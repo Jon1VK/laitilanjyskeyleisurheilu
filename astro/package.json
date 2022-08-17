@@ -7,8 +7,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "prisma": "prisma",
     "lint": "tsc && eslint .",
     "prettier": "prettier"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "prisma": "^4.2.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.1",
@@ -22,6 +27,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.5.0"
+    "prettier-plugin-astro": "^0.5.0",
+    "typescript": "^4.7.4"
   }
 }

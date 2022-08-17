@@ -13,6 +13,32 @@ services:
     env_file:
       - config/astro/.env
     depends_on:
+      - prisma-migrate
+  prisma-studio:
+    build:
+      context: ./astro
+      dockerfile: Dockerfile
+      target: prisma-studio
+    ports:
+      - 5555:5555
+    volumes:
+      - ./astro:/app
+      - astro_node_modules:/app/node_modules
+    env_file:
+      - config/astro/.env
+    depends_on:
+      - prisma-migrate
+  prisma-migrate:
+    build:
+      context: ./astro
+      dockerfile: Dockerfile
+      target: prisma-migrate
+    volumes:
+      - ./astro:/app
+      - astro_node_modules:/app/node_modules
+    env_file:
+      - config/astro/.env
+    depends_on:
       - postgres
   postgres:
     image: postgres:14.5-alpine
@@ -24,5 +50,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+    depends_on:
+      - postgres
 volumes:
   astro_node_modules:

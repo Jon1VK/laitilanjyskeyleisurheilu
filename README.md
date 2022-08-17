@@ -10,8 +10,9 @@ Website for track & field sport club Laitilan Jyske.
 - [Development](#development)
   - [Docker Compose architecture](#docker-compose-architecture)
   - [Running the application](#running-the-application)
-  - [DB Migrations](#db-migrations)
   - [Installing new npm packages](#installing-new-npm-packages)
+  - [DB Schema and Migrations](#db-schema-and-migrations)
+  - [Prisma Studio](#prisma-studio)
   - [Adminer](#adminer)
 - [Other remarks](#other-remarks)
   - [Development with Visual Studio Code](#development-with-visual-studio-code)
@@ -39,16 +40,18 @@ Below are listed all of the environment variables that the application needs. If
 
 ## Development
 
-Docker is needed to develop the application. Install instructions for Docker can be found [here](https://docs.docker.com/get-docker/). Environment variables for the development environment are defined in the config folder.
+Docker is needed to develop the application. Install instructions for Docker can be found [here](https://docs.docker.com/get-docker/). Environment variables for the development environment are defined in the config folder. Copy the .env.example file to .env file and fill in the needed values for variables.
 
 ### Docker Compose architecture
 
 ```mermaid
 flowchart LR
     client(Client) <--localhost:3000--> astro(Astro)
+    client <--localhost:5555--> prisma_studio(Prisma Studio)
     client <--localhost:8080--> adminer(Adminer)
     subgraph Docker Compose Network
         astro <----> postgres[(PostgreSQL)]
+        prisma_studio <----> postgres
         adminer <----> postgres
     end
 ```
@@ -66,10 +69,6 @@ docker compose down --volumes
 docker compose build
 ```
 
-### DB Migrations
-
-// Todo
-
 ### Installing new npm packages
 
 ```sh
@@ -82,9 +81,24 @@ docker compose down --volumes
 docker compose up --build
 ```
 
+### DB Schema and Migrations
+
+[Prisma](https://www.prisma.io/) is used as an ORM between the application and the DB. As so, all DB related files like the schema and the migration files are found from the _astro/prisma_ folder.
+
+[Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate) is used to create and run DB migrations. Existing migrations are ran automatically when `docker compose up` is executed. If you change the DB schema, a new migration has to be created. Add a descriptive name for a new migration (e.g. create_table_post)
+
+```sh
+# Create a new migration
+docker compose exec astro npm run prisma migrate dev -- --name <migration_name>
+```
+
+### Prisma Studio
+
+Prisma Studio is a visual editor for the data in the database. Prsima Studio can be used to easily create and browse records for the models that have been defined in the schema. Navigate to [http://localhost:5555](http://localhost:5555) to open the Prisma Studio.
+
 ### Adminer
 
-Adminer is used to browse PostgreSQL database in the development environment. Navigate to [http://localhost:8080](http://localhost:8080) to open the Adminer service.
+Adminer is another way to browse PostgreSQL database in the development environment. Navigate to [http://localhost:8080](http://localhost:8080) to open the Adminer service.
 
 Connect to the PostgreSQL with development environment credentials:
 
@@ -92,6 +106,7 @@ Connect to the PostgreSQL with development environment credentials:
 - server: postgres
 - username: postgres
 - password: postgres
+- database: development
 
 ## Other remarks
 

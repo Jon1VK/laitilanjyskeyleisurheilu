@@ -1,7 +1,9 @@
 {
   "eslint.validate": ["astro", "typescript", "typescriptreact"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "prettier.documentSelectors": ["**/*.astro"],
-  "[astro]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }
