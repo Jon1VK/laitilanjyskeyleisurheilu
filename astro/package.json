@@ -12,6 +12,7 @@
     "prettier": "prettier"
   },
   "dependencies": {
+    "@astrojs/vercel": "^1.0.0",
     "@prisma/client": "^4.2.1",
     "prisma": "^4.2.1"
   },
