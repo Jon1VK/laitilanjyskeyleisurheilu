@@ -21,11 +21,29 @@ Website for track & field sport club Laitilan Jyske.
 
 ```
 .
-├── .vscode                  Project-spesific Visual Studio Code settings
-├── README.md                Documentation
-├── astro                    Source code for Astro application
-├── config                   Configuration files for development
-└── docker-compose.yml       Docker Compose for development environment
+├── .vscode                  - VS Code workspace config
+│   ├── extensions.json          - Recommended extensions for VS Code
+│   └── settings.json            - Project spesific settings for VS Code
+├── README.md                - Documentation
+├── astro                    - Astro application
+│   ├── .eslintrc.js             - ESLint config
+│   ├── .prettierrc              - Prettier config
+│   ├── Dockerfile               - Docker image instructions
+│   ├── astro.config.mjs         - Astro config
+│   ├── prisma                   - DB schema and migration files
+│   ├── public                   - Public files to serve unprocessed
+│   ├── src                      - Source code for Astro application
+│   │   ├── components               - Astro or React components for the pages
+│   │   ├── layouts                  - Layouts for the pages
+│   │   ├── lib                      - Common library files
+│   │   └── pages                    - Pages for the website
+│   ├── tailwind.config.cjs      - Tailwind config
+│   └── tsconfig.json            - TypeScript config
+├── config                   - Configuration files for development
+│   └── astro                    - Astro related config
+│       ├── .env                     - Environment variables
+│       └── .env.example             - Example for .env file
+└── docker-compose.yml       - Docker Compose for development environment
 ```
 
 ## Environment variables
