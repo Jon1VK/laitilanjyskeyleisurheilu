@@ -5,5 +5,8 @@
   "prettier.documentSelectors": ["**/*.astro"],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "files.associations": {
+    "*.svg": "html"
   }
 }
