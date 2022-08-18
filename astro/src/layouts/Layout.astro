@@ -1,9 +1,10 @@
 ---
 export interface Props {
   title: string;
+  heroImage: string;
 }
 
-const { title } = Astro.props as Props;
+const { title, heroImage } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -12,10 +13,64 @@ const { title } = Astro.props as Props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Graduate&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>
+    <header class="relative font-display bg-red-500">
+      <div class="absolute inset-0">
+        <img
+          class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+          src={heroImage}
+          alt="Yhtenkuuluvuutta seuran joukkuekilpailuissa"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-700 mix-blend-multiply"
+          aria-hidden="true"
+        >
+        </div>
+      </div>
+      <nav
+        class="relative flex items-center lg:justify-center p-4 md:p-8"
+        aria-label="Global"
+      >
+        <a href="/" rel="prefetch">
+          <span class="sr-only">Etusivu</span>
+          <img
+            class="h-12 md:h-14 w-auto"
+            src="/images/logo.svg"
+            alt="Laitilan Jyske logo"
+          />
+        </a>
+        <div class="hidden lg:flex lg:gap-10 lg:ml-10">
+          <a href="/uutiset" class="text-white hover:text-red-100">Uutiset</a>
+          <a href="/tapahtumat" class="text-white hover:text-red-100"
+            >Tapahtumat
+          </a>
+          <a href="/seuraennatykset" class="text-white hover:text-red-100"
+            >Seuraennätykset
+          </a>
+          <a href="/edustusurheilijat" class="text-white hover:text-red-100"
+            >Edustusurheilijat
+          </a>
+          <a href="/yhteystiedot" class="text-white hover:text-red-100"
+            >Yhteystiedot
+          </a>
+        </div>
+      </nav>
+      <h1
+        class="relative text-center text-white py-20 sm:py-32 md:py-40 lg:pt-52 xl:pt-64 text-2xl sm:text-3xl md:text-4xl"
+      >
+        Laitilan Jyske <span class="hidden lg:inline">-</span>
+        <span class="block mt-2 md:mt-4 lg:inline">Yleisurheilu</span>
+      </h1>
+    </header>
     <slot />
   </body>
 </html>
