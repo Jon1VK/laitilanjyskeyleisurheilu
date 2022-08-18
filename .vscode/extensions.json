@@ -3,7 +3,8 @@
     "astro-build.astro-vscode",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "prisma.prisma"
+    "prisma.prisma",
+    "bradlc.vscode-tailwindcss"
   ],
   "unwantedRecommendations": []
 }
