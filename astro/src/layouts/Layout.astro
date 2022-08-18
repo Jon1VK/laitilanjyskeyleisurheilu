@@ -1,4 +1,9 @@
 ---
+import { ReactComponent as Logo } from '../assets/logo.svg';
+import { ReactComponent as WhatsAppIcon } from '../assets/whatsapp.svg';
+import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
+import { ReactComponent as InstagramIcon } from '../assets/instagram.svg';
+
 export interface Props {
   title: string;
   heroImage: string;
@@ -42,11 +47,7 @@ const { title, heroImage } = Astro.props as Props;
       >
         <a href="/" rel="prefetch">
           <span class="sr-only">Etusivu</span>
-          <img
-            class="h-12 md:h-14 w-auto"
-            src="/images/logo.svg"
-            alt="Laitilan Jyske logo"
-          />
+          <Logo className="h-12 md:h-14 w-auto" />
         </a>
         <div class="hidden lg:flex lg:gap-10 lg:ml-10">
           <a href="/uutiset" class="text-white hover:text-red-100">Uutiset</a>
@@ -65,12 +66,95 @@ const { title, heroImage } = Astro.props as Props;
         </div>
       </nav>
       <h1
-        class="relative text-center text-white py-20 sm:py-32 md:py-40 lg:pt-52 xl:pt-64 text-2xl sm:text-3xl md:text-4xl"
+        class="relative text-center text-white pt-16 pb-20 sm:py-32 md:py-40 lg:pt-52 xl:pt-64 text-2xl sm:text-3xl md:text-4xl"
       >
         Laitilan Jyske <span class="hidden lg:inline">-</span>
         <span class="block mt-2 md:mt-4 lg:inline">Yleisurheilu</span>
       </h1>
     </header>
     <slot />
+    <footer class="bg-gray-800">
+      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav
+          class="-mx-5 -my-2 flex flex-wrap justify-center"
+          aria-label="Footer"
+        >
+          <div class="px-5 py-2">
+            <a
+              href="/uutiset"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Uutiset
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/tapahtumat"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Tapahtumat
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/seuraennatykset"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Seuraennätykset
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/edustusurheilijat"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Edustusurheilijat
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/yhteystiedot"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Yhteystiedot
+            </a>
+          </div>
+        </nav>
+        <div class="mt-8 flex justify-center space-x-6">
+          <a
+            href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">WhatsApp</span>
+            <WhatsAppIcon className="h-6 w-auto" />
+          </a>
+          <a
+            href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">Instagram</span>
+            <InstagramIcon className="h-6 w-auto" />
+          </a>
+          <a
+            href="https://www.facebook.com/laitilanjyskeyu/"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">Facebook</span>
+            <FacebookIcon className="h-6 w-auto" />
+          </a>
+        </div>
+        <p class="mt-8 text-center text-base text-gray-400">
+          &copy; 2022 Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
