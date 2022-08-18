@@ -25,28 +25,28 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
-      parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: './tsconfig.json',
-      },
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:prettier/recommended',
       ],
+      rules: {
+        '@typescript-eslint/no-unused-vars': [
+          2,
+          { args: 'all', argsIgnorePattern: '^_' },
+        ],
+      },
     },
     {
       files: ['*.tsx'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: './tsconfig.json',
-      },
       extends: [
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
       ],
+      rules: {
+        'react/react-in-jsx-scope': 0,
+        'react-hooks/exhaustive-deps': 2,
+      },
     },
   ],
 };

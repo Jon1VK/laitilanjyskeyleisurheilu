@@ -1,4 +1,5 @@
 ---
+import HelloWorldReact from '../components/React';
 import Layout from '../layouts/Layout.astro';
 import prisma from '../lib/prisma';
 
@@ -9,6 +10,7 @@ const postsCount = await prisma.post.count();
   <main>
     <h1 class="text-gradient">Laitilan Jyske Yleisurheilu</h1>
     <p class="instructions">There is {postsCount} post in the DB</p>
+    <HelloWorldReact />
   </main>
 </Layout>
 
