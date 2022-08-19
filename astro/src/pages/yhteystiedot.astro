@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactsTable from '../components/ContactsTable.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ContactDetails from '../components/ContactDetails.astro';
+---
+
+<Layout
+  title="Laitilan Jyske | Yleisurheilu | Yhteystiedot"
+  heroImage="/images/contacts.jpg"
+  heading="Yhteystiedot"
+>
+  <section
+    class="max-w-7xl mx-auto my-8 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+  >
+    <div class="bg-white shadow-xl grid grid-cols-1 lg:grid-cols-3">
+      <ContactDetails />
+      <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+        <h3 class="text-lg font-medium text-gray-900">Lähetä viesti</h3>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+  <section
+    class="max-w-7xl mx-auto my-8 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+  >
+    <h2 class="text-xl font-semibold text-gray-900">
+      Yleisurheilujaoston jäsenet
+    </h2>
+    <p class="mt-2 text-gray-700">
+      Oheisesta taulukosta löydät yleisurheilujaoston jäsenten yhteystiedot.
+    </p>
+    <div
+      class="my-8 overflow-x-auto shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+    >
+      <ContactsTable />
+    </div>
+  </section>
+</Layout>

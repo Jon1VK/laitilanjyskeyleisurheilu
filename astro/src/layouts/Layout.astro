@@ -7,9 +7,11 @@ import { ReactComponent as InstagramIcon } from '../assets/instagram.svg';
 export interface Props {
   title: string;
   heroImage: string;
+  heading: string;
+  subHeading?: string;
 }
 
-const { title, heroImage } = Astro.props as Props;
+const { title, heroImage, heading, subHeading } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -27,13 +29,13 @@ const { title, heroImage } = Astro.props as Props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-slate-100">
     <header class="relative font-display bg-red-500">
       <div class="absolute inset-0">
         <img
           class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
           src={heroImage}
-          alt="Yhtenkuuluvuutta seuran joukkuekilpailuissa"
+          aria-hidden="true"
         />
         <div
           class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-700 mix-blend-multiply"
@@ -50,17 +52,34 @@ const { title, heroImage } = Astro.props as Props;
           <Logo className="h-12 md:h-14 w-auto" />
         </a>
         <div class="hidden lg:flex lg:gap-10 lg:ml-10">
-          <a href="/uutiset" class="text-white hover:text-red-100">Uutiset</a>
-          <a href="/tapahtumat" class="text-white hover:text-red-100"
+          <a
+            href="/uutiset"
+            rel="prefetch"
+            class="text-white hover:text-red-100"
+            >Uutiset
+          </a>
+          <a
+            href="/tapahtumat"
+            rel="prefetch"
+            class="text-white hover:text-red-100"
             >Tapahtumat
           </a>
-          <a href="/seuraennatykset" class="text-white hover:text-red-100"
+          <a
+            href="/seuraennatykset"
+            rel="prefetch"
+            class="text-white hover:text-red-100"
             >Seuraennätykset
           </a>
-          <a href="/edustusurheilijat" class="text-white hover:text-red-100"
+          <a
+            href="/edustusurheilijat"
+            rel="prefetch"
+            class="text-white hover:text-red-100"
             >Edustusurheilijat
           </a>
-          <a href="/yhteystiedot" class="text-white hover:text-red-100"
+          <a
+            href="/yhteystiedot"
+            rel="prefetch"
+            class="text-white hover:text-red-100"
             >Yhteystiedot
           </a>
         </div>
@@ -68,11 +87,20 @@ const { title, heroImage } = Astro.props as Props;
       <h1
         class="relative text-center text-white pt-16 pb-20 sm:py-32 md:py-40 lg:pt-52 xl:pt-64 text-2xl sm:text-3xl md:text-4xl"
       >
-        Laitilan Jyske <span class="hidden lg:inline">-</span>
-        <span class="block mt-2 md:mt-4 lg:inline">Yleisurheilu</span>
+        {heading}
+        {
+          subHeading && (
+            <>
+              <span class="hidden lg:inline"> - </span>
+              <span class="block mt-2 md:mt-4 lg:inline">{subHeading}</span>
+            </>
+          )
+        }
       </h1>
     </header>
-    <slot />
+    <main>
+      <slot />
+    </main>
     <footer class="bg-gray-800">
       <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav
