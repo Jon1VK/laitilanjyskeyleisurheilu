@@ -38,15 +38,7 @@ module.exports = {
     },
     {
       files: ['*.tsx'],
-      extends: [
-        'plugin:react/recommended',
-        'plugin:react-hooks/recommended',
-        'plugin:jsx-a11y/recommended',
-      ],
-      rules: {
-        'react/react-in-jsx-scope': 0,
-        'react-hooks/exhaustive-deps': 2,
-      },
+      extends: ['plugin:solid/typescript', 'plugin:jsx-a11y/recommended'],
     },
   ],
 };

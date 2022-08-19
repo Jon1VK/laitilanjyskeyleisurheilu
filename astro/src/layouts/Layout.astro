@@ -1,8 +1,5 @@
 ---
-import { ReactComponent as Logo } from '../assets/logo.svg';
-import { ReactComponent as WhatsAppIcon } from '../assets/whatsapp.svg';
-import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
-import { ReactComponent as InstagramIcon } from '../assets/instagram.svg';
+import { Icon } from 'astro-icon';
 
 export interface Props {
   title: string;
@@ -49,7 +46,7 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
       >
         <a href="/" rel="prefetch">
           <span class="sr-only">Etusivu</span>
-          <Logo className="h-12 md:h-14 w-auto" />
+          <Icon name="logo" class="h-12 md:h-14 w-auto" />
         </a>
         <div class="hidden lg:flex lg:gap-10 lg:ml-10">
           <a
@@ -160,7 +157,7 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
             class="text-gray-400 hover:text-gray-300"
           >
             <span class="sr-only">WhatsApp</span>
-            <WhatsAppIcon className="h-6 w-auto" />
+            <Icon name="whatsapp" class="h-6 w-auto" />
           </a>
           <a
             href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
@@ -168,7 +165,7 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
             class="text-gray-400 hover:text-gray-300"
           >
             <span class="sr-only">Instagram</span>
-            <InstagramIcon className="h-6 w-auto" />
+            <Icon name="instagram" class="h-6 w-auto" />
           </a>
           <a
             href="https://www.facebook.com/laitilanjyskeyu/"
@@ -176,7 +173,7 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
             class="text-gray-400 hover:text-gray-300"
           >
             <span class="sr-only">Facebook</span>
-            <FacebookIcon className="h-6 w-auto" />
+            <Icon name="facebook" class="h-6 w-auto" />
           </a>
         </div>
         <p class="mt-8 text-center text-base text-gray-400">

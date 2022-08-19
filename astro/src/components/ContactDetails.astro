@@ -1,25 +1,21 @@
 ---
-import { ReactComponent as AngleXS } from '../assets/angle_xs.svg';
-import { ReactComponent as AngleSM } from '../assets/angle_sm.svg';
-import { ReactComponent as AngleLG } from '../assets/angle_lg.svg';
-import { ReactComponent as HomeIcon } from '../assets/home.svg';
-import { ReactComponent as MailIcon } from '../assets/mail.svg';
-import { ReactComponent as WhatsAppIcon } from '../assets/whatsapp.svg';
-import { ReactComponent as InstagramIcon } from '../assets/instagram.svg';
-import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
+import { Icon } from 'astro-icon';
 ---
 
 <div
   class="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-blue-500 to-blue-600 sm:px-10 xl:p-12"
 >
-  <AngleXS
-    className="sm:hidden absolute inset-0 w-full h-full pointer-events-none"
+  <Icon
+    name="angle-sm"
+    class="sm:hidden absolute inset-0 w-full h-full pointer-events-none"
   />
-  <AngleSM
-    className="hidden sm:block lg:hidden absolute top-0 right-0 bottom-0 w-1/2 h-full pointer-events-none"
+  <Icon
+    name="angle-md"
+    class="hidden sm:block lg:hidden absolute top-0 right-0 bottom-0 w-1/2 h-full pointer-events-none"
   />
-  <AngleLG
-    className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none"
+  <Icon
+    name="angle-lg"
+    class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none"
   />
   <h3 class="text-lg font-medium text-white">
     Yleisurheilujaoston yhteystiedot
@@ -35,12 +31,12 @@ import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
   <dl class="mt-10 space-y-3 text-blue-50">
     <dt><span class="sr-only">Postiosoite</span></dt>
     <dd class="flex">
-      <HomeIcon className="flex-shrink-0 w-6 h-6 text-blue-200" />
+      <Icon name="home" class="flex-shrink-0 w-6 h-6 text-blue-200" />
       <span class="ml-3">Haaparinne 4, 23800 Laitila</span>
     </dd>
     <dt><span class="sr-only">Email</span></dt>
     <dd class="flex">
-      <MailIcon className="flex-shrink-0 w-6 h-6 text-blue-200" />
+      <Icon name="mail" class="flex-shrink-0 w-6 h-6 text-blue-200" />
       <span class="ml-3 hover:text-white hover:underline"
         ><a href="mailto:laitilan.jyske@lailanet.fi"
           >laitilan.jyske@lailanet.fi
@@ -56,7 +52,7 @@ import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
         class="text-blue-200 hover:text-blue-100"
       >
         <span class="sr-only">WhatsApp</span>
-        <WhatsAppIcon className="h-7 w-auto" />
+        <Icon name="whatsapp" class="h-7 w-auto" />
       </a>
     </li>
     <li>
@@ -66,7 +62,7 @@ import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
         class="text-blue-200 hover:text-blue-100"
       >
         <span class="sr-only">Instagram</span>
-        <InstagramIcon className="h-7 w-auto" />
+        <Icon name="instagram" class="h-7 w-auto" />
       </a>
     </li>
     <li>
@@ -76,7 +72,7 @@ import { ReactComponent as FacebookIcon } from '../assets/facebook.svg';
         class="text-blue-200 hover:text-blue-100"
       >
         <span class="sr-only">Facebook</span>
-        <FacebookIcon className="h-7 w-auto" />
+        <Icon name="facebook" class="h-7 w-auto" />
       </a>
     </li>
   </ul>
