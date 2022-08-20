@@ -1,21 +1,16 @@
 ---
 import { Icon } from 'astro-icon';
 
-export interface Props {
-  title: string;
-  heroImage: string;
-  heading: string;
-  subHeading?: string;
-}
-
-const { title, heroImage, heading, subHeading } = Astro.props as Props;
+const currentURL = new URL('', Astro.url);
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
+  <!-- HEAD META DATA -->
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,22 +19,27 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentURL} />
+    <meta property="og:site_name" content="Laitilan Jyske | Yleisurheilu" />
+    <slot name="head" />
   </head>
+
+  <!-- BODY -->
   <body class="bg-slate-100">
+    <!-- HEADER -->
     <header class="relative font-display bg-red-500">
+      <!-- HEADER HERO IMAGE -->
       <div class="absolute inset-0">
-        <img
-          class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
-          src={heroImage}
-          aria-hidden="true"
-        />
+        <slot name="hero-image" />
         <div
-          class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-700 mix-blend-multiply"
+          class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-900 mix-blend-multiply"
           aria-hidden="true"
         >
         </div>
       </div>
+
+      <!-- MAIN NAVIGATION -->
       <nav
         class="relative flex items-center lg:justify-center p-4 md:p-8"
         aria-label="Global"
@@ -81,25 +81,20 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
           </a>
         </div>
       </nav>
-      <h1
-        class="relative text-center text-white pt-16 pb-20 sm:py-32 md:py-40 lg:pt-52 xl:pt-64 text-2xl sm:text-3xl md:text-4xl"
-      >
-        {heading}
-        {
-          subHeading && (
-            <>
-              <span class="hidden lg:inline"> - </span>
-              <span class="block mt-2 md:mt-4 lg:inline">{subHeading}</span>
-            </>
-          )
-        }
-      </h1>
+
+      <!-- HEADER HERO HEADING -->
+      <slot name="hero-heading" />
     </header>
+
+    <!-- MAIN CONTENT -->
     <main>
-      <slot />
+      <slot name="main" />
     </main>
+
+    <!-- FOOTER -->
     <footer class="bg-gray-800">
       <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <!-- FOOTER SITE NAVIGATION -->
         <nav
           class="-mx-5 -my-2 flex flex-wrap justify-center"
           aria-label="Footer"
@@ -150,6 +145,8 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
             </a>
           </div>
         </nav>
+
+        <!-- FOOTER SOCIAL NAVIGATION -->
         <div class="mt-8 flex justify-center space-x-6">
           <a
             href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
@@ -176,6 +173,8 @@ const { title, heroImage, heading, subHeading } = Astro.props as Props;
             <Icon name="facebook" class="h-6 w-auto" />
           </a>
         </div>
+
+        <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
           &copy; 2022 Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>

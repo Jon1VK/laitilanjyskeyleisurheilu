@@ -1,64 +1,103 @@
 ---
 import { Icon } from 'astro-icon';
 import Layout from '../layouts/Layout.astro';
+
+const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
 ---
 
-<Layout
-  title="Laitilan Jyske | Yleisurheilu"
-  heroImage="/images/frontpage.jpg"
-  heading="Laitilan Jyske"
-  subHeading="Yleisurheilu"
->
-  <section class="bg-blue-700 shadow shadow-black">
-    <div class="text-center py-16 px-4 sm:py-20">
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <title>Laitilan Jyske | Yleisurheilu</title>
+    <meta property="og:title" content="Etusivu" />
+    <meta
+      name="description"
+      content="Tutustu Laitilan Jyskeen yleisurheilujaoston kotisivuihin."
+    />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, etusivu"
+    />
+    <meta property="og:image" content={socialImageURL} />
+    <meta
+      property="og:description"
+      content="Tutustu Laitilan Jyskeen yleisurheilujaoston kotisivuihin."
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+      src="/images/frontpage.jpg"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative text-center text-white pt-16 pb-32 sm:pt-24 sm:pb-40 md:pb-48 lg:pt-36 xl:pt-44 xl:pb-52 text-2xl sm:text-3xl md:text-4xl"
+    >
+      Laitilan Jyske
+      <span class="hidden lg:inline">-</span>
+      <span class="block mt-1 md:mt-2 lg:mt-0 lg:inline">Yleisurheilu</span>
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <section class="bg-blue-700 shadow shadow-black">
+      <div class="text-center py-16 px-4 sm:py-20">
+        <h2
+          class="text-lg lg:text-xl tracking-wide leading-snug font-medium text-white"
+        >
+          Etsitkö lapsellesi monipuolista, innostavaa ja liikunnallista
+          harrastusta?
+        </h2>
+        <a
+          href="/tapahtumat"
+          rel="prefetch"
+          class="inline-block px-6 py-3 shadow-lg shadow-blue-900 mt-10 md:mt-12 lg:md-14 text-sm sm:text-base lg:text-lg font-medium rounded-md text-white bg-red-700 hover:bg-red-800"
+        >
+          Ilmoittaudu harjoituksiin
+        </a>
+      </div>
+    </section>
+    <section class="max-w-7xl mx-auto py-16 px-4">
       <h2
-        class="text-lg lg:text-xl tracking-wide leading-snug font-medium text-white"
+        class="text-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-600"
       >
-        Etsitkö lapsellesi monipuolista, innostavaa ja liikunnallista
-        harrastusta?
+        Seuraa meitä sosiaalisessa mediassa
       </h2>
-      <a
-        href="/tapahtumat"
-        rel="prefetch"
-        class="inline-block px-6 py-3 shadow-lg shadow-blue-900 mt-10 md:mt-12 lg:md-14 text-sm sm:text-base lg:text-lg font-medium rounded-md text-white bg-red-700 hover:bg-red-800"
+      <div
+        class="mt-6 md:mt-8 grid grid-cols-4 sm:grid-cols-3 justify-center gap-0.5"
       >
-        Ilmoittaudu harjoituksiin
-      </a>
-    </div>
-  </section>
-  <section class="max-w-7xl mx-auto py-16 px-4">
-    <h2
-      class="text-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-600"
-    >
-      Seuraa meitä sosiaalisessa mediassa
-    </h2>
-    <div
-      class="mt-6 md:mt-8 grid grid-cols-4 sm:grid-cols-3 justify-center gap-0.5"
-    >
-      <a
-        href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
-        target="_blank"
-        class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
-      >
-        <span class="sr-only">WhatsApp</span>
-        <Icon name="whatsapp-with-name" class="max-h-12" />
-      </a>
-      <a
-        href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
-        target="_blank"
-        class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
-      >
-        <span class="sr-only">Instagram</span>
-        <Icon name="instagram-with-name" class="max-h-12" />
-      </a>
-      <a
-        href="https://www.facebook.com/laitilanjyskeyu/"
-        target="_blank"
-        class="col-start-2 col-end-4 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
-      >
-        <span class="sr-only">Facebook</span>
-        <Icon name="facebook-find-us" class="max-h-12" />
-      </a>
-    </div>
-  </section>
+        <a
+          href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
+          target="_blank"
+          class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+        >
+          <span class="sr-only">WhatsApp</span>
+          <Icon name="whatsapp-with-name" class="max-h-12" />
+        </a>
+        <a
+          href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
+          target="_blank"
+          class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+        >
+          <span class="sr-only">Instagram</span>
+          <Icon name="instagram-with-name" class="max-h-12" />
+        </a>
+        <a
+          href="https://www.facebook.com/laitilanjyskeyu/"
+          target="_blank"
+          class="col-start-2 col-end-4 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+        >
+          <span class="sr-only">Facebook</span>
+          <Icon name="facebook-find-us" class="max-h-12" />
+        </a>
+      </div>
+    </section>
+  </Fragment>
 </Layout>
