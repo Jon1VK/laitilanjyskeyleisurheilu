@@ -47,23 +47,33 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
 
   <!-- MAIN -->
   <Fragment slot="main">
-    <section class="bg-blue-700 shadow shadow-black">
-      <div class="text-center py-16 px-4 sm:py-20">
-        <h2
-          class="text-lg lg:text-xl tracking-wide leading-snug font-medium text-white"
+    <!-- TOP BANNER CALL-TO-ACTION -->
+    <section class="bg-blue-700 shadow-md shadow-blue-900">
+      <div
+        class="max-w-7xl mx-auto py-5 md:py-3 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between font-medium"
+      >
+        <div
+          class="w-full md:w-0 flex-1 flex flex-col md:flex-row items-center text-white"
         >
-          Etsitkö lapsellesi monipuolista, innostavaa ja liikunnallista
-          harrastusta?
-        </h2>
+          <span class="p-2 rounded-lg bg-blue-800">
+            <Icon name="speaker" class="h-6 w-6" />
+          </span>
+          <p
+            class="text-center md:text-left mt-3 mb-5 md:my-0 flex-1 ml-3 md:truncate"
+          >
+            Syysmoniottelut 24.-25. syyskuuta klo 18:00 alkaen Laitilassa.
+          </p>
+        </div>
         <a
-          href="/tapahtumat"
-          rel="prefetch"
-          class="inline-block px-6 py-3 shadow-lg shadow-blue-900 mt-10 md:mt-12 lg:md-14 text-sm sm:text-base lg:text-lg font-medium rounded-md text-white bg-red-700 hover:bg-red-800"
+          href="#"
+          class="text-sm md:ml-4 px-4 py-2 rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50"
         >
-          Ilmoittaudu harjoituksiin
+          Lisätietoa
         </a>
       </div>
     </section>
+
+    <!-- SOSIAALISET MEDIAT CALL-TO-ACTION -->
     <section class="max-w-7xl mx-auto py-16 px-4">
       <h2
         class="text-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-600"
@@ -96,6 +106,25 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
         >
           <span class="sr-only">Facebook</span>
           <Icon name="facebook-find-us" class="max-h-12" />
+        </a>
+      </div>
+    </section>
+
+    <!-- TAPAHTUMAT CALL-TO-ACTION -->
+    <section class="bg-blue-700 shadow shadow-black">
+      <div class="text-center py-16 px-4 sm:py-20">
+        <h2
+          class="text-lg lg:text-xl tracking-wide leading-snug font-medium text-white"
+        >
+          Etsitkö lapsellesi monipuolista, innostavaa ja liikunnallista
+          harrastusta?
+        </h2>
+        <a
+          href="/tapahtumat"
+          rel="prefetch"
+          class="inline-block px-6 py-3 shadow-lg shadow-blue-900 mt-10 md:mt-12 lg:md-14 text-sm sm:text-base lg:text-lg font-medium rounded-md text-white bg-red-700 hover:bg-red-800"
+        >
+          Ilmoittaudu harjoituksiin
         </a>
       </div>
     </section>
