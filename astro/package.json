@@ -15,6 +15,7 @@
   "dependencies": {
     "@astrojs/vercel": "^1.0.0",
     "@prisma/client": "^4.2.1",
+    "inflected": "^2.1.0",
     "prisma": "^4.2.1"
   },
   "devDependencies": {
@@ -22,9 +23,10 @@
     "@astrojs/solid-js": "^1.0.0",
     "@astrojs/tailwind": "^1.0.0",
     "@tailwindcss/forms": "^0.5.2",
+    "@types/inflected": "^1.1.29",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
-    "astro": "^1.0.5",
+    "astro": "^1.0.6",
     "astro-icon": "^0.7.3",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",

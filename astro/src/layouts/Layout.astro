@@ -1,7 +1,8 @@
 ---
 import { Icon } from 'astro-icon';
+import { titleize } from '../utils/strings';
 
-const currentURL = new URL('', Astro.url);
+const pathSegments = Astro.url.pathname.slice(1).split('/');
 ---
 
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ const currentURL = new URL('', Astro.url);
     />
     <meta name="generator" content={Astro.generator} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={currentURL} />
+    <meta property="og:url" content={new URL('', Astro.url)} />
     <meta property="og:site_name" content="Laitilan Jyske | Yleisurheilu" />
     <slot name="head" />
   </head>
@@ -88,6 +89,55 @@ const currentURL = new URL('', Astro.url);
 
     <!-- MAIN CONTENT -->
     <main>
+      <!-- BREADCRUMBS HEADER -->
+      {
+        pathSegments[0] && (
+          <header class="bg-blue-700">
+            <div class="mx-auto max-w-7xl p-4 sm:px-8 lg:px-12">
+              <nav class="sm:hidden" aria-label="Back">
+                <button
+                  onclick="history.back()"
+                  class="flex items-center text-sm font-medium text-blue-200 hover:text-white"
+                >
+                  <Icon
+                    name="chevron-right"
+                    class="-ml-1 mr-1 h-5 w-5 shrink-0 text-blue-200"
+                  />
+                  Takaisin
+                </button>
+              </nav>
+              <nav
+                class="hidden text-sm font-medium text-blue-200 sm:block"
+                aria-label="Breadcrumb"
+              >
+                <ol class="flex gap-4">
+                  <li class="flex items-center">
+                    <a href="/" class="hover:text-white">
+                      Etusivu
+                    </a>
+                  </li>
+                  {pathSegments.map((segment, index) => (
+                    <li class="flex items-center">
+                      <Icon
+                        name="chevron-right"
+                        class="mr-4 h-5 w-5 shrink-0 text-blue-200"
+                      />
+                      <a
+                        href={`/${pathSegments.slice(0, 1 + index).join('/')}`}
+                        class="hover:text-white"
+                      >
+                        {titleize(segment)}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </div>
+          </header>
+        )
+      }
+
+      <!-- MAIN PAGE CONTENT -->
       <slot name="main" />
     </main>
 
