@@ -9,6 +9,7 @@
     "astro": "astro",
     "prisma": "prisma",
     "lint": "tsc && eslint .",
+    "eslint": "eslint",
     "prettier": "prettier"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-solid": "^0.7.1",
+    "eslint-plugin-tailwindcss": "^3.6.0",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.5.0",
     "solid-js": "^1.4.8",

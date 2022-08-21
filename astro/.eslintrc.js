@@ -5,12 +5,22 @@ module.exports = {
     es2022: true,
     'astro/astro': true,
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:tailwindcss/recommended',
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+  },
+  rules: {
+    'tailwindcss/no-custom-classname': [
+      1,
+      {
+        config: __dirname + '/tailwind.config.cjs',
+      },
+    ],
   },
   overrides: [
     {
@@ -20,11 +30,18 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         extraFileExtensions: ['.astro'],
       },
-      extends: ['plugin:astro/recommended'],
+      extends: [
+        'plugin:astro/recommended',
+        'plugin:astro/jsx-a11y-recommended',
+      ],
     },
     {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: './tsconfig.json',
+      },
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',

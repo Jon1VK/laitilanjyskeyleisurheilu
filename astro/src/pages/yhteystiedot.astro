@@ -29,8 +29,9 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
   <!-- HERO IMAGE -->
   <Fragment slot="hero-image">
     <img
-      class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+      class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
       src="/images/contacts.jpg"
+      alt="Seuran puheenjohtaja Pekka Kuusisto toimitsijana"
       aria-hidden="true"
     />
   </Fragment>
@@ -38,7 +39,7 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
   <!-- HERO HEADING -->
   <Fragment slot="hero-heading">
     <h1
-      class="relative text-center text-white pt-16 pb-32 sm:pt-24 sm:pb-40 md:pb-48 lg:pt-36 xl:pt-44 xl:pb-52 text-2xl sm:text-3xl md:text-4xl"
+      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
     >
       Yhteystiedot
     </h1>
@@ -48,27 +49,27 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
   <Fragment slot="main">
     <!-- CONTACT CARD -->
     <section
-      class="max-w-7xl mx-auto my-8 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
     >
-      <div class="bg-white shadow-xl grid grid-cols-1 lg:grid-cols-3">
+      <div class="grid grid-cols-1 bg-white shadow-xl lg:grid-cols-3">
         <!-- CONTACT INFO -->
         <div
-          class="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-blue-500 to-blue-600 sm:px-10 xl:p-12"
+          class="relative overflow-hidden bg-gradient-to-b from-blue-500 to-blue-600 py-10 px-6 sm:px-10 xl:p-12"
         >
           <!-- DECORATION FOR MOBILES -->
           <Icon
             name="angle-sm"
-            class="sm:hidden absolute inset-0 w-full h-full pointer-events-none"
+            class="pointer-events-none absolute inset-0 h-full w-full sm:hidden"
           />
           <!-- DECORATION FOR TABLETS -->
           <Icon
             name="angle-md"
-            class="hidden sm:block lg:hidden absolute top-0 right-0 bottom-0 w-1/2 h-full pointer-events-none"
+            class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-1/2 sm:block lg:hidden"
           />
           <!-- DECORATION FOR LAPTOPS -->
           <Icon
             name="angle-lg"
-            class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none"
+            class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
           />
 
           <!-- CONTACT INFO DESCRIPTION -->
@@ -88,12 +89,12 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
           <dl class="mt-10 space-y-3 text-blue-50">
             <dt><span class="sr-only">Postiosoite</span></dt>
             <dd class="flex">
-              <Icon name="home" class="flex-shrink-0 w-6 h-6 text-blue-200" />
+              <Icon name="home" class="h-6 w-6 shrink-0 text-blue-200" />
               <span class="ml-3">Haaparinne 4, 23800 Laitila</span>
             </dd>
             <dt><span class="sr-only">Email</span></dt>
             <dd class="flex">
-              <Icon name="mail" class="flex-shrink-0 w-6 h-6 text-blue-200" />
+              <Icon name="mail" class="h-6 w-6 shrink-0 text-blue-200" />
               <span class="ml-3 hover:text-white hover:underline"
                 ><a href="mailto:laitilan.jyske@lailanet.fi"
                   >laitilan.jyske@lailanet.fi
@@ -103,7 +104,7 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
           </dl>
 
           <!-- CONTACT INFO SOCIAL MEDIA -->
-          <ul role="list" class="mt-12 flex items-end gap-6">
+          <ul class="mt-12 flex items-end gap-6">
             <li>
               <a
                 href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
@@ -147,81 +148,71 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
           >
             <!-- FIRST NAME -->
             <div>
-              <label
-                for="first-name"
-                class="block text-sm font-medium text-gray-700"
+              <label class="block text-sm font-medium text-gray-700"
                 >Etunimi
+                <div class="mt-1">
+                  <input
+                    required
+                    type="text"
+                    name="first-name"
+                    autocomplete="given-name"
+                    class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </label>
-              <div class="mt-1">
-                <input
-                  required
-                  type="text"
-                  name="first-name"
-                  id="first-name"
-                  autocomplete="given-name"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                />
-              </div>
             </div>
 
             <!-- LAST NAME -->
             <div>
-              <label
-                for="last-name"
-                class="block text-sm font-medium text-gray-700"
+              <label class="block text-sm font-medium text-gray-700"
                 >Sukunimi
+                <div class="mt-1">
+                  <input
+                    required
+                    type="text"
+                    name="last-name"
+                    autocomplete="family-name"
+                    class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </label>
-              <div class="mt-1">
-                <input
-                  required
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autocomplete="family-name"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                />
-              </div>
             </div>
 
             <!-- EMAIL -->
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700"
+              <label class="block text-sm font-medium text-gray-700"
                 >Sähköposti
+                <div class="mt-1">
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </label>
-              <div class="mt-1">
-                <input
-                  required
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                />
-              </div>
             </div>
 
             <!-- PHONE NUMBER -->
             <div>
-              <div class="flex justify-between">
-                <label
-                  for="phone"
-                  class="block text-sm font-medium text-gray-700"
-                  >Puhelinnumero
-                </label>
-                <span id="phone-optional" class="text-sm text-gray-500"
-                  >Valinnainen
-                </span>
-              </div>
-              <div class="mt-1">
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  autocomplete="tel"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                  aria-describedby="phone-optional"
-                />
-              </div>
+              <label class="block text-sm font-medium text-gray-700">
+                <div class="flex justify-between">
+                  Puhelinnumero
+                  <span id="phone-optional" class="text-sm text-gray-500"
+                    >Valinnainen
+                  </span>
+                </div>
+                <div class="mt-1">
+                  <input
+                    type="text"
+                    name="phone"
+                    autocomplete="tel"
+                    class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    aria-describedby="phone-optional"
+                  />
+                </div>
+              </label>
             </div>
 
             <!-- SUBJECT -->
@@ -230,16 +221,16 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
                 for="subject"
                 class="block text-sm font-medium text-gray-700"
                 >Aihe
+                <div class="mt-1">
+                  <input
+                    required
+                    type="text"
+                    name="subject"
+                    id="subject"
+                    class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </label>
-              <div class="mt-1">
-                <input
-                  required
-                  type="text"
-                  name="subject"
-                  id="subject"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                />
-              </div>
             </div>
 
             <!-- MESSAGE -->
@@ -248,22 +239,22 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
                 for="message"
                 class="block text-sm font-medium text-gray-700"
                 >Viesti
+                <div class="mt-1">
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    class="block w-full rounded-md border border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  ></textarea>
+                </div>
               </label>
-              <div class="mt-1">
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  class="py-3 px-4 block w-full shadow-sm text-gray-700 focus:ring-blue-500 focus:border-blue-500 border border-gray-300 rounded-md"
-                ></textarea>
-              </div>
             </div>
 
             <!-- SUBMIT BUTTON -->
             <div class="sm:col-span-2 sm:flex sm:justify-end">
               <button
                 type="submit"
-                class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto"
+                class="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
                 >Lähetä
               </button>
             </div>
@@ -274,7 +265,7 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
 
     <!-- MEMBERS INFO SECTION -->
     <section
-      class="max-w-7xl mx-auto my-8 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
     >
       <!-- MEMBERS INFO DESCRIPTION -->
       <h2 class="text-xl font-semibold text-gray-900">
@@ -286,11 +277,11 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
 
       <!-- MEMBERS CONTACTS TABLE -->
       <div
-        class="my-8 overflow-x-auto shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+        class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
       >
         <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
           <!-- MEMBERS TABLE HEAD -->
-          <thead class="bg-blue-500 text-white text-left text-sm font-semibold">
+          <thead class="bg-blue-500 font-semibold text-white">
             <tr>
               <th scope="col" class="py-3.5 pl-4 pr-3">Nimi</th>
               <th scope="col" class="py-3.5 px-3">Tehtävä</th>
@@ -301,21 +292,19 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
 
           <!-- MEMBERS TABLE BODY -->
           <tbody
-            class="divide-y divide-gray-200 whitespace-nowrap text-sm text-gray-700"
+            class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
           >
             {
               contacts.map(({ name, title, email, phone }) => (
                 <tr class="hover:bg-white">
-                  <td
-                    scope="col"
+                  <th
+                    scope="row"
                     class="py-4 pl-4 pr-3 font-medium text-gray-900"
                   >
                     {name}
-                  </td>
-                  <td scope="col" class="py-4 px-3">
-                    {title ? title : '-'}
-                  </td>
-                  <td scope="col" class="py-4 px-3">
+                  </th>
+                  <td class="py-4 px-3">{title ? title : '-'}</td>
+                  <td class="py-4 px-3">
                     <a
                       class="hover:text-gray-900 hover:underline"
                       href={`mailto:${email}`}
@@ -323,9 +312,7 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
                       {email}
                     </a>
                   </td>
-                  <td scope="col" class="py-4 px-3">
-                    {phone}
-                  </td>
+                  <td class="py-4 px-3">{phone}</td>
                 </tr>
               ))
             }

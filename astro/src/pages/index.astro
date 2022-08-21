@@ -1,8 +1,6 @@
 ---
 import { Icon } from 'astro-icon';
 import Layout from '../layouts/Layout.astro';
-
-const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
 ---
 
 <Layout>
@@ -18,7 +16,10 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
       name="keywords"
       content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, etusivu"
     />
-    <meta property="og:image" content={socialImageURL} />
+    <meta
+      property="og:image"
+      content={new URL('/images/frontpage.jpg', Astro.url)}
+    />
     <meta
       property="og:description"
       content="Tutustu Laitilan Jyskeen yleisurheilujaoston kotisivuihin."
@@ -28,8 +29,9 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
   <!-- HERO IMAGE -->
   <Fragment slot="hero-image">
     <img
-      class="w-full h-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+      class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
       src="/images/frontpage.jpg"
+      alt="Yhteenkuuluvuuden tunnetta"
       aria-hidden="true"
     />
   </Fragment>
@@ -37,11 +39,11 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
   <!-- HERO HEADING -->
   <Fragment slot="hero-heading">
     <h1
-      class="relative text-center text-white pt-16 pb-32 sm:pt-24 sm:pb-40 md:pb-48 lg:pt-36 xl:pt-44 xl:pb-52 text-2xl sm:text-3xl md:text-4xl"
+      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
     >
       Laitilan Jyske
       <span class="hidden lg:inline">-</span>
-      <span class="block mt-1 md:mt-2 lg:mt-0 lg:inline">Yleisurheilu</span>
+      <span class="mt-1 block md:mt-2 lg:mt-0 lg:inline">Yleisurheilu</span>
     </h1>
   </Fragment>
 
@@ -50,23 +52,23 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
     <!-- TOP BANNER CALL-TO-ACTION -->
     <section class="bg-blue-700 shadow-md shadow-blue-900">
       <div
-        class="max-w-7xl mx-auto py-5 md:py-3 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between font-medium"
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between py-5 px-4 font-medium sm:px-6 md:flex-row md:py-3 lg:px-8"
       >
         <div
-          class="w-full md:w-0 flex-1 flex flex-col md:flex-row items-center text-white"
+          class="flex w-full flex-1 flex-col items-center text-white md:w-0 md:flex-row"
         >
-          <span class="p-2 rounded-lg bg-blue-800">
+          <span class="rounded-lg bg-blue-800 p-2">
             <Icon name="speaker" class="h-6 w-6" />
           </span>
           <p
-            class="text-center md:text-left mt-3 mb-5 md:my-0 flex-1 ml-3 md:truncate"
+            class="mt-3 mb-5 ml-3 flex-1 text-center md:my-0 md:truncate md:text-left"
           >
             Syysmoniottelut 24.-25. syyskuuta klo 18:00 alkaen Laitilassa.
           </p>
         </div>
         <a
-          href="#"
-          class="text-sm md:ml-4 px-4 py-2 rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50"
+          href="/"
+          class="rounded-md bg-white px-4 py-2 text-sm text-blue-700 shadow-sm hover:bg-blue-50 md:ml-4"
         >
           Lisätietoa
         </a>
@@ -74,19 +76,19 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
     </section>
 
     <!-- SOSIAALISET MEDIAT CALL-TO-ACTION -->
-    <section class="max-w-7xl mx-auto py-16 px-4">
+    <section class="mx-auto max-w-7xl py-16 px-4">
       <h2
-        class="text-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-600"
+        class="text-center text-lg font-semibold text-gray-600 md:text-xl lg:text-2xl"
       >
         Seuraa meitä sosiaalisessa mediassa
       </h2>
       <div
-        class="mt-6 md:mt-8 grid grid-cols-4 sm:grid-cols-3 justify-center gap-0.5"
+        class="mt-6 grid grid-cols-4 justify-center gap-0.5 sm:grid-cols-3 md:mt-8"
       >
         <a
           href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
           target="_blank"
-          class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+          class="col-span-2 flex items-center justify-center bg-slate-100 p-8 grayscale transition-all duration-500 hover:bg-slate-200 hover:grayscale-0 sm:col-auto"
         >
           <span class="sr-only">WhatsApp</span>
           <Icon name="whatsapp-with-name" class="max-h-12" />
@@ -94,7 +96,7 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
         <a
           href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
           target="_blank"
-          class="col-span-2 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+          class="col-span-2 flex items-center justify-center bg-slate-100 p-8 grayscale transition-all duration-500 hover:bg-slate-200 hover:grayscale-0 sm:col-auto"
         >
           <span class="sr-only">Instagram</span>
           <Icon name="instagram-with-name" class="max-h-12" />
@@ -102,7 +104,7 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
         <a
           href="https://www.facebook.com/laitilanjyskeyu/"
           target="_blank"
-          class="col-start-2 col-end-4 sm:col-auto flex items-center justify-center py-8 px-8 bg-slate-100 hover:bg-slate-200 grayscale hover:grayscale-0 transition-all duration-500"
+          class="col-start-2 col-end-4 flex items-center justify-center bg-slate-100 p-8 grayscale transition-all duration-500 hover:bg-slate-200 hover:grayscale-0 sm:col-auto"
         >
           <span class="sr-only">Facebook</span>
           <Icon name="facebook-find-us" class="max-h-12" />
@@ -112,9 +114,9 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
 
     <!-- TAPAHTUMAT CALL-TO-ACTION -->
     <section class="bg-blue-700 shadow shadow-black">
-      <div class="text-center py-16 px-4 sm:py-20">
+      <div class="py-16 px-4 text-center sm:py-20">
         <h2
-          class="text-lg lg:text-xl tracking-wide leading-snug font-medium text-white"
+          class="text-lg font-medium leading-snug tracking-wide text-white lg:text-xl"
         >
           Etsitkö lapsellesi monipuolista, innostavaa ja liikunnallista
           harrastusta?
@@ -122,7 +124,7 @@ const socialImageURL = new URL('/images/frontpage.jpg', Astro.url);
         <a
           href="/tapahtumat"
           rel="prefetch"
-          class="inline-block px-6 py-3 shadow-lg shadow-blue-900 mt-10 md:mt-12 lg:md-14 text-sm sm:text-base lg:text-lg font-medium rounded-md text-white bg-red-700 hover:bg-red-800"
+          class="mt-10 inline-block rounded-md bg-red-700 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-900 hover:bg-red-800 sm:text-base md:mt-12 lg:mt-14 lg:text-lg"
         >
           Ilmoittaudu harjoituksiin
         </a>

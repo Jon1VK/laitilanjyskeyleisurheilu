@@ -28,7 +28,7 @@ const currentURL = new URL('', Astro.url);
   <!-- BODY -->
   <body class="bg-slate-100">
     <!-- HEADER -->
-    <header class="relative font-display bg-red-500">
+    <header class="font-display relative bg-red-500">
       <!-- HEADER HERO IMAGE -->
       <div class="absolute inset-0">
         <slot name="hero-image" />
@@ -41,14 +41,14 @@ const currentURL = new URL('', Astro.url);
 
       <!-- MAIN NAVIGATION -->
       <nav
-        class="relative flex items-center lg:justify-center p-4 md:p-8"
+        class="relative flex items-center p-4 md:p-8 lg:justify-center"
         aria-label="Global"
       >
         <a href="/" rel="prefetch">
           <span class="sr-only">Etusivu</span>
-          <Icon name="logo" class="h-12 md:h-14 w-auto" />
+          <Icon name="logo" class="h-12 w-auto md:h-14" />
         </a>
-        <div class="hidden lg:flex lg:gap-10 lg:ml-10">
+        <div class="hidden lg:ml-10 lg:flex lg:gap-10">
           <a
             href="/uutiset"
             rel="prefetch"
@@ -93,7 +93,7 @@ const currentURL = new URL('', Astro.url);
 
     <!-- FOOTER -->
     <footer class="bg-gray-800">
-      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
         <!-- FOOTER SITE NAVIGATION -->
         <nav
           class="-mx-5 -my-2 flex flex-wrap justify-center"
