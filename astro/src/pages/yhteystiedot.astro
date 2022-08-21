@@ -2,8 +2,6 @@
 import { Icon } from 'astro-icon';
 import Layout from '../layouts/Layout.astro';
 import contacts from '../data/contacts';
-
-const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
 ---
 
 <Layout>
@@ -19,7 +17,10 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
       name="keywords"
       content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, yhteystiedot"
     />
-    <meta property="og:image" content={socialImageURL} />
+    <meta
+      property="og:image"
+      content={new URL('/images/contacts.jpg', Astro.url)}
+    />
     <meta
       property="og:description"
       content="Ota yhteyttä yhteystietojen tai lomakkeen avulla."
@@ -73,20 +74,19 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
           />
 
           <!-- CONTACT INFO DESCRIPTION -->
-          <h3 class="text-lg font-medium text-white">
-            Yleisurheilujaoston yhteystiedot
-          </h3>
-          <p class="mt-6 text-blue-50">
+          <h3 class="text-lg font-medium text-white">Seuran yhteystiedot</h3>
+          <p class="mt-4 text-blue-50">
             Ota yhteyttä tältä sivulta löytyvien yhteystietojen tai oheisen
             lomakkeen avulla.
           </p>
-          <p class="mt-6 text-blue-50">
+          <p class="mt-4 text-blue-50">
             Voit myös seurata seuran WhatsApp-tiedotusryhmää ja muita
             sosiaalisia medioita pysyäksesi ajan tasalla seuran tapahtumista.
           </p>
 
           <!-- CONTACT INFO DETAILS -->
-          <dl class="mt-10 space-y-3 text-blue-50">
+          <h4 class="mt-6 font-medium text-white">Yleisurheilujaosto</h4>
+          <dl class="mt-2 space-y-3 text-blue-50">
             <dt><span class="sr-only">Postiosoite</span></dt>
             <dd class="flex">
               <Icon name="home" class="h-6 w-6 shrink-0 text-blue-200" />
@@ -268,10 +268,10 @@ const socialImageURL = new URL('/images/contacts.jpg', Astro.url);
       class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
     >
       <!-- MEMBERS INFO DESCRIPTION -->
-      <h2 class="text-xl font-semibold text-gray-900">
+      <h2 class="text-xl font-medium leading-6 text-gray-900">
         Yleisurheilujaoston jäsenet
       </h2>
-      <p class="mt-2 text-gray-700">
+      <p class="mt-2 max-w-4xl border-b border-gray-200 pb-5 text-gray-600">
         Oheisesta taulukosta löydät yleisurheilujaoston jäsenten yhteystiedot.
       </p>
 
