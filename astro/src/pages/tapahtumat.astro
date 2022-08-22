@@ -56,7 +56,17 @@ const calendarDates = getCalendarDates(
     <section
       class="mx-auto my-6 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:flex lg:flex-col lg:px-12"
     >
-      <div class="rounded-t-lg shadow ring-1 ring-black/5">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Tapahtumakalenteri
+        </h2>
+        <p class="mx-auto mt-3 max-w-3xl text-xl text-gray-500 sm:mt-4">
+          Löydä seuraava tapahtuma, johon voit osallistua. Punaisella värillä
+          merkatut tapahtumat ovat kilpailuja ja sinisellä merkatut
+          harjoituksia.
+        </p>
+      </div>
+      <div class="mt-12 rounded-t-lg shadow ring-1 ring-black/5">
         <!-- CALENDAR HEADER -->
         <header
           class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 py-3 px-5 lg:flex-none"
@@ -104,7 +114,7 @@ const calendarDates = getCalendarDates(
             {
               calendarDates.map((date) => (
                 <div
-                  class={`h-14 py-2 px-3 ${
+                  class={`h-20 py-2 px-3 ${
                     currentDate.getMonth() !== date.getMonth()
                       ? 'bg-gray-50 text-gray-500'
                       : 'bg-white'
