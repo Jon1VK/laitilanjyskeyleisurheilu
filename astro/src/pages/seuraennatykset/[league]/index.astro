@@ -55,10 +55,10 @@ const eventClickHandler = (event: string) =>
   <!-- MAIN -->
   <Fragment slot="main">
     <div
-      class="mx-auto my-8 grid max-w-7xl grid-cols-5 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 md:grid md:grid-cols-5 lg:my-16 lg:px-12"
     >
       <!-- LEAGUE SIDEBAR NAVIGATION -->
-      <nav>
+      <nav class="hidden md:block">
         {
           Object.entries(LEAGUES_BY_GENDER).map(([gender, leagues]) => (
             <>
@@ -118,7 +118,13 @@ const eventClickHandler = (event: string) =>
         >
           <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
             <!-- LEAGUE RECORDS TABLE HEAD -->
-            <thead class="bg-blue-600 font-semibold text-white">
+            <thead
+              class={`font-semibold ${
+                /^[MP]/.test(currentLeague)
+                  ? 'bg-blue-200 text-blue-800'
+                  : 'bg-red-100 text-red-800'
+              }`}
+            >
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3">Laji</th>
                 <th scope="col" class="py-3.5 px-3">Urheilija</th>
