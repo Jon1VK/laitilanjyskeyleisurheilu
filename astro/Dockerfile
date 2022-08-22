@@ -1,4 +1,5 @@
-FROM node:16.16-alpine AS base
+FROM node:16.17 AS base
+RUN apt-get update && apt-get install -y openssl
 WORKDIR /app
 COPY ./package*.json ./
 RUN npm install
