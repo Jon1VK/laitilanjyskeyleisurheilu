@@ -1,0 +1,173 @@
+---
+import { parameterize } from 'inflected';
+import { titleize } from '@utils/strings';
+import { LEAGUES_BY_GENDER } from '@data/leagues';
+import { recordsByEvent } from '@data/records';
+import Layout from '@layouts/Layout.astro';
+
+const currentLeague = titleize(Astro.params.league as string);
+const eventClickHandler = (event: string) =>
+  `location.assign("${Astro.params.league}/${parameterize(event)}#main")`;
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <title>
+      Laitilan Jyske | Yleisurheilu | Seuraennätykset | {currentLeague}
+    </title>
+    <meta property="og:title" content={`TOP 10 | ${currentLeague}`} />
+    <meta name="description" content={`Selaa ${currentLeague} seuraennätyksiä.`}
+    />
+    <meta
+      name="keywords"
+      content={`laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, seuraennätykset, ennätykset, TOP10, ${currentLeague}`}
+    />
+    <meta
+      property="og:image"
+      content={new URL('/images/records.jpg', Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content={`Selaa ${currentLeague} seuraennätyksiä.`}
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/records.jpg"
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
+    >
+      Seuraennätykset | {currentLeague}
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div
+      class="mx-auto my-8 grid max-w-7xl grid-cols-5 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <!-- LEAGUE SIDEBAR NAVIGATION -->
+      <nav>
+        {
+          Object.entries(LEAGUES_BY_GENDER).map(([gender, leagues]) => (
+            <>
+              <div class="mb-1 mt-2 font-semibold text-gray-700">{gender}</div>
+              <ul
+                class="space-y-1 text-sm font-medium text-gray-500"
+                aria-label="Sidebar"
+              >
+                {leagues.map((league) => (
+                  <li>
+                    <a
+                      href={`/seuraennatykset/${parameterize(league)}#main`}
+                      rel="prefetch"
+                      class={`block rounded-md px-3 py-2 ${
+                        currentLeague === league
+                          ? `text-gray-900 ${
+                              /^[MP]/.test(league)
+                                ? 'bg-blue-100 text-blue-800'
+                                : 'bg-red-100 text-red-800'
+                            }`
+                          : 'hover:bg-white hover:text-gray-900'
+                      }`}
+                    >
+                      {league}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))
+        }
+      </nav>
+
+      <!-- LEAGUE RECORDS SECTION -->
+      <section class="col-span-4 px-4 sm:px-8 lg:px-12">
+        <!-- LEAGUE RECORDS DESCRIPTION -->
+        <h2 class="text-xl font-medium leading-6 text-gray-900">
+          Seuraennätykset | {currentLeague}
+        </h2>
+        <p class="mt-2 text-gray-600">
+          Klikkaamalla taulukon riviä pääset tarkastelemaan kyseisen lajin
+          TOP10-listaa.
+        </p>
+        <div class="mt-2 border-b border-gray-200 pb-5">
+          <a
+            href="/seuraennatykset/uusi-ennatys#main"
+            rel="prefetch"
+            class="cursor-pointer text-blue-800 hover:text-blue-700 hover:underline"
+          >
+            Ilmoita uusi seuraennätys
+          </a>
+        </div>
+
+        <!-- LEAGUE RECORDS TABLE -->
+        <div
+          class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
+        >
+          <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
+            <!-- LEAGUE RECORDS TABLE HEAD -->
+            <thead class="bg-blue-600 font-semibold text-white">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3">Laji</th>
+                <th scope="col" class="py-3.5 px-3">Urheilija</th>
+                <th scope="col" class="py-3.5 px-3">Tulos</th>
+                <th scope="col" class="py-3.5 px-3">Paikkakunta</th>
+                <th scope="col" class="py-3.5 px-3">Päivämäärä</th>
+              </tr>
+            </thead>
+
+            <!-- LEAGUE RECORDS TABLE BODY -->
+            <tbody
+              class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
+              >{
+                Object.values(recordsByEvent).map((records) => (
+                  <>
+                    {records.map(
+                      (
+                        { event, athlete, result, handtime, location, date },
+                        index
+                      ) => (
+                        <tr
+                          onclick={eventClickHandler(event)}
+                          class="cursor-pointer hover:bg-white"
+                        >
+                          {index === 0 && (
+                            <th
+                              rowspan={records.length}
+                              class="py-4 pl-4 pr-3 align-top font-medium"
+                            >
+                              {event}
+                            </th>
+                          )}
+                          <td class="py-4 px-3">{athlete}</td>
+                          <td class="py-4 px-3">
+                            {result}
+                            {handtime ? 'h' : ''}
+                          </td>
+                          <td class="py-4 px-3">{location || '-'}</td>
+                          <td class="py-4 px-3">{date}</td>
+                        </tr>
+                      )
+                    )}
+                  </>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </Fragment>
+</Layout>

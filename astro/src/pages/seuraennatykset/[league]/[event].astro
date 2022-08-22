@@ -1,0 +1,159 @@
+---
+import { parameterize } from 'inflected';
+import { titleize } from '@utils/strings';
+import { EVENTS_BY_LEAGUE } from '@data/events';
+import { top10 } from '@data/records';
+import Layout from '@layouts/Layout.astro';
+
+const currentLeague = titleize(
+  Astro.params.league as string
+) as keyof typeof EVENTS_BY_LEAGUE;
+const currentEvent = titleize(Astro.params.event as string);
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <title>
+      Laitilan Jyske | Yleisurheilu | TOP 10 | {currentLeague} | {currentEvent}
+    </title>
+    <meta
+      property="og:title"
+      content={`TOP 10 | ${currentLeague} | ${currentEvent}`}
+    />
+    <meta
+      name="description"
+      content={`Selaa ${currentLeague} ${currentEvent} TOP 10 listan tuloksia.`}
+    />
+    <meta
+      name="keywords"
+      content={`laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, seuraennätykset, ennätykset, TOP10, ${currentLeague}, ${currentEvent}`}
+    />
+    <meta
+      property="og:image"
+      content={new URL('/images/records.jpg', Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content={`Selaa ${currentLeague} ${currentEvent} TOP 10 listan tuloksia.`}
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/records.jpg"
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
+    >
+      TOP 10 | {currentLeague} | {currentEvent}
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div
+      class="mx-auto my-8 grid max-w-7xl grid-cols-5 px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <!-- EVENTS SIDEBAR NAVIGATION -->
+      <nav>
+        <div class="my-1 font-semibold text-gray-700">
+          {currentLeague}
+        </div>
+        <ul
+          class="space-y-1 text-sm font-medium text-gray-500"
+          aria-label="Sidebar"
+        >
+          {
+            EVENTS_BY_LEAGUE[currentLeague].map((event) => (
+              <li>
+                <a
+                  href={`/seuraennatykset/${Astro.params.league}/${parameterize(
+                    event
+                  )}#main`}
+                  rel="prefetch"
+                  class={`block rounded-md px-3 py-2 ${
+                    currentEvent === event
+                      ? 'bg-gray-200 text-gray-900'
+                      : 'hover:bg-white hover:text-gray-900'
+                  }`}
+                >
+                  {event}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- EVENT TOP10 SECTION -->
+      <section class="col-span-4 px-4 sm:px-8 lg:px-12">
+        <!-- TOP10 SECTION DESCRIPTION -->
+        <h2 class="text-xl font-medium leading-6 text-gray-900">
+          TOP 10 | {currentLeague} | {currentEvent}
+        </h2>
+        <div class="mt-2 border-b border-gray-200 pb-5">
+          <a
+            href="/seuraennatykset/uusi-ennatys#main"
+            rel="prefetch"
+            class="cursor-pointer text-blue-800 hover:text-blue-700 hover:underline"
+          >
+            Ilmoita uusi seuraennätys
+          </a>
+        </div>
+
+        <!-- TOP10 RECORDS TABLE -->
+        <div
+          class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
+        >
+          <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
+            <!-- TOP10 RECORDS TABLE HEAD -->
+            <thead class="bg-blue-600 font-semibold text-white">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3">Sija</th>
+                <th scope="col" class="py-3.5 px-3">Urheilija</th>
+                <th scope="col" class="py-3.5 px-3">Tulos</th>
+                <th scope="col" class="py-3.5 px-3">Paikkakunta</th>
+                <th scope="col" class="py-3.5 px-3">Päivämäärä</th>
+              </tr>
+            </thead>
+
+            <!-- TOP10 RECORDS TABLE BODY -->
+            <tbody
+              class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
+            >
+              {
+                top10.map(
+                  ({ athlete, result, handtime, location, date }, index) => (
+                    <tr class="hover:bg-white">
+                      <th
+                        scope="row"
+                        class="py-4 pl-4 pr-3 align-top font-medium"
+                      >
+                        {index + 1}.
+                      </th>
+                      <td class="py-4 px-3">{athlete}</td>
+                      <td class="py-4 px-3">
+                        {`${result}${handtime ? 'h' : ''}`}
+                      </td>
+                      <td class="py-4 px-3">{location || '-'}</td>
+                      <td class="py-4 px-3">{date}</td>
+                    </tr>
+                  )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </Fragment>
+</Layout>
