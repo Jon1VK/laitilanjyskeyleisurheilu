@@ -2,6 +2,11 @@
 import { Icon } from 'astro-icon';
 import { titleize } from '../utils/strings';
 
+export interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props as Props;
 const pathSegments = Astro.url.pathname.slice(1).split('/');
 ---
 
@@ -27,7 +32,7 @@ const pathSegments = Astro.url.pathname.slice(1).split('/');
   </head>
 
   <!-- BODY -->
-  <body class="bg-slate-100">
+  <body class="bg-slate-50">
     <!-- HEADER -->
     <header class="font-display relative bg-red-500">
       <!-- HEADER HERO IMAGE -->
@@ -133,7 +138,8 @@ const pathSegments = Astro.url.pathname.slice(1).split('/');
                             : 'hover:text-white'
                         }
                       >
-                        {titleize(segment)}
+                        {(index === pathSegments.length - 1 && title) ||
+                          titleize(segment)}
                       </a>
                     </li>
                   ))}
