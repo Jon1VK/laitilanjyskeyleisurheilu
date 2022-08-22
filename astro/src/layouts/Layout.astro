@@ -88,7 +88,7 @@ const pathSegments = Astro.url.pathname.slice(1).split('/');
     </header>
 
     <!-- MAIN CONTENT -->
-    <main>
+    <main id="main">
       <!-- BREADCRUMBS HEADER -->
       {
         pathSegments[0] && (
@@ -112,7 +112,7 @@ const pathSegments = Astro.url.pathname.slice(1).split('/');
               >
                 <ol class="flex gap-4">
                   <li class="flex items-center">
-                    <a href="/" class="hover:text-white">
+                    <a href="/" rel="prefetch" class="hover:text-white">
                       Etusivu
                     </a>
                   </li>
@@ -123,8 +123,15 @@ const pathSegments = Astro.url.pathname.slice(1).split('/');
                         class="mr-4 h-5 w-5 shrink-0 text-blue-200"
                       />
                       <a
-                        href={`/${pathSegments.slice(0, 1 + index).join('/')}`}
-                        class="hover:text-white"
+                        href={`/${pathSegments
+                          .slice(0, 1 + index)
+                          .join('/')}#main`}
+                        rel="prefetch"
+                        class={
+                          index + 1 === pathSegments.length
+                            ? 'text-white'
+                            : 'hover:text-white'
+                        }
                       >
                         {titleize(segment)}
                       </a>
