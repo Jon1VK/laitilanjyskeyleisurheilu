@@ -7,6 +7,8 @@
       "@icons/*": ["src/icons/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
+      "@models/*": ["src/models/*"],
+      "@server/*": ["src/server/*"],
       "@utils/*": ["src/utils/*"]
     },
     "target": "ESNext",
@@ -19,6 +21,7 @@
     "importsNotUsedAsValues": "error",
     "skipLibCheck": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "allowSyntheticDefaultImports": true
   }
 }
