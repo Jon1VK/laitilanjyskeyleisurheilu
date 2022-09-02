@@ -10,9 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id      Int     @id @default(autoincrement())
-  title   String  @db.VarChar(255)
-  content String?
-  value   Int?
+enum EventType {
+  PRACTICE
+  COMPETITION
+  OTHER
+}
+
+model Event {
+  id            Int       @id @default(autoincrement())
+  type          EventType
+  startDateTime DateTime
+  endDateTime   DateTime?
+  title         String
+  description   String?
+  location      String?
 }
