@@ -1,21 +1,28 @@
 export const WEEKDAYS = [
-  'Maanantai',
-  'Tiistai',
-  'Keskiviikko',
-  'Torstai',
-  'Perjantai',
-  'Lauantai',
-  'Sunnuntai',
-];
+  'maanantai',
+  'tiistai',
+  'keskiviikko',
+  'torstai',
+  'perjantai',
+  'lauantai',
+  'sunnuntai',
+] as const;
 
-export const getCalendarDates = (year: number, month: number) => {
-  // Find calendar first monday
+export const getCalendarStartDate = (year: number, month: number) => {
   const startDate = new Date(year, month);
   while (startDate.getDay() !== 1) startDate.setDate(startDate.getDate() - 1);
-  // Find calendar last sunday
+  return startDate;
+};
+
+export const getCalendarEndDate = (year: number, month: number) => {
   const endDate = new Date(year, month + 1);
   while (endDate.getDay() !== 0) endDate.setDate(endDate.getDate() + 1);
-  // Get all dates for the calendar
+  return endDate;
+};
+
+export const getCalendarDates = (year: number, month: number) => {
+  const startDate = getCalendarStartDate(year, month);
+  const endDate = getCalendarEndDate(year, month);
   const dates: Date[] = [];
   while (startDate <= endDate) {
     dates.push(new Date(startDate));
