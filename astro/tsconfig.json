@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@auth": ["src/auth/index.ts"],
       "@components/*": ["src/components/*"],
       "@data/*": ["src/data/*"],
       "@hooks": ["src/hooks/index.ts"],

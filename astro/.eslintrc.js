@@ -58,6 +58,10 @@ module.exports = {
       extends: ['plugin:solid/typescript', 'plugin:jsx-a11y/recommended'],
       rules: {
         '@typescript-eslint/no-unused-vars': [2, { varsIgnorePattern: '^_' }],
+        '@typescript-eslint/no-misused-promises': [
+          2,
+          { checksVoidReturn: { attributes: false } },
+        ],
       },
     },
   ],

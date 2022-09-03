@@ -52,9 +52,13 @@ Below are listed all of the environment variables that the application needs. If
 
 ### Astro
 
-| Environment Variable | Description                   |
-| -------------------- | ----------------------------- |
-| DATABASE_URL         | PostgreSQL connect URL string |
+| Environment Variable | Description                    |
+| -------------------- | ------------------------------ |
+| DATABASE_URL         | PostgreSQL connect URL string  |
+| ASTROAUTH_URL        | Astro Auth base URL            |
+| ASTROAUTH_SECRET     | Astro Auth secret              |
+| GOOGLE_CLIENT_ID     | Google OAuth Web Client ID     |
+| GOOGLE_CLIENT_SECRET | Google OAuth Web Client secret |
 
 ## Development
 
