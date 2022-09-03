@@ -47,10 +47,12 @@ const EventCalendarListItem = (props: { date: Date; event: Event }) => (
         {props.event.title}
       </p>
       <time
-        datetime={props.event.startDateTime.toISOString()}
+        datetime={props.event.startDateTime.toLocaleString('sv', {
+          timeZone: 'utc',
+        })}
         class={`ml-3 hidden flex-none xl:block ${hoverColor(props.event)}`}
       >
-        {props.event.startDateTime.getDate() === props.date.getDate()
+        {props.date.toDateString() === props.event.startDateTime.toDateString()
           ? props.event.startDateTime.toLocaleTimeString('fi', {
               timeZone: 'utc',
               timeStyle: 'short',

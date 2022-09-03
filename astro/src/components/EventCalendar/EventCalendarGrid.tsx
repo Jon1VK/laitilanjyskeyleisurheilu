@@ -22,14 +22,15 @@ const EventCalendarLaptopGrid = (props: {
   const [{ eventCalendarNavigator }, _] = splitProps(props, [
     'eventCalendarNavigator',
   ]);
-  const { inMonth, calendarDates, eventsByDate } = eventCalendarNavigator;
+  const { isInCurrentMonth, calendarDates, eventsByDate } =
+    eventCalendarNavigator;
   return (
     <div class="hidden w-full grid-cols-7 gap-px lg:grid">
       <For each={calendarDates()}>
         {(date) => (
           <div
             class={`min-h-[5rem] py-2 px-3 ${
-              inMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
+              isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
             }`}
           >
             <EventCalendarDateNumber date={date} />
@@ -50,7 +51,8 @@ const EventCalendarMobileGrid = (props: {
   const [{ eventCalendarNavigator }, _] = splitProps(props, [
     'eventCalendarNavigator',
   ]);
-  const { inMonth, calendarDates, eventsByDate } = eventCalendarNavigator;
+  const { isInCurrentMonth, calendarDates, eventsByDate } =
+    eventCalendarNavigator;
   return (
     <div class="grid w-full grid-cols-7 gap-px lg:hidden">
       <For each={calendarDates()}>
@@ -58,7 +60,7 @@ const EventCalendarMobileGrid = (props: {
           <button
             type="button"
             class={`flex min-h-[3.5rem] flex-col py-2 px-3 hover:bg-gray-100 ${
-              inMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
+              isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
             }`}
           >
             <EventCalendarDateNumber date={date} />

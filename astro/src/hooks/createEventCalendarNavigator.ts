@@ -12,19 +12,16 @@ const createEventCalendarNavigator = (
   const [month, setMonth] = createSignal(defaultMonth);
 
   const humanized = () =>
-    new Date(Date.UTC(year(), month())).toLocaleDateString('fi', {
+    new Date(year(), month()).toLocaleDateString('fi', {
       year: 'numeric',
       month: 'long',
     });
 
   const datetime = () =>
-    new Date(Date.UTC(year(), month())).toISOString().slice(0, 7);
+    new Date(year(), month()).toLocaleDateString('sv').slice(0, 7);
 
-  const inMonth = (date: Date) =>
-    datetime() ===
-    new Date(Date.UTC(date.getFullYear(), date.getMonth()))
-      .toISOString()
-      .slice(0, 7);
+  const isInCurrentMonth = (date: Date) =>
+    date.getFullYear() === year() && date.getMonth() === month();
 
   const calendarDates = createMemo(() => getCalendarDates(year(), month()));
 
@@ -49,8 +46,8 @@ const createEventCalendarNavigator = (
       '',
       `?vuosi=${toYear}&kuukausi=${toMonth + 1}`
     );
-    setYear(date.getFullYear());
-    setMonth(date.getMonth());
+    setYear(toYear);
+    setMonth(toMonth);
   };
 
   const navigateToPrevMonth = () => setYearAndMonth(year(), month() - 1);
@@ -59,7 +56,7 @@ const createEventCalendarNavigator = (
   return {
     humanized,
     datetime,
-    inMonth,
+    isInCurrentMonth,
     calendarDates,
     eventsByDate,
     navigateToPrevMonth,
