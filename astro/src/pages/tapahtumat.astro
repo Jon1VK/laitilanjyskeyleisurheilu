@@ -1,13 +1,11 @@
 ---
-import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
-import { getCalendarDates, WEEKDAYS } from '@utils/dates';
+import EventCalendar from '@components/EventCalendar';
 
-const currentDate = new Date();
-const calendarDates = getCalendarDates(
-  currentDate.getFullYear(),
-  currentDate.getMonth()
-);
+const searchParams = Astro.url.searchParams;
+const year = Number(searchParams.get('vuosi') || new Date().getFullYear());
+const month =
+  Number(searchParams.get('kuukausi') || new Date().getMonth() + 1) - 1;
 ---
 
 <Layout>
@@ -68,103 +66,7 @@ const calendarDates = getCalendarDates(
           harjoituksia.
         </p>
       </div>
-      <div class="mt-12 rounded-t-lg shadow ring-1 ring-black/5">
-        <!-- CALENDAR HEADER -->
-        <header
-          class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 py-3 px-5 lg:flex-none"
-        >
-          <h1 class="text-lg font-semibold text-white">
-            <time datetime="2022-01">Elokuu 2022</time>
-          </h1>
-          <div class="flex items-center rounded-md shadow-sm">
-            <button
-              type="button"
-              class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-2 pl-2 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:hover:bg-gray-50"
-            >
-              <span class="sr-only">Edellinen kuukausi</span>
-              <Icon name="chevron-left" class="h-5 w-5" />
-            </button>
-            <span class="relative -mx-px h-5 w-px bg-gray-300"></span>
-            <button
-              type="button"
-              class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-2 pl-2 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:hover:bg-gray-50"
-            >
-              <span class="sr-only">Seuraava kuukausi</span>
-              <Icon name="chevron-right" class="h-5 w-5" />
-            </button>
-          </div>
-        </header>
-
-        <!-- CALENDAR WEEKDAYS ROW -->
-        <div
-          class="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700"
-        >
-          {
-            WEEKDAYS.map((weekday) => (
-              <div class="bg-white py-2">
-                <span class="sm:hidden">{weekday.charAt(0)}</span>
-                <span class="sr-only sm:not-sr-only">{weekday}</span>
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- CALENDAR DATE ROWS -->
-        <div class="bg-gray-200 text-xs leading-6 text-gray-700">
-          <!-- CALENDAR DATE ROWS FOR LAPTOPS -->
-          <div class="hidden w-full grid-cols-7 gap-px lg:grid">
-            {
-              calendarDates.map((date) => (
-                <div
-                  class={`h-20 py-2 px-3 ${
-                    currentDate.getMonth() !== date.getMonth()
-                      ? 'bg-gray-50 text-gray-500'
-                      : 'bg-white'
-                  }`}
-                >
-                  <time
-                    class={
-                      currentDate.getDate() === date.getDate()
-                        ? '-ml-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white'
-                        : ''
-                    }
-                    datetime="2021-12-28"
-                  >
-                    {date.getDate()}
-                  </time>
-                </div>
-              ))
-            }
-          </div>
-
-          <!-- CALENDAR DATE ROWS FOR MOBILES AND TABLETS -->
-          <div class="grid w-full grid-cols-7 gap-px lg:hidden">
-            {
-              calendarDates.map((date) => (
-                <button
-                  type="button"
-                  class={`flex h-14 flex-col py-2 px-3 hover:bg-gray-100 ${
-                    currentDate.getMonth() !== date.getMonth()
-                      ? 'bg-gray-50 text-gray-500'
-                      : 'bg-white'
-                  }`}
-                >
-                  <time
-                    class={
-                      currentDate.getDate() === date.getDate()
-                        ? '-ml-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white'
-                        : ''
-                    }
-                    datetime="2021-12-28"
-                  >
-                    {date.getDate()}
-                  </time>
-                </button>
-              ))
-            }
-          </div>
-        </div>
-      </div>
+      <EventCalendar client:only="solid" year={year} month={month} />
     </section>
   </Fragment>
 </Layout>

@@ -56,6 +56,9 @@ module.exports = {
     {
       files: ['*.tsx'],
       extends: ['plugin:solid/typescript', 'plugin:jsx-a11y/recommended'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': [2, { varsIgnorePattern: '^_' }],
+      },
     },
   ],
 };

@@ -1,6 +1,5 @@
 import PrismaEvent from '@models/event';
 import { router } from '@trpc/server';
-import { getCalendarEndDate, getCalendarStartDate } from '@utils/dates';
 import { z } from 'zod';
 
 const eventsRouter = router().query('events', {
@@ -10,8 +9,8 @@ const eventsRouter = router().query('events', {
   }),
   async resolve({ input }) {
     const { year, month } = input;
-    const startDate = getCalendarStartDate(year, month);
-    const endDate = getCalendarEndDate(year, month);
+    const startDate = new Date(year, month);
+    const endDate = new Date(year, month + 1, 0);
     endDate.setDate(endDate.getDate() + 1);
     const events = await PrismaEvent.findAllBetweenStartDateAndEndDate(
       startDate,

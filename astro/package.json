@@ -20,6 +20,7 @@
     "inflected": "^2.1.0",
     "json-complete": "^2.0.1",
     "prisma": "^4.2.1",
+    "solid-icons": "^1.0.1",
     "zod": "^3.18.0"
   },
   "devDependencies": {
