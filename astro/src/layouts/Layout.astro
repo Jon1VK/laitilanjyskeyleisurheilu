@@ -42,7 +42,7 @@ const user = getUser({ client: Astro }) as JwtPayload | null | undefined;
     <UserStore user={user?.user} client:only="solid" />
 
     <!-- USER NAVIGATION -->
-    <div class="fixed top-0 right-0 z-50 p-4 md:p-8">
+    <div class="fixed top-0 right-0 z-10 p-4 md:p-8">
       <UserNavigation client:only="solid" />
     </div>
 

@@ -1,5 +1,5 @@
 import trpcClient from '@lib/trpcClient';
-import type { Event } from '@prisma/client';
+import type { Event, EventType } from '@prisma/client';
 import { getCalendarDates, getMonthDates } from '@utils/dates';
 import { mapEventsByDate } from '@utils/events';
 import { createMemo, createResource, createSignal } from 'solid-js';
@@ -25,7 +25,7 @@ const createEventCalendarNavigator = (
 
   const calendarDates = createMemo(() => getCalendarDates(year(), month()));
 
-  const [eventsResource] = createResource(
+  const [eventsResource, { refetch }] = createResource(
     () => ({ year: year(), month: month() }),
     (query) => trpcClient.query('events', query)
   );
@@ -36,6 +36,27 @@ const createEventCalendarNavigator = (
       getMonthDates(year(), month())
     )
   );
+
+  const createEvent = async (formData: FormData) => {
+    const type = formData.get('type') as EventType;
+    const startDateTime = new Date(formData.get('startDateTime') as string);
+    const endDateTimeValue = formData.get('endDateTime') as string;
+    const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
+    const title = formData.get('title') as string;
+    const locationValue = formData.get('location') as string;
+    const location = locationValue || null;
+    const descriptionValue = formData.get('description') as string;
+    const description = descriptionValue || null;
+    await trpcClient.mutation('events', {
+      type,
+      startDateTime,
+      endDateTime,
+      title,
+      location,
+      description,
+    });
+    await refetch();
+  };
 
   const setYearAndMonth = (year: number, month: number) => {
     const date = new Date(year, month);
@@ -59,6 +80,7 @@ const createEventCalendarNavigator = (
     isInCurrentMonth,
     calendarDates,
     eventsByDate,
+    createEvent,
     navigateToPrevMonth,
     navigateToNextMonth,
   };

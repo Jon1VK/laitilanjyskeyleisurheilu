@@ -15,7 +15,7 @@ const getCalendarStartDate = (year: number, month: number) => {
 };
 
 const getCalendarEndDate = (year: number, month: number) => {
-  const endDate = new Date(year, month + 1);
+  const endDate = new Date(year, month + 1, 0);
   while (endDate.getDay() !== 0) endDate.setDate(endDate.getDate() + 1);
   return endDate;
 };

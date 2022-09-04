@@ -7,8 +7,8 @@ const UserNavigation = () => {
   const [show, setShow] = createSignal(false);
   const menuVisibilityStyle = () =>
     show()
-      ? 'transition duration-200 ease-out opacity-100 translate-y-0'
-      : 'transition ease-in duration-150 opacity-0 translate-y-1';
+      ? 'duration-200 ease-out opacity-100 translate-y-0'
+      : 'ease-in duration-150 opacity-0 translate-y-1 pointer-events-none';
   return (
     <Show when={loggedIn()}>
       <div class="relative">
@@ -25,7 +25,7 @@ const UserNavigation = () => {
           />
         </button>
         <div
-          class={`absolute right-0 z-50 mt-3 flex w-screen max-w-xs flex-col gap-2 rounded-lg bg-slate-50 p-4 shadow-lg ring-2 ring-black/5  ${menuVisibilityStyle()}`}
+          class={`absolute right-0 mt-3 flex w-screen max-w-xs flex-col gap-2 rounded-lg bg-slate-50 p-4 shadow-lg ring-2 ring-black/5 transition focus-within:translate-y-0 focus-within:opacity-100 ${menuVisibilityStyle()}`}
         >
           <p class="ml-3 font-medium text-gray-900">{user().name}</p>
           <button

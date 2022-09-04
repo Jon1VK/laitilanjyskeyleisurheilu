@@ -62,6 +62,7 @@ module.exports = {
           2,
           { checksVoidReturn: { attributes: false } },
         ],
+        'jsx-a11y/label-has-associated-control': 0,
       },
     },
   ],

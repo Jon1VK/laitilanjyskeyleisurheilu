@@ -24,7 +24,7 @@ const EventCalendarEventList = (props: { date: Date; events: Event[] }) => (
         {(event) => <EventCalendarListItem date={props.date} event={event} />}
       </For>
     </ol>
-    <div class="flex flex-wrap lg:hidden">
+    <div class="mt-2 flex flex-wrap lg:hidden">
       <span class="sr-only">{props.events.length} tapahtumaa</span>
       <For each={props.events}>
         {(event) => (
@@ -38,7 +38,11 @@ const EventCalendarEventList = (props: { date: Date; events: Event[] }) => (
 const EventCalendarListItem = (props: { date: Date; event: Event }) => (
   <li>
     <a href="/" class="group hidden items-center lg:flex">
-      <span class={`mr-2 h-1.5 w-1.5 rounded-full ${dotColor(props.event)}`} />
+      <span
+        class={`mr-2 h-1.5 w-1.5 shrink-0 rounded-full ${dotColor(
+          props.event
+        )}`}
+      />
       <p
         class={`flex-auto truncate font-medium text-gray-900 ${hoverColor(
           props.event
@@ -47,14 +51,11 @@ const EventCalendarListItem = (props: { date: Date; event: Event }) => (
         {props.event.title}
       </p>
       <time
-        datetime={props.event.startDateTime.toLocaleString('sv', {
-          timeZone: 'utc',
-        })}
+        datetime={props.event.startDateTime.toLocaleString('sv')}
         class={`ml-3 hidden flex-none xl:block ${hoverColor(props.event)}`}
       >
         {props.date.toDateString() === props.event.startDateTime.toDateString()
           ? props.event.startDateTime.toLocaleTimeString('fi', {
-              timeZone: 'utc',
               timeStyle: 'short',
             })
           : '--:--'}
