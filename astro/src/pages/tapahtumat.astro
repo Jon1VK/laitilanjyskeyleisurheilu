@@ -1,6 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import EventCalendar from '@components/EventCalendar';
+import { EventCalendar } from '@components';
 
 const searchParams = Astro.url.searchParams;
 const year = Number(searchParams.get('vuosi') || new Date().getFullYear());

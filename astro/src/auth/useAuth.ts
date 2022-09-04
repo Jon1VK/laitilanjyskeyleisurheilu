@@ -1,10 +1,11 @@
 import { signIn, signOut } from '@astro-auth/client';
-import { user } from './UserStore';
+import type { Accessor } from 'solid-js';
+import { User, user } from './UserStore';
 
 const loggedIn = () => !!user();
 
 const useAuth = () => ({
-  user: user,
+  user: user as Accessor<User>,
   loggedIn,
   signIn,
   signOut,

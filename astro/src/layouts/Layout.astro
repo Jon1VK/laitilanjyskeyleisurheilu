@@ -1,9 +1,10 @@
 ---
 import { getUser } from '@astro-auth/core';
 import { UserStore } from '@auth';
-import Login from '@components/Login';
+import { Login, UserNavigation } from '@components';
 import { Icon } from 'astro-icon';
-import { titleize } from '../utils/strings';
+import { titleize } from '@utils/strings';
+import type { JwtPayload } from 'jsonwebtoken';
 
 export interface Props {
   title?: string;
@@ -11,7 +12,7 @@ export interface Props {
 
 const { title } = Astro.props as Props;
 const pathSegments = Astro.url.pathname.slice(1).split('/');
-const user = getUser({ client: Astro });
+const user = getUser({ client: Astro }) as JwtPayload | null | undefined;
 ---
 
 <!DOCTYPE html>
@@ -36,8 +37,15 @@ const user = getUser({ client: Astro });
   </head>
 
   <!-- BODY -->
-  <body class="bg-slate-50">
-    <UserStore user={user} client:only="solid" />
+  <body class="relative bg-slate-50">
+    <!-- USER STORE -->
+    <UserStore user={user?.user} client:only="solid" />
+
+    <!-- USER NAVIGATION -->
+    <div class="fixed top-0 right-0 z-50 p-4 md:p-8">
+      <UserNavigation client:only="solid" />
+    </div>
+
     <!-- HEADER -->
     <header class="font-display relative bg-red-500">
       <!-- HEADER HERO IMAGE -->

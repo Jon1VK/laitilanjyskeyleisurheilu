@@ -1,16 +1,16 @@
 import { createSignal, splitProps } from 'solid-js';
 
 export interface User {
-  name: string;
-  email: string;
-  image: string;
+  readonly name: string;
+  readonly email: string;
+  readonly image: string;
 }
 
-const [user, setUser] = createSignal<User | null>(null);
+const [user, setUser] = createSignal<User | undefined>();
 
 export { user };
 
-const UserStore = (props: { user: User | null }) => {
+const UserStore = (props: { user: User | undefined }) => {
   const [{ user }, _] = splitProps(props, ['user']);
   setUser(user);
 };

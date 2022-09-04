@@ -16,6 +16,15 @@ declare module 'json-complete' {
     encode: (value: any) => any;
     decode: (value: any) => any;
   }
-
   export = <JsonComplete>{};
+}
+
+declare module 'jsonwebtoken' {
+  interface JwtPayload {
+    user: {
+      readonly name: string;
+      readonly email: string;
+      readonly image: string;
+    };
+  }
 }
