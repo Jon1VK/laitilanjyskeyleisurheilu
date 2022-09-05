@@ -1,11 +1,22 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { EventCalendar } from '@components';
+import PrismaEvent from '@models/event';
+import { getMonthEndDate, getMonthStartDate } from '@utils/dates';
 
 const searchParams = Astro.url.searchParams;
-const year = Number(searchParams.get('vuosi') || new Date().getFullYear());
-const month =
-  Number(searchParams.get('kuukausi') || new Date().getMonth() + 1) - 1;
+const queryYear = searchParams.get('vuosi');
+const queryMonth = searchParams.get('kuukausi');
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth();
+const year = Number(queryYear || currentYear);
+const month = Number(queryMonth || currentMonth + 1) - 1;
+const startDate = getMonthStartDate(year, month);
+const endDate = getMonthEndDate(year, month);
+const events = await PrismaEvent.findAllBetweenStartDateAndEndDate(
+  startDate,
+  endDate
+);
 ---
 
 <Layout>
@@ -66,7 +77,7 @@ const month =
           harjoituksia.
         </p>
       </div>
-      <EventCalendar client:only="solid" year={year} month={month} />
+      <EventCalendar client:load year={year} month={month} events={events} />
     </section>
   </Fragment>
 </Layout>

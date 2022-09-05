@@ -6,22 +6,26 @@ import { createMemo, createResource, createSignal } from 'solid-js';
 
 const createEventCalendarNavigator = (
   defaultYear: number,
-  defaultMonth: number
+  defaultMonth: number,
+  defaultEvents: Event[]
 ) => {
   const [year, setYear] = createSignal(defaultYear);
   const [month, setMonth] = createSignal(defaultMonth);
 
-  const humanized = () =>
-    new Date(year(), month()).toLocaleDateString('fi', {
+  const humanized = () => {
+    return new Date(year(), month()).toLocaleDateString('fi', {
       year: 'numeric',
       month: 'long',
     });
+  };
 
-  const datetime = () =>
-    new Date(year(), month()).toLocaleDateString('sv').slice(0, 7);
+  const datetime = () => {
+    return new Date(year(), month()).toLocaleDateString('sv').slice(0, 7);
+  };
 
-  const isInCurrentMonth = (date: Date) =>
-    date.getFullYear() === year() && date.getMonth() === month();
+  const isInCurrentMonth = (date: Date) => {
+    return date.getFullYear() === year() && date.getMonth() === month();
+  };
 
   const calendarDates = createMemo(() => getCalendarDates(year(), month()));
 
@@ -30,12 +34,13 @@ const createEventCalendarNavigator = (
     (query) => trpcClient.query('events', query)
   );
 
-  const eventsByDate = createMemo(() =>
-    mapEventsByDate(
-      eventsResource.loading ? [] : (eventsResource() as Event[]),
-      getMonthDates(year(), month())
-    )
-  );
+  const eventsByDate = createMemo(() => {
+    const events = eventsResource.loading
+      ? defaultEvents
+      : (eventsResource() as Event[]);
+    const monthDates = getMonthDates(year(), month());
+    return mapEventsByDate(events, monthDates);
+  });
 
   const createEvent = async (formData: FormData) => {
     const type = formData.get('type') as EventType;

@@ -7,7 +7,7 @@ import { appRouter } from '@server/router';
 async function httpHandler({ request, params }: APIContext): Promise<Response> {
   const query = new URL(request.url).searchParams;
   const requestBody = request.method === 'GET' ? {} : await request.json();
-  const { status, headers, ...response } = await resolveHTTPResponse({
+  const { status, headers, body } = await resolveHTTPResponse({
     async createContext() {
       // CreateContext
     },
@@ -20,7 +20,7 @@ async function httpHandler({ request, params }: APIContext): Promise<Response> {
       body: requestBody,
     },
   });
-  return new Response(response.body, {
+  return new Response(body, {
     headers: headers as HeadersInit,
     status,
   });

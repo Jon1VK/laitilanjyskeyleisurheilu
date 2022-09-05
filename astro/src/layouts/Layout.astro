@@ -252,7 +252,7 @@ const user = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
         <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
-          <Login client:only="solid" />
+          <Login client:load />
           2022 Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>
       </div>

@@ -25,12 +25,8 @@ const EventCalendarHeader = (props: {
     navigateToNextMonth,
   } = eventCalendarNavigator;
   const handleFormSubmit = async (formData: FormData) => {
-    try {
-      await createEvent(formData);
-      setShowForm(false);
-    } catch (error) {
-      console.log(error);
-    }
+    await createEvent(formData);
+    setShowForm(false);
   };
   return (
     <>

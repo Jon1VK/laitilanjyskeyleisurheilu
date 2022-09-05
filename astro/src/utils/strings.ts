@@ -21,5 +21,8 @@ const TITLEIZED_SLUGS = new Map([
   ['50km-kavely', '50km kävely'],
 ]);
 
-export const titleize = (string: string) =>
-  TITLEIZED_SLUGS.has(string) ? <string>TITLEIZED_SLUGS.get(string) : t(string);
+export const titleize = (string: string) => {
+  return TITLEIZED_SLUGS.has(string)
+    ? (TITLEIZED_SLUGS.get(string) as string)
+    : t(string);
+};

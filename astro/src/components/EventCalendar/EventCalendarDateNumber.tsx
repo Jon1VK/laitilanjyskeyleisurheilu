@@ -1,7 +1,15 @@
-const timeStyle = (date: Date) =>
-  new Date().toDateString() === date.toDateString()
+const timeStyle = (date: Date) => {
+  const localeDate = date.toLocaleDateString('sv', {
+    timeZone: 'Europe/Helsinki',
+  });
+  const currentLocaleDate = new Date().toLocaleDateString('sv', {
+    timeZone: 'Europe/Helsinki',
+  });
+  const isCurrentDate = localeDate === currentLocaleDate;
+  return isCurrentDate
     ? '-ml-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white'
     : '';
+};
 
 const EventCalendarDateNumber = (props: { date: Date }) => (
   <time

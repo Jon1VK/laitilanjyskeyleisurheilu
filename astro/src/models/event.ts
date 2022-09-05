@@ -14,9 +14,7 @@ const PrismaEvent = Object.assign(prisma.event, {
           },
         ],
       },
-      orderBy: {
-        startDateTime: 'asc',
-      },
+      orderBy: { startDateTime: 'asc' },
     });
   },
 });

@@ -12,10 +12,11 @@ const dotColor = (event: Event) => {
   }
 };
 
-const hoverColor = (event: Event) =>
-  event.type === 'COMPETITION'
+const hoverColor = (event: Event) => {
+  return event.type === 'COMPETITION'
     ? 'group-hover:text-red-600'
     : 'group-hover:text-blue-700';
+};
 
 const EventCalendarEventList = (props: { date: Date; events: Event[] }) => (
   <>
@@ -51,11 +52,14 @@ const EventCalendarListItem = (props: { date: Date; event: Event }) => (
         {props.event.title}
       </p>
       <time
-        datetime={props.event.startDateTime.toLocaleString('sv')}
+        datetime={props.event.startDateTime.toLocaleString('sv', {
+          timeZone: 'Europe/Helsinki',
+        })}
         class={`ml-3 hidden flex-none xl:block ${hoverColor(props.event)}`}
       >
         {props.date.toDateString() === props.event.startDateTime.toDateString()
           ? props.event.startDateTime.toLocaleTimeString('fi', {
+              timeZone: 'Europe/Helsinki',
               timeStyle: 'short',
             })
           : '--:--'}

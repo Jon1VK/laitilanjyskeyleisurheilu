@@ -5,16 +5,18 @@ import { createSignal, Show } from 'solid-js';
 const UserNavigation = () => {
   const { loggedIn, user, signOut } = useAuth();
   const [show, setShow] = createSignal(false);
-  const menuVisibilityStyle = () =>
-    show()
+  const menuVisibilityStyle = () => {
+    return show()
       ? 'duration-200 ease-out opacity-100 translate-y-0'
       : 'ease-in duration-150 opacity-0 translate-y-1 pointer-events-none';
+  };
   return (
     <Show when={loggedIn()}>
-      <div class="relative">
+      <nav class="relative">
         <button onClick={() => setShow(!show())}>
           <img
             class="h-12 w-12 rounded-full md:h-14 md:w-14"
+            referrerPolicy="no-referrer"
             src={
               user().image ||
               `https://ui-avatars.com/api/?background=random&name=${
@@ -36,7 +38,7 @@ const UserNavigation = () => {
             <HiOutlineLogout class="h-5 w-5" />
           </button>
         </div>
-      </div>
+      </nav>
     </Show>
   );
 };
