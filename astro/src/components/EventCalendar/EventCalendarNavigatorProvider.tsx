@@ -19,6 +19,12 @@ const createEventCalendarNavigator = (
 ) => {
   const [year, setYear] = createSignal(initialYear);
   const [month, setMonth] = createSignal(initialMonth);
+  const [selectedDate, selectDate] = createSignal(
+    new Date().getFullYear() === initialYear &&
+      new Date().getMonth() === initialMonth
+      ? new Date()
+      : new Date(initialYear, initialMonth)
+  );
 
   const humanized = () => {
     return new Date(year(), month()).toLocaleDateString('fi', {
@@ -82,6 +88,7 @@ const createEventCalendarNavigator = (
     );
     setYear(toYear);
     setMonth(toMonth);
+    selectDate(new Date(toYear, toMonth));
   };
 
   const navigateToPrevMonth = () => setYearAndMonth(year(), month() - 1);
@@ -94,6 +101,8 @@ const createEventCalendarNavigator = (
     calendarDates,
     eventsByDate,
     createEvent,
+    selectedDate,
+    selectDate,
     navigateToPrevMonth,
     navigateToNextMonth,
   };
