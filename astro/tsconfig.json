@@ -5,7 +5,6 @@
       "@auth": ["src/auth/index.ts"],
       "@components": ["src/components/index.ts"],
       "@data/*": ["src/data/*"],
-      "@hooks": ["src/hooks/index.ts"],
       "@icons/*": ["src/icons/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],

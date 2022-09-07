@@ -1,29 +1,18 @@
-import type { EventCalendarNavigator } from '@hooks';
-import { For, splitProps } from 'solid-js';
+import { For } from 'solid-js';
 import EventCalendarDateNumber from './EventCalendarDateNumber';
 import EventCalendarEventList from './EventCalendarEventList';
+import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
 
-const EventCalendarGrid = (props: {
-  eventCalendarNavigator: EventCalendarNavigator;
-}) => (
+const EventCalendarGrid = () => (
   <div class="bg-gray-200 text-xs leading-6 text-gray-700">
-    <EventCalendarLaptopGrid
-      eventCalendarNavigator={props.eventCalendarNavigator}
-    />
-    <EventCalendarMobileGrid
-      eventCalendarNavigator={props.eventCalendarNavigator}
-    />
+    <EventCalendarLaptopGrid />
+    <EventCalendarMobileGrid />
   </div>
 );
 
-const EventCalendarLaptopGrid = (props: {
-  eventCalendarNavigator: EventCalendarNavigator;
-}) => {
-  const [{ eventCalendarNavigator }, _] = splitProps(props, [
-    'eventCalendarNavigator',
-  ]);
+const EventCalendarLaptopGrid = () => {
   const { isInCurrentMonth, calendarDates, eventsByDate } =
-    eventCalendarNavigator;
+    useEventCalendarNavigator();
   return (
     <div class="hidden w-full grid-cols-7 gap-px lg:grid">
       <For each={calendarDates()}>
@@ -45,14 +34,9 @@ const EventCalendarLaptopGrid = (props: {
   );
 };
 
-const EventCalendarMobileGrid = (props: {
-  eventCalendarNavigator: EventCalendarNavigator;
-}) => {
-  const [{ eventCalendarNavigator }, _] = splitProps(props, [
-    'eventCalendarNavigator',
-  ]);
+const EventCalendarMobileGrid = () => {
   const { isInCurrentMonth, calendarDates, eventsByDate } =
-    eventCalendarNavigator;
+    useEventCalendarNavigator();
   return (
     <div class="grid w-full grid-cols-7 gap-px lg:hidden">
       <For each={calendarDates()}>

@@ -1,29 +1,24 @@
 import { useAuth } from '@auth';
-import type { EventCalendarNavigator } from '@hooks';
 import {
   HiOutlineChevronLeft,
   HiOutlineChevronRight,
   HiOutlinePlus,
 } from 'solid-icons/hi';
-import { createSignal, Show, splitProps } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 import EventForm from '../EventForm';
 import Modal from '../Modal';
+import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
 
-const EventCalendarHeader = (props: {
-  eventCalendarNavigator: EventCalendarNavigator;
-}) => {
-  const [{ eventCalendarNavigator }, _] = splitProps(props, [
-    'eventCalendarNavigator',
-  ]);
-  const { loggedIn } = useAuth();
-  const [showForm, setShowForm] = createSignal(false);
+const EventCalendarHeader = () => {
   const {
     datetime,
     humanized,
     createEvent,
     navigateToPrevMonth,
     navigateToNextMonth,
-  } = eventCalendarNavigator;
+  } = useEventCalendarNavigator();
+  const { loggedIn } = useAuth();
+  const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     await createEvent(formData);
     setShowForm(false);
@@ -62,7 +57,9 @@ const EventCalendarHeader = (props: {
           <Show when={loggedIn()}>
             <div class="mx-3 h-4 w-px bg-gray-300 md:mx-6 md:h-6" />
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => {
+                setShowForm(true);
+              }}
               class="rounded-md border border-gray-300 bg-white py-1 px-2 text-sm font-medium text-gray-400 shadow-sm hover:bg-gray-50 hover:text-gray-500 md:py-2 md:px-4"
             >
               <span class="sr-only">Lisää tapahtuma</span>

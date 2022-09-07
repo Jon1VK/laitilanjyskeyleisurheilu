@@ -2,15 +2,23 @@ import trpcClient from '@lib/trpcClient';
 import type { Event, EventType } from '@prisma/client';
 import { getCalendarDates, getMonthDates } from '@utils/dates';
 import { mapEventsByDate } from '@utils/events';
-import { createMemo, createResource, createSignal } from 'solid-js';
+import {
+  Context,
+  createContext,
+  createMemo,
+  createResource,
+  createSignal,
+  ParentComponent,
+  useContext,
+} from 'solid-js';
 
 const createEventCalendarNavigator = (
-  defaultYear: number,
-  defaultMonth: number,
-  defaultEvents: Event[]
+  initialYear: number,
+  initialMonth: number,
+  initialEvents: Event[]
 ) => {
-  const [year, setYear] = createSignal(defaultYear);
-  const [month, setMonth] = createSignal(defaultMonth);
+  const [year, setYear] = createSignal(initialYear);
+  const [month, setMonth] = createSignal(initialMonth);
 
   const humanized = () => {
     return new Date(year(), month()).toLocaleDateString('fi', {
@@ -36,7 +44,7 @@ const createEventCalendarNavigator = (
 
   const eventsByDate = createMemo(() => {
     const events = eventsResource.loading
-      ? defaultEvents
+      ? initialEvents
       : (eventsResource() as Event[]);
     const monthDates = getMonthDates(year(), month());
     return mapEventsByDate(events, monthDates);
@@ -91,8 +99,29 @@ const createEventCalendarNavigator = (
   };
 };
 
-export type EventCalendarNavigator = ReturnType<
-  typeof createEventCalendarNavigator
->;
+type EventCalendarNavigator = ReturnType<typeof createEventCalendarNavigator>;
 
-export default createEventCalendarNavigator;
+const EventCalendarNavigatorContext =
+  createContext() as Context<EventCalendarNavigator>;
+
+const EventCalendarNavigatorProvider: ParentComponent<{
+  initialYear: number;
+  initialMonth: number;
+  initialEvents: Event[];
+}> = (props) => {
+  const eventCalendarNavigator = createEventCalendarNavigator(
+    props.initialYear,
+    props.initialMonth,
+    props.initialEvents
+  );
+  return (
+    <EventCalendarNavigatorContext.Provider value={eventCalendarNavigator}>
+      {props.children}
+    </EventCalendarNavigatorContext.Provider>
+  );
+};
+
+export default EventCalendarNavigatorProvider;
+
+export const useEventCalendarNavigator = () =>
+  useContext(EventCalendarNavigatorContext);
