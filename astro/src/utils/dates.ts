@@ -51,3 +51,31 @@ export const getMonthDates = (year: number, month: number) => {
   const dates = getDatesBetween(startDate, endDate);
   return dates;
 };
+
+export const formattedDateTimePeriod = (
+  {
+    startDateTime,
+    endDateTime,
+  }: {
+    startDateTime: Date;
+    endDateTime?: Date | null;
+  },
+  dateStyle: 'short' | 'long' = 'long'
+) => {
+  const startDateTimeOnly = !endDateTime;
+  const startAndEndDateTimeOnSameDate =
+    startDateTime.toDateString() === endDateTime?.toDateString();
+  const startDateTimeString = startDateTime.toLocaleString('fi', {
+    timeZone: 'Europe/Helsinki',
+    dateStyle: dateStyle,
+    timeStyle:
+      startDateTimeOnly || startAndEndDateTimeOnSameDate ? 'short' : undefined,
+  });
+  const divider = startDateTimeOnly ? '' : ' - ';
+  const endDateTimeString = endDateTime?.toLocaleString('fi', {
+    timeZone: 'Europe/Helsinki',
+    dateStyle: startAndEndDateTimeOnSameDate ? undefined : dateStyle,
+    timeStyle: startAndEndDateTimeOnSameDate ? 'short' : undefined,
+  });
+  return `${startDateTimeString}${divider}${endDateTimeString || ''}`;
+};

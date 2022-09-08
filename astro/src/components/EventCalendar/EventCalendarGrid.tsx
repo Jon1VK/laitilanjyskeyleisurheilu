@@ -120,7 +120,11 @@ const EventCalendarGridEventList = (props: { date: Date; events: Event[] }) => {
         <For each={props.events}>
           {(event) => (
             <li>
-              <a href="/" class="group hidden items-center lg:flex">
+              <a
+                href={`/tapahtumat/${event.slug}#main`}
+                class="group hidden items-center lg:flex"
+                rel="prefetch"
+              >
                 <span
                   class={`mr-2 h-1.5 w-1.5 shrink-0 rounded-full ${dotColor(
                     event

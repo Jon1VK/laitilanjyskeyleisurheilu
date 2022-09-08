@@ -18,6 +18,7 @@ enum EventType {
 
 model Event {
   id            Int       @id @default(autoincrement())
+  slug          String    @unique
   type          EventType
   startDateTime DateTime
   endDateTime   DateTime?

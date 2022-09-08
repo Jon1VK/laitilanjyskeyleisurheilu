@@ -1,5 +1,6 @@
 import PrismaEvent from '@models/event';
 import { router } from '@trpc/server';
+import { parameterize } from 'inflected';
 import { z } from 'zod';
 
 const eventsRouter = router()
@@ -20,6 +21,13 @@ const eventsRouter = router()
       return events;
     },
   })
+  .query('event', {
+    input: z.string(),
+    async resolve({ input: slug }) {
+      const event = await PrismaEvent.findUniqueOrThrow({ where: { slug } });
+      return event;
+    },
+  })
   .mutation('events', {
     input: z.object({
       type: z.enum(['PRACTICE', 'COMPETITION', 'OTHER']),
@@ -29,8 +37,11 @@ const eventsRouter = router()
       location: z.string().min(1).nullable(),
       description: z.string().min(1).nullable(),
     }),
-    async resolve({ input: data }) {
-      await PrismaEvent.create({ data });
+    async resolve({ input }) {
+      const dateSlug = input.startDateTime.toLocaleDateString('sv');
+      const titleSlug = parameterize(input.title);
+      const slug = `${dateSlug}-${titleSlug}`;
+      await PrismaEvent.create({ data: { ...input, slug } });
     },
   });
 
