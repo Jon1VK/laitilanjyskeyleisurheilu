@@ -1,8 +1,10 @@
 import EventCalendarHeader from './EventCalendarHeader';
 import EventCalendarGrid from './EventCalendarGrid';
 import type { Event } from '@prisma/client';
-import EventCalendarNavigatorProvider from './EventCalendarNavigatorProvider';
-import EventCalendarMobileEventList from './EventCalendarMobileEventList';
+import EventCalendarNavigatorProvider, {
+  useEventCalendarNavigator,
+} from './EventCalendarNavigatorProvider';
+import EventList from '../EventList';
 
 const EventCalendar = (props: {
   year: number;
@@ -21,5 +23,15 @@ const EventCalendar = (props: {
     <EventCalendarMobileEventList />
   </EventCalendarNavigatorProvider>
 );
+
+const EventCalendarMobileEventList = () => {
+  const { eventsByDate, selectedDate } = useEventCalendarNavigator();
+  const events = () => eventsByDate().get(selectedDate().toDateString()) || [];
+  return (
+    <div class="py-10 px-4 sm:px-6 lg:hidden">
+      <EventList events={events()} />
+    </div>
+  );
+};
 
 export default EventCalendar;

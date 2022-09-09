@@ -3,9 +3,19 @@ import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
 import { formattedDateTimePeriod } from '@utils/dates';
 import { PrismaEvent } from '@models';
+import { EventList } from '@components';
 
 const slug = Astro.params.slug as string;
-const event = await PrismaEvent.findUnique({ where: { slug } });
+const event = await PrismaEvent.findUnique({
+  where: { slug },
+  include: {
+    RecurringEvent: {
+      include: {
+        occurrences: true,
+      },
+    },
+  },
+});
 if (!event) return Astro.redirect('/404');
 ---
 
@@ -37,7 +47,7 @@ if (!event) return Astro.redirect('/404');
     <img
       class="h-full w-full object-cover object-[100%_35%] lg:object-[100%_30%] xl:object-[100%_25%]"
       src="/images/events.jpg"
-      alt="Seuran vakiotoimitsijat ajanotossa"
+      alt="Juoksumatka Seuracup-kilpailussa"
       aria-hidden="true"
     />
   </Fragment>
@@ -68,30 +78,37 @@ if (!event) return Astro.redirect('/404');
           />
         </div>
       </div>
-      <div class="relative px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-prose text-lg">
-          <h1
-            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-          >
-            {event.title}
-          </h1>
-          <div class="mt-3 flex flex-col sm:mt-4">
-            <span class="mb-1 text-lg font-medium text-blue-600 sm:text-xl"
-              >{event.location}
-            </span>
-            <time
-              class="text-base text-gray-500 sm:text-lg"
-              datetime={event.startDateTime.toLocaleTimeString('sv', {
-                timeZone: 'Europe/Helsinki',
-              })}
-              >{formattedDateTimePeriod(event)}
-            </time>
-          </div>
+      <div class="relative mx-auto max-w-prose px-4 text-lg sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          {event.title}
+        </h1>
+        <div class="mt-3 flex flex-col sm:mt-4">
+          <span class="mb-1 text-lg font-medium text-blue-600 sm:text-xl"
+            >{event.location}
+          </span>
+          <time
+            class="text-base text-gray-500 sm:text-lg"
+            datetime={event.startDateTime.toLocaleTimeString('sv', {
+              timeZone: 'Europe/Helsinki',
+            })}
+            >{formattedDateTimePeriod(event)}
+          </time>
         </div>
         <div class="prose prose-blue mx-auto mt-6 text-lg text-gray-600">
           <p>{event.description}</p>
         </div>
       </div>
+      {
+        event.recurringEventId && (
+          <div class="relative mx-auto max-w-prose">
+            <h2 class="mt-8 mb-4 text-2xl font-bold">Kaikki tapahtumakerrat</h2>
+            <EventList
+              client:load
+              events={event.RecurringEvent?.occurrences ?? []}
+            />
+          </div>
+        )
+      }
     </div>
   </Fragment>
 </Layout>
