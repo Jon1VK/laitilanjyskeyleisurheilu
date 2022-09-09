@@ -13,7 +13,7 @@ export const getMonthStartDate = (year: number, month: number) => {
 };
 
 export const getMonthEndDate = (year: number, month: number) => {
-  return new Date(year, month + 1, 0);
+  return new Date(year, month + 1, 1, 0, 0, 0, -1);
 };
 
 const getCalendarStartDate = (year: number, month: number) => {
@@ -28,7 +28,7 @@ const getCalendarEndDate = (year: number, month: number) => {
   return endDate;
 };
 
-const getDatesBetween = (startDate: Date, endDate: Date) => {
+export const getDatesBetween = (startDate: Date, endDate: Date) => {
   const start = new Date(startDate.toDateString());
   const dates: Date[] = [];
   while (start <= endDate) {
@@ -78,4 +78,10 @@ export const formattedDateTimePeriod = (
     timeStyle: startAndEndDateTimeOnSameDate ? 'short' : undefined,
   });
   return `${startDateTimeString}${divider}${endDateTimeString || ''}`;
+};
+
+export const toUTCTime = (time: string) => {
+  return new Date(`1994-01-13 ${time}`).toLocaleTimeString('sv', {
+    timeZone: 'utc',
+  });
 };

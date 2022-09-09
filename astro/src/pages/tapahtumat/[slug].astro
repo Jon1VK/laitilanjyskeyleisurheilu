@@ -1,11 +1,12 @@
 ---
 import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
-import PrismaEvent from '@models/event';
 import { formattedDateTimePeriod } from '@utils/dates';
+import { PrismaEvent } from '@models';
 
 const slug = Astro.params.slug as string;
-const event = await PrismaEvent.findUniqueOrThrow({ where: { slug } });
+const event = await PrismaEvent.findUnique({ where: { slug } });
+if (!event) return Astro.redirect('/404');
 ---
 
 <Layout title={event.title}>

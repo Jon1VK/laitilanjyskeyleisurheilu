@@ -4,12 +4,13 @@
     "paths": {
       "@auth": ["src/auth/index.ts"],
       "@components": ["src/components/index.ts"],
+      "@controllers": ["src/controllers/index.ts"],
       "@data/*": ["src/data/*"],
       "@icons/*": ["src/icons/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
-      "@models/*": ["src/models/*"],
-      "@server/*": ["src/server/*"],
+      "@models": ["src/models/index.ts"],
+      "@router": ["src/router/index.ts"],
       "@utils/*": ["src/utils/*"]
     },
     "target": "ESNext",

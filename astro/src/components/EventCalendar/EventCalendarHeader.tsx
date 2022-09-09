@@ -10,19 +10,10 @@ import Modal from '../Modal';
 import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
 
 const EventCalendarHeader = () => {
-  const {
-    datetime,
-    humanized,
-    createEvent,
-    navigateToPrevMonth,
-    navigateToNextMonth,
-  } = useEventCalendarNavigator();
+  const { datetime, humanized, navigateToPrevMonth, navigateToNextMonth } =
+    useEventCalendarNavigator();
   const { loggedIn } = useAuth();
   const [showForm, setShowForm] = createSignal(false);
-  const handleFormSubmit = async (formData: FormData) => {
-    await createEvent(formData);
-    setShowForm(false);
-  };
   return (
     <>
       <header class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 py-3 px-5 lg:flex-none">
@@ -68,7 +59,7 @@ const EventCalendarHeader = () => {
       </header>
       <Show when={showForm()}>
         <Modal close={() => setShowForm(false)}>
-          <EventForm onSubmit={handleFormSubmit} />
+          <EventForm onSubmit={() => setShowForm(false)} />
         </Modal>
       </Show>
     </>

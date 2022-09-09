@@ -16,13 +16,23 @@ enum EventType {
   OTHER
 }
 
+model RecurringEvent {
+  id          Int      @id @default(autoincrement())
+  startDate   DateTime @db.Date
+  endDate     DateTime @db.Date
+  weekdays    Int[]
+  occurrences Event[]
+}
+
 model Event {
-  id            Int       @id @default(autoincrement())
-  slug          String    @unique
-  type          EventType
-  startDateTime DateTime
-  endDateTime   DateTime?
-  title         String
-  description   String?
-  location      String?
+  id               Int             @id @default(autoincrement())
+  slug             String          @unique
+  type             EventType
+  startDateTime    DateTime
+  endDateTime      DateTime?
+  title            String
+  description      String?
+  location         String?
+  recurringEventId Int?
+  RecurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
 }

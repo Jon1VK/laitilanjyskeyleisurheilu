@@ -1,5 +1,5 @@
 import { createTRPCClient } from '@trpc/client';
-import type { AppRouter } from '@server/router';
+import type { AppRouter } from '@router';
 import trpcTransformer from './trpcTransformer';
 
 const trpcClient = createTRPCClient<AppRouter>({

@@ -1,6 +1,12 @@
 import trpcClient from '@lib/trpcClient';
 import type { Event, EventType } from '@prisma/client';
-import { getCalendarDates, getMonthDates } from '@utils/dates';
+import {
+  getCalendarDates,
+  getMonthDates,
+  getMonthEndDate,
+  getMonthStartDate,
+  toUTCTime,
+} from '@utils/dates';
 import { mapEventsByDate } from '@utils/events';
 import {
   Context,
@@ -44,8 +50,11 @@ const createEventCalendarNavigator = (
   const calendarDates = createMemo(() => getCalendarDates(year(), month()));
 
   const [eventsResource, { refetch }] = createResource(
-    () => ({ year: year(), month: month() }),
-    (query) => trpcClient.query('events', query)
+    () => ({
+      startDate: getMonthStartDate(year(), month()),
+      endDate: getMonthEndDate(year(), month()),
+    }),
+    (query) => trpcClient.query('getAllEvents', query)
   );
 
   const eventsByDate = createMemo(() => {
@@ -62,14 +71,41 @@ const createEventCalendarNavigator = (
     const endDateTimeValue = formData.get('endDateTime') as string;
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
     const title = formData.get('title') as string;
-    const locationValue = formData.get('location') as string;
-    const location = locationValue || null;
-    const descriptionValue = formData.get('description') as string;
-    const description = descriptionValue || null;
-    await trpcClient.mutation('events', {
+    const location = (formData.get('location') as string) || null;
+    const description = (formData.get('description') as string) || null;
+    await trpcClient.mutation('createEvent', {
       type,
       startDateTime,
       endDateTime,
+      title,
+      location,
+      description,
+    });
+    await refetch();
+  };
+
+  const createRecurringEvent = async (formData: FormData) => {
+    const type = formData.get('type') as EventType;
+    const weekdays = formData.getAll('weekdays').map(Number);
+    const recurrenceStartDate = new Date(
+      formData.get('recurrenceStartDate') as string
+    );
+    const recurrenceEndDate = new Date(
+      formData.get('recurrenceEndDate') as string
+    );
+    const startTime = toUTCTime(formData.get('startDateTime') as string);
+    const endTimeValue = formData.get('endDateTime') as string;
+    const endTime = endTimeValue ? toUTCTime(endTimeValue) : null;
+    const title = formData.get('title') as string;
+    const location = (formData.get('location') as string) || null;
+    const description = (formData.get('description') as string) || null;
+    await trpcClient.mutation('createRecurringEvent', {
+      type,
+      weekdays,
+      recurrenceStartDate,
+      recurrenceEndDate,
+      startTime,
+      endTime,
       title,
       location,
       description,
@@ -101,6 +137,7 @@ const createEventCalendarNavigator = (
     calendarDates,
     eventsByDate,
     createEvent,
+    createRecurringEvent,
     selectedDate,
     selectDate,
     navigateToPrevMonth,

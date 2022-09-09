@@ -2,7 +2,7 @@
 import type { APIContext } from 'astro';
 import { resolveHTTPResponse } from '@trpc/server';
 import type { HTTPHeaders } from '@trpc/client';
-import { appRouter } from '@server/router';
+import { appRouter } from '@router';
 
 async function httpHandler({ request, params }: APIContext): Promise<Response> {
   const query = new URL(request.url).searchParams;
