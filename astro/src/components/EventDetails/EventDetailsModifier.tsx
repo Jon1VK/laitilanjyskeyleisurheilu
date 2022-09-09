@@ -1,5 +1,5 @@
 import trpcClient from '@lib/trpcClient';
-import type { Event } from '@prisma/client';
+import type { Event, RecurringEvent } from '@prisma/client';
 import {
   Context,
   createContext,
@@ -14,7 +14,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
 
   const deleteEvent = async () => {
     await trpcClient.mutation('deleteEvent', event().id);
-    window.location.href = '/tapahtumat';
+    window.location.href = '/tapahtumat#main';
   };
 
   const deleteOccurrence = async (occurrenceToDelete: Event) => {
@@ -31,6 +31,16 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
         occurrences: remainingOccurrences,
       },
     });
+  };
+
+  const deleteRecurringEvent = async (
+    recurringEventToDelete: RecurringEvent
+  ) => {
+    await trpcClient.mutation(
+      'deleteRecurringEvent',
+      recurringEventToDelete.id
+    );
+    window.location.href = '/tapahtumat#main';
   };
 
   const updateEvent = async (event: Event, formData: FormData) => {
@@ -54,6 +64,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     updateEvent,
     deleteEvent,
     deleteOccurrence,
+    deleteRecurringEvent,
   };
 };
 
