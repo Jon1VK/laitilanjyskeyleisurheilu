@@ -4,9 +4,9 @@ import { z } from 'zod';
 
 const input = z.object({
   type: z.enum(['PRACTICE', 'COMPETITION', 'OTHER']),
+  title: z.string().min(1),
   startDateTime: z.date(),
   endDateTime: z.date().nullable(),
-  title: z.string().min(1),
   location: z.string().min(1).nullable(),
   description: z.string().min(1).nullable(),
 });
