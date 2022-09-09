@@ -84,6 +84,11 @@ const createEventCalendarNavigator = (
     await refetch();
   };
 
+  const deleteEvent = async (event: Event) => {
+    await trpcClient.mutation('deleteEvent', event.id);
+    await refetch();
+  };
+
   const createRecurringEvent = async (formData: FormData) => {
     const type = formData.get('type') as EventType;
     const weekdays = formData.getAll('weekdays').map(Number);
@@ -117,7 +122,7 @@ const createEventCalendarNavigator = (
     const date = new Date(year, month);
     const toYear = date.getFullYear();
     const toMonth = date.getMonth();
-    window.history.pushState(
+    window.history.replaceState(
       {},
       '',
       `?vuosi=${toYear}&kuukausi=${toMonth + 1}`
@@ -137,6 +142,7 @@ const createEventCalendarNavigator = (
     calendarDates,
     eventsByDate,
     createEvent,
+    deleteEvent,
     createRecurringEvent,
     selectedDate,
     selectDate,

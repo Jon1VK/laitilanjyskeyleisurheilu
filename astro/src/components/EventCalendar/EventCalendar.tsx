@@ -4,7 +4,7 @@ import type { Event } from '@prisma/client';
 import EventCalendarNavigatorProvider, {
   useEventCalendarNavigator,
 } from './EventCalendarNavigatorProvider';
-import EventList from '../EventList';
+import EventListStateless from '../EventListStateless';
 
 const EventCalendar = (props: {
   year: number;
@@ -25,11 +25,12 @@ const EventCalendar = (props: {
 );
 
 const EventCalendarMobileEventList = () => {
-  const { eventsByDate, selectedDate } = useEventCalendarNavigator();
+  const { eventsByDate, selectedDate, deleteEvent } =
+    useEventCalendarNavigator();
   const events = () => eventsByDate().get(selectedDate().toDateString()) || [];
   return (
     <div class="py-10 px-4 sm:px-6 lg:hidden">
-      <EventList events={events()} />
+      <EventListStateless events={events()} onDelete={deleteEvent} />
     </div>
   );
 };

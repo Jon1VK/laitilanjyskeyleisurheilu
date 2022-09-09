@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
 import { formattedDateTimePeriod } from '@utils/dates';
 import { PrismaEvent } from '@models';
-import { EventList } from '@components';
+import { EventActions, EventList } from '@components';
 
 const slug = Astro.params.slug as string;
 const event = await PrismaEvent.findUnique({
@@ -87,7 +87,7 @@ if (!event) return Astro.redirect('/404');
             >{event.location}
           </span>
           <time
-            class="text-base text-gray-500 sm:text-lg"
+            class="text-base text-gray-600 sm:text-base"
             datetime={event.startDateTime.toLocaleTimeString('sv', {
               timeZone: 'Europe/Helsinki',
             })}
@@ -97,10 +97,11 @@ if (!event) return Astro.redirect('/404');
         <div class="prose prose-blue mx-auto mt-6 text-lg text-gray-600">
           <p>{event.description}</p>
         </div>
+        <EventActions client:load event={event} />
       </div>
       {
         event.recurringEventId && (
-          <div class="relative mx-auto max-w-prose">
+          <div class="relative mx-auto max-w-prose px-4 text-lg sm:px-6 lg:px-8">
             <h2 class="mt-8 mb-4 text-2xl font-bold">Kaikki tapahtumakerrat</h2>
             <EventList
               client:load
