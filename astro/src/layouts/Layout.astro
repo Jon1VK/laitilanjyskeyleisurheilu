@@ -33,6 +33,18 @@ const user = getUser({ client: Astro }) as JwtPayload | null | undefined;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL('', Astro.url)} />
     <meta property="og:site_name" content="Laitilan Jyske | Yleisurheilu" />
+    <style is:global>
+      .prose li > p,
+      .prose table p {
+        margin: 0;
+      }
+      .prose li {
+        margin: 0;
+      }
+      .prose .selectedCell {
+        background: rgba(29, 78, 216, 0.2);
+      }
+    </style>
     <slot name="head" />
   </head>
 

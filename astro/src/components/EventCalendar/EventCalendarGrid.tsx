@@ -144,12 +144,11 @@ const EventCalendarGridEventList = (props: { date: Date; events: Event[] }) => {
                   class={`ml-3 hidden flex-none xl:block ${hoverColor(event)}`}
                 >
                   {props.date.toDateString() ===
-                  event.startDateTime.toDateString()
-                    ? event.startDateTime.toLocaleTimeString('fi', {
-                        timeZone: 'Europe/Helsinki',
-                        timeStyle: 'short',
-                      })
-                    : '--:--'}
+                    event.startDateTime.toDateString() &&
+                    event.startDateTime.toLocaleTimeString('fi', {
+                      timeZone: 'Europe/Helsinki',
+                      timeStyle: 'short',
+                    })}
                 </time>
               </a>
             </li>

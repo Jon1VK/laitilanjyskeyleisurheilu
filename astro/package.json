@@ -17,6 +17,15 @@
     "@astro-auth/core": "^1.0.12",
     "@astro-auth/providers": "^1.0.6",
     "@prisma/client": "^4.3.1",
+    "@tiptap/core": "^2.0.0-beta.183",
+    "@tiptap/extension-bubble-menu": "^2.0.0-beta.62",
+    "@tiptap/extension-floating-menu": "^2.0.0-beta.56",
+    "@tiptap/extension-link": "^2.0.0-beta.43",
+    "@tiptap/extension-table": "^2.0.0-beta.194",
+    "@tiptap/extension-table-cell": "^2.0.0-beta.194",
+    "@tiptap/extension-table-header": "^2.0.0-beta.194",
+    "@tiptap/extension-table-row": "^2.0.0-beta.194",
+    "@tiptap/starter-kit": "^2.0.0-beta.192",
     "@trpc/client": "^9.27.2",
     "@trpc/server": "^9.27.2",
     "astro-icon": "^0.7.3",
@@ -24,6 +33,7 @@
     "json-complete": "^2.0.1",
     "solid-icons": "^1.0.1",
     "solid-js": "^1.4.8",
+    "solid-tiptap": "^0.3.3",
     "zod": "^3.18.0"
   },
   "devDependencies": {

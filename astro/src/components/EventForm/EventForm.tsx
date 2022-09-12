@@ -2,6 +2,7 @@ import { Event as IEvent, EventType } from '@prisma/client';
 import { WEEKDAYS } from '@utils/dates';
 import { HiSolidPencilAlt } from 'solid-icons/hi';
 import { createSignal, For, Show } from 'solid-js';
+import RichTextEditor from '../RichTextEditor';
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -24,9 +25,11 @@ const EventForm = (props: {
   onSubmit: (formData: FormData) => void;
 }) => {
   const [isRecurring, setIsRecurring] = createSignal(false);
+  const [richTextDescription, setRichTextDescription] = createSignal('');
   const handleSubmit: SubmitHandler = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    formData.set('description', richTextDescription());
     props.onSubmit(formData);
   };
   return (
@@ -156,7 +159,7 @@ const EventForm = (props: {
               <input
                 required
                 type={isRecurring() ? 'time' : 'datetime-local'}
-                value={props.event?.startDateTime.toLocaleString('sv')}
+                value={props.event?.startDateTime.toLocaleString('sv') || ''}
                 name="startDateTime"
                 id="startDateTime"
                 class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -169,7 +172,7 @@ const EventForm = (props: {
               </div>
               <input
                 type={isRecurring() ? 'time' : 'datetime-local'}
-                value={props.event?.endDateTime?.toLocaleString('sv')}
+                value={props.event?.endDateTime?.toLocaleString('sv') || ''}
                 name="endDateTime"
                 id="endDateTime"
                 class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -190,16 +193,15 @@ const EventForm = (props: {
             </div>
             <div class="sm:col-span-2">
               <div class="flex justify-between">
-                <label for="description">Kuvaus</label>
+                <label>Kuvaus</label>
                 <span class="ml-auto text-gray-500">Ei pakollinen</span>
               </div>
-              <textarea
-                name="description"
-                value={props.event?.description || ''}
-                id="description"
-                rows="3"
-                class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-              />
+              <div class="mt-1 w-full">
+                <RichTextEditor
+                  initialHTML={props.event?.description || ''}
+                  onChange={setRichTextDescription}
+                />
+              </div>
             </div>
           </div>
         </fieldset>

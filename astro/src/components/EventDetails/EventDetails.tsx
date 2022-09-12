@@ -1,4 +1,5 @@
 import { useAuth } from '@auth';
+import type { RecurringEvent } from '@prisma/client';
 import { formattedDateTimePeriod } from '@utils/dates';
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
@@ -68,9 +69,11 @@ const InternalEventDetails = () => {
             {formattedDateTimePeriod(event())}
           </time>
         </div>
-        <div class="prose prose-blue mx-auto mt-6 text-lg text-gray-600">
-          <p>{event().description}</p>
-        </div>
+        <div
+          // eslint-disable-next-line solid/no-innerhtml
+          innerHTML={event().description || ''}
+          class="prose prose-blue prose-table:text-sm prose-table:shadow prose-table:ring-1 prose-table:ring-black/5 prose-td:p-3 prose-th:p-3 prose-th:bg-blue-600 prose-th:text-white mx-auto mt-6 text-lg text-gray-600"
+        />
         {event().recurringEventId && (
           <div class="relative mx-auto max-w-prose text-lg sm:px-0">
             <div class="mt-8 mb-4">
@@ -110,7 +113,9 @@ const InternalEventDetails = () => {
           <div class="mt-6 flex items-center gap-4">
             <button
               type="submit"
-              onClick={() => deleteRecurringEvent(event().RecurringEvent)}
+              onClick={() =>
+                deleteRecurringEvent(event().RecurringEvent as RecurringEvent)
+              }
               class="rounded-md bg-red-700 py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-red-800"
             >
               Poista

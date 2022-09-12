@@ -62,7 +62,7 @@ const EventCalendarHeader = () => {
             <div class="mx-3 h-4 w-px bg-gray-300 md:mx-6 md:h-6" />
             <button
               onClick={() => setShowForm(true)}
-              class="rounded-md border border-gray-300 bg-white py-1 px-2 text-sm font-medium text-gray-400 shadow-sm hover:bg-gray-50 hover:text-gray-500 md:py-2 md:px-4"
+              class="rounded-md border border-gray-300 bg-white py-1 px-2 text-sm font-medium text-gray-400 shadow-sm hover:bg-gray-50 hover:text-gray-500 md:py-2 md:px-3"
             >
               <span class="sr-only">Lisää tapahtuma</span>
               <HiOutlinePlus class="h-5 w-5" />
