@@ -13,6 +13,13 @@ export default defineConfig({
     ssr: {
       external: ['svgo'],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'entry.[hash].js',
+        },
+      },
+    },
   },
   server: {
     host: true,

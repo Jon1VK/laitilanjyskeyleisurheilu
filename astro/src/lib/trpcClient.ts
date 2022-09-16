@@ -3,7 +3,7 @@ import type { AppRouter } from '@router';
 import trpcTransformer from './trpcTransformer';
 
 const trpcClient = createTRPCClient<AppRouter>({
-  url: `http://localhost:3000/api/trpc`,
+  url: `${import.meta.env.PUBLIC_BASE_URL}/api/trpc`,
   transformer: trpcTransformer,
 });
 

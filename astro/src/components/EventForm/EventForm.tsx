@@ -1,4 +1,4 @@
-import { Event as IEvent, EventType } from '@prisma/client';
+import type { Event as IEvent } from '@prisma/client';
 import { WEEKDAYS } from '@utils/dates';
 import { HiSolidPencilAlt } from 'solid-icons/hi';
 import { createSignal, For, Show } from 'solid-js';
@@ -8,16 +8,19 @@ type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
 ) => void;
 
-const humanizedEventTypes = {
-  PRACTICE: 'Harjoitus',
-  COMPETITION: 'Kilpailu',
-  OTHER: 'Muu tapahtuma',
-};
-
-const eventTypeColors = {
-  PRACTICE: 'text-blue-600',
-  COMPETITION: 'text-red-600',
-  OTHER: 'text-gray-600',
+const eventTypes = {
+  PRACTICE: {
+    title: 'Harjoitus',
+    textColor: 'text-blue-600',
+  },
+  COMPETITION: {
+    title: 'Kilpailu',
+    textColor: 'text-red-600',
+  },
+  OTHER: {
+    title: 'Muu tapahtuma',
+    textColor: 'text-gray-600',
+  },
 };
 
 const EventForm = (props: {
@@ -38,7 +41,7 @@ const EventForm = (props: {
         {props.event ? (
           <span class="flex items-center gap-2">
             <HiSolidPencilAlt
-              class={`h-5 w-5 ${eventTypeColors[props.event.type]}`}
+              class={`h-5 w-5 ${eventTypes[props.event.type].textColor}`}
             />
             <span class="sr-only">Muokkaa tapahtumaa</span>
             {props.event.title}
@@ -51,19 +54,19 @@ const EventForm = (props: {
         <Show when={!props.event}>
           <fieldset>
             <div class="flex flex-col gap-3 font-medium text-gray-700 sm:flex-row sm:gap-6">
-              <For each={Object.values(EventType)}>
-                {(eventType) => (
+              <For each={Object.entries(eventTypes)}>
+                {([id, eventType]) => (
                   <div class="flex items-center">
                     <input
-                      id={eventType}
+                      id={id}
                       required
                       name="type"
-                      value={eventType}
+                      value={id}
                       type="radio"
                       class="border-gray-300"
                     />
-                    <label for={eventType} class="pl-3">
-                      {humanizedEventTypes[eventType]}
+                    <label for={id} class="pl-3">
+                      {eventType.title}
                     </label>
                   </div>
                 )}

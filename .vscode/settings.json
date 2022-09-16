@@ -8,5 +8,8 @@
   },
   "files.associations": {
     "*.svg": "html"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///home/jon1vk/github/laitilanjyskeyleisurheilu/.github/workflows/deploy.yml"
   }
 }
