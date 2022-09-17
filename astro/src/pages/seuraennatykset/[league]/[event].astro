@@ -14,6 +14,7 @@ const currentEvent = titleize(Astro.params.event as string);
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/records.webp" />
     <title>
       Laitilan Jyske | Yleisurheilu | TOP 10 | {currentLeague} | {currentEvent}
     </title>
@@ -31,7 +32,7 @@ const currentEvent = titleize(Astro.params.event as string);
     />
     <meta
       property="og:image"
-      content={new URL('/images/records.jpg', Astro.url)}
+      content={new URL('/images/records.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -43,7 +44,7 @@ const currentEvent = titleize(Astro.params.event as string);
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover"
-      src="/images/records.jpg"
+      src="/images/records.webp"
       alt="Seuracup mitali kaulassa"
       aria-hidden="true"
     />

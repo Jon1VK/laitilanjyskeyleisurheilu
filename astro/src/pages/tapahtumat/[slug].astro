@@ -28,6 +28,7 @@ if (!event) return Astro.redirect('/404');
 <Layout title={event.title}>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/events.webp" />
     <title>Laitilan Jyske - Yleisurheilu | Tapahtumat | {event.title}</title>
     <meta property="og:title" content={event.title} />
     <meta
@@ -40,7 +41,7 @@ if (!event) return Astro.redirect('/404');
     />
     <meta
       property="og:image"
-      content={new URL('/images/events.jpg', Astro.url)}
+      content={new URL('/images/events.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -51,8 +52,8 @@ if (!event) return Astro.redirect('/404');
   <!-- HERO IMAGE -->
   <Fragment slot="hero-image">
     <img
-      class="h-full w-full object-cover object-[100%_35%] lg:object-[100%_30%] xl:object-[100%_25%]"
-      src="/images/events.jpg"
+      class="h-full w-full object-cover"
+      src="/images/events.webp"
       alt="Juoksumatka Seuracup-kilpailussa"
       aria-hidden="true"
     />

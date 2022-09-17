@@ -6,6 +6,7 @@ import Layout from '@layouts/Layout.astro';
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/frontpage.webp" />
     <title>Laitilan Jyske | Yleisurheilu</title>
     <meta property="og:title" content="Etusivu" />
     <meta
@@ -18,7 +19,7 @@ import Layout from '@layouts/Layout.astro';
     />
     <meta
       property="og:image"
-      content={new URL('/images/frontpage.jpg', Astro.url)}
+      content={new URL('/images/frontpage.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -30,7 +31,7 @@ import Layout from '@layouts/Layout.astro';
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
-      src="/images/frontpage.jpg"
+      src="/images/frontpage.webp"
       alt="Yhteenkuuluvuuden tunnetta"
       aria-hidden="true"
     />

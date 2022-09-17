@@ -5,6 +5,7 @@ import Layout from '@layouts/Layout.astro';
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/news.webp" />
     <title>Laitilan Jyske | Yleisurheilu | Uutiset</title>
     <meta property="og:title" content="Uutiset" />
     <meta name="description" content="Lue tuoreimmat yleisurheilu-uutiset." />
@@ -14,7 +15,7 @@ import Layout from '@layouts/Layout.astro';
     />
     <meta
       property="og:image"
-      content={new URL('/images/news.jpg', Astro.url)}
+      content={new URL('/images/news.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -26,7 +27,7 @@ import Layout from '@layouts/Layout.astro';
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover object-[100%_35%] lg:object-[100%_30%] xl:object-[100%_25%]"
-      src="/images/news.jpg"
+      src="/images/news.webp"
       alt="Seuran vakiotoimitsijat ajanotossa"
       aria-hidden="true"
     />

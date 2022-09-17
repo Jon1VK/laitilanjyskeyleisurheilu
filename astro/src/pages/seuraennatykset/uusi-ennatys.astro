@@ -6,6 +6,7 @@ import Layout from '@layouts/Layout.astro';
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/records.webp" />
     <title>
       Laitilan Jyske | Yleisurheilu | Seuraennätykset | Uusi Ennätys
     </title>
@@ -20,7 +21,7 @@ import Layout from '@layouts/Layout.astro';
     />
     <meta
       property="og:image"
-      content={new URL('/images/records.jpg', Astro.url)}
+      content={new URL('/images/records.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -32,7 +33,7 @@ import Layout from '@layouts/Layout.astro';
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover"
-      src="/images/records.jpg"
+      src="/images/records.webp"
       alt="Seuracup mitali kaulassa"
       aria-hidden="true"
     />

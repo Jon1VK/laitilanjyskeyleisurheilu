@@ -7,6 +7,7 @@ import contacts from '@data/contacts';
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/contacts.webp" />
     <title>Laitilan Jyske | Yleisurheilu | Yhteystiedot</title>
     <meta property="og:title" content="Yhteystiedot" />
     <meta
@@ -19,7 +20,7 @@ import contacts from '@data/contacts';
     />
     <meta
       property="og:image"
-      content={new URL('/images/contacts.jpg', Astro.url)}
+      content={new URL('/images/contacts.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -31,7 +32,7 @@ import contacts from '@data/contacts';
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
-      src="/images/contacts.jpg"
+      src="/images/contacts.webp"
       alt="Seuran puheenjohtaja Pekka Kuusisto toimitsijana"
       aria-hidden="true"
     />

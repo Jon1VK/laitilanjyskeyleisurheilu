@@ -22,6 +22,7 @@ const events = await PrismaEvent.findAllBetweenStartDateAndEndDate(
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/events.webp" />
     <title>Laitilan Jyske - Yleisurheilu | Tapahtumat</title>
     <meta property="og:title" content="Tapahtumat" />
     <meta
@@ -34,7 +35,7 @@ const events = await PrismaEvent.findAllBetweenStartDateAndEndDate(
     />
     <meta
       property="og:image"
-      content={new URL('/images/events.jpg', Astro.url)}
+      content={new URL('/images/events.webp', Astro.url)}
     />
     <meta
       property="og:description"
@@ -46,7 +47,7 @@ const events = await PrismaEvent.findAllBetweenStartDateAndEndDate(
   <Fragment slot="hero-image">
     <img
       class="h-full w-full object-cover"
-      src="/images/events.jpg"
+      src="/images/events.webp"
       alt="Juoksumatka Seuracup-kilpailussa"
       aria-hidden="true"
     />
