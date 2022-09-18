@@ -36,7 +36,12 @@ const resolve = async ({
   const titleSlug = parameterize(title);
   const occurrences = getDatesBetween(recurrenceStartDate, recurrenceEndDate)
     .filter((date) => weekdays.includes(date.getDay()))
-    .map<Omit<Event, 'id' | 'recurringEventId'>>((date) => {
+    .map<
+      Omit<
+        Event,
+        'id' | 'recurringEventId' | 'resultsFileKey' | 'timetableFileKey'
+      >
+    >((date) => {
       const dateString = date.toLocaleDateString('sv');
       return {
         type,

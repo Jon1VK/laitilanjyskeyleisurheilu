@@ -1,3 +1,4 @@
+import supabaseClient from '@lib/supabaseClient';
 import trpcClient from '@lib/trpcClient';
 import type { Event, RecurringEvent } from '@prisma/client';
 import {
@@ -43,14 +44,14 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     window.location.href = '/tapahtumat#main';
   };
 
-  const updateEvent = async (event: Event, formData: FormData) => {
+  const updateEvent = async (formData: FormData) => {
     const startDateTime = new Date(formData.get('startDateTime') as string);
     const endDateTimeValue = formData.get('endDateTime') as string;
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
     const location = (formData.get('location') as string) || null;
     const description = (formData.get('description') as string) || null;
     const updatedEvent = await trpcClient.mutation('updateEvent', {
-      id: event.id,
+      ...event(),
       startDateTime,
       endDateTime,
       location,
@@ -59,10 +60,52 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     setEvent(updatedEvent);
   };
 
+  const uploadTimetable = async (file: File) => {
+    const { data } = await supabaseClient.storage
+      .from('files')
+      .upload(`timetables/${event().slug}_aikataulu`, file);
+    const updatedEvent = await trpcClient.mutation('updateEvent', {
+      ...event(),
+      timetableFileKey: data?.Key,
+    });
+    setEvent(updatedEvent);
+  };
+
+  const deleteTimetable = async () => {
+    const updatedEvent = await trpcClient.mutation('deleteEventTimetable', {
+      id: event().id,
+      timetableFileKey: event().timetableFileKey as string,
+    });
+    setEvent(updatedEvent);
+  };
+
+  const uploadResults = async (file: File) => {
+    const { data } = await supabaseClient.storage
+      .from('files')
+      .upload(`results/${event().slug}_tulokset`, file);
+    const updatedEvent = await trpcClient.mutation('updateEvent', {
+      ...event(),
+      resultsFileKey: data?.Key,
+    });
+    setEvent(updatedEvent);
+  };
+
+  const deleteResults = async () => {
+    const updatedEvent = await trpcClient.mutation('deleteEventResults', {
+      id: event().id,
+      resultsFileKey: event().resultsFileKey as string,
+    });
+    setEvent(updatedEvent);
+  };
+
   return {
     event,
     updateEvent,
     deleteEvent,
+    uploadTimetable,
+    deleteTimetable,
+    uploadResults,
+    deleteResults,
     deleteOccurrence,
     deleteRecurringEvent,
   };

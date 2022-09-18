@@ -17,6 +17,46 @@ const PrismaEvent = Object.assign(prisma.event, {
       orderBy: { startDateTime: 'asc' },
     });
   },
+  async findUniqueWithOccurrences(slug: string) {
+    return await prisma.event.findUnique({
+      where: { slug },
+      include: {
+        RecurringEvent: {
+          include: {
+            occurrences: {
+              where: {
+                slug: {
+                  not: slug,
+                },
+              },
+              orderBy: { startDateTime: 'asc' },
+            },
+          },
+        },
+      },
+    });
+  },
+  async updateAndIncludeOccurrences(id: number, data: Record<string, unknown>) {
+    const updatedEvent = await prisma.event.update({
+      where: { id },
+      data,
+      include: {
+        RecurringEvent: {
+          include: {
+            occurrences: {
+              where: {
+                id: {
+                  not: id,
+                },
+              },
+              orderBy: { startDateTime: 'asc' },
+            },
+          },
+        },
+      },
+    });
+    return updatedEvent;
+  },
 });
 
 export default PrismaEvent;

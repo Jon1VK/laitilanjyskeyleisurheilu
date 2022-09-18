@@ -33,6 +33,8 @@ model Event {
   title            String
   description      String?
   location         String?
+  timetableFileKey String?
+  resultsFileKey   String?
   recurringEventId Int?
   RecurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
 }

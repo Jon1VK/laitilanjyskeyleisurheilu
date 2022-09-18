@@ -6,22 +6,7 @@ import { PrismaEvent } from '@models';
 import { EventDetails } from '@components';
 
 const slug = Astro.params.slug as string;
-const event = await PrismaEvent.findUnique({
-  where: { slug },
-  include: {
-    RecurringEvent: {
-      include: {
-        occurrences: {
-          where: {
-            slug: {
-              not: slug,
-            },
-          },
-        },
-      },
-    },
-  },
-});
+const event = await PrismaEvent.findUniqueWithOccurrences(slug);
 if (!event) return Astro.redirect('/404');
 ---
 

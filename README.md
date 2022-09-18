@@ -52,13 +52,17 @@ Below are listed all of the environment variables that the application needs. If
 
 ### Astro
 
-| Environment Variable | Description                    |
-| -------------------- | ------------------------------ |
-| DATABASE_URL         | PostgreSQL connect URL string  |
-| ASTROAUTH_URL        | Astro Auth base URL            |
-| ASTROAUTH_SECRET     | Astro Auth secret              |
-| GOOGLE_CLIENT_ID     | Google OAuth Web Client ID     |
-| GOOGLE_CLIENT_SECRET | Google OAuth Web Client secret |
+| Environment Variable | Description                            |
+| -------------------- | -------------------------------------- |
+| PUBLIC_BASE_URL      | Domain base URL                        |
+| PUBLIC_SUPABASE_URL  | Supabase client URL                    |
+| PUBLIC_SUPABASE_KEY  | Supabase client key for public access  |
+| PRIVATE_SUPABASE_KEY | Supabase client key for private access |
+| DATABASE_URL         | PostgreSQL connect URL string          |
+| ASTROAUTH_URL        | Astro Auth base URL                    |
+| ASTROAUTH_SECRET     | Astro Auth secret                      |
+| GOOGLE_CLIENT_ID     | Google OAuth Web Client ID             |
+| GOOGLE_CLIENT_SECRET | Google OAuth Web Client secret         |
 
 ## Development
 
@@ -137,3 +141,5 @@ Connect to the PostgreSQL with development environment credentials:
 Visual Studio Code will output typescript errors if you have not installed all the required npm packages locally. For that reason `npm install` has to be ran after new npm package(s) has been installed inside the corresponding docker container.
 
 After cloning this repository `npm install` must be run on astro folder before using Docker Compose -commands. This ensures that the astro/node_modules folder gets right permissions for you to update it's contents. If `docker compose up` is ran before installing npm dependencies, you will get permission error when you try to install the dependencies locally on your machine afterwards.
+
+Also when a new migration is generated on the docker container, the prisma client has to be generated locally by running `npm run prisma generate` for new typings to be available in VS Code.
