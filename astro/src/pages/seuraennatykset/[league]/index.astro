@@ -1,11 +1,13 @@
 ---
 import { parameterize } from 'inflected';
 import { titleize } from '@utils/strings';
-import { LEAGUES_BY_GENDER } from '@data/leagues';
-import { recordsByEvent } from '@data/records';
 import Layout from '@layouts/Layout.astro';
+import { LEAGUE, PrismaRecord } from '@models';
+import { formattedRecordAchievedDate } from '@utils/records';
 
-const currentLeague = titleize(Astro.params.league as string);
+const currentLeague = titleize(Astro.params.league as string) as LEAGUE;
+const clubRecordsByEvent =
+  await PrismaRecord.findClubRecordsByLeagueAndMappedByEvent(currentLeague);
 const eventClickHandler = (event: string) =>
   `location.assign("${Astro.params.league}/${parameterize(event)}#main")`;
 ---
@@ -17,7 +19,7 @@ const eventClickHandler = (event: string) =>
     <title>
       Laitilan Jyske - Yleisurheilu | Seuraennätykset | {currentLeague}
     </title>
-    <meta property="og:title" content={`TOP 10 | ${currentLeague}`} />
+    <meta property="og:title" content={`Seuraennätykset | ${currentLeague}`} />
     <meta
       name="description"
       content={`Selaa ${currentLeague} seuraennätyksiä.`}
@@ -63,14 +65,14 @@ const eventClickHandler = (event: string) =>
       <!-- LEAGUE SIDEBAR NAVIGATION -->
       <nav class="hidden md:block">
         {
-          Object.entries(LEAGUES_BY_GENDER).map(([gender, leagues]) => (
+          PrismaRecord.getGenders().map((gender) => (
             <>
               <div class="mb-1 mt-2 font-semibold text-gray-700">{gender}</div>
               <ul
                 class="space-y-1 text-sm font-medium text-gray-500"
                 aria-label="Sidebar"
               >
-                {leagues.map((league) => (
+                {PrismaRecord.getLeaguesByGender(gender).map((league) => (
                   <li>
                     <a
                       href={`/seuraennatykset/${parameterize(league)}#main`}
@@ -119,7 +121,7 @@ const eventClickHandler = (event: string) =>
         <div
           class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
         >
-          <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
+          <table class="min-w-full divide-y divide-gray-300 bg-white">
             <!-- LEAGUE RECORDS TABLE HEAD -->
             <thead
               class={`font-semibold ${
@@ -141,35 +143,32 @@ const eventClickHandler = (event: string) =>
             <tbody
               class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
               >{
-                Object.values(recordsByEvent).map((records) => (
+                [...clubRecordsByEvent.values()].map((records) => (
                   <>
-                    {records.map(
-                      (
-                        { event, athlete, result, handtime, location, date },
-                        index
-                      ) => (
-                        <tr
-                          onclick={eventClickHandler(event)}
-                          class="cursor-pointer hover:bg-white"
-                        >
-                          {index === 0 && (
-                            <th
-                              rowspan={records.length}
-                              class="py-4 pl-4 pr-3 align-top font-medium"
-                            >
-                              {event}
-                            </th>
-                          )}
-                          <td class="py-4 px-3">{athlete}</td>
-                          <td class="py-4 px-3">
-                            {result}
-                            {handtime ? 'h' : ''}
-                          </td>
-                          <td class="py-4 px-3">{location || '-'}</td>
-                          <td class="py-4 px-3">{date}</td>
-                        </tr>
-                      )
-                    )}
+                    {records.map((record, index) => (
+                      <tr
+                        onclick={eventClickHandler(record.event)}
+                        class="cursor-pointer hover:bg-gray-100"
+                      >
+                        {index === 0 && (
+                          <th
+                            rowspan={records.length}
+                            class="py-4 pl-4 pr-3 align-top font-medium"
+                          >
+                            {record.event}
+                          </th>
+                        )}
+                        <td class="py-4 px-3">{record.athlete}</td>
+                        <td class="py-4 px-3">
+                          {record.result}
+                          {record.handtime ? 'h' : ''}
+                        </td>
+                        <td class="py-4 px-3">{record.location || '-'}</td>
+                        <td class="py-4 px-3">
+                          {formattedRecordAchievedDate(record)}
+                        </td>
+                      </tr>
+                    ))}
                   </>
                 ))
               }

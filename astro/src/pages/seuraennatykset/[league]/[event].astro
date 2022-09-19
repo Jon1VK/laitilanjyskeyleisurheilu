@@ -1,14 +1,16 @@
 ---
 import { parameterize } from 'inflected';
 import { titleize } from '@utils/strings';
-import { EVENTS_BY_LEAGUE } from '@data/events';
-import { top10 } from '@data/records';
 import Layout from '@layouts/Layout.astro';
+import { LEAGUE, PrismaRecord } from '@models';
+import { formattedRecordAchievedDate } from '@utils/records';
 
-const currentLeague = titleize(
-  Astro.params.league as string
-) as keyof typeof EVENTS_BY_LEAGUE;
+const currentLeague = titleize(Astro.params.league as string) as LEAGUE;
 const currentEvent = titleize(Astro.params.event as string);
+const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
+  currentLeague,
+  currentEvent
+);
 ---
 
 <Layout>
@@ -62,7 +64,7 @@ const currentEvent = titleize(Astro.params.event as string);
   <!-- MAIN -->
   <Fragment slot="main">
     <div
-      class="mx-auto my-8 grid max-w-7xl px-4 sm:my-12 sm:px-8 md:grid-cols-5 lg:my-16 lg:px-12"
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 md:grid md:grid-cols-5 lg:my-16 lg:px-12"
     >
       <!-- EVENTS SIDEBAR NAVIGATION -->
       <nav class="hidden md:block">
@@ -74,7 +76,7 @@ const currentEvent = titleize(Astro.params.event as string);
           aria-label="Sidebar"
         >
           {
-            EVENTS_BY_LEAGUE[currentLeague].map((event) => (
+            PrismaRecord.getEventsByLeague(currentLeague).map((event) => (
               <li>
                 <a
                   href={`/seuraennatykset/${Astro.params.league}/${parameterize(
@@ -107,7 +109,7 @@ const currentEvent = titleize(Astro.params.event as string);
             rel="prefetch"
             class="cursor-pointer text-blue-800 hover:text-blue-700 hover:underline"
           >
-            Ilmoita uusi seuraennätys
+            Ilmoita uusi ennätys
           </a>
         </div>
 
@@ -115,7 +117,7 @@ const currentEvent = titleize(Astro.params.event as string);
         <div
           class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
         >
-          <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
+          <table class="min-w-full divide-y divide-gray-300 bg-white">
             <!-- TOP10 RECORDS TABLE HEAD -->
             <thead
               class={`font-semibold ${
@@ -138,24 +140,24 @@ const currentEvent = titleize(Astro.params.event as string);
               class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
             >
               {
-                top10.map(
-                  ({ athlete, result, handtime, location, date }, index) => (
-                    <tr class="hover:bg-white">
-                      <th
-                        scope="row"
-                        class="py-4 pl-4 pr-3 align-top font-medium"
-                      >
-                        {index + 1}.
-                      </th>
-                      <td class="py-4 px-3">{athlete}</td>
-                      <td class="py-4 px-3">
-                        {`${result}${handtime ? 'h' : ''}`}
-                      </td>
-                      <td class="py-4 px-3">{location || '-'}</td>
-                      <td class="py-4 px-3">{date}</td>
-                    </tr>
-                  )
-                )
+                topTenRecords.map((record, index) => (
+                  <tr class="hover:bg-gray-100">
+                    <th
+                      scope="row"
+                      class="py-4 pl-4 pr-3 align-top font-medium"
+                    >
+                      {index + 1}.
+                    </th>
+                    <td class="py-4 px-3">{record.athlete}</td>
+                    <td class="py-4 px-3">
+                      {`${record.result}${record.handtime ? 'h' : ''}`}
+                    </td>
+                    <td class="py-4 px-3">{record.location || '-'}</td>
+                    <td class="py-4 px-3">
+                      {formattedRecordAchievedDate(record)}
+                    </td>
+                  </tr>
+                ))
               }
             </tbody>
           </table>

@@ -37,7 +37,7 @@ const PrismaEvent = Object.assign(prisma.event, {
     });
   },
   async updateAndIncludeOccurrences(id: number, data: Record<string, unknown>) {
-    const updatedEvent = await prisma.event.update({
+    return await prisma.event.update({
       where: { id },
       data,
       include: {
@@ -55,7 +55,6 @@ const PrismaEvent = Object.assign(prisma.event, {
         },
       },
     });
-    return updatedEvent;
   },
 });
 

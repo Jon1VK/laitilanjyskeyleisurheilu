@@ -1,4 +1,101 @@
-export const EVENTS_BY_LEAGUE = {
+import prisma from '@lib/prisma';
+import type { Record as IRecord } from '@prisma/client';
+
+const PrismaRecord = Object.assign(prisma.record, {
+  async findClubRecordsByLeagueAndMappedByEvent(league: LEAGUE) {
+    const records = await prisma.$queryRaw<IRecord[]>`
+      SELECT *
+      FROM "Record" as R1
+        JOIN (
+          SELECT event,
+            CASE
+              WHEN event SIMILAR TO '[0-9]%|Puoli%|Maraton%' THEN MIN(LPAD(result, 10, '0'))
+              ELSE MAX(LPAD(result, 10, '0'))
+            END AS "bestResult"
+          FROM "Record"
+          WHERE league = ${league}
+            AND reviewed
+          GROUP BY event
+        ) AS R2 ON R1.event = R2.event
+      WHERE league = ${league}
+        AND reviewed
+        AND LPAD(R1.result, 10, '0') = R2."bestResult"
+      ORDER BY "achievedAt"
+    `;
+    const recordsByEvent = new Map<string, IRecord[]>();
+    EVENTS_BY_LEAGUE[league].forEach((event) => {
+      const eventRecords = records.filter((record) => record.event === event);
+      recordsByEvent.set(event, eventRecords);
+    });
+    return recordsByEvent;
+  },
+  async findTopTenByLeagueAndEvent(league: LEAGUE, event: string) {
+    return await prisma.$queryRaw<IRecord[]>`
+      SELECT *
+      FROM "Record" as R1
+        JOIN (
+          SELECT athlete,
+            CASE
+              WHEN event SIMILAR TO '[0-9]%|Puoli%|Maraton%' THEN MIN(LPAD(result, 10, '0'))
+              ELSE MAX(LPAD(result, 10, '0'))
+            END AS "bestResult"
+          FROM "Record"
+          WHERE league = ${league}
+            AND event = ${event}
+            AND reviewed
+          GROUP BY athlete,
+            event
+        ) AS R2 ON R1.athlete = R2.athlete
+      WHERE league = ${league}
+        AND event = ${event}
+        AND reviewed
+        AND LPAD(R1.result, 10, '0') = R2."bestResult"
+      ORDER BY CASE
+          WHEN event SIMILAR TO '[0-9]%|Puoli%|Maraton' THEN LPAD(result, 10, '0')
+        END ASC,
+        LPAD(result, 10, '0') DESC,
+        "achievedAt" ASC
+      LIMIT 10
+    `;
+  },
+  getGenders() {
+    return GENDERS;
+  },
+  getLeaguesByGender(gender: GENDER) {
+    return LEAGUES_BY_GENDER[gender];
+  },
+  getEventsByLeague(league: LEAGUE) {
+    return EVENTS_BY_LEAGUE[league];
+  },
+});
+
+export type GENDER = 'Aikuiset' | 'Pojat' | 'Tytöt';
+
+const GENDERS: GENDER[] = ['Aikuiset', 'Pojat', 'Tytöt'];
+
+const LEAGUES_BY_GENDER: Record<GENDER, string[]> = {
+  Aikuiset: ['Miehet', 'Naiset'],
+  Pojat: [
+    'Pojat 9',
+    'Pojat 10',
+    'Pojat 11',
+    'Pojat 12',
+    'Pojat 13',
+    'Pojat 14',
+    'Pojat 15',
+  ],
+  Tytöt: [
+    'Tytöt 9',
+    'Tytöt 10',
+    'Tytöt 11',
+    'Tytöt 12',
+    'Tytöt 13',
+    'Tytöt 14',
+    'Tytöt 15',
+  ],
+};
+
+const EVENTS_BY_LEAGUE = {
   'Pojat 9': [
     '40m',
     '1000m',
@@ -289,4 +386,8 @@ export const EVENTS_BY_LEAGUE = {
     '10km kävely',
     '20km kävely',
   ],
-} as const;
+};
+
+export type LEAGUE = keyof typeof EVENTS_BY_LEAGUE;
+
+export default PrismaRecord;

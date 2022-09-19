@@ -38,3 +38,17 @@ model Event {
   recurringEventId Int?
   RecurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
 }
+
+model Record {
+  id         Int      @id @default(autoincrement())
+  league     String
+  event      String
+  athlete    String
+  result     String
+  handtime   Boolean  @default(false)
+  location   String
+  achievedAt DateTime @db.Date
+  reviewed   Boolean  @default(false)
+
+  @@index([league, event])
+}
