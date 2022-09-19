@@ -2,10 +2,15 @@
 import { parameterize } from 'inflected';
 import { titleize } from '@utils/strings';
 import Layout from '@layouts/Layout.astro';
-import { LEAGUE, PrismaRecord } from '@models';
-import { formattedRecordAchievedDate } from '@utils/records';
+import { PrismaRecord } from '@models';
+import {
+  EVENTS_BY_LEAGUE,
+  formattedRecordAchievedDate,
+  League,
+} from '@utils/records';
+import { NewRecord } from '@components';
 
-const currentLeague = titleize(Astro.params.league as string) as LEAGUE;
+const currentLeague = titleize(Astro.params.league as string) as League;
 const currentEvent = titleize(Astro.params.event as string);
 const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
   currentLeague,
@@ -76,7 +81,7 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
           aria-label="Sidebar"
         >
           {
-            PrismaRecord.getEventsByLeague(currentLeague).map((event) => (
+            EVENTS_BY_LEAGUE[currentLeague].map((event) => (
               <li>
                 <a
                   href={`/seuraennatykset/${Astro.params.league}/${parameterize(
@@ -100,18 +105,11 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
       <!-- EVENT TOP10 SECTION -->
       <section class="col-span-4 px-4 sm:px-8 lg:px-12">
         <!-- TOP10 SECTION DESCRIPTION -->
-        <h2 class="text-xl font-medium leading-6 text-gray-900">
+        <h2 class="mb-2 text-xl font-medium leading-6 text-gray-900">
           TOP 10 | {currentLeague} | {currentEvent}
         </h2>
-        <div class="mt-2 border-b border-gray-200 pb-5">
-          <a
-            href="/seuraennatykset/uusi-ennatys#main"
-            rel="prefetch"
-            class="cursor-pointer text-blue-800 hover:text-blue-700 hover:underline"
-          >
-            Ilmoita uusi ennätys
-          </a>
-        </div>
+        <NewRecord client:load />
+        <div class="mt-3 border-b border-gray-200"></div>
 
         <!-- TOP10 RECORDS TABLE -->
         <div
