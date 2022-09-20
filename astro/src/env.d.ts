@@ -9,6 +9,8 @@ interface ImportMetaEnv {
   readonly PRIVATE_SUPABASE_KEY: string;
   readonly GOOGLE_CLIENT_ID: string;
   readonly GOOGLE_CLIENT_SECRET: string;
+  readonly SENDGRID_API_KEY: string;
+  readonly CONTACT_EMAIL_RECIPIENTS: string;
 }
 
 interface ImportMeta {
