@@ -18,7 +18,7 @@ const EventCalendarHeader = () => {
     navigateToPrevMonth,
     navigateToNextMonth,
   } = useEventCalendarNavigator();
-  const { loggedIn } = useAuth();
+  const { isAdmin } = useAuth();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     const isRecurring = formData.has('isRecurring');
@@ -58,7 +58,7 @@ const EventCalendarHeader = () => {
               <HiOutlineChevronRight class="h-5 w-5" />
             </button>
           </div>
-          <Show when={loggedIn()}>
+          <Show when={isAdmin()}>
             <div class="mx-3 h-4 w-px bg-gray-300 md:mx-6 md:h-6" />
             <button
               onClick={() => setShowForm(true)}

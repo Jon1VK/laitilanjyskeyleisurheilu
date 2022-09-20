@@ -7,7 +7,7 @@ import Modal from '../Modal';
 import { useEventDetailsModifier } from './EventDetailsModifier';
 
 const EventDetailsOccurrences = () => {
-  const { loggedIn } = useAuth();
+  const { isAdmin } = useAuth();
   const { event, deleteOccurrence, deleteRecurringEvent } =
     useEventDetailsModifier();
   const [showConfirmation, setShowConfirmation] = createSignal(false);
@@ -17,7 +17,7 @@ const EventDetailsOccurrences = () => {
         <div class="relative mx-auto max-w-prose text-lg sm:px-0">
           <div class="mt-8 mb-4">
             <h2 class="text-2xl font-bold">Muut harjoituskerrat</h2>
-            <Show when={loggedIn()}>
+            <Show when={isAdmin()}>
               <button
                 onClick={() => setShowConfirmation(true)}
                 class="pt-2 text-base text-red-600 hover:text-red-700 hover:underline"

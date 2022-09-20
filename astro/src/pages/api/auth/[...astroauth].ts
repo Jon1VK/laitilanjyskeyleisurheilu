@@ -17,5 +17,18 @@ export const all = AstroAuth({
       });
       return dbUser ? true : '/403';
     },
+    jwt: async (jwtPayload: JwtPayload) => {
+      const { user } = jwtPayload;
+      const dbUser = await PrismaUser.findUnique({
+        where: { email: user.email },
+      });
+      return {
+        ...jwtPayload,
+        user: {
+          ...dbUser,
+          image: user.image,
+        },
+      };
+    },
   },
 });

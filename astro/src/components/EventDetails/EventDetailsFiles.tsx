@@ -5,7 +5,7 @@ import { Show } from 'solid-js';
 import { useEventDetailsModifier } from './EventDetailsModifier';
 
 const EventDetailsFiles = () => {
-  const { loggedIn } = useAuth();
+  const { isAdmin } = useAuth();
   const {
     event,
     uploadTimetable,
@@ -28,7 +28,7 @@ const EventDetailsFiles = () => {
               <FaSolidFileLines />
               Aikataulu
             </a>
-            <Show when={loggedIn()}>
+            <Show when={isAdmin()}>
               <button
                 onClick={deleteTimetable}
                 class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white"
@@ -39,7 +39,7 @@ const EventDetailsFiles = () => {
             </Show>
           </div>
         </Show>
-        <Show when={loggedIn() && !event().timetableFileKey}>
+        <Show when={isAdmin() && !event().timetableFileKey}>
           <div class="flex flex-col gap-1 text-base text-gray-600">
             <label for="timetable">Lisää aikataulu</label>
             <input
@@ -65,7 +65,7 @@ const EventDetailsFiles = () => {
               <FaSolidFileLines />
               Tulokset
             </a>
-            <Show when={loggedIn()}>
+            <Show when={isAdmin()}>
               <button
                 onClick={deleteResults}
                 class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white"
@@ -76,7 +76,7 @@ const EventDetailsFiles = () => {
             </Show>
           </div>
         </Show>
-        <Show when={loggedIn() && !event().resultsFileKey}>
+        <Show when={isAdmin() && !event().resultsFileKey}>
           <div class="flex flex-col gap-1 text-base text-gray-600">
             <label for="results">Lisää tulokset</label>
             <input

@@ -11,9 +11,24 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  name           String
+  isAdmin        Boolean         @default(false)
+  isAthlete      Boolean         @default(false)
+  athleteProfile AthleteProfile?
+
+  @@index([isAthlete])
+}
+
+model AthleteProfile {
+  id          Int     @id @default(autoincrement())
+  avatar      String?
+  heroImage   String?
+  mainEvents  String?
+  description String?
+  userId      Int     @unique
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum EventType {

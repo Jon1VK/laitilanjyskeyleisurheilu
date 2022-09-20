@@ -1,9 +1,9 @@
 import { recurringEventsController } from '@controllers';
 import createRouter from '@lib/createRouter';
-import { requireLoggedIn } from 'src/middlewares';
+import { requireAdmin } from 'src/middlewares';
 
 const recurringEventsRouter = createRouter()
-  .middleware(requireLoggedIn)
+  .middleware(requireAdmin)
   .mutation('createRecurringEvent', recurringEventsController.create)
   .mutation('deleteRecurringEvent', recurringEventsController.delete);
 

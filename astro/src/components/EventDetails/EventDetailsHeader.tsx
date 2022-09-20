@@ -7,7 +7,7 @@ import Modal from '../Modal';
 import { useEventDetailsModifier } from './EventDetailsModifier';
 
 const EventDetailsHeader = () => {
-  const { loggedIn } = useAuth();
+  const { isAdmin } = useAuth();
   const { event, updateEvent, deleteEvent } = useEventDetailsModifier();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
@@ -20,7 +20,7 @@ const EventDetailsHeader = () => {
         <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           {event().title}
         </h1>
-        <Show when={loggedIn()}>
+        <Show when={isAdmin()}>
           <div class="my-3 flex gap-1">
             <button
               onClick={() => setShowForm(true)}

@@ -1,1 +1,1 @@
-export { default as requireLoggedIn } from './requireLoggedIn';
+export { default as requireAdmin } from './requireAdmin';

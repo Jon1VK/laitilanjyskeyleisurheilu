@@ -8,7 +8,7 @@ const EventList = (props: {
   events: Event[];
   onDelete: (event: Event) => void;
 }) => {
-  const { loggedIn } = useAuth();
+  const { isAdmin } = useAuth();
   const clockColor = (event: Event) => {
     switch (event.type) {
       case 'PRACTICE':
@@ -43,7 +43,7 @@ const EventList = (props: {
                 </time>
               </div>
             </a>
-            <Show when={loggedIn()}>
+            <Show when={isAdmin()}>
               <div class="mx-6 flex gap-1">
                 <button
                   onClick={() => props.onDelete(event)}

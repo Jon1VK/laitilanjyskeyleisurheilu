@@ -1,5 +1,6 @@
 /// <reference types="astro/client" />
 /// <reference types="vite-plugin-svgr/client" />
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface ImportMetaEnv {
@@ -28,9 +29,12 @@ declare module 'json-complete' {
 declare module 'jsonwebtoken' {
   interface JwtPayload {
     user: {
+      readonly id: number;
       readonly name: string;
       readonly email: string;
       readonly image?: string;
+      readonly isAdmin: boolean;
+      readonly isAthlete: boolean;
     };
   }
 }

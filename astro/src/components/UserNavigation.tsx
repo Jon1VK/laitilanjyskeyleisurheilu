@@ -3,7 +3,7 @@ import { HiOutlineLogout } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
 
 const UserNavigation = () => {
-  const { loggedIn, user, signOut } = useAuth();
+  const { isLoggedIn, user, signOut } = useAuth();
   const [show, setShow] = createSignal(false);
   const menuVisibilityStyle = () => {
     return show()
@@ -11,7 +11,7 @@ const UserNavigation = () => {
       : 'ease-in duration-150 opacity-0 translate-y-1 pointer-events-none';
   };
   return (
-    <Show when={loggedIn()}>
+    <Show when={isLoggedIn()}>
       <nav class="relative">
         <button onClick={() => setShow(!show())}>
           <img
