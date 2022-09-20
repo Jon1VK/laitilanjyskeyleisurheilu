@@ -81,7 +81,8 @@ export const formattedDateTimePeriod = (
 };
 
 export const toUTCTime = (time: string) => {
-  return new Date(`1994-01-13 ${time}`).toLocaleTimeString('sv', {
+  const currentDateString = new Date().toLocaleDateString('sv');
+  return new Date(`${currentDateString} ${time}`).toLocaleTimeString('sv', {
     timeZone: 'utc',
   });
 };

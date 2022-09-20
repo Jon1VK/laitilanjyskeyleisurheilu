@@ -116,7 +116,7 @@ const EventForm = (props: {
                           <input
                             id={`weekday-${weekday}`}
                             name="weekdays"
-                            value={(index() % 7) + 1}
+                            value={(index() + 1) % 7}
                             type="checkbox"
                             class="border-gray-300"
                           />
