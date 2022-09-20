@@ -3,14 +3,13 @@ import type { APIContext } from 'astro';
 import { resolveHTTPResponse } from '@trpc/server';
 import type { HTTPHeaders } from '@trpc/client';
 import { appRouter } from '@router';
+import createContext from '@lib/createContext';
 
 async function httpHandler({ request, params }: APIContext): Promise<Response> {
   const query = new URL(request.url).searchParams;
   const requestBody = request.method === 'GET' ? {} : await request.json();
   const { status, headers, body } = await resolveHTTPResponse({
-    async createContext() {
-      // CreateContext
-    },
+    createContext: createContext(request),
     router: appRouter,
     path: params.trpc as string,
     req: {

@@ -9,6 +9,7 @@
       "@icons/*": ["src/icons/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
+      "@middlewares": ["src/middlewares/indes.ts"],
       "@models": ["src/models/index.ts"],
       "@router": ["src/router/index.ts"],
       "@utils/*": ["src/utils/*"]

@@ -1,7 +1,7 @@
 import { recordsController } from '@controllers';
-import { router } from '@trpc/server';
+import createRouter from '@lib/createRouter';
 
-const recordsRouter = router().mutation(
+const recordsRouter = createRouter().mutation(
   'createRecord',
   recordsController.create
 );

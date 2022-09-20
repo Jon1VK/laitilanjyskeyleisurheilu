@@ -1,7 +1,9 @@
 import { recurringEventsController } from '@controllers';
-import { router } from '@trpc/server';
+import createRouter from '@lib/createRouter';
+import { requireLoggedIn } from 'src/middlewares';
 
-const recurringEventsRouter = router()
+const recurringEventsRouter = createRouter()
+  .middleware(requireLoggedIn)
   .mutation('createRecurringEvent', recurringEventsController.create)
   .mutation('deleteRecurringEvent', recurringEventsController.delete);
 

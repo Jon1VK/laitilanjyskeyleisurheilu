@@ -1,8 +1,10 @@
 import { eventsController } from '@controllers';
-import { router } from '@trpc/server';
+import createRouter from '@lib/createRouter';
+import { requireLoggedIn } from 'src/middlewares';
 
-const eventsRouter = router()
+const eventsRouter = createRouter()
   .query('getAllEvents', eventsController.getAll)
+  .middleware(requireLoggedIn)
   .mutation('createEvent', eventsController.create)
   .mutation('updateEvent', eventsController.update)
   .mutation('deleteEvent', eventsController.delete)

@@ -1,7 +1,7 @@
 import { emailsController } from '@controllers';
-import { router } from '@trpc/server';
+import createRouter from '@lib/createRouter';
 
-const emailsRouter = router().mutation(
+const emailsRouter = createRouter().mutation(
   'sendContactEmail',
   emailsController.sendContactEmail
 );
