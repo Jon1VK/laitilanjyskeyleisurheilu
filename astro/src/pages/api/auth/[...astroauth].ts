@@ -1,5 +1,7 @@
 import AstroAuth from '@astro-auth/core';
 import { GoogleProvider } from '@astro-auth/providers';
+import { PrismaUser } from '@models';
+import type { JwtPayload } from 'jsonwebtoken';
 
 export const all = AstroAuth({
   authProviders: [
@@ -8,5 +10,12 @@ export const all = AstroAuth({
       clientSecret: import.meta.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  hooks: {},
+  hooks: {
+    signIn: async ({ user }: JwtPayload) => {
+      const dbUser = await PrismaUser.findUnique({
+        where: { email: user.email },
+      });
+      return dbUser ? true : '/403';
+    },
+  },
 });

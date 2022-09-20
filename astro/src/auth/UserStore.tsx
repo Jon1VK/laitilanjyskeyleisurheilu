@@ -3,7 +3,7 @@ import { createSignal, splitProps } from 'solid-js';
 export interface User {
   readonly name: string;
   readonly email: string;
-  readonly image: string;
+  readonly image?: string;
 }
 
 const [user, setUser] = createSignal<User | undefined>();

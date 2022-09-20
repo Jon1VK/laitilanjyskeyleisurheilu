@@ -30,7 +30,7 @@ declare module 'jsonwebtoken' {
     user: {
       readonly name: string;
       readonly email: string;
-      readonly image: string;
+      readonly image?: string;
     };
   }
 }
