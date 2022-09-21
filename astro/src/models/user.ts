@@ -1,5 +1,5 @@
 import prisma from '@lib/prisma';
-import type { User } from '@prisma/client';
+import type { AthleteProfile, User } from '@prisma/client';
 
 const PrismaUser = Object.assign(prisma.user, {
   async findAllAthletes() {
@@ -13,8 +13,9 @@ const PrismaUser = Object.assign(prisma.user, {
   },
 });
 
-export interface UserWithImage extends User {
+export interface ExtendedUser extends User {
   image?: string;
+  athleteProfile?: AthleteProfile | null;
 }
 
 export default PrismaUser;

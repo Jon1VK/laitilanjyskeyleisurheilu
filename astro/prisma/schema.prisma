@@ -23,12 +23,13 @@ model User {
 
 model AthleteProfile {
   id          Int     @id @default(autoincrement())
+  slug        String  @unique
   avatar      String?
   heroImage   String?
   mainEvents  String?
   description String?
   userId      Int     @unique
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  athlete     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum EventType {

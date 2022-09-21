@@ -35,6 +35,7 @@ declare module 'jsonwebtoken' {
       readonly image?: string;
       readonly isAdmin: boolean;
       readonly isAthlete: boolean;
+      readonly athleteProfile?: any;
     };
   }
 }

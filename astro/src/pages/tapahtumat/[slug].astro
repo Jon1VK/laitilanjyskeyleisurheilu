@@ -56,7 +56,9 @@ if (!event) return Astro.redirect('/404');
   <!-- MAIN -->
   <Fragment slot="main">
     <div class="relative overflow-hidden py-8 sm:py-16">
-      <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
+      <div
+        class="pointer-events-none hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full"
+      >
         <div class="relative mx-auto h-full max-w-prose" aria-hidden="true">
           <Icon
             name="dot-grid"

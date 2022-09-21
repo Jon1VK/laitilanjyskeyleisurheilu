@@ -1,9 +1,10 @@
 import { useAuth } from '@auth';
+import { CgProfile } from 'solid-icons/cg';
 import { HiOutlineLogout } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
 
 const UserNavigation = () => {
-  const { isLoggedIn, user, signOut } = useAuth();
+  const { isLoggedIn, isAthlete, user, signOut } = useAuth();
   const [show, setShow] = createSignal(false);
   const menuVisibilityStyle = () => {
     return show()
@@ -19,7 +20,7 @@ const UserNavigation = () => {
             referrerPolicy="no-referrer"
             src={
               user().image ||
-              `https://ui-avatars.com/api/?background=random&name=${
+              `https://ui-avatars.com/api/?background=1d4ed8&color=fff&name=${
                 user().name
               }`
             }
@@ -30,6 +31,17 @@ const UserNavigation = () => {
           class={`absolute right-0 mt-3 flex w-screen max-w-xs flex-col gap-2 rounded-lg bg-slate-50 p-4 shadow-lg ring-2 ring-black/5 transition focus-within:translate-y-0 focus-within:opacity-100 ${menuVisibilityStyle()}`}
         >
           <p class="ml-3 font-medium text-gray-900">{user().name}</p>
+          <Show when={isAthlete()}>
+            <a
+              href={`/edustusurheilijat/${
+                user().athleteProfile?.slug as string
+              }`}
+              class="flex items-center justify-between rounded-md p-3 text-sm text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100"
+            >
+              <span>Profiili</span>
+              <CgProfile class="h-5 w-5" />
+            </a>
+          </Show>
           <button
             class="flex items-center justify-between rounded-md p-3 text-sm text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100"
             onClick={() => signOut()}

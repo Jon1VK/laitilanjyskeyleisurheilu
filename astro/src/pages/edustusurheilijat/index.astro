@@ -69,7 +69,7 @@ const athletes = await PrismaUser.findAllAthletes();
           athletes.map((athlete) => (
             <li class="justify-self-center">
               <a
-                href={`/edusutusurheilijat/${parameterize(athlete.name)}`}
+                href={`/edustusurheilijat/${parameterize(athlete.name)}`}
                 rel="prefetch"
                 class="block cursor-pointer space-y-4 transition-transform hover:scale-105"
               >

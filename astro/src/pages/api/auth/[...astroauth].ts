@@ -21,6 +21,7 @@ export const all = AstroAuth({
       const { user } = jwtPayload;
       const dbUser = await PrismaUser.findUnique({
         where: { email: user.email },
+        include: { athleteProfile: true },
       });
       return {
         ...jwtPayload,
