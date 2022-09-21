@@ -2,34 +2,16 @@ import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import BubbleMenu from '@tiptap/extension-bubble-menu';
 import Link from '@tiptap/extension-link';
-import { BsTable } from 'solid-icons/bs';
-import { CgRedo, CgUndo } from 'solid-icons/cg';
-import {
-  RiEditorDeleteColumn,
-  RiEditorDeleteRow,
-  RiEditorInsertColumnLeft,
-  RiEditorInsertColumnRight,
-  RiEditorInsertRowBottom,
-  RiEditorInsertRowTop,
-  RiEditorMergeCellsHorizontal,
-  RiEditorSplitCellsHorizontal,
-} from 'solid-icons/ri';
-import {
-  FaSolidBold,
-  FaSolidHeading,
-  FaSolidItalic,
-  FaSolidLink,
-  FaSolidListOl,
-  FaSolidListUl,
-  FaSolidQuoteLeft,
-  FaSolidStrikethrough,
-  FaSolidT,
-} from 'solid-icons/fa';
 import Table from '@tiptap/extension-table';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
+import Image from './Image';
+import TableMenu from './TableMenu';
+import NodeMenu from './NodeMenu';
+import HistoryMenu from './HistoryMenu';
+import MarkMenu from './MarkMenu';
 
 const RichTextEditor = (props: {
   initialHTML?: string;
@@ -56,6 +38,7 @@ const RichTextEditor = (props: {
           TableHeader,
           TableRow,
           TableCell,
+          Image,
         ],
         editorProps: {
           attributes: {
@@ -67,8 +50,8 @@ const RichTextEditor = (props: {
     );
   });
   const [updateSignal, setUpdateSignal] = createSignal([]);
-  const forceUpdate = () => setUpdateSignal([]);
   createEffect(() => {
+    const forceUpdate = () => setUpdateSignal([]);
     editor()?.on('transaction', forceUpdate);
     onCleanup(() => editor()?.off('transaction', forceUpdate));
   });
@@ -91,226 +74,15 @@ const RichTextEditor = (props: {
     <div>
       <div class="flex justify-between">
         <Show when={isActive('table')}>
-          <div>
-            <button
-              type="button"
-              title="Lisää sarake vasemmalle"
-              class={`rounded-l-md ${buttonStyle()}`}
-              onClick={() => editor()?.chain().focus().addColumnBefore().run()}
-            >
-              <RiEditorInsertColumnLeft class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Lisää sarake oikealle"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().addColumnAfter().run()}
-            >
-              <RiEditorInsertColumnRight class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Poista sarake"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().deleteColumn().run()}
-            >
-              <RiEditorDeleteColumn class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Lisää rivi yläpuolelle"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().addRowBefore().run()}
-            >
-              <RiEditorInsertRowTop class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Lisää rivi alapuolelle"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().addRowAfter().run()}
-            >
-              <RiEditorInsertRowBottom class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Poista rivi"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().deleteRow().run()}
-            >
-              <RiEditorDeleteRow class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Yhdistä solut"
-              class={buttonStyle()}
-              onClick={() => editor()?.chain().focus().mergeCells().run()}
-            >
-              <RiEditorMergeCellsHorizontal class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Jaa solu"
-              class={`rounded-r-md ${buttonStyle()}`}
-              onClick={() => editor()?.chain().focus().splitCell().run()}
-            >
-              <RiEditorSplitCellsHorizontal class="h-4 w-4" />
-            </button>
-          </div>
+          <TableMenu editor={editor()} buttonStyle={buttonStyle} />
         </Show>
         <Show when={!isActive('table')}>
-          <div>
-            <button
-              type="button"
-              title="Normaali teksti"
-              class={`rounded-l-md ${buttonStyle('paragraph')}`}
-              onClick={() =>
-                editor()?.chain().clearNodes().focus().setParagraph().run()
-              }
-            >
-              <FaSolidT class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="1. tason otsikko"
-              class={buttonStyle('heading', { level: 2 })}
-              onClick={() =>
-                editor()
-                  ?.chain()
-                  .clearNodes()
-                  .focus()
-                  .toggleHeading({ level: 2 })
-                  .run()
-              }
-            >
-              <div class="flex items-end">
-                <FaSolidHeading class="h-4 w-4" />
-                <div class="font-semibold leading-none">1</div>
-              </div>
-            </button>
-            <button
-              type="button"
-              title="2. tason otsikko"
-              class={buttonStyle('heading', { level: 3 })}
-              onClick={() =>
-                editor()
-                  ?.chain()
-                  .clearNodes()
-                  .focus()
-                  .toggleHeading({ level: 3 })
-                  .run()
-              }
-            >
-              <div class="flex items-end">
-                <FaSolidHeading class="h-4 w-4" />
-                <div class="font-semibold leading-none">2</div>
-              </div>
-            </button>
-            <button
-              type="button"
-              title="Lista"
-              class={buttonStyle('bulletList')}
-              onClick={() =>
-                editor()?.chain().clearNodes().focus().toggleBulletList().run()
-              }
-            >
-              <FaSolidListUl class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Numeroitu lista"
-              class={buttonStyle('orderedList')}
-              onClick={() =>
-                editor()?.chain().clearNodes().focus().toggleOrderedList().run()
-              }
-            >
-              <FaSolidListOl class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Lainaus"
-              class={buttonStyle('blockquote')}
-              onClick={() =>
-                editor()?.chain().clearNodes().focus().toggleBlockquote().run()
-              }
-            >
-              <FaSolidQuoteLeft class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              title="Lisää taulukko"
-              class={`rounded-r-md ${buttonStyle('table')}`}
-              onClick={() =>
-                editor()
-                  ?.chain()
-                  .clearNodes()
-                  .focus()
-                  .insertTable({ withHeaderRow: true })
-                  .run()
-              }
-            >
-              <BsTable class="h-4 w-4" />
-            </button>
-          </div>
+          <NodeMenu editor={editor()} buttonStyle={buttonStyle} />
         </Show>
-        <div>
-          <button
-            type="button"
-            title="Palauta"
-            class={`rounded-l-md ${buttonStyle('undo')}`}
-            onClick={() => editor()?.chain().focus().undo().run()}
-          >
-            <CgUndo class="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            title="Tee uudelleen"
-            class={`rounded-r-md ${buttonStyle('redo')}`}
-            onClick={() => editor()?.chain().focus().redo().run()}
-          >
-            <CgRedo class="h-4 w-4" />
-          </button>
-        </div>
+        <HistoryMenu editor={editor()} buttonStyle={buttonStyle} />
       </div>
       <div id="bubbleMenu" ref={bubbleMenuRef}>
-        <button
-          type="button"
-          title="Lihavoitu teksti"
-          class={`rounded-l-md ${buttonStyle('bold')}`}
-          onClick={() => editor()?.chain().focus().toggleBold().run()}
-        >
-          <FaSolidBold class="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          title="Kursivoitu teksti"
-          class={buttonStyle('italic')}
-          onClick={() => editor()?.chain().focus().toggleItalic().run()}
-        >
-          <FaSolidItalic class="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          title="Yliviivattu teksti"
-          class={buttonStyle('strike')}
-          onClick={() => editor()?.chain().focus().toggleStrike().run()}
-        >
-          <FaSolidStrikethrough class="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          title="Lisää linkki"
-          class={`rounded-r-md ${buttonStyle('link')}`}
-          onClick={() =>
-            editor()
-              ?.chain()
-              .focus()
-              .toggleLink({ href: prompt('Syötä linkki:') ?? '' })
-              .run()
-          }
-        >
-          <FaSolidLink class="h-4 w-4" />
-        </button>
+        <MarkMenu editor={editor()} buttonStyle={buttonStyle} />
       </div>
       <div id="editor" ref={editorRef} />
     </div>
