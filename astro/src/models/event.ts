@@ -21,7 +21,7 @@ const PrismaEvent = Object.assign(prisma.event, {
     return await prisma.event.findUnique({
       where: { slug },
       include: {
-        RecurringEvent: {
+        recurringEvent: {
           include: {
             occurrences: {
               where: {
@@ -41,7 +41,7 @@ const PrismaEvent = Object.assign(prisma.event, {
       where: { id },
       data,
       include: {
-        RecurringEvent: {
+        recurringEvent: {
           include: {
             occurrences: {
               where: {

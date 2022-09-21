@@ -57,7 +57,7 @@ model Event {
   timetableFileKey String?
   resultsFileKey   String?
   recurringEventId Int?
-  RecurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
+  recurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
 }
 
 model Record {

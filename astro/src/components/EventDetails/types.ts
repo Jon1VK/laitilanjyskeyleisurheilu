@@ -5,5 +5,5 @@ export type RecurringEventWithOccurrences = RecurringEvent & {
 };
 
 export type EventWithOccurrences = Event & {
-  RecurringEvent: RecurringEventWithOccurrences | null;
+  recurringEvent: RecurringEventWithOccurrences | null;
 };

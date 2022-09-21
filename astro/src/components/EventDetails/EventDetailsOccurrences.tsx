@@ -27,7 +27,7 @@ const EventDetailsOccurrences = () => {
             </Show>
           </div>
           <EventListStateless
-            events={event().RecurringEvent?.occurrences ?? []}
+            events={event().recurringEvent?.occurrences ?? []}
             onDelete={deleteOccurrence}
           />
         </div>
@@ -40,14 +40,14 @@ const EventDetailsOccurrences = () => {
           </h3>
           <p class="text-gray-600">
             Olet poistamassa tapahtuman "{event().title}" kaikki{' '}
-            {(event().RecurringEvent?.occurrences.length as number) + 1}{' '}
+            {(event().recurringEvent?.occurrences.length as number) + 1}{' '}
             tapahtumakertaa. Haluatko suorittaa toiminnon loppuun?
           </p>
           <div class="mt-6 flex items-center gap-4">
             <button
               type="submit"
               onClick={() =>
-                deleteRecurringEvent(event().RecurringEvent as RecurringEvent)
+                deleteRecurringEvent(event().recurringEvent as RecurringEvent)
               }
               class="rounded-md bg-red-700 py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-red-800"
             >

@@ -20,7 +20,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
 
   const deleteOccurrence = async (occurrenceToDelete: Event) => {
     await trpcClient.mutation('deleteEvent', occurrenceToDelete.id);
-    const recurringEvent = event().RecurringEvent;
+    const recurringEvent = event().recurringEvent;
     if (!recurringEvent) return;
     const remainingOccurrences = recurringEvent.occurrences.filter(
       (occurrence) => occurrence.id !== occurrenceToDelete.id
