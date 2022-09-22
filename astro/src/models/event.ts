@@ -1,4 +1,5 @@
 import prisma from '@lib/prisma';
+import type { Prisma } from '@prisma/client';
 
 const PrismaEvent = Object.assign(prisma.event, {
   async findAllBetweenStartDateAndEndDate(startDate: Date, endDate: Date) {
@@ -36,7 +37,7 @@ const PrismaEvent = Object.assign(prisma.event, {
       },
     });
   },
-  async updateAndIncludeOccurrences(id: number, data: Record<string, unknown>) {
+  async updateAndIncludeOccurrences(id: number, data: Prisma.EventUpdateInput) {
     return await prisma.event.update({
       where: { id },
       data,

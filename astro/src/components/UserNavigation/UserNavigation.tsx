@@ -1,4 +1,5 @@
 import { useAuth } from '@auth';
+import { parameterize } from 'inflected';
 import { CgProfile } from 'solid-icons/cg';
 import { HiOutlineLogout } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
@@ -33,9 +34,7 @@ const UserNavigation = () => {
           <p class="ml-3 font-medium text-gray-900">{user().name}</p>
           <Show when={isAthlete()}>
             <a
-              href={`/edustusurheilijat/${
-                user().athleteProfile?.slug as string
-              }`}
+              href={`/edustusurheilijat/${parameterize(user().name)}`}
               class="flex items-center justify-between rounded-md p-3 text-sm text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100"
             >
               <span>Profiili</span>

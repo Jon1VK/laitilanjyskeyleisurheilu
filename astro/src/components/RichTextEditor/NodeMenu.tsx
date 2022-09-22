@@ -10,7 +10,7 @@ import {
 } from 'solid-icons/fa';
 import { createSignal, Show } from 'solid-js';
 import Modal from '../Modal';
-import ImageForm from './ImageForm';
+import ImageForm from '../ImageForm';
 
 const NodeMenu = (props: {
   editor?: Editor;

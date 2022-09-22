@@ -28,6 +28,8 @@ model AthleteProfile {
   heroImage   String?
   mainEvents  String?
   description String?
+  instagram   String?
+  linkedin    String?
   userId      Int     @unique
   athlete     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

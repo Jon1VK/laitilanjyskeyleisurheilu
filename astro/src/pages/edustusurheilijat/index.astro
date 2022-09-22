@@ -74,7 +74,7 @@ const athletes = await PrismaUser.findAllAthletes();
                 class="block cursor-pointer space-y-4 transition-transform hover:scale-105"
               >
                 <img
-                  class="mx-auto h-20 w-20 rounded-full lg:h-24 lg:w-24"
+                  class="mx-auto h-20 w-20 rounded-full object-cover lg:h-24 lg:w-24"
                   src={
                     athlete.athleteProfile?.avatar ||
                     '/images/avatar-placeholder.jpg'
