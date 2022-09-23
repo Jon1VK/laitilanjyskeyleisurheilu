@@ -39,7 +39,11 @@ const resolve = async ({
     .map<
       Omit<
         Event,
-        'id' | 'recurringEventId' | 'resultsFileKey' | 'timetableFileKey'
+        | 'id'
+        | 'recurringEventId'
+        | 'resultsFileKey'
+        | 'timetableFileKey'
+        | 'externalUrl'
       >
     >((date) => {
       const dateString = date.toLocaleDateString('sv');

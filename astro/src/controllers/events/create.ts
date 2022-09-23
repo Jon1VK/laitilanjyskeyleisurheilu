@@ -6,9 +6,10 @@ const input = z.object({
   type: z.enum(['PRACTICE', 'COMPETITION', 'OTHER']),
   title: z.string().min(1),
   startDateTime: z.date(),
-  endDateTime: z.date().nullable(),
+  endDateTime: z.date().nullable().optional(),
   location: z.string().min(1).nullable(),
-  description: z.string().min(1).nullable(),
+  description: z.string().min(1).nullable().optional(),
+  externalUrl: z.string().min(1).nullable().optional(),
 });
 
 type Input = z.infer<typeof input>;

@@ -72,6 +72,7 @@ const createEventCalendarNavigator = (
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
     const title = formData.get('title') as string;
     const location = (formData.get('location') as string) || null;
+    const externalUrl = (formData.get('externalUrl') as string) || null;
     const description = (formData.get('description') as string) || null;
     await trpcClient.mutation('createEvent', {
       type,
@@ -79,6 +80,7 @@ const createEventCalendarNavigator = (
       endDateTime,
       title,
       location,
+      externalUrl,
       description,
     });
     await refetch();

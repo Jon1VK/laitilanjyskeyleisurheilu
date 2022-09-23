@@ -1,5 +1,5 @@
 import { useAuth } from '@auth';
-import { FaSolidFileLines } from 'solid-icons/fa';
+import { FaSolidFileLines, FaSolidLink } from 'solid-icons/fa';
 import { HiOutlineTrash } from 'solid-icons/hi';
 import { Show } from 'solid-js';
 import { useEventDetailsModifier } from './EventDetailsModifier';
@@ -16,6 +16,16 @@ const EventDetailsFiles = () => {
   return (
     <Show when={event().type === 'COMPETITION'}>
       <div class="prose prose-blue mt-3 flex flex-col gap-2">
+        <Show when={event().externalUrl}>
+          <a
+            class="flex items-center gap-1"
+            target="_blank"
+            href={event().externalUrl as string}
+          >
+            <FaSolidLink />
+            Kilpailukalenteri
+          </a>
+        </Show>
         <Show when={event().timetableFileKey}>
           <div class="flex w-36 items-center justify-between">
             <a

@@ -49,12 +49,14 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const endDateTimeValue = formData.get('endDateTime') as string;
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
     const location = (formData.get('location') as string) || null;
+    const externalUrl = (formData.get('externalUrl') as string) || null;
     const description = (formData.get('description') as string) || null;
     const updatedEvent = await trpcClient.mutation('updateEvent', {
       ...event(),
       startDateTime,
       endDateTime,
       location,
+      externalUrl,
       description,
     });
     setEvent(updatedEvent);

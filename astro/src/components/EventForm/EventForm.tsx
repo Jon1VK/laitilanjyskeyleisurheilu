@@ -205,6 +205,24 @@ const EventForm = (props: {
                 class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
               />
             </div>
+            <Show
+              when={
+                eventType() === 'COMPETITION' ||
+                props.event?.type === 'COMPETITION'
+              }
+            >
+              <div class="sm:col-span-2">
+                <label for="externalUrl">Kilpailukalenteri</label>
+                <input
+                  type="text"
+                  value={props.event?.externalUrl || ''}
+                  name="externalUrl"
+                  placeholder="https://www.kilpailukalenteri.fi/?cs=16&nid=30297"
+                  id="externalUrl"
+                  class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
+                />
+              </div>
+            </Show>
             <div class="sm:col-span-2">
               <label>Kuvaus</label>
               <div class="mt-1 w-full">

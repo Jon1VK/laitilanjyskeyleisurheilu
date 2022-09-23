@@ -57,6 +57,7 @@ model Event {
   title            String
   description      String?
   location         String?
+  externalUrl      String?
   timetableFileKey String?
   resultsFileKey   String?
   recurringEventId Int?

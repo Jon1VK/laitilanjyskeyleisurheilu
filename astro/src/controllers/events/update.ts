@@ -4,11 +4,12 @@ import { z } from 'zod';
 const input = z.object({
   id: z.number().int(),
   startDateTime: z.date(),
-  endDateTime: z.date().nullable(),
-  location: z.string().min(1).nullable(),
+  endDateTime: z.date().nullable().optional(),
+  location: z.string().min(1).nullable().optional(),
+  externalUrl: z.string().min(1).nullable().optional(),
   timetableFileKey: z.string().min(1).nullable().optional(),
   resultsFileKey: z.string().min(1).nullable().optional(),
-  description: z.string().min(1).nullable(),
+  description: z.string().min(1).nullable().optional(),
 });
 
 type Input = z.infer<typeof input>;
