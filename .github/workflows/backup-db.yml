@@ -1,0 +1,17 @@
+name: Backup DB
+on:
+  schedule:
+    - cron: 0 0 * * 1
+jobs:
+  Backup-DB:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tj-actions/pg-dump@v2.3
+        with:
+          database_url: ${{ secrets.DATABASE_URL }}
+          path: db.sql
+      - uses: actions/upload-artifact@v3
+        with:
+          name: DB Backup
+          path: db.sql
