@@ -1,4 +1,6 @@
 import { useAuth } from '@auth';
+import logger from '@lib/logger';
+import uploadImage from '@lib/uploadImage';
 import {
   FaBrandsInstagram,
   FaBrandsLinkedin,
@@ -6,25 +8,41 @@ import {
 } from 'solid-icons/fa';
 import { HiOutlinePencilAlt } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
-import ImageForm from '../ImageForm';
 import Modal from '../Modal';
 import AthleteDetailsForm from './AthleteDetailsForm';
 import { useAthleteDetailsModifier } from './AthleteDetailsModifier';
+
+type InputChangeHandler = (
+  event: Event & { currentTarget: HTMLInputElement }
+) => Promise<void>;
 
 const EventDetailsHeader = () => {
   const { isLoggedInUser } = useAuth();
   const { athleteProfile, updateAvatar, updateProfile } =
     useAthleteDetailsModifier();
-  const [showImageForm, setShowImageForm] = createSignal(false);
+  const handleAvatarChange: InputChangeHandler = async (event) => {
+    try {
+      const file = event.currentTarget.files?.[0];
+      if (!file) return;
+      const src = await uploadImage(file);
+      await updateAvatar(src);
+    } catch (error) {
+      await logger.error(error as Error);
+      alert('Henkilökuvan lataus ei onnistunut. Yritä uudelleen!');
+    }
+  };
   const [showAthleteProfileForm, setShowAthleteProfileForm] =
     createSignal(false);
-  const handleImageFormSubmit = async (src: string) => {
-    await updateAvatar(src);
-    setShowImageForm(false);
-  };
   const handleAthleteProfileFormSubmit = async (formData: FormData) => {
-    await updateProfile(formData);
-    setShowAthleteProfileForm(false);
+    try {
+      await updateProfile(formData);
+      setShowAthleteProfileForm(false);
+    } catch (error) {
+      await logger.error(error as Error);
+      alert(
+        'Profiilin päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen.'
+      );
+    }
   };
   return (
     <>
@@ -36,12 +54,18 @@ const EventDetailsHeader = () => {
             alt="Profiilikuva"
           />
           <Show when={isLoggedInUser(athleteProfile().athlete)}>
-            <button
-              onClick={() => setShowImageForm(true)}
-              class="absolute right-1.5 bottom-1.5 rounded-full bg-blue-700 p-2.5 text-white xl:right-3 xl:bottom-3 xl:p-3"
+            <label
+              class="absolute right-1.5 bottom-1.5 cursor-pointer rounded-full bg-blue-700 p-2.5 text-white xl:right-3 xl:bottom-3 xl:p-3"
+              for="avatarImageButton"
             >
               <FaSolidCameraRetro />
-            </button>
+            </label>
+            <input
+              class="hidden w-0"
+              id="avatarImageButton"
+              type="file"
+              onChange={handleAvatarChange}
+            />
           </Show>
         </div>
         <div class="space-y-4 text-center">
@@ -84,11 +108,6 @@ const EventDetailsHeader = () => {
           </div>
         </div>
       </header>
-      <Show when={showImageForm()}>
-        <Modal close={() => setShowImageForm(false)}>
-          <ImageForm onSubmit={handleImageFormSubmit} />
-        </Modal>
-      </Show>
       <Show when={showAthleteProfileForm()}>
         <Modal close={() => setShowAthleteProfileForm(false)}>
           <AthleteDetailsForm

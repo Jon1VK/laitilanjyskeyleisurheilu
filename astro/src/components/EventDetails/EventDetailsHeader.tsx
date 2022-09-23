@@ -1,4 +1,5 @@
 import { useAuth } from '@auth';
+import logger from '@lib/logger';
 import { formattedDateTimePeriod } from '@utils/dates';
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
@@ -11,8 +12,15 @@ const EventDetailsHeader = () => {
   const { event, updateEvent, deleteEvent } = useEventDetailsModifier();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
-    await updateEvent(formData);
-    setShowForm(false);
+    try {
+      await updateEvent(formData);
+      setShowForm(false);
+    } catch (error) {
+      await logger.error(error as Error);
+      alert(
+        'Tietojen päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen.'
+      );
+    }
   };
   return (
     <>

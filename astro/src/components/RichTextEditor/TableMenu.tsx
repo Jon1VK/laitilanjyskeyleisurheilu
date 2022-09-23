@@ -9,6 +9,8 @@ import {
   RiEditorMergeCellsHorizontal,
   RiEditorSplitCellsHorizontal,
 } from 'solid-icons/ri';
+import { AiOutlineInsertRowAbove } from 'solid-icons/ai';
+import { HiOutlineTrash } from 'solid-icons/hi';
 
 const TableMenu = (props: {
   editor?: Editor;
@@ -18,8 +20,16 @@ const TableMenu = (props: {
     <div>
       <button
         type="button"
-        title="Lisää sarake vasemmalle"
+        title="Lisää/poista otsikkorivi"
         class={`rounded-l-md ${props.buttonStyle()}`}
+        onClick={() => props.editor?.chain().focus().toggleHeaderRow().run()}
+      >
+        <AiOutlineInsertRowAbove class="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        title="Lisää sarake vasemmalle"
+        class={props.buttonStyle()}
         onClick={() => props.editor?.chain().focus().addColumnBefore().run()}
       >
         <RiEditorInsertColumnLeft class="h-4 w-4" />
@@ -75,10 +85,18 @@ const TableMenu = (props: {
       <button
         type="button"
         title="Jaa solu"
-        class={`rounded-r-md ${props.buttonStyle()}`}
+        class={props.buttonStyle()}
         onClick={() => props.editor?.chain().focus().splitCell().run()}
       >
         <RiEditorSplitCellsHorizontal class="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        title="Poista taulukko"
+        class={`relative rounded-r-md ${props.buttonStyle()}`}
+        onClick={() => props.editor?.chain().focus().deleteTable().run()}
+      >
+        <HiOutlineTrash class="h-4 w-4" />
       </button>
     </div>
   );

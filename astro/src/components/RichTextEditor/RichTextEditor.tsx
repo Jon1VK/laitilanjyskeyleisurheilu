@@ -6,19 +6,22 @@ import Table from '@tiptap/extension-table';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
-import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import Image from './Image';
 import TableMenu from './TableMenu';
 import NodeMenu from './NodeMenu';
 import HistoryMenu from './HistoryMenu';
 import MarkMenu from './MarkMenu';
+import FloatingMenu from '@tiptap/extension-floating-menu';
 
 const RichTextEditor = (props: {
   initialHTML?: string;
   onChange: (html?: string) => void;
 }) => {
   let editorRef!: HTMLDivElement;
+  let floatingMenuRef!: HTMLDivElement;
   let bubbleMenuRef!: HTMLDivElement;
+  let tableMenuRef!: HTMLDivElement;
   const [editor, setEditor] = createSignal<Editor>();
   createEffect(() => {
     setEditor(
@@ -27,7 +30,18 @@ const RichTextEditor = (props: {
         content: props.initialHTML,
         autofocus: false,
         extensions: [
-          BubbleMenu.configure({ element: bubbleMenuRef }),
+          FloatingMenu.configure({ element: floatingMenuRef }),
+          BubbleMenu.configure({
+            element: bubbleMenuRef,
+            pluginKey: 'bubbleMenu',
+          }),
+          BubbleMenu.configure({
+            element: tableMenuRef,
+            pluginKey: 'tableMenu',
+            shouldShow: ({ editor, state }) => {
+              return editor.isActive('table') && state.selection.empty;
+            },
+          }),
           StarterKit.configure({
             heading: { levels: [2, 3] },
             codeBlock: false,
@@ -72,17 +86,17 @@ const RichTextEditor = (props: {
     }`;
   return (
     <div>
-      <div class="flex justify-between">
-        <Show when={isActive('table')}>
-          <TableMenu editor={editor()} buttonStyle={buttonStyle} />
-        </Show>
-        <Show when={!isActive('table')}>
-          <NodeMenu editor={editor()} buttonStyle={buttonStyle} />
-        </Show>
+      <div id="historyMenu">
         <HistoryMenu editor={editor()} buttonStyle={buttonStyle} />
+      </div>
+      <div id="floatingMenu" ref={floatingMenuRef}>
+        <NodeMenu editor={editor()} buttonStyle={buttonStyle} />
       </div>
       <div id="bubbleMenu" ref={bubbleMenuRef}>
         <MarkMenu editor={editor()} buttonStyle={buttonStyle} />
+      </div>
+      <div id="tableMenu" ref={tableMenuRef}>
+        <TableMenu editor={editor()} buttonStyle={buttonStyle} />
       </div>
       <div id="editor" ref={editorRef} />
     </div>

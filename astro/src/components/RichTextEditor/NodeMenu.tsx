@@ -1,3 +1,5 @@
+import logger from '@lib/logger';
+import uploadImage from '@lib/uploadImage';
 import type { Editor } from '@tiptap/core';
 import { BsTable } from 'solid-icons/bs';
 import {
@@ -8,26 +10,29 @@ import {
   FaSolidQuoteRight,
   FaSolidT,
 } from 'solid-icons/fa';
-import { createSignal, Show } from 'solid-js';
-import Modal from '../Modal';
-import ImageForm from '../ImageForm';
+
+type InputChangeHandler = (
+  event: Event & { currentTarget: HTMLInputElement }
+) => Promise<void>;
 
 const NodeMenu = (props: {
   editor?: Editor;
   buttonStyle: (name?: string, attributes?: Record<string, unknown>) => string;
 }) => {
-  const [showImageForm, setShowImageForm] = createSignal(false);
-  const closeImageForm = () => {
-    setShowImageForm(false);
-    props.editor?.chain().focus();
-  };
-  const handleImageFormSubmit = (src: string) => {
-    setShowImageForm(false);
-    props.editor?.chain().clearNodes().focus().setImage({ src }).run();
+  const handleImageChange: InputChangeHandler = async (event) => {
+    try {
+      const file = event.currentTarget.files?.[0];
+      if (!file) return;
+      const src = await uploadImage(file);
+      props.editor?.chain().clearNodes().focus().setImage({ src }).run();
+    } catch (error) {
+      await logger.error(error as Error);
+      alert('Kuvan lataus ei onnistunut. Yritä uudelleen!');
+    }
   };
   return (
     <>
-      <div>
+      <div class="flex">
         <button
           type="button"
           title="Normaali teksti"
@@ -104,14 +109,17 @@ const NodeMenu = (props: {
         >
           <FaSolidQuoteRight class="h-4 w-4" />
         </button>
-        <button
-          type="button"
-          title="Lainaus"
-          class={props.buttonStyle('image')}
-          onClick={() => setShowImageForm(true)}
-        >
-          <FaRegularImage class="h-4 w-4" />
-        </button>
+        <div class={`cursor-pointer ${props.buttonStyle('image')}`}>
+          <label for="richTextImageButton">
+            <FaRegularImage class="h-4 w-4" />
+          </label>
+          <input
+            class="hidden w-0"
+            id="richTextImageButton"
+            type="file"
+            onChange={handleImageChange}
+          />
+        </div>
         <button
           type="button"
           title="Lisää taulukko"
@@ -128,11 +136,6 @@ const NodeMenu = (props: {
           <BsTable class="h-4 w-4" />
         </button>
       </div>
-      <Show when={showImageForm()}>
-        <Modal close={closeImageForm}>
-          <ImageForm onSubmit={handleImageFormSubmit} />
-        </Modal>
-      </Show>
     </>
   );
 };

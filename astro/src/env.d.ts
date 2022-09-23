@@ -5,6 +5,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_BASE_URL: string;
+  readonly PUBLIC_AXIOM_TOKEN: string;
   readonly PUBLIC_SUPABASE_URL: string;
   readonly PUBLIC_SUPABASE_KEY: string;
   readonly PRIVATE_SUPABASE_KEY: string;
