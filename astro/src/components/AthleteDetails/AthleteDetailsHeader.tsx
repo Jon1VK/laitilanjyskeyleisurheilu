@@ -1,6 +1,6 @@
 import { useAuth } from '@auth';
 import logger from '@lib/logger';
-import uploadImage from '@lib/uploadImage';
+import { BsImage } from 'solid-icons/bs';
 import {
   FaBrandsInstagram,
   FaBrandsLinkedin,
@@ -18,18 +18,17 @@ type InputChangeHandler = (
 
 const EventDetailsHeader = () => {
   const { isLoggedInUser } = useAuth();
-  const { athleteProfile, updateAvatar, updateProfile } =
+  const { athleteProfile, updateHeroImage, updateAvatar, updateProfile } =
     useAthleteDetailsModifier();
   const handleAvatarChange: InputChangeHandler = async (event) => {
-    try {
-      const file = event.currentTarget.files?.[0];
-      if (!file) return;
-      const src = await uploadImage(file);
-      await updateAvatar(src);
-    } catch (error) {
-      await logger.error(error as Error);
-      alert('Henkilökuvan lataus ei onnistunut. Yritä uudelleen!');
-    }
+    const file = event.currentTarget.files?.[0];
+    if (!file) return;
+    await updateAvatar(file);
+  };
+  const handleHeroImageChange: InputChangeHandler = async (event) => {
+    const file = event.currentTarget.files?.[0];
+    if (!file) return;
+    await updateHeroImage(file);
   };
   const [showAthleteProfileForm, setShowAthleteProfileForm] =
     createSignal(false);
@@ -70,14 +69,30 @@ const EventDetailsHeader = () => {
         </div>
         <div class="space-y-4 text-center">
           <Show when={isLoggedInUser(athleteProfile().athlete)}>
-            <button
-              onClick={() => setShowAthleteProfileForm(true)}
-              class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
-            >
-              <div class="flex items-center px-1 text-sm">
-                <HiOutlinePencilAlt class="mr-2 h-5 w-5" /> Muokkaa profiilia
-              </div>
-            </button>
+            <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <label
+                class="cursor-pointer rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
+                for="heroImageButton"
+              >
+                <div class="flex items-center px-1 text-sm">
+                  <BsImage class="mr-2 h-4 w-4" /> Vaihda kansikuva
+                </div>
+              </label>
+              <input
+                class="hidden"
+                id="heroImageButton"
+                type="file"
+                onChange={handleHeroImageChange}
+              />
+              <button
+                onClick={() => setShowAthleteProfileForm(true)}
+                class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
+              >
+                <div class="flex items-center px-1 text-sm">
+                  <HiOutlinePencilAlt class="mr-2 h-5 w-5" /> Muokkaa profiilia
+                </div>
+              </button>
+            </div>
           </Show>
           <div class="space-y-1 text-lg font-medium leading-6">
             <h3>{athleteProfile().athlete.name}</h3>
@@ -88,7 +103,9 @@ const EventDetailsHeader = () => {
             <Show when={athleteProfile().instagram}>
               <a
                 target="_blank"
-                href={athleteProfile().instagram as string}
+                href={`https://www.instagram.com/${
+                  athleteProfile().instagram as string
+                }`}
                 class="text-gray-400 hover:text-gray-500"
               >
                 <span class="sr-only">Instagram</span>

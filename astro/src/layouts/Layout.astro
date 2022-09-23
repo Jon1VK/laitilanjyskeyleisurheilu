@@ -55,7 +55,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
     <!-- USER NAVIGATION -->
     <div class="fixed top-0 right-0 z-10 p-4 md:p-8">
-      <UserNavigation client:load />
+      <UserNavigation client:idle />
     </div>
 
     <!-- HEADER -->
@@ -264,7 +264,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
         <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
-          <Login client:load />
+          <Login client:idle />
           2022 Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>
       </div>

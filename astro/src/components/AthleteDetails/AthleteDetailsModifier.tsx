@@ -1,4 +1,6 @@
+import logger from '@lib/logger';
 import trpcClient from '@lib/trpcClient';
+import uploadImage from '@lib/uploadImage';
 import {
   Context,
   createContext,
@@ -15,12 +17,29 @@ const createAthleteDetailsModifier = (
     initialAthleteProfile
   );
 
-  const updateAvatar = async (src: string) => {
-    const updatedAthleteProfile = await trpcClient.mutation(
-      'updateAthleteProfile',
-      { avatar: src }
-    );
-    setAthleteProfile(updatedAthleteProfile);
+  const updateHeroImage = async (image: File) => {
+    try {
+      const src = await uploadImage(image);
+      await trpcClient.mutation('updateAthleteProfile', { heroImage: src });
+      location.reload();
+    } catch (error) {
+      await logger.error(error as Error);
+      alert('Kansikuvan lataus ei onnistunut. Yritä uudelleen!');
+    }
+  };
+
+  const updateAvatar = async (image: File) => {
+    try {
+      const src = await uploadImage(image);
+      const updatedAthleteProfile = await trpcClient.mutation(
+        'updateAthleteProfile',
+        { avatar: src }
+      );
+      setAthleteProfile(updatedAthleteProfile);
+    } catch (error) {
+      await logger.error(error as Error);
+      alert('Henkilökuvan lataus ei onnistunut. Yritä uudelleen!');
+    }
   };
 
   const updateProfile = async (formData: FormData) => {
@@ -33,6 +52,7 @@ const createAthleteDetailsModifier = (
 
   return {
     athleteProfile,
+    updateHeroImage,
     updateAvatar,
     updateProfile,
   };

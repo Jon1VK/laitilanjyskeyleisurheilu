@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
 import { PrismaAthleteProfile } from '@models';
-import { AthleteDetails, AthleteHeroImage } from '@components';
+import { AthleteDetails } from '@components';
 
 const slug = Astro.params.slug as string;
 const athleteProfile = await PrismaAthleteProfile.findUniqueWithAthlete(slug);
@@ -36,7 +36,12 @@ const heroImage = athleteProfile.heroImage || '/images/hero-placeholder.webp';
 
   <!-- HERO IMAGE -->
   <Fragment slot="hero-image">
-    <AthleteHeroImage client:load athleteProfile={athleteProfile} />
+    <img
+      class="h-full w-full object-cover"
+      src={heroImage}
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
   </Fragment>
 
   <!-- HERO HEADING -->

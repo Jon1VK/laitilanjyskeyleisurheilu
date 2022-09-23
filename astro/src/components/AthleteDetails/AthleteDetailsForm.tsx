@@ -30,39 +30,42 @@ const AthleteDetailsForm = (props: {
               Päälaji(t)
             </label>
             <input
-              required
               type="text"
+              placeholder="Pikajuoksu"
               name="mainEvents"
               value={props.athleteProfile.mainEvents || ''}
               id="mainEvents"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
           </div>
-          <div class="sm:col-span-2">
-            <label for="instagram" class="flex items-center">
-              <FaBrandsInstagram class="mr-1 h-5 w-5" /> Instagram URL
-            </label>
-            <input
-              required
-              type="text"
-              name="instagram"
-              value={props.athleteProfile.instagram || ''}
-              id="instagram"
-              class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-            />
-          </div>
-          <div class="sm:col-span-2">
-            <label for="linkedin" class="flex items-center">
-              <FaBrandsLinkedinIn class="mr-1 h-5 w-5" /> LinkedIn URL
-            </label>
-            <input
-              required
-              type="text"
-              name="linkedin"
-              value={props.athleteProfile.linkedin || ''}
-              id="linkedin"
-              class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-            />
+          <div class="space-y-1 sm:col-span-2">
+            <p>Sosiaalinen media</p>
+            <div class="flex items-center">
+              <label for="instagram" class="mr-2">
+                <FaBrandsInstagram class="h-5 w-5" />
+              </label>
+              <input
+                type="text"
+                placeholder="Käyttäjätunnus"
+                name="instagram"
+                value={props.athleteProfile.instagram || ''}
+                id="instagram"
+                class="w-full rounded-md border-gray-300 text-sm shadow-sm"
+              />
+            </div>
+            <div class="flex items-center">
+              <label for="linkedin" class="mr-2">
+                <FaBrandsLinkedinIn class="h-5 w-5" />
+              </label>
+              <input
+                type="text"
+                placeholder="https://www.linkedin.com/in/tunnus"
+                name="linkedin"
+                value={props.athleteProfile.linkedin || ''}
+                id="linkedin"
+                class="w-full rounded-md border-gray-300 text-sm shadow-sm"
+              />
+            </div>
           </div>
           <div class="sm:col-span-2">
             <label>Kuvaus</label>
