@@ -27,7 +27,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     );
     setEvent({
       ...event(),
-      RecurringEvent: {
+      recurringEvent: {
         ...recurringEvent,
         occurrences: remainingOccurrences,
       },
