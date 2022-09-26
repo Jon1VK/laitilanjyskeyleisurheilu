@@ -6,7 +6,7 @@ import Layout from '@layouts/Layout.astro';
 <Layout>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
-    <title>Laitilan Jyske - Yleisurheilu | 403</title>
+    <title>Laitilan Jyske - Yleisurheilu | 500</title>
     <meta name="robots" content="noindex" />
   </Fragment>
 
@@ -18,12 +18,16 @@ import Layout from '@layouts/Layout.astro';
       <h1
         class="flex flex-col items-center text-2xl sm:flex-row sm:text-3xl md:text-4xl"
       >
-        <Icon class="mb-6 mr-4 h-12 w-12 sm:mb-0" pack="ps" name="forbidden" />
-        Kirjautuminen estetty
+        <Icon
+          class="mb-6 mr-4 h-12 w-12 sm:mb-0"
+          pack="carbon"
+          name="data-error"
+        />
+        Palvelinvirhe
       </h1>
       <p class="mt-10 px-6">
-        Sinulla ei ole oikeuksia kirjautua. Ota yhteyttä Joni Vainio-Kailaan,
-        jos kirjautumisessa on ongelmia.
+        Yritä uudelleen. Jos virhe toistuu useasti, ilmoita siitä Joni
+        Vainio-Kailalle
       </p>
     </div>
   </Fragment>
