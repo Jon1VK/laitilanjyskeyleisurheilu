@@ -79,7 +79,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           <span class="sr-only">Etusivu</span>
           <Icon name="logo" class="h-12 w-auto md:h-14" />
         </a>
-        <div class="hidden lg:ml-10 lg:flex lg:gap-10">
+        <div class="hidden xl:ml-10 xl:flex xl:gap-10">
           <a
             href="/uutiset"
             rel="prefetch"
@@ -91,6 +91,12 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
             rel="prefetch"
             class="text-white hover:text-gray-300"
             >Tapahtumat
+          </a>
+          <a
+            href="/tulokset"
+            rel="prefetch"
+            class="text-white hover:text-gray-300"
+            >Tulokset
           </a>
           <a
             href="/seuraennatykset"
@@ -203,6 +209,15 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
               class="text-base text-gray-300 hover:text-white"
             >
               Tapahtumat
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/tulokset"
+              rel="prefetch"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Tulokset
             </a>
           </div>
           <div class="px-5 py-2">

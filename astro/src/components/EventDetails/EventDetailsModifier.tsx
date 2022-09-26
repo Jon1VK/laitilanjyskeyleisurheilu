@@ -1,6 +1,7 @@
 import supabaseClient from '@lib/supabaseClient';
 import trpcClient from '@lib/trpcClient';
 import type { Event, RecurringEvent } from '@prisma/client';
+import { parameterize } from 'inflected';
 import {
   Context,
   createContext,
@@ -63,9 +64,15 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   };
 
   const uploadTimetable = async (file: File) => {
-    const { data } = await supabaseClient.storage
-      .from('files')
-      .upload(`timetables/${event().slug}_aikataulu`, file);
+    const { data } = await supabaseClient.storage.from('files').upload(
+      `timetables/${event().startDateTime.toLocaleDateString(
+        'sv'
+      )}__${parameterize(event().title, {
+        separator: ' ',
+        preserveCase: true,
+      } as { separator: string })}__Aikataulu`,
+      file
+    );
     const updatedEvent = await trpcClient.mutation('updateEvent', {
       ...event(),
       timetableFileKey: data?.Key,
@@ -82,9 +89,15 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   };
 
   const uploadResults = async (file: File) => {
-    const { data } = await supabaseClient.storage
-      .from('files')
-      .upload(`results/${event().slug}_tulokset`, file);
+    const { data } = await supabaseClient.storage.from('files').upload(
+      `results/${event().startDateTime.toLocaleDateString(
+        'sv'
+      )}__${parameterize(event().title, {
+        separator: ' ',
+        preserveCase: true,
+      } as { separator: string })}__Tulokset`,
+      file
+    );
     const updatedEvent = await trpcClient.mutation('updateEvent', {
       ...event(),
       resultsFileKey: data?.Key,
