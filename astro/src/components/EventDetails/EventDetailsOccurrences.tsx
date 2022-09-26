@@ -1,16 +1,23 @@
 import { useAuth } from '@auth';
 import type { RecurringEvent } from '@prisma/client';
+import { FaSolidPlus } from 'solid-icons/fa';
 import { HiOutlineTrash } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
+import EventForm from '../EventForm';
 import EventListStateless from '../EventListStateless';
 import Modal from '../Modal';
 import { useEventDetailsModifier } from './EventDetailsModifier';
 
 const EventDetailsOccurrences = () => {
   const { isAdmin } = useAuth();
-  const { event, deleteOccurrence, deleteRecurringEvent } =
+  const { event, deleteOccurrence, deleteRecurringEvent, createOccurrence } =
     useEventDetailsModifier();
+  const [showNewOccurrenceForm, setShowNewOccurrenceForm] = createSignal(false);
   const [showConfirmation, setShowConfirmation] = createSignal(false);
+  const handleNewOccurranceFormSubmit = async (formData: FormData) => {
+    await createOccurrence(formData);
+    setShowNewOccurrenceForm(false);
+  };
   return (
     <>
       <Show when={event().recurringEventId}>
@@ -18,12 +25,22 @@ const EventDetailsOccurrences = () => {
           <div class="mt-8 mb-4">
             <h2 class="text-2xl font-bold">Muut harjoituskerrat</h2>
             <Show when={isAdmin()}>
-              <button
-                onClick={() => setShowConfirmation(true)}
-                class="pt-2 text-base text-red-600 hover:text-red-700 hover:underline"
-              >
-                Poista koko sarja
-              </button>
+              <div class="mt-3 flex items-center gap-1">
+                <button
+                  onClick={() => setShowNewOccurrenceForm(true)}
+                  class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
+                >
+                  <FaSolidPlus class="h-4 w-4" />
+                  <span class="sr-only">Lisää uusi tapahtumakerta</span>
+                </button>
+                <button
+                  onClick={() => setShowConfirmation(true)}
+                  class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white"
+                >
+                  <HiOutlineTrash class="h-4 w-4" />
+                  <span class="sr-only">Poista koko sarja</span>
+                </button>
+              </div>
             </Show>
           </div>
           <EventListStateless
@@ -31,6 +48,11 @@ const EventDetailsOccurrences = () => {
             onDelete={deleteOccurrence}
           />
         </div>
+      </Show>
+      <Show when={showNewOccurrenceForm()}>
+        <Modal close={() => setShowNewOccurrenceForm(false)}>
+          <EventForm event={event()} onSubmit={handleNewOccurranceFormSubmit} />
+        </Modal>
       </Show>
       <Show when={showConfirmation()}>
         <Modal close={() => setShowConfirmation(false)}>

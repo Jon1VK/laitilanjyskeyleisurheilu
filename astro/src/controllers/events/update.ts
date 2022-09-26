@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 const input = z.object({
   id: z.number().int(),
+  title: z.string().min(1),
   startDateTime: z.date(),
   endDateTime: z.date().nullable().optional(),
   location: z.string().min(1).nullable().optional(),

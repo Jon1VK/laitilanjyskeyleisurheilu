@@ -10,6 +10,7 @@ const input = z.object({
   location: z.string().min(1).nullable(),
   description: z.string().min(1).nullable().optional(),
   externalUrl: z.string().min(1).nullable().optional(),
+  recurringEventId: z.number().optional(),
 });
 
 type Input = z.infer<typeof input>;
@@ -18,7 +19,7 @@ const resolve = async ({ input }: { input: Input }) => {
   const titleSlug = parameterize(input.title);
   const dateSlug = input.startDateTime.toLocaleDateString('sv');
   const slug = `${dateSlug}-${titleSlug}`;
-  await PrismaEvent.create({ data: { ...input, slug } });
+  return await PrismaEvent.create({ data: { ...input, slug } });
 };
 
 const createEvent = { input, resolve };

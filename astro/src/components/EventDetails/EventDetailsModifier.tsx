@@ -9,7 +9,10 @@ import {
   ParentComponent,
   useContext,
 } from 'solid-js';
-import type { EventWithOccurrences } from './types';
+import type {
+  EventWithOccurrences,
+  RecurringEventWithOccurrences,
+} from './types';
 
 const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   const [event, setEvent] = createSignal(initialEvent);
@@ -23,15 +26,39 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     await trpcClient.mutation('deleteEvent', occurrenceToDelete.id);
     const recurringEvent = event().recurringEvent;
     if (!recurringEvent) return;
-    const remainingOccurrences = recurringEvent.occurrences.filter(
+    const occurrences = recurringEvent.occurrences.filter(
       (occurrence) => occurrence.id !== occurrenceToDelete.id
     );
     setEvent({
       ...event(),
-      recurringEvent: {
-        ...recurringEvent,
-        occurrences: remainingOccurrences,
-      },
+      recurringEvent: { ...recurringEvent, occurrences },
+    });
+  };
+
+  const createOccurrence = async (formData: FormData) => {
+    const startDateTime = new Date(formData.get('startDateTime') as string);
+    const endDateTimeValue = formData.get('endDateTime') as string;
+    const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
+    const title = formData.get('title') as string;
+    const location = (formData.get('location') as string) || null;
+    const description = (formData.get('description') as string) || null;
+    const recurringEvent = event()
+      .recurringEvent as RecurringEventWithOccurrences;
+    const occurrence = await trpcClient.mutation('createEvent', {
+      type: 'PRACTICE',
+      startDateTime,
+      endDateTime,
+      title,
+      location,
+      description,
+      recurringEventId: recurringEvent.id,
+    });
+    const occurrences = [...recurringEvent.occurrences, occurrence].sort(
+      (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
+    );
+    setEvent({
+      ...event(),
+      recurringEvent: { ...recurringEvent, occurrences },
     });
   };
 
@@ -46,6 +73,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   };
 
   const updateEvent = async (formData: FormData) => {
+    const title = formData.get('title') as string;
     const startDateTime = new Date(formData.get('startDateTime') as string);
     const endDateTimeValue = formData.get('endDateTime') as string;
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
@@ -54,6 +82,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const description = (formData.get('description') as string) || null;
     const updatedEvent = await trpcClient.mutation('updateEvent', {
       ...event(),
+      title,
       startDateTime,
       endDateTime,
       location,
@@ -121,6 +150,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     deleteTimetable,
     uploadResults,
     deleteResults,
+    createOccurrence,
     deleteOccurrence,
     deleteRecurringEvent,
   };

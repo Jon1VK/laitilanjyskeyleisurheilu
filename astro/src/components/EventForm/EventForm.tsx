@@ -156,21 +156,20 @@ const EventForm = (props: {
             </legend>
           </Show>
           <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
-            <Show when={!props.event}>
-              <div class="sm:col-span-2">
-                <div class="flex justify-between">
-                  <label for="title">Otsikko</label>
-                  <span class="ml-auto text-gray-500">Pakollinen</span>
-                </div>
-                <input
-                  required
-                  type="text"
-                  name="title"
-                  id="title"
-                  class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-                />
+            <div class="sm:col-span-2">
+              <div class="flex justify-between">
+                <label for="title">Otsikko</label>
+                <span class="ml-auto text-gray-500">Pakollinen</span>
               </div>
-            </Show>
+              <input
+                required
+                type="text"
+                value={props.event?.title || ''}
+                name="title"
+                id="title"
+                class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
+              />
+            </div>
             <div>
               <div class="flex justify-between">
                 <label for="startDateTime">Alkamisaika</label>
