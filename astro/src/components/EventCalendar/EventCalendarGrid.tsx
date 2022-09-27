@@ -60,7 +60,7 @@ const EventCalendarMobileGrid = () => {
               isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
             }`}
           >
-            <EventCalendarGridDateNumber date={date} />
+            <EventCalendarGridDateNumber date={date} mobile />
             <EventCalendarGridEventList
               date={date}
               events={eventsByDate().get(date.toDateString()) || []}
@@ -72,7 +72,10 @@ const EventCalendarMobileGrid = () => {
   );
 };
 
-const EventCalendarGridDateNumber = (props: { date: Date }) => {
+const EventCalendarGridDateNumber = (props: {
+  date: Date;
+  mobile?: boolean;
+}) => {
   const { selectedDate } = useEventCalendarNavigator();
   const timeStyle = (date: Date) => {
     const localeDate = date.toLocaleDateString('sv', {
@@ -81,8 +84,8 @@ const EventCalendarGridDateNumber = (props: { date: Date }) => {
     const currentLocaleDate = new Date().toLocaleDateString('sv', {
       timeZone: 'Europe/Helsinki',
     });
-    if (selectedDate().toDateString() === date.toDateString()) {
-      return 'flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 font-semibold text-white lg:inline lg:bg-transparent lg:font-normal lg:text-gray-500';
+    if (props.mobile && selectedDate().toDateString() === date.toDateString()) {
+      return 'flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 font-semibold text-white';
     }
     if (localeDate === currentLocaleDate) {
       return 'font-semibold text-blue-600 lg:-ml-1.5 lg:flex lg:h-6 lg:w-6 lg:items-center lg:justify-center lg:rounded-full lg:bg-blue-600 lg:text-white';
