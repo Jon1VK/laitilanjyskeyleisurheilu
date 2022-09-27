@@ -1,6 +1,6 @@
 import supabaseClient from '@lib/supabaseClient';
 import trpcClient from '@lib/trpcClient';
-import type { Event, RecurringEvent } from '@prisma/client';
+import type { Event } from '@prisma/client';
 import { parameterize } from 'inflected';
 import {
   Context,
@@ -62,12 +62,26 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     });
   };
 
-  const deleteRecurringEvent = async (
-    recurringEventToDelete: RecurringEvent
-  ) => {
+  const updateOccurrences = async (formData: FormData) => {
+    const title = formData.get('title') as string;
+    const location = (formData.get('location') as string) || null;
+    const description = (formData.get('description') as string) || null;
+    const recurringEvent = await trpcClient.mutation(
+      'updateRecurringEventOccurrences',
+      {
+        id: event().recurringEventId as number,
+        title,
+        location,
+        description,
+      }
+    );
+    setEvent({ ...event(), title, location, description, recurringEvent });
+  };
+
+  const deleteRecurringEvent = async () => {
     await trpcClient.mutation(
       'deleteRecurringEvent',
-      recurringEventToDelete.id
+      event().recurringEventId as number
     );
     window.location.href = '/tapahtumat#main';
   };
@@ -158,6 +172,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     deleteResults,
     createOccurrence,
     deleteOccurrence,
+    updateOccurrences,
     deleteRecurringEvent,
   };
 };

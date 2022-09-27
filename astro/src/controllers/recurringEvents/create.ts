@@ -18,6 +18,16 @@ const input = z.object({
 
 type Input = z.infer<typeof input>;
 
+type Occurrence = Omit<
+  Event,
+  | 'id'
+  | 'recurringEventId'
+  | 'resultsFileKey'
+  | 'timetableFileKey'
+  | 'externalUrl'
+  | 'promote'
+>;
+
 const resolve = async ({
   input: {
     type,
@@ -36,16 +46,7 @@ const resolve = async ({
   const titleSlug = parameterize(title);
   const occurrences = getDatesBetween(recurrenceStartDate, recurrenceEndDate)
     .filter((date) => weekdays.includes(date.getDay()))
-    .map<
-      Omit<
-        Event,
-        | 'id'
-        | 'recurringEventId'
-        | 'resultsFileKey'
-        | 'timetableFileKey'
-        | 'externalUrl'
-      >
-    >((date) => {
+    .map<Occurrence>((date) => {
       const dateString = date.toLocaleDateString('sv');
       return {
         type,

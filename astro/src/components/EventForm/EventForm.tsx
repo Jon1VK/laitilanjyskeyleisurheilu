@@ -29,6 +29,7 @@ const eventTypes = {
 const EventForm = (props: {
   event?: IEvent;
   onSubmit: (formData: FormData) => void;
+  updateMany?: boolean;
 }) => {
   const [eventType, setEventType] = createSignal<EventType>('PRACTICE');
   const [isRecurring, setIsRecurring] = createSignal(false);
@@ -43,17 +44,19 @@ const EventForm = (props: {
   return (
     <>
       <h3 class="mb-3 text-lg font-medium leading-6 text-gray-900">
-        {props.event ? (
+        <Show when={props.event && !props.updateMany}>
           <span class="flex items-center gap-2">
             <HiSolidPencilAlt
-              class={`h-5 w-5 ${eventTypes[props.event.type].textColor}`}
+              class={`h-5 w-5 ${
+                eventTypes[props.event?.type as EventType].textColor
+              }`}
             />
             <span class="sr-only">Muokkaa tapahtumaa</span>
-            {props.event.title}
+            {props.event?.title}
           </span>
-        ) : (
-          'Luo uusi tapahtuma'
-        )}
+        </Show>
+        <Show when={!props.event}>Luo uusi tapahtuma</Show>
+        <Show when={props.updateMany}>Muokkaa kaikkia tapahtumakertoja</Show>
       </h3>
       <form onSubmit={handleSubmit} class="space-y-6 text-sm">
         <Show when={!props.event}>
@@ -168,30 +171,32 @@ const EventForm = (props: {
                 class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
               />
             </div>
-            <div>
-              <div class="flex justify-between">
-                <label for="startDateTime">Alkamisaika</label>
-                <span class="ml-auto text-gray-500">Pakollinen</span>
+            <Show when={!props.updateMany}>
+              <div>
+                <div class="flex justify-between">
+                  <label for="startDateTime">Alkamisaika</label>
+                  <span class="ml-auto text-gray-500">Pakollinen</span>
+                </div>
+                <input
+                  required
+                  type={isRecurring() ? 'time' : 'datetime-local'}
+                  value={props.event?.startDateTime.toLocaleString('sv') || ''}
+                  name="startDateTime"
+                  id="startDateTime"
+                  class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
+                />
               </div>
-              <input
-                required
-                type={isRecurring() ? 'time' : 'datetime-local'}
-                value={props.event?.startDateTime.toLocaleString('sv') || ''}
-                name="startDateTime"
-                id="startDateTime"
-                class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-              />
-            </div>
-            <div>
-              <label for="endDateTime">Loppumisaika</label>
-              <input
-                type={isRecurring() ? 'time' : 'datetime-local'}
-                value={props.event?.endDateTime?.toLocaleString('sv') || ''}
-                name="endDateTime"
-                id="endDateTime"
-                class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-              />
-            </div>
+              <div>
+                <label for="endDateTime">Loppumisaika</label>
+                <input
+                  type={isRecurring() ? 'time' : 'datetime-local'}
+                  value={props.event?.endDateTime?.toLocaleString('sv') || ''}
+                  name="endDateTime"
+                  id="endDateTime"
+                  class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
+                />
+              </div>
+            </Show>
             <div class="sm:col-span-2">
               <label for="location">Paikka</label>
               <input
@@ -204,8 +209,10 @@ const EventForm = (props: {
             </div>
             <Show
               when={
-                (!isRecurring() && eventType() === 'COMPETITION') ||
-                props.event?.type === 'COMPETITION'
+                !props.updateMany &&
+                !isRecurring() &&
+                (props.event?.type === 'COMPETITION' ||
+                  eventType() === 'COMPETITION')
               }
             >
               <div class="sm:col-span-2">
