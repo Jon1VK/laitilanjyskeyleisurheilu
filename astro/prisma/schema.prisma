@@ -51,6 +51,7 @@ model RecurringEvent {
 model Event {
   id               Int             @id @default(autoincrement())
   slug             String          @unique
+  promote          Boolean         @default(false)
   type             EventType
   startDateTime    DateTime
   endDateTime      DateTime?

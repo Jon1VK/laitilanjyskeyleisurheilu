@@ -1,7 +1,11 @@
 import { useAuth } from '@auth';
 import logger from '@lib/logger';
 import { formattedDateTimePeriod } from '@utils/dates';
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'solid-icons/hi';
+import {
+  HiOutlinePencilAlt,
+  HiOutlineSpeakerphone,
+  HiOutlineTrash,
+} from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
 import EventForm from '../EventForm';
 import Modal from '../Modal';
@@ -9,7 +13,8 @@ import { useEventDetailsModifier } from './EventDetailsModifier';
 
 const EventDetailsHeader = () => {
   const { isAdmin } = useAuth();
-  const { event, updateEvent, deleteEvent } = useEventDetailsModifier();
+  const { event, updateEvent, promoteEvent, deleteEvent } =
+    useEventDetailsModifier();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     try {
@@ -30,6 +35,20 @@ const EventDetailsHeader = () => {
         </h1>
         <Show when={isAdmin()}>
           <div class="my-3 flex gap-1">
+            <Show when={!event().promote}>
+              <button
+                onClick={promoteEvent}
+                class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
+              >
+                <HiOutlineSpeakerphone class="h-5 w-5" />
+                <span class="sr-only">Mainosta tapahtumaa {event().title}</span>
+              </button>
+            </Show>
+            <Show when={event().promote}>
+              <div class="rounded-md border border-gray-300 bg-green-600 p-2 font-semibold text-white shadow-sm">
+                <HiOutlineSpeakerphone class="h-5 w-5" />
+              </div>
+            </Show>
             <button
               onClick={() => setShowForm(true)}
               class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"

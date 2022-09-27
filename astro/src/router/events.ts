@@ -7,6 +7,7 @@ const eventsRouter = createRouter()
   .middleware(requireAdmin)
   .mutation('createEvent', eventsController.create)
   .mutation('updateEvent', eventsController.update)
+  .mutation('promoteEvent', eventsController.promote)
   .mutation('deleteEvent', eventsController.delete)
   .mutation('deleteEventTimetable', eventsController.deleteTimetable)
   .mutation('deleteEventResults', eventsController.deleteResults);

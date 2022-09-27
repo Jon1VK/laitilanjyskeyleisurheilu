@@ -92,6 +92,11 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     setEvent(updatedEvent);
   };
 
+  const promoteEvent = async () => {
+    const promotedEvent = await trpcClient.mutation('promoteEvent', event().id);
+    setEvent(promotedEvent);
+  };
+
   const uploadTimetable = async (file: File) => {
     const { data } = await supabaseClient.storage.from('files').upload(
       `timetables/${event().startDateTime.toLocaleDateString(
@@ -145,6 +150,7 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   return {
     event,
     updateEvent,
+    promoteEvent,
     deleteEvent,
     uploadTimetable,
     deleteTimetable,
