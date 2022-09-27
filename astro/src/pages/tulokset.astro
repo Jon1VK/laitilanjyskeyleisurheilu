@@ -79,6 +79,7 @@ const filesForPage = files?.slice(
         {
           filesForPage?.map((file) => (
             <a
+              download
               target="_blank"
               href={`${
                 import.meta.env.PUBLIC_SUPABASE_URL

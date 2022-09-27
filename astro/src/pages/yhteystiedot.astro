@@ -54,7 +54,9 @@ import { ContactEmailForm } from '@components';
     <section
       class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
     >
-      <div class="grid grid-cols-1 bg-white shadow-xl lg:grid-cols-3">
+      <div
+        class="grid grid-cols-1 bg-white shadow-xl ring-1 ring-gray-400/5 lg:grid-cols-3"
+      >
         <!-- CONTACT INFO -->
         <div
           class="relative overflow-hidden bg-gradient-to-b from-blue-600 to-blue-700 py-10 px-6 sm:px-10 xl:p-12"
@@ -76,19 +78,11 @@ import { ContactEmailForm } from '@components';
           />
 
           <!-- CONTACT INFO DESCRIPTION -->
-          <h3 class="text-lg font-medium text-white">Seuran yhteystiedot</h3>
-          <p class="mt-4 text-blue-50">
-            Ota yhteyttä tältä sivulta löytyvien yhteystietojen tai oheisen
-            lomakkeen avulla.
-          </p>
-          <p class="mt-4 text-blue-50">
-            Voit myös seurata seuran WhatsApp-tiedotusryhmää ja muita
-            sosiaalisia medioita pysyäksesi ajan tasalla seuran tapahtumista.
-          </p>
-
-          <!-- CONTACT INFO DETAILS -->
-          <h4 class="mt-6 font-medium text-white">Yleisurheilujaosto</h4>
-          <dl class="mt-2 space-y-3 text-blue-50">
+          <h2 class="text-lg font-medium text-white">Seuran yhteystiedot</h2>
+          <h3 class="mt-9 font-medium text-white">
+            Laitilan Jyske - Yleisurheilujaosto
+          </h3>
+          <dl class="mt-3 space-y-3 text-blue-50">
             <dt><span class="sr-only">Postiosoite</span></dt>
             <dd class="flex">
               <Icon name="home" class="h-6 w-6 shrink-0 text-blue-200" />
@@ -105,13 +99,21 @@ import { ContactEmailForm } from '@components';
             </dd>
           </dl>
 
+          <div class="mt-9 font-medium text-white">
+            <a
+              class="hover:underline"
+              href="/files/kustannus_ja_matkalaskupohja_yleisurheilu.pdf"
+              download>Kustannus- ja matkalaskupohja</a
+            >
+          </div>
+
           <!-- CONTACT INFO SOCIAL MEDIA -->
-          <ul class="mt-12 flex items-end gap-6">
+          <ul class="mt-9 flex items-end gap-6">
             <li>
               <a
                 href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
                 target="_blank"
-                class="text-blue-200 hover:text-blue-100"
+                class="text-blue-200 hover:text-blue-50"
               >
                 <span class="sr-only">WhatsApp</span>
                 <Icon name="whatsapp" class="h-7 w-auto" />
@@ -121,7 +123,7 @@ import { ContactEmailForm } from '@components';
               <a
                 href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
                 target="_blank"
-                class="text-blue-200 hover:text-blue-100"
+                class="text-blue-200 hover:text-blue-50"
               >
                 <span class="sr-only">Instagram</span>
                 <Icon name="instagram" class="h-7 w-auto" />
@@ -131,7 +133,7 @@ import { ContactEmailForm } from '@components';
               <a
                 href="https://www.facebook.com/laitilanjyskeyu/"
                 target="_blank"
-                class="text-blue-200 hover:text-blue-100"
+                class="text-blue-200 hover:text-blue-50"
               >
                 <span class="sr-only">Facebook</span>
                 <Icon name="facebook" class="h-7 w-auto" />

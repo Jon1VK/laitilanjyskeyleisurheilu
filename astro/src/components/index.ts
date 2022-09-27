@@ -5,4 +5,3 @@ export { default as EventDetails } from './EventDetails';
 export { default as NewRecord } from './NewRecord';
 export { default as ContactEmailForm } from './ContactEmailForm';
 export { default as AthleteDetails } from './AthleteDetails';
-export { default as AthleteHeroImage } from './AthleteHeroImage';
