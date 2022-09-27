@@ -23,7 +23,7 @@ const EventDetailsOccurrences = () => {
       <Show when={event().recurringEventId}>
         <div class="relative mx-auto max-w-prose text-lg sm:px-0">
           <div class="mt-8 mb-4">
-            <h2 class="text-2xl font-bold">Muut harjoituskerrat</h2>
+            <h2 class="text-2xl font-bold">Muut tapahtumakerrat</h2>
             <Show when={isAdmin()}>
               <div class="mt-3 flex items-center gap-1">
                 <button
