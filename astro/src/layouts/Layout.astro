@@ -1,7 +1,7 @@
 ---
 import { getUser } from '@astro-auth/core';
 import { UserStore } from '@auth';
-import { Login, UserNavigation } from '@components';
+import { Login, MainNavigation, UserNavigation } from '@components';
 import { Icon } from 'astro-icon';
 import { titleize } from '@utils/strings';
 import type { JwtPayload } from 'jsonwebtoken';
@@ -54,7 +54,9 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
     <UserStore user={jwtPayload?.user} client:load />
 
     <!-- USER NAVIGATION -->
-    <div class="fixed top-0 right-0 z-10 p-4 md:p-8">
+    <div
+      class="absolute top-4 right-16 z-10 md:top-8 md:right-24 xl:fixed xl:right-8"
+    >
       <UserNavigation client:idle />
     </div>
 
@@ -71,53 +73,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
       </div>
 
       <!-- MAIN NAVIGATION -->
-      <nav
-        class="relative flex items-center p-4 md:p-8 xl:justify-center"
-        aria-label="Global"
-      >
-        <a href="/" rel="prefetch">
-          <span class="sr-only">Etusivu</span>
-          <Icon name="logo" class="h-12 w-auto md:h-14" />
-        </a>
-        <div class="hidden xl:ml-10 xl:flex xl:gap-10">
-          <a
-            href="/uutiset"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Uutiset
-          </a>
-          <a
-            href="/tapahtumat"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Tapahtumat
-          </a>
-          <a
-            href="/tulokset"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Tulokset
-          </a>
-          <a
-            href="/seuraennatykset"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Seuraennätykset
-          </a>
-          <a
-            href="/edustusurheilijat"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Edustusurheilijat
-          </a>
-          <a
-            href="/yhteystiedot"
-            rel="prefetch"
-            class="text-white hover:text-gray-300"
-            >Yhteystiedot
-          </a>
-        </div>
-      </nav>
+      <MainNavigation client:load />
 
       <!-- HEADER HERO HEADING -->
       <slot name="hero-heading" />
