@@ -57,6 +57,9 @@ const PrismaEvent = Object.assign(prisma.event, {
       },
     });
   },
+  async findPromoted() {
+    return await prisma.event.findFirst({ where: { promote: true } });
+  },
 });
 
 export default PrismaEvent;

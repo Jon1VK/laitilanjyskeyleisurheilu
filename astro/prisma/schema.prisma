@@ -78,3 +78,17 @@ model Record {
 
   @@index([league, event])
 }
+
+model News {
+  id            Int      @id @default(autoincrement())
+  slug          String   @unique
+  draft         Boolean  @default(false)
+  publishedAt   DateTime @db.Date
+  author        String
+  cardImage     String?
+  title         String
+  leadParagraph String
+  body          String
+
+  @@index([draft])
+}

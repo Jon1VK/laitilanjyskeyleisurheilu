@@ -6,10 +6,11 @@
       "@components": ["src/components/index.ts"],
       "@controllers": ["src/controllers/index.ts"],
       "@data/*": ["src/data/*"],
+      "@fragments/*": ["src/fragments/*"],
       "@icons/*": ["src/icons/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
-      "@middlewares": ["src/middlewares/indes.ts"],
+      "@middlewares": ["src/middlewares/index.ts"],
       "@models": ["src/models/index.ts"],
       "@router": ["src/router/index.ts"],
       "@utils/*": ["src/utils/*"]

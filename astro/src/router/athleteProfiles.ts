@@ -1,6 +1,6 @@
 import { athleteProfilesController } from '@controllers';
 import createRouter from '@lib/createRouter';
-import { requireAthlete } from 'src/middlewares';
+import { requireAthlete } from '@middlewares';
 
 const athleteProfilesRouter = createRouter()
   .middleware(requireAthlete)

@@ -1,5 +1,17 @@
 ---
+import { getUser } from '@astro-auth/core';
+import { CreateNews } from '@components';
 import Layout from '@layouts/Layout.astro';
+import { PrismaNews } from '@models';
+import PaginationNav from '@fragments/PaginationNav.astro';
+import NewsCard from '@fragments/NewsCard.astro';
+
+const includeDrafts = Boolean(getUser({ client: Astro }));
+const currentPage = Number(Astro.url.searchParams.get('sivu') || 1);
+const pageCount = await PrismaNews.countPages({ includeDrafts });
+const newsArray = await PrismaNews.findNewsForPage(currentPage, {
+  includeDrafts,
+});
 ---
 
 <Layout>
@@ -51,274 +63,22 @@ import Layout from '@layouts/Layout.astro';
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Yleisurheilu-uutiset
         </h2>
-        <p class="mt-3 text-xl text-gray-500 sm:mt-4">
+        <p class="my-3 mb-4 text-xl text-gray-500 sm:mt-4">
           Lue tuoreimmat yleisurheilu-uutiset journalistimme Ilkka Simolan
           sanoittamina
         </p>
+        <CreateNews client:load />
       </div>
       <div
         class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3"
       >
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/paattajaiset.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-11-11">11. marraskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Yleisurheilulla menestyksekäs kausi
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Jyskeen yleisurheiluväki palasi yhden koronasta johtuvan
-              evakkovuoden jälkeen palkitsemistilaisuuteensa Louhenlinnaan.
-              Tutun juhlapaikan ohella tut...
-            </p>
-          </div>
-        </a>
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/syysmoniottelut.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-09-28">28. syyskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Monien ennätysten Syysmoniottelut
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Viikonvaihteessa Laitilassa järjestetyt Syysmoniottelut
-              huipensivat kesäkauden kilpailutapahtumat jälleen upealla tavalla.
-              Tiivis kisakausi pistett...
-            </p>
-          </div>
-        </a>
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/merkkimitalicup.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-09-17">17. syyskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Jyske yhdestoista Merkki-Mitalicupissa
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Jyskeen yleisurheiluväki palasi yhden koronasta johtuvan
-              evakkovuoden jälkeen palkitsemistilaisuuteensa Louhenlinnaan.
-              Tutun juhlapaikan ohella tut...
-            </p>
-          </div>
-        </a>
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/paattajaiset.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-11-11">11. marraskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Yleisurheilulla menestyksekäs kausi
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Jyskeen yleisurheiluväki palasi yhden koronasta johtuvan
-              evakkovuoden jälkeen palkitsemistilaisuuteensa Louhenlinnaan.
-              Tutun juhlapaikan ohella tut...
-            </p>
-          </div>
-        </a>
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/syysmoniottelut.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-09-28">28. syyskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Monien ennätysten Syysmoniottelut
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Viikonvaihteessa Laitilassa järjestetyt Syysmoniottelut
-              huipensivat kesäkauden kilpailutapahtumat jälleen upealla tavalla.
-              Tiivis kisakausi pistett...
-            </p>
-          </div>
-        </a>
-        <a
-          href="/uutiset/2021-11-11-yleisurheilulla-menestyksekas-kausi#main"
-          class="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105"
-        >
-          <img
-            class="h-48 w-full object-cover"
-            src="/images/merkkimitalicup.jpg"
-            alt=""
-          />
-          <div class="flex-1 bg-white p-6">
-            <div class="text-sm text-gray-500">
-              <span class="text-sm font-medium text-blue-600">
-                Ilkka Simola
-              </span>
-              <span aria-hidden="true"> &middot;</span>
-              <time datetime="2021-09-17">17. syyskuuta 2021</time>
-            </div>
-
-            <p class="mt-2 text-xl font-semibold text-gray-900">
-              Jyske yhdestoista Merkki-Mitalicupissa
-            </p>
-            <p class="mt-3 text-base text-gray-500">
-              Jyskeen yleisurheiluväki palasi yhden koronasta johtuvan
-              evakkovuoden jälkeen palkitsemistilaisuuteensa Louhenlinnaan.
-              Tutun juhlapaikan ohella tut...
-            </p>
-          </div>
-        </a>
+        {newsArray.map((news) => <NewsCard news={news} />)}
       </div>
-      <nav
-        class="mt-6 flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 md:mt-8"
-      >
-        <div class="-mt-px flex w-0 flex-1">
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            <!-- Heroicon name: solid/arrow-narrow-left -->
-            <svg
-              class="mr-3 h-5 w-5 text-gray-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-            Edellinen sivu
-          </a>
-        </div>
-        <div class="hidden md:-mt-px md:flex">
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            1
-          </a>
-          <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600"
-            aria-current="page"
-          >
-            2
-          </a>
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            3
-          </a>
-          <span
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500"
-          >
-            ...
-          </span>
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            8
-          </a>
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            9
-          </a>
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            10
-          </a>
-        </div>
-        <div class="-mt-px flex w-0 flex-1 justify-end">
-          <a
-            href="/"
-            class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-          >
-            Seuraava sivu
-            <!-- Heroicon name: solid/arrow-narrow-right -->
-            <svg
-              class="ml-3 h-5 w-5 text-gray-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </a>
-        </div>
-      </nav>
+      <PaginationNav
+        url="/uutiset"
+        pageCount={pageCount}
+        currentPage={currentPage}
+      />
     </section>
   </Fragment>
 </Layout>

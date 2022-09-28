@@ -1,6 +1,6 @@
 import { recurringEventsController } from '@controllers';
 import createRouter from '@lib/createRouter';
-import { requireAdmin } from 'src/middlewares';
+import { requireAdmin } from '@middlewares';
 
 const recurringEventsRouter = createRouter()
   .middleware(requireAdmin)

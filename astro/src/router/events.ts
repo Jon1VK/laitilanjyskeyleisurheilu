@@ -1,6 +1,6 @@
 import { eventsController } from '@controllers';
 import createRouter from '@lib/createRouter';
-import { requireAdmin } from 'src/middlewares';
+import { requireAdmin } from '@middlewares';
 
 const eventsRouter = createRouter()
   .query('getAllEvents', eventsController.getAll)

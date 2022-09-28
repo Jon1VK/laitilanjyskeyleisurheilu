@@ -1,27 +1,26 @@
 ---
 import { Icon } from 'astro-icon';
 import Layout from '@layouts/Layout.astro';
+import { PrismaNews } from '@models';
+
+const slug = Astro.params.slug as string;
+const news = await PrismaNews.findUnique({ where: { slug } });
+if (!news) return Astro.redirect('/404');
 ---
 
-<Layout title="Yleisurheilulla menestyksekäs kausi">
+<Layout title={news.title}>
   <!-- HEAD META DATA FOR SEO -->
   <Fragment slot="head">
     <link rel="preload" as="image" href="/images/news.webp" />
-    <title>Laitilan Jyske - Yleisurheilu | Uutiset</title>
-    <meta property="og:title" content="Uutiset" />
-    <meta name="description" content="Lue tuoreimmat yleisurheilu-uutiset." />
+    <title>Laitilan Jyske - Yleisurheilu | Uutiset | {news.title}</title>
+    <meta property="og:title" content={news.title} />
+    <meta name="description" content={news.leadParagraph} />
     <meta
       name="keywords"
       content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, uutiset"
     />
-    <meta
-      property="og:image"
-      content={new URL('/images/news.webp', Astro.url)}
-    />
-    <meta
-      property="og:description"
-      content="Lue tuoreimmat yleisurheilu-uutiset."
-    />
+    {news.cardImage && <meta property="og:image" content={news.cardImage} />}
+    <meta property="og:description" content={news.leadParagraph} />
   </Fragment>
 
   <!-- HERO IMAGE -->
@@ -70,104 +69,25 @@ import Layout from '@layouts/Layout.astro';
           <h1
             class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
           >
-            Yleisurheilulla menestyksekäs kausi
+            {news.title}
           </h1>
           <div class="mt-3 text-lg text-gray-500 sm:mt-4 sm:text-xl">
-            <span class="font-medium text-blue-600"> Ilkka Simola</span>
+            <span class="font-medium text-blue-600">{news.author}</span>
             <span aria-hidden="true"> &middot;</span>
-            <time datetime="2021-11-11">11 marraskuuta 2021</time>
+            <time datetime={news.publishedAt.toLocaleDateString('sv')}
+              >{
+                news.publishedAt.toLocaleDateString('fi', { dateStyle: 'full' })
+              }
+            </time>
           </div>
           <p class="mt-8 text-lg leading-8 text-gray-600 sm:text-xl">
-            Jyskeen yleisurheiluväki palasi yhden koronasta johtuvan
-            evakkovuoden jälkeen palkitsemistilaisuuteensa Louhenlinnaan. Tutun
-            juhlapaikan ohella tuttua oli myös kauden yleisurheilumenestys.
-            Avaussanat lausunut jaoston puheenjohtaja Pekka Kuusisto saattoikin
-            hyvillä mielin todeta kauden olleen taas totutun menestyksekäs niin
-            kilpailusaavutusten kuin järjestettyjen kilpailujenkin osalta.
+            {news.leadParagraph}
           </p>
         </div>
-        <div class="prose prose-blue mx-auto mt-6 text-lg text-gray-600">
-          <figure>
-            <img
-              class="w-full rounded-lg"
-              src="/images/paattajaiset.jpg"
-              alt="Palkintopöytä"
-            />
-            <figcaption>
-              📷 Kari Raiskinmäki. Palkittavia oli jälleen runsaasti, ja
-              palkintopöydällä oli monenlaisia pokaaleja ja palkintoja.
-            </figcaption>
-          </figure>
-          <p>
-            Valioluokka eli nykyterminologialla Ykkösliigan asema saavutettiin
-            nyt 11. kerran peräkkäin. Näin toiminta on jatkunut vakaalla
-            korkealla tasolla seurahistorian pisimmän yhtämittaisen ajan.
-            Valtakunnallinen sijaluku jopa parani yhdellä ollen nyt 46.
-            Varsinais-Suomen piirin seuroista edelle yltivät vain Turun
-            Urheiluliitto, Someron Esa, Naantalin Löyly ja Turun Weikot.
-            Vakka-Suomen lähiseuroista kovassa nousussa oleva Kalannin Vankka
-            löytyy kakkosliigasta kokonaissijaluvulta 88 ja Uudenkaupungin
-            Kenttäkarhut sijalta 109 Suomen 342 luokitellun seuran listalta.
-          </p>
-          <p>
-            Sen sijaan nuorisotoiminnan tasoa mittaavassa Varsinais-Suomen
-            piirin seurojen keskinäisessä Topline-kilpailussa tuli hienoinen
-            notkahdus sijaluvun pudotessa jo vakiintuneesta neljästä
-            seitsemänteen. Edellä pitkään olleiden Turun Urheiluliiton,
-            Naantalin Löylyn ja Raision Kuulan lisäksi isomman pistesaaliin
-            pm-kisoista keräsivät myös Liedon Parma, Kalannin Vankka ja Salon
-            Vilpas tässä jo neljä vuosikymmentä käydyssä piirin seurojen alle
-            15-vuotiaiden toimintaa mittaavassa yli 30 seuran kisassa. Piste-ero
-            edelle menneisiin seuroihin oli niin pieni, että muutaman
-            lisäedustajan osanotolla pm-kisoihin asemat olisi säilytetty.
-            Tulipahan tavoitetta ensi kaudelle.
-          </p>
-          <h2>Seuracupmenestys Jatkui</h2>
-          <p>
-            Kauden kilpailullisena kohokohtana oli valtakunnallisen Seuracupin
-            A-finaalin järjestäminen Laitilassa. Vaikka kakkossija kotikentällä
-            saattoi tuntua aluksi pettymykseltä kahden edeltävän vuoden
-            murskavoittojen jälkeen niin kyseessä on kuitenkin erinomaisen hieno
-            saavutus seuran ollessa viidettä vuotta peräkkäin finaalin kolmen
-            parhaan joukossa tässä 11-17 -ikäluokkien alle 10 000 asukkaan
-            paikkakuntien seurojen paremmuutta mittaavassa kisassa.
-            Lisäbonuksena Jyskeelle tuli kehut loistavista kisajärjestelyistä.
-          </p>
-          <figure>
-            <img
-              class="w-full rounded-lg"
-              src="/images/seuracup.jpg"
-              alt="Seuracup-joukkuekuva"
-            />
-            <figcaption>
-              📷 Heidi Lockmer. Kotikentällä kisailtu valtakunnallisen Pohjola
-              Seuracupin A-sarjan finaali oli kauden ehdoton kohokohta. Kuvassa
-              Jyskeen hopealle sijoittunut joukkue.
-            </figcaption>
-          </figure>
-          <h2>Viisi SM-Mitalia</h2>
-          <p>
-            SM-mitaleja saavutettiin viisi. <strong>Venla Laiho</strong> uusi hopeansa
-            kevään maantiekävelyissä Urjalassa. Mitaliketju jatkui Kokkolassa 15-sarjojen
-            kisoissa <strong>Valtteri Valtosen</strong> pukatessa kuulassa kakkoseksi
-            ja <strong>Aada Vuoriahon</strong> heittäessä moukarinsa pronssilukemiin.
-            Hyvinkäällä <strong>Verna Vuorela</strong> otti pronssia N16 100 metrin
-            aitajuoksussa ja kauden päätteeksi naisten kävelyjoukkue Venla Laiho
-            - <strong>Jonna Voronkoff</strong> - <strong>Maria Antola</strong> palasi
-            parin välivuoden jälkeen mitalikantaan 3 x 3000 metrin pronssillaan
-          </p>
-          <p>
-            Lajeissaan kahdeksan parhaan joukkoon SM-tasolla sijoittuivat myös
-            <strong>Ilmari Vuorela</strong>, <strong>Akseli Hyytiä</strong> ja <strong
-              >Elias Hyytiä
-            </strong> sekä <strong>Lotta Metsärinta</strong> ja N17-pikaviesti- ja
-            aitajoukkueet, joissa Vernan ja Lotan ohella vauhdista vastasivat <strong
-              >Carolina Grönroos
-            </strong>, <strong>Aamu Airisto</strong> ja <strong
-              >Kiia Ihanmäki
-            </strong>. Kaikkiaan 16 sijoitusta kärkikahdeksikossa ylitti
-            tavoitteen.
-          </p>
+        <div
+          set:html={news.body}
+          class="prose prose-blue mx-auto mt-6 text-lg text-gray-600"
+        >
         </div>
       </div>
     </div>

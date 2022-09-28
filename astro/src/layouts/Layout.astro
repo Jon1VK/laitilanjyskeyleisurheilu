@@ -194,18 +194,13 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           aria-label="Footer"
         >
           <div class="px-5 py-2">
-            <a
-              href="/uutiset"
-              rel="prefetch"
-              class="text-base text-gray-300 hover:text-white"
-            >
+            <a href="/uutiset" class="text-base text-gray-300 hover:text-white">
               Uutiset
             </a>
           </div>
           <div class="px-5 py-2">
             <a
               href="/tapahtumat"
-              rel="prefetch"
               class="text-base text-gray-300 hover:text-white"
             >
               Tapahtumat
@@ -214,7 +209,6 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           <div class="px-5 py-2">
             <a
               href="/tulokset"
-              rel="prefetch"
               class="text-base text-gray-300 hover:text-white"
             >
               Tulokset
@@ -223,7 +217,6 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           <div class="px-5 py-2">
             <a
               href="/seuraennatykset"
-              rel="prefetch"
               class="text-base text-gray-300 hover:text-white"
             >
               Seuraennätykset
@@ -232,7 +225,6 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           <div class="px-5 py-2">
             <a
               href="/edustusurheilijat"
-              rel="prefetch"
               class="text-base text-gray-300 hover:text-white"
             >
               Edustusurheilijat
@@ -241,7 +233,6 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
           <div class="px-5 py-2">
             <a
               href="/yhteystiedot"
-              rel="prefetch"
               class="text-base text-gray-300 hover:text-white"
             >
               Yhteystiedot
@@ -280,7 +271,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
         <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
           <Login client:idle />
-          2022 Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
+          {new Date().getFullYear()} Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>
       </div>
     </footer>
