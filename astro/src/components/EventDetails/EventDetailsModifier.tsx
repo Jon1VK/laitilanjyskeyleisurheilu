@@ -42,6 +42,9 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const title = formData.get('title') as string;
     const location = (formData.get('location') as string) || null;
     const description = (formData.get('description') as string) || null;
+    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
+    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
+    const pressBody = (formData.get('pressBody') as string) || null;
     const recurringEvent = event()
       .recurringEvent as RecurringEventWithOccurrences;
     const occurrence = await trpcClient.mutation('createEvent', {
@@ -51,6 +54,9 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
       title,
       location,
       description,
+      pressStartBefore,
+      pressEndBefore,
+      pressBody,
       recurringEventId: recurringEvent.id,
     });
     const occurrences = [...recurringEvent.occurrences, occurrence].sort(
@@ -66,6 +72,8 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const title = formData.get('title') as string;
     const location = (formData.get('location') as string) || null;
     const description = (formData.get('description') as string) || null;
+    const pressBody = (formData.get('pressBody') as string) || null;
+    console.log(pressBody);
     const recurringEvent = await trpcClient.mutation(
       'updateRecurringEventOccurrences',
       {
@@ -73,9 +81,17 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
         title,
         location,
         description,
+        pressBody,
       }
     );
-    setEvent({ ...event(), title, location, description, recurringEvent });
+    setEvent({
+      ...event(),
+      title,
+      location,
+      description,
+      recurringEvent,
+      pressBody,
+    });
   };
 
   const deleteRecurringEvent = async () => {
@@ -94,6 +110,9 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const location = (formData.get('location') as string) || null;
     const externalUrl = (formData.get('externalUrl') as string) || null;
     const description = (formData.get('description') as string) || null;
+    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
+    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
+    const pressBody = (formData.get('pressBody') as string) || null;
     const updatedEvent = await trpcClient.mutation('updateEvent', {
       ...event(),
       title,
@@ -102,6 +121,9 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
       location,
       externalUrl,
       description,
+      pressStartBefore,
+      pressEndBefore,
+      pressBody,
     });
     setEvent(updatedEvent);
   };

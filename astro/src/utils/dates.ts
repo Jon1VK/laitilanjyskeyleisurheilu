@@ -86,3 +86,9 @@ export const toUTCTime = (time: string) => {
     timeZone: 'utc',
   });
 };
+
+export const getDayCountBetween = (startDate: Date, endDate: Date) => {
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+  const differenceMs = endDate.getTime() - startDate.getTime();
+  return Math.floor(differenceMs / ONE_DAY_MS);
+};

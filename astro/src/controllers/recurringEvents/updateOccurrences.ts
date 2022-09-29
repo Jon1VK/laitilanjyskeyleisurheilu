@@ -6,6 +6,7 @@ const input = z.object({
   title: z.string().min(1),
   location: z.string().min(1).nullable().optional(),
   description: z.string().min(1).nullable().optional(),
+  pressBody: z.string().min(1).nullable().optional(),
 });
 
 type Input = z.infer<typeof input>;

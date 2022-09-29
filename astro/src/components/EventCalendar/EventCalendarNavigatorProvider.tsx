@@ -74,6 +74,9 @@ const createEventCalendarNavigator = (
     const location = (formData.get('location') as string) || null;
     const externalUrl = (formData.get('externalUrl') as string) || null;
     const description = (formData.get('description') as string) || null;
+    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
+    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
+    const pressBody = (formData.get('pressBody') as string) || null;
     await trpcClient.mutation('createEvent', {
       type,
       startDateTime,
@@ -82,6 +85,9 @@ const createEventCalendarNavigator = (
       location,
       externalUrl,
       description,
+      pressStartBefore,
+      pressEndBefore,
+      pressBody,
     });
     await refetch();
   };
@@ -106,6 +112,9 @@ const createEventCalendarNavigator = (
     const title = formData.get('title') as string;
     const location = (formData.get('location') as string) || null;
     const description = (formData.get('description') as string) || null;
+    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
+    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
+    const pressBody = (formData.get('pressBody') as string) || null;
     await trpcClient.mutation('createRecurringEvent', {
       type,
       weekdays,
@@ -116,6 +125,9 @@ const createEventCalendarNavigator = (
       title,
       location,
       description,
+      pressStartBefore,
+      pressEndBefore,
+      pressBody,
     });
     await refetch();
   };

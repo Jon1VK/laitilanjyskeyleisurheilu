@@ -61,6 +61,9 @@ model Event {
   externalUrl      String?
   timetableFileKey String?
   resultsFileKey   String?
+  pressStartDate   DateTime        @default(now()) @db.Date
+  pressEndDate     DateTime        @default(now()) @db.Date
+  pressBody        String?
   recurringEventId Int?
   recurringEvent   RecurringEvent? @relation(fields: [recurringEventId], references: [id], onDelete: Cascade)
 }

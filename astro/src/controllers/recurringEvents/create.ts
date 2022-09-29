@@ -10,10 +10,13 @@ const input = z.object({
   recurrenceStartDate: z.date(),
   recurrenceEndDate: z.date(),
   startTime: z.string(),
-  endTime: z.string().nullable(),
+  endTime: z.string().nullable().optional(),
   title: z.string().min(1),
   location: z.string().min(1).nullable(),
   description: z.string().min(1).nullable(),
+  pressStartBefore: z.number().min(7).max(21),
+  pressEndBefore: z.number().min(1).max(14),
+  pressBody: z.string().min(1).nullable(),
 });
 
 type Input = z.infer<typeof input>;
@@ -28,34 +31,35 @@ type Occurrence = Omit<
   | 'promote'
 >;
 
-const resolve = async ({
-  input: {
-    type,
+const resolve = async ({ input }: { input: Input }) => {
+  const {
     weekdays,
     recurrenceStartDate,
     recurrenceEndDate,
     startTime,
     endTime,
     title,
-    location,
-    description,
-  },
-}: {
-  input: Input;
-}) => {
+    pressStartBefore,
+    pressEndBefore,
+    ...occurrenceData
+  } = input;
   const titleSlug = parameterize(title);
   const occurrences = getDatesBetween(recurrenceStartDate, recurrenceEndDate)
     .filter((date) => weekdays.includes(date.getDay()))
     .map<Occurrence>((date) => {
       const dateString = date.toLocaleDateString('sv');
       return {
-        type,
+        ...occurrenceData,
         slug: `${dateString}-${titleSlug}`,
         startDateTime: new Date(`${dateString} ${startTime}`),
         endDateTime: endTime ? new Date(`${dateString} ${endTime}`) : null,
         title,
-        location,
-        description,
+        pressStartDate: new Date(
+          date.getTime() - pressStartBefore * 24 * 60 * 60 * 1000
+        ),
+        pressEndDate: new Date(
+          date.getTime() - pressEndBefore * 24 * 60 * 60 * 1000
+        ),
       };
     });
   await PrismaRecurringEvent.create({
