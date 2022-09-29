@@ -43,7 +43,7 @@ const EventCalendarHeader = () => {
             <button
               type="button"
               onClick={navigateToPrevMonth}
-              class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-1 pl-1 pr-2 text-gray-400 hover:text-gray-500 md:py-2 md:pl-2 md:pr-3 md:hover:bg-gray-50"
+              class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white p-1.5 pr-2.5 text-gray-400 hover:text-gray-500 md:py-2 md:pl-2 md:pr-3 md:hover:bg-gray-50"
             >
               <span class="sr-only">Edellinen kuukausi</span>
               <HiOutlineChevronLeft class="h-5 w-5" />
@@ -52,7 +52,7 @@ const EventCalendarHeader = () => {
             <button
               type="button"
               onClick={navigateToNextMonth}
-              class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-1 pl-2 pr-1 text-gray-400 hover:text-gray-500 md:py-2 md:pl-3 md:pr-2 md:hover:bg-gray-50"
+              class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white p-1.5 pl-2 text-gray-400 hover:text-gray-500 md:py-2 md:pl-3 md:pr-2 md:hover:bg-gray-50"
             >
               <span class="sr-only">Seuraava kuukausi</span>
               <HiOutlineChevronRight class="h-5 w-5" />
@@ -62,7 +62,7 @@ const EventCalendarHeader = () => {
             <div class="mx-3 h-4 w-px bg-gray-300 md:mx-6 md:h-6" />
             <button
               onClick={() => setShowForm(true)}
-              class="rounded-md border border-gray-300 bg-white py-1 px-2 text-sm font-medium text-gray-400 shadow-sm hover:bg-gray-50 hover:text-gray-500 md:py-2 md:px-3"
+              class="rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-sm font-medium text-gray-400 shadow-sm hover:bg-gray-50 hover:text-gray-500 md:py-2 md:px-3"
             >
               <span class="sr-only">Lisää tapahtuma</span>
               <HiOutlinePlus class="h-5 w-5" />
