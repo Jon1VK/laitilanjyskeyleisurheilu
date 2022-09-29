@@ -164,7 +164,9 @@ const eventClickHandler = (event: string) =>
                         </td>
                         <td class="py-4 px-3">{record.location || '-'}</td>
                         <td class="py-4 px-3">
-                          {formattedRecordAchievedDate(record)}
+                          {record.athlete === '-'
+                            ? '-'
+                            : formattedRecordAchievedDate(record)}
                         </td>
                       </tr>
                     ))}
