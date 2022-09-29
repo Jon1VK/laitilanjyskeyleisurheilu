@@ -66,10 +66,10 @@ const eventClickHandler = (event: string) =>
   <!-- MAIN -->
   <Fragment slot="main">
     <div
-      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 md:grid md:grid-cols-5 lg:my-16 lg:px-12"
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:grid lg:grid-cols-5 lg:px-12"
     >
       <!-- LEAGUE SIDEBAR NAVIGATION -->
-      <nav class="hidden md:block">
+      <nav class="hidden lg:block">
         {
           GENDERS.map((gender) => (
             <>
@@ -118,7 +118,7 @@ const eventClickHandler = (event: string) =>
 
         <!-- LEAGUE RECORDS TABLE -->
         <div
-          class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
+          class="my-8 overflow-x-auto rounded-lg text-left text-sm shadow ring-1 ring-black/5"
         >
           <table class="min-w-full divide-y divide-gray-300 bg-white">
             <!-- LEAGUE RECORDS TABLE HEAD -->
