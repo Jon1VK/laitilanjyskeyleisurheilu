@@ -1,11 +1,11 @@
 import { useAuth } from '@auth';
 import { parameterize } from 'inflected';
 import { CgProfile } from 'solid-icons/cg';
-import { HiOutlineLogout } from 'solid-icons/hi';
+import { HiOutlineLogout, HiOutlineMail } from 'solid-icons/hi';
 import { createSignal, Show } from 'solid-js';
 
 const UserNavigation = () => {
-  const { isLoggedIn, isAthlete, user, signOut } = useAuth();
+  const { isLoggedIn, isAthlete, isAdmin, user, signOut } = useAuth();
   const [show, setShow] = createSignal(false);
   const menuVisibilityStyle = () => {
     return show()
@@ -39,6 +39,15 @@ const UserNavigation = () => {
             >
               <span>Profiili</span>
               <CgProfile class="h-5 w-5" />
+            </a>
+          </Show>
+          <Show when={isAdmin()}>
+            <a
+              href="/tiedotteet"
+              class="flex items-center justify-between rounded-md p-3 text-sm text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100"
+            >
+              <span>Tiedotteet</span>
+              <HiOutlineMail class="h-5 w-5" />
             </a>
           </Show>
           <button

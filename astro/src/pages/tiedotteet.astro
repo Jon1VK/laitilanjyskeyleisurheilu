@@ -1,0 +1,52 @@
+---
+import { PressReleases } from '@components';
+import Layout from '@layouts/Layout.astro';
+import { PrismaPressRelease } from '@models';
+
+const pressReleases = await PrismaPressRelease.findMany();
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/frontpage.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Tiedotteet</title>
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover object-[100%_35%] lg:object-[100%_30%] xl:object-[100%_25%]"
+      src="/images/frontpage.webp"
+      alt=""
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
+    >
+      Tiedotteet
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <section
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Tiedotteet
+        </h2>
+        <p class="mt-3 text-xl text-gray-500 sm:mt-4">
+          Muokkaa lähetettäviä tiedotteita
+        </p>
+      </div>
+      <PressReleases client:load pressReleases={pressReleases} />
+    </section>
+  </Fragment>
+</Layout>

@@ -95,3 +95,10 @@ model News {
 
   @@index([draft])
 }
+
+model PressRelease {
+  id           Int      @id @default(autoincrement())
+  sendDate     DateTime @unique @db.Date
+  newsBody     String
+  whatsappBody String
+}

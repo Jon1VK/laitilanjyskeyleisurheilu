@@ -7,3 +7,4 @@ export { default as ContactEmailForm } from './ContactEmailForm';
 export { default as AthleteDetails } from './AthleteDetails';
 export { default as CreateNews } from './CreateNews';
 export { default as MainNavigation } from './MainNavigation';
+export { default as PressReleases } from './PressReleases';

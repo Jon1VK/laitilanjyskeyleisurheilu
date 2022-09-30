@@ -6,6 +6,7 @@ import emailsRouter from './emails';
 import createRouter from '@lib/createRouter';
 import athleteProfilesRouter from './athleteProfiles';
 import newsRouter from './news';
+import pressReleasesRouter from './pressReleases';
 
 export type AppRouter = typeof appRouter;
 
@@ -16,4 +17,5 @@ export const appRouter = createRouter()
   .merge(recordsRouter)
   .merge(emailsRouter)
   .merge(athleteProfilesRouter)
-  .merge(newsRouter);
+  .merge(newsRouter)
+  .merge(pressReleasesRouter);

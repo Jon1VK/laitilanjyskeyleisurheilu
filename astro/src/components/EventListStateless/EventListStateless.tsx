@@ -23,9 +23,9 @@ const EventList = (props: {
     <ol class="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black/5">
       <For each={props.events}>
         {(event) => (
-          <li class="group flex items-center justify-between focus-within:bg-gray-50 hover:bg-gray-100">
+          <li class="group relative focus-within:bg-gray-50 hover:bg-gray-100">
             <a
-              class="grow p-4 pr-6"
+              class="block p-4 pr-6"
               href={`/tapahtumat/${event.slug}#main`}
               rel="prefetch"
             >
@@ -44,7 +44,7 @@ const EventList = (props: {
               </div>
             </a>
             <Show when={isAdmin()}>
-              <div class="mx-6 flex gap-1">
+              <div class="absolute right-6 top-0 flex h-full items-center">
                 <button
                   onClick={() => props.onDelete(event)}
                   class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white focus:opacity-100 group-hover:opacity-100"

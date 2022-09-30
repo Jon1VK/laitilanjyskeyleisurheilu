@@ -18,7 +18,7 @@ const pageNumbers = getPageNumbers(pageCount, currentPage);
       <div class="-mt-px flex w-0 flex-1">
         {currentPage > 1 && (
           <a
-            href={`${url}?sivu=${currentPage - 1}`}
+            href={`${url}?sivu=${currentPage - 1}#main`}
             rel="prefetch"
             class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
           >
@@ -40,7 +40,7 @@ const pageNumbers = getPageNumbers(pageCount, currentPage);
               </span>
             )}
             <a
-              href={`${url}?sivu=${page}`}
+              href={`${url}?sivu=${page}#main`}
               class={`inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium ${
                 currentPage === page
                   ? 'border-indigo-500 text-indigo-600'
@@ -55,7 +55,7 @@ const pageNumbers = getPageNumbers(pageCount, currentPage);
       <div class="-mt-px flex w-0 flex-1 justify-end">
         {currentPage < pageCount && (
           <a
-            href={`${url}?sivu=${currentPage + 1}`}
+            href={`${url}?sivu=${currentPage + 1}#main`}
             rel="prefetch"
             class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
           >
