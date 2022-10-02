@@ -6,7 +6,6 @@ jobs:
   Backup-DB:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: tj-actions/pg-dump@v2.3
         with:
           database_url: ${{ secrets.DATABASE_URL }}

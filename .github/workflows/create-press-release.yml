@@ -1,0 +1,14 @@
+name: Create Press Release
+on:
+  schedule:
+    - cron: 0 1 * * 1,4
+jobs:
+  Create-Press-Release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SEND_DATE=$(date --date="+7 days" +%Y-%m-%d)" >> $GITHUB_ENV
+      - uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://laitilanjyskeyleisurheilu.fi/api/secret/createPressRelease"
+          customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secrets.API_SECRET }}"}'
+          data: '{"sendDate": "${{ env.SEND_DATE }}"}'
