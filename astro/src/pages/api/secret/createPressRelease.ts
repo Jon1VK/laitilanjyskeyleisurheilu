@@ -31,14 +31,12 @@ export const createNewsBody = (events: Event[]) => {
   const eventsString = events
     .map(
       (event) =>
-        event.title +
-        '\n' +
+        `${event.title}\n` +
         formattedDateTimePeriod(event, 'short') +
-        '\n' +
-        (event.location ? event.location + '\n' : '') +
-        (event.pressBody ? '\n' + event.pressBody + '\n' : '')
+        (event.location ? ` ${event.location}\n` : '\n') +
+        (event.pressBody ? `${event.pressBody}\n` : '')
     )
-    .join('-------------------------\n');
+    .join('\n');
   return (
     'Alla yleisurheilutiedotteet seuraavaan lehteen\n' +
     '\n' +
@@ -55,10 +53,8 @@ const createWhatsappBody = (events: Event[]) => {
   const eventsString = events
     .map(
       (event) =>
-        `*${event.title}*` +
-        '\n' +
-        formattedDateTimePeriod(event, 'short') +
-        '\n' +
+        `*${event.title}\n*` +
+        `${formattedDateTimePeriod(event, 'short')}\n` +
         (event.location ? `${event.location}\n` : '') +
         (event.pressBody ? `\n${event.pressBody}\n` : '')
     )
