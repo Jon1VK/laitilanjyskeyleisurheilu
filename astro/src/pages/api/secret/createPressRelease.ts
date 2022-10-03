@@ -53,7 +53,7 @@ const createWhatsappBody = (events: Event[]) => {
   const eventsString = events
     .map(
       (event) =>
-        `*${event.title}\n*` +
+        `*${event.title}*\n` +
         `${formattedDateTimePeriod(event, 'short')}\n` +
         (event.location ? `${event.location}\n` : '') +
         (event.pressBody ? `\n${event.pressBody}\n` : '')
