@@ -1,7 +1,7 @@
 name: Send Press Release
 on:
   schedule:
-    - cron: 0 7 * * 1,4
+    - cron: 0 4 * * 1,4
 jobs:
   Send-Press-Release:
     runs-on: ubuntu-latest
