@@ -52,19 +52,23 @@ Below are listed all of the environment variables that the application needs. If
 
 ### Astro
 
-| Environment Variable     | Description                                  |
-| ------------------------ | -------------------------------------------- |
-| PUBLIC_BASE_URL          | Domain base URL                              |
-| PUBLIC_SUPABASE_URL      | Supabase client URL                          |
-| PUBLIC_SUPABASE_KEY      | Supabase client key for public access        |
-| PRIVATE_SUPABASE_KEY     | Supabase client key for private access       |
-| DATABASE_URL             | PostgreSQL connect URL string                |
-| ASTROAUTH_URL            | Astro Auth base URL                          |
-| ASTROAUTH_SECRET         | Astro Auth secret                            |
-| GOOGLE_CLIENT_ID         | Google OAuth Web Client ID                   |
-| GOOGLE_CLIENT_SECRET     | Google OAuth Web Client secret               |
-| SENDGRID_API_KEY         | SendGrid API key                             |
-| CONTACT_EMAIL_RECIPIENTS | Space separated list for contact form emails |
+| Environment Variable     | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| PUBLIC_BASE_URL          | Domain base URL                                  |
+| PUBLIC_SUPABASE_URL      | Supabase client URL                              |
+| PUBLIC_SUPABASE_KEY      | Supabase client key for public access            |
+| PRIVATE_SUPABASE_KEY     | Supabase client key for private access           |
+| DATABASE_URL             | PostgreSQL connect URL string                    |
+| API_SECRET               | Secret for protected API WebHook routes          |
+| ASTROAUTH_URL            | Astro Auth base URL                              |
+| ASTROAUTH_SECRET         | Astro Auth secret                                |
+| GOOGLE_CLIENT_ID         | Google OAuth Web Client ID                       |
+| GOOGLE_CLIENT_SECRET     | Google OAuth Web Client secret                   |
+| SENDGRID_API_KEY         | SendGrid API key                                 |
+| CONTACT_EMAIL_RECIPIENTS | Space separated list for contact form emails     |
+| PRESS_EMAIL_RECIPIENTS   | Space separated list of press email recipients   |
+| CALLMEBOT_PHONE          | CallMeBot phone number to send WhatsApp messages |
+| CALLMEBOT_API_KEY        | CallMeBot API key                                |
 
 ## Development
 
