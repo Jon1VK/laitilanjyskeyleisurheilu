@@ -15,6 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'tailwindcss/classnames-order': 0,
     'tailwindcss/no-custom-classname': [
       1,
       {

@@ -24,7 +24,7 @@ const AthleteDetailsForm = (props: {
         Muokkaa profiilia
       </h3>
       <form onSubmit={handleSubmit} class="space-y-6 text-sm">
-        <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label for="mainEvents" class="flex items-center">
               Päälaji(t)
@@ -79,7 +79,7 @@ const AthleteDetailsForm = (props: {
         </div>
         <button
           type="submit"
-          class="w-full rounded-md bg-blue-700 py-2 px-4 font-medium text-white shadow-sm hover:bg-blue-800 sm:w-1/2"
+          class="w-full rounded-md bg-blue-700 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-800 sm:w-1/2"
         >
           Tallenna
         </button>

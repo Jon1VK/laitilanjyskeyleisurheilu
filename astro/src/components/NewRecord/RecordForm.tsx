@@ -33,7 +33,7 @@ const RecordForm = (props: { onSubmit: (formData: FormData) => void }) => {
           <legend class="mb-3 text-base font-medium text-gray-700">
             Urheilijan tiedot
           </legend>
-          <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-3">
+          <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
             <div>
               <label for="league">Sarja</label>
               <select
@@ -73,7 +73,7 @@ const RecordForm = (props: { onSubmit: (formData: FormData) => void }) => {
           <legend class="mb-3 text-base font-medium text-gray-700">
             Kilpailun tiedot
           </legend>
-          <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-6">
+          <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6">
             <div class="sm:col-span-3">
               <label for="event">Laji</label>
               <select
@@ -122,7 +122,7 @@ const RecordForm = (props: { onSubmit: (formData: FormData) => void }) => {
         <fieldset>
           <button
             type="submit"
-            class="mt-4 w-full rounded-md bg-blue-700 py-2 px-4 font-medium text-white shadow-sm hover:bg-blue-800 sm:w-1/2"
+            class="mt-4 w-full rounded-md bg-blue-700 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-800 sm:w-1/2"
           >
             Lähetä
           </button>

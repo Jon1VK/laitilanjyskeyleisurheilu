@@ -55,13 +55,13 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
     <!-- USER NAVIGATION -->
     <div
-      class="absolute top-4 right-16 z-10 md:top-8 md:right-24 xl:fixed xl:right-8"
+      class="absolute right-16 top-4 z-10 md:right-24 md:top-8 xl:fixed xl:right-8"
     >
       <UserNavigation client:idle />
     </div>
 
     <!-- HEADER -->
-    <header class="font-display relative bg-red-500">
+    <header class="relative bg-red-500 font-display">
       <!-- HEADER HERO IMAGE -->
       <div class="absolute inset-0">
         <slot name="hero-image" />
@@ -143,7 +143,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
     <!-- FOOTER -->
     <footer class="bg-gray-800">
-      <div class="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
         <!-- FOOTER SITE NAVIGATION -->
         <nav
           class="-mx-5 -my-2 flex flex-wrap justify-center"

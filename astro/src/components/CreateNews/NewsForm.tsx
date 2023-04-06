@@ -40,7 +40,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
         </h3>
       </header>
       <form onSubmit={handleSubmit} class="space-y-6 text-sm">
-        <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
           <div>
             <label for="author">Kirjoittaja</label>
             <input
@@ -75,7 +75,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
                 const image = event.currentTarget.files?.[0];
                 if (image) setImage(image);
               }}
-              class="mt-1 w-full cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:font-medium file:hover:bg-gray-300 focus:outline-blue-600"
+              class="mt-1 w-full cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:px-4 file:py-2 file:font-medium file:hover:bg-gray-300 focus:outline-blue-600"
             />
           </div>
           <div class="sm:col-span-2">
@@ -107,7 +107,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
           <div>
             <button
               type="submit"
-              class="mt-4 w-full rounded-md bg-blue-700 py-2 px-4 font-medium text-white shadow-sm hover:bg-blue-800"
+              class="mt-4 w-full rounded-md bg-blue-700 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-800"
             >
               Julkaise
             </button>
@@ -116,7 +116,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
             <button
               type="submit"
               onClick={() => setIsDraft(true)}
-              class="mt-4 w-full rounded-md bg-gray-100 py-2 px-4 font-medium ring-1 ring-black/10 hover:bg-gray-200"
+              class="mt-4 w-full rounded-md bg-gray-100 px-4 py-2 font-medium ring-1 ring-black/10 hover:bg-gray-200"
             >
               Tallenna luonnoksena
             </button>

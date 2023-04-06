@@ -44,7 +44,7 @@ const ContactEmailForm = () => {
                 type="text"
                 name="firstname"
                 autocomplete="given-name"
-                class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </label>
@@ -58,7 +58,7 @@ const ContactEmailForm = () => {
                 type="text"
                 name="lastname"
                 autocomplete="family-name"
-                class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </label>
@@ -72,7 +72,7 @@ const ContactEmailForm = () => {
                 name="email"
                 type="email"
                 autocomplete="email"
-                class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </label>
@@ -90,7 +90,7 @@ const ContactEmailForm = () => {
                 type="text"
                 name="phone"
                 autocomplete="tel"
-                class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 aria-describedby="phone-optional"
               />
             </div>
@@ -105,7 +105,7 @@ const ContactEmailForm = () => {
                 type="text"
                 name="subject"
                 id="subject"
-                class="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </label>
@@ -118,7 +118,7 @@ const ContactEmailForm = () => {
                 id="message"
                 name="message"
                 rows="4"
-                class="block w-full rounded-md border border-gray-300 py-3 px-4 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                class="block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </label>

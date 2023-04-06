@@ -1,18 +1,18 @@
 import { Editor } from '@tiptap/core';
-import StarterKit from '@tiptap/starter-kit';
 import BubbleMenu from '@tiptap/extension-bubble-menu';
+import FloatingMenu from '@tiptap/extension-floating-menu';
 import Link from '@tiptap/extension-link';
 import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
-import TableCell from '@tiptap/extension-table-cell';
+import StarterKit from '@tiptap/starter-kit';
 import { createEffect, createSignal, onCleanup } from 'solid-js';
-import Image from './Image';
-import TableMenu from './TableMenu';
-import NodeMenu from './NodeMenu';
 import HistoryMenu from './HistoryMenu';
+import Image from './Image';
 import MarkMenu from './MarkMenu';
-import FloatingMenu from '@tiptap/extension-floating-menu';
+import NodeMenu from './NodeMenu';
+import TableMenu from './TableMenu';
 
 const RichTextEditor = (props: {
   initialHTML?: string;

@@ -54,7 +54,7 @@ const EventDetailsHeader = () => {
           />
           <Show when={isLoggedInUser(athleteProfile().athlete)}>
             <label
-              class="absolute right-1.5 bottom-1.5 cursor-pointer rounded-full bg-blue-700 p-2.5 text-white xl:right-3 xl:bottom-3 xl:p-3"
+              class="absolute bottom-1.5 right-1.5 cursor-pointer rounded-full bg-blue-700 p-2.5 text-white xl:bottom-3 xl:right-3 xl:p-3"
               for="avatarImageButton"
             >
               <FaSolidCameraRetro />

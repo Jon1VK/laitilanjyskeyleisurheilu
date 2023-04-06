@@ -33,7 +33,7 @@ const EventFormPressFieldset = (props: {
       <legend class="mb-3 text-base font-medium text-gray-700">
         Tiedote asetukset
       </legend>
-      <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
         <Show when={!props.updateMany}>
           <div>
             <label for="pressStartBefore">Lähetys aloitetaan</label>

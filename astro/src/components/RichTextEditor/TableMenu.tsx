@@ -1,4 +1,6 @@
 import type { Editor } from '@tiptap/core';
+import { AiOutlineInsertRowAbove } from 'solid-icons/ai';
+import { HiOutlineTrash } from 'solid-icons/hi';
 import {
   RiEditorDeleteColumn,
   RiEditorDeleteRow,
@@ -9,8 +11,6 @@ import {
   RiEditorMergeCellsHorizontal,
   RiEditorSplitCellsHorizontal,
 } from 'solid-icons/ri';
-import { AiOutlineInsertRowAbove } from 'solid-icons/ai';
-import { HiOutlineTrash } from 'solid-icons/hi';
 
 const TableMenu = (props: {
   editor?: Editor;

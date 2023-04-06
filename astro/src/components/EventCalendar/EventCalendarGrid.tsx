@@ -30,7 +30,7 @@ const EventCalendarLaptopGrid = () => {
       <For each={calendarDates()}>
         {(date) => (
           <div
-            class={`min-h-[5rem] py-2 px-3 ${
+            class={`min-h-[5rem] px-3 py-2 ${
               isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
             }`}
           >
@@ -56,7 +56,7 @@ const EventCalendarMobileGrid = () => {
           <button
             type="button"
             onClick={() => selectDate(date)}
-            class={`flex min-h-[3.5rem] flex-col py-2 px-3 hover:bg-gray-100 ${
+            class={`flex min-h-[3.5rem] flex-col px-3 py-2 hover:bg-gray-100 ${
               isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
             }`}
           >
@@ -158,7 +158,7 @@ const EventCalendarGridEventList = (props: { date: Date; events: Event[] }) => {
           )}
         </For>
       </ol>
-      <div class="mt-2 ml-2 flex flex-wrap lg:hidden">
+      <div class="ml-2 mt-2 flex flex-wrap lg:hidden">
         <span class="sr-only">{props.events.length} tapahtumaa</span>
         <For each={props.events}>
           {(event) => (

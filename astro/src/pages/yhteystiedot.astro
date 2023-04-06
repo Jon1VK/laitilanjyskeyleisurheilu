@@ -42,7 +42,7 @@ import { ContactEmailForm } from '@components';
   <!-- HERO HEADING -->
   <Fragment slot="hero-heading">
     <h1
-      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
     >
       Yhteystiedot
     </h1>
@@ -59,7 +59,7 @@ import { ContactEmailForm } from '@components';
       >
         <!-- CONTACT INFO -->
         <div
-          class="relative overflow-hidden bg-gradient-to-b from-blue-600 to-blue-700 py-10 px-6 sm:px-10 xl:p-12"
+          class="relative overflow-hidden bg-gradient-to-b from-blue-600 to-blue-700 px-6 py-10 sm:px-10 xl:p-12"
         >
           <!-- DECORATION FOR MOBILES -->
           <Icon
@@ -143,7 +143,7 @@ import { ContactEmailForm } from '@components';
         </div>
 
         <!-- CONTACT FORM -->
-        <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+        <div class="px-6 py-10 sm:px-10 lg:col-span-2 xl:p-12">
           <h3 class="text-lg font-medium text-gray-900">Lähetä viesti</h3>
           <ContactEmailForm client:load />
         </div>
@@ -171,9 +171,9 @@ import { ContactEmailForm } from '@components';
           <thead class="bg-blue-600 font-semibold text-white">
             <tr>
               <th scope="col" class="py-3.5 pl-4 pr-3">Nimi</th>
-              <th scope="col" class="py-3.5 px-3">Tehtävä</th>
-              <th scope="col" class="py-3.5 px-3">Sähköposti</th>
-              <th scope="col" class="py-3.5 px-3">Puhelinnumero</th>
+              <th scope="col" class="px-3 py-3.5">Tehtävä</th>
+              <th scope="col" class="px-3 py-3.5">Sähköposti</th>
+              <th scope="col" class="px-3 py-3.5">Puhelinnumero</th>
             </tr>
           </thead>
 
@@ -190,8 +190,8 @@ import { ContactEmailForm } from '@components';
                   >
                     {name}
                   </th>
-                  <td class="py-4 px-3">{title ? title : '-'}</td>
-                  <td class="py-4 px-3">
+                  <td class="px-3 py-4">{title ? title : '-'}</td>
+                  <td class="px-3 py-4">
                     <a
                       class="hover:text-gray-900 hover:underline"
                       href={`mailto:${email}`}
@@ -199,7 +199,7 @@ import { ContactEmailForm } from '@components';
                       {email}
                     </a>
                   </td>
-                  <td class="py-4 px-3">{phone}</td>
+                  <td class="px-3 py-4">{phone}</td>
                 </tr>
               ))
             }

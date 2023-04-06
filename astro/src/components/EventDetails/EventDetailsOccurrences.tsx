@@ -39,7 +39,7 @@ const EventDetailsOccurrences = () => {
     <>
       <Show when={event().recurringEventId}>
         <div class="relative mx-auto max-w-prose text-lg sm:px-0">
-          <div class="mt-8 mb-4">
+          <div class="mb-4 mt-8">
             <h2 class="text-2xl font-bold">Muut tapahtumakerrat</h2>
             <Show when={isAdmin()}>
               <div class="mt-3 flex items-center gap-1">
@@ -99,14 +99,14 @@ const EventDetailsOccurrences = () => {
             <button
               type="submit"
               onClick={handleEditOccurrencesConfirmation}
-              class="rounded-md bg-blue-600 py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+              class="rounded-md bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
             >
               Kyllä
             </button>
             <button
               type="submit"
               onClick={() => setShowEditOccurrencesConfirmation(false)}
-              class="rounded-md border border-gray-300 bg-gray-50 py-2 px-4 font-medium shadow-sm hover:bg-gray-200"
+              class="rounded-md border border-gray-300 bg-gray-50 px-4 py-2 font-medium shadow-sm hover:bg-gray-200"
             >
               Peruuta
             </button>
@@ -138,14 +138,14 @@ const EventDetailsOccurrences = () => {
             <button
               type="submit"
               onClick={deleteRecurringEvent}
-              class="rounded-md bg-red-700 py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-red-800"
+              class="rounded-md bg-red-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-800"
             >
               Poista
             </button>
             <button
               type="submit"
               onClick={() => setShowDeleteConfirmation(false)}
-              class="rounded-md border border-gray-300 bg-gray-50 py-2 px-4 font-medium shadow-sm hover:bg-gray-200"
+              class="rounded-md border border-gray-300 bg-gray-50 px-4 py-2 font-medium shadow-sm hover:bg-gray-200"
             >
               Peruuta
             </button>

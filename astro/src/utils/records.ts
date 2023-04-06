@@ -13,7 +13,7 @@ export const formattedRecordAchievedDate = (record: IRecord) => {
 
 export const GENDERS = ['Aikuiset', 'Pojat', 'Tytöt'] as const;
 
-export type Gender = typeof GENDERS[number];
+export type Gender = (typeof GENDERS)[number];
 
 export const LEAGUES = [
   'Miehet',
@@ -34,7 +34,7 @@ export const LEAGUES = [
   'Tytöt 15',
 ] as const;
 
-export type League = typeof LEAGUES[number];
+export type League = (typeof LEAGUES)[number];
 
 export const EVENTS = [
   '40m',
@@ -83,7 +83,7 @@ export const EVENTS = [
   '50km kävely',
 ] as const;
 
-export type RecordEvent = typeof EVENTS[number];
+export type RecordEvent = (typeof EVENTS)[number];
 
 export const LEAGUES_BY_GENDER: Record<Gender, League[]> = {
   Aikuiset: ['Miehet', 'Naiset'],

@@ -6,7 +6,7 @@ const EventCalendarMobileEventList = () => {
     useEventCalendarNavigator();
   const events = () => eventsByDate().get(selectedDate().toDateString()) || [];
   return (
-    <div class="py-10 px-4 sm:px-6 lg:hidden">
+    <div class="px-4 py-10 sm:px-6 lg:hidden">
       <EventListStateless events={events()} onDelete={deleteEvent} />
     </div>
   );

@@ -68,7 +68,7 @@ const LaptopMainNavigation = () => {
             <For each={GENDERS}>
               {(gender) => (
                 <div>
-                  <div class="ml-3 mb-3 font-semibold text-blue-700">
+                  <div class="mb-3 ml-3 font-semibold text-blue-700">
                     {gender}
                   </div>
                   <ul

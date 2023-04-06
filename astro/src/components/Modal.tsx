@@ -15,7 +15,7 @@ const Modal: ParentComponent<{ close: () => void }> = (props) => {
         >
           <button
             onClick={handleClose}
-            class="absolute top-0 right-0 m-2 rounded-md bg-white p-2 text-gray-400 hover:text-gray-500"
+            class="absolute right-0 top-0 m-2 rounded-md bg-white p-2 text-gray-400 hover:text-gray-500"
           >
             <span class="sr-only">Close</span>
             <HiSolidX class="h-6 w-6" />

@@ -57,7 +57,7 @@ const eventClickHandler = (event: string) =>
   <!-- HERO HEADING -->
   <Fragment slot="hero-heading">
     <h1
-      class="relative pt-16 pb-32 text-center text-2xl text-white sm:pt-24 sm:pb-40 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pt-44 xl:pb-52"
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
     >
       Seuraennätykset | {currentLeague}
     </h1>
@@ -131,10 +131,10 @@ const eventClickHandler = (event: string) =>
             >
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3">Laji</th>
-                <th scope="col" class="py-3.5 px-3">Urheilija</th>
-                <th scope="col" class="py-3.5 px-3">Tulos</th>
-                <th scope="col" class="py-3.5 px-3">Paikkakunta</th>
-                <th scope="col" class="py-3.5 px-3">Päivämäärä</th>
+                <th scope="col" class="px-3 py-3.5">Urheilija</th>
+                <th scope="col" class="px-3 py-3.5">Tulos</th>
+                <th scope="col" class="px-3 py-3.5">Paikkakunta</th>
+                <th scope="col" class="px-3 py-3.5">Päivämäärä</th>
               </tr>
             </thead>
 
@@ -157,13 +157,13 @@ const eventClickHandler = (event: string) =>
                             {record.event}
                           </th>
                         )}
-                        <td class="py-4 px-3">{record.athlete}</td>
-                        <td class="py-4 px-3">
+                        <td class="px-3 py-4">{record.athlete}</td>
+                        <td class="px-3 py-4">
                           {record.result}
                           {record.handtime ? 'h' : ''}
                         </td>
-                        <td class="py-4 px-3">{record.location || '-'}</td>
-                        <td class="py-4 px-3">
+                        <td class="px-3 py-4">{record.location || '-'}</td>
+                        <td class="px-3 py-4">
                           {record.athlete === '-'
                             ? '-'
                             : formattedRecordAchievedDate(record)}

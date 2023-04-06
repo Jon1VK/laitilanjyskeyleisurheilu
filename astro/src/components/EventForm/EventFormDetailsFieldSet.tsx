@@ -14,7 +14,7 @@ const EventFormDetailsFieldSet = (props: {
       <legend class="mb-3 text-base font-medium text-gray-700">
         Tapahtuman tiedot
       </legend>
-      <div class="grid grid-cols-1 gap-y-3 gap-x-6 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
         <div class="sm:col-span-2">
           <div class="flex justify-between">
             <label for="title">Otsikko</label>

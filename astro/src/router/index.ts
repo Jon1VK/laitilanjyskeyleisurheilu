@@ -1,12 +1,12 @@
-import eventsRouter from './events';
-import trpcTransformer from '@lib/trpcTransformer';
-import recurringEventsRouter from './recurringEvents';
-import recordsRouter from './records';
-import emailsRouter from './emails';
 import createRouter from '@lib/createRouter';
+import trpcTransformer from '@lib/trpcTransformer';
 import athleteProfilesRouter from './athleteProfiles';
+import emailsRouter from './emails';
+import eventsRouter from './events';
 import newsRouter from './news';
 import pressReleasesRouter from './pressReleases';
+import recordsRouter from './records';
+import recurringEventsRouter from './recurringEvents';
 
 export type AppRouter = typeof appRouter;
 

@@ -60,7 +60,7 @@ const EventDetailsFiles = () => {
                 if (file) void uploadTimetable(file);
               }}
               id="timetable"
-              class="cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:font-medium file:hover:bg-gray-300"
+              class="cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:px-4 file:py-2 file:font-medium file:hover:bg-gray-300"
             />
           </div>
         </Show>
@@ -98,7 +98,7 @@ const EventDetailsFiles = () => {
                 if (file) void uploadResults(file);
               }}
               id="results"
-              class="cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:font-medium file:hover:bg-gray-300"
+              class="cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:px-4 file:py-2 file:font-medium file:hover:bg-gray-300"
             />
           </div>
         </Show>
