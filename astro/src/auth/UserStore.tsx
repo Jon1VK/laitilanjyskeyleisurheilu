@@ -1,13 +1,12 @@
 import type { ExtendedUser } from '@models';
-import { createSignal, splitProps } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
-const [user, setUser] = createSignal<ExtendedUser | null>();
+const [user, setUser] = createSignal<ExtendedUser>();
 
 export { user };
 
-const UserStore = (props: { user?: ExtendedUser | null }) => {
-  const [{ user }, _] = splitProps(props, ['user']);
-  setUser(user);
+const UserStore = (props: { user: ExtendedUser }) => {
+  createEffect(() => setUser(props.user));
 };
 
 export default UserStore;

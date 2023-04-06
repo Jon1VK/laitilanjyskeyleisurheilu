@@ -4,7 +4,7 @@ import {
   HiOutlineChevronRight,
   HiOutlinePlus,
 } from 'solid-icons/hi';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import EventForm from '../EventForm';
 import Modal from '../Modal';
 import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';

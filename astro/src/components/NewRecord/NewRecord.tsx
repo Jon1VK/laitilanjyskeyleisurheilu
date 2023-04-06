@@ -1,6 +1,6 @@
 import trpcClient from '@lib/trpcClient';
 import type { League, RecordEvent } from '@utils/records';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import Modal from '../Modal';
 import RecordForm from './RecordForm';
 

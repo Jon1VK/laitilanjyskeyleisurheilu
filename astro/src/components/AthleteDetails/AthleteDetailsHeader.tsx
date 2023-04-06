@@ -7,7 +7,7 @@ import {
   FaSolidCameraRetro,
 } from 'solid-icons/fa';
 import { HiOutlinePencilAlt } from 'solid-icons/hi';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import Modal from '../Modal';
 import AthleteDetailsForm from './AthleteDetailsForm';
 import { useAthleteDetailsModifier } from './AthleteDetailsModifier';

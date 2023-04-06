@@ -10,7 +10,7 @@ type SubmitHandler = (
 
 const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
   const { user } = useAuth();
-  const [isDraft, setIsDraft] = createSignal(false);
+  const [isDraft, _setIsDraft] = createSignal(false);
   const [image, setImage] = createSignal<File>();
   const [body, setBody] = createSignal('');
   const handleSubmit: SubmitHandler = async (event) => {
@@ -73,7 +73,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               id="cardImage"
               onChange={(event) => {
                 const image = event.currentTarget.files?.[0];
-                if (image) setImage(image);
+                if (image) setImage(() => image);
               }}
               class="mt-1 w-full cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:px-4 file:py-2 file:font-medium file:hover:bg-gray-300 focus:outline-blue-600"
             />
@@ -104,7 +104,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               <RichTextEditor onChange={setBody} />
             </div>
           </div>
-          <div>
+          <div class="sm:col-span-2">
             <button
               type="submit"
               class="mt-4 w-full rounded-md bg-blue-700 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-800"
@@ -112,7 +112,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               Julkaise
             </button>
           </div>
-          <div>
+          {/* <div>
             <button
               type="submit"
               onClick={() => setIsDraft(true)}
@@ -120,7 +120,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
             >
               Tallenna luonnoksena
             </button>
-          </div>
+          </div> */}
         </div>
       </form>
     </div>

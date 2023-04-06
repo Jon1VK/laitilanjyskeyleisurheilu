@@ -1,5 +1,5 @@
 import type { Event, EventType } from '@prisma/client';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import RichTextEditor from '../RichTextEditor';
 
 const EventFormDetailsFieldSet = (props: {

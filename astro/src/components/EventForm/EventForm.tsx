@@ -1,6 +1,6 @@
-import type { Event as IEvent, EventType } from '@prisma/client';
+import type { EventType, Event as IEvent } from '@prisma/client';
 import { HiSolidPencilAlt } from 'solid-icons/hi';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import EventFormDetailsFieldSet from './EventFormDetailsFieldSet';
 import EventFormPressFieldset from './EventFormPressFieldset';
 import EventFormRecurrenceFieldset from './EventFormRecurrenceFieldset';

@@ -5,7 +5,7 @@ import {
   HiOutlineTrash,
   HiSolidPencilAlt,
 } from 'solid-icons/hi';
-import { createSignal, For, Show } from 'solid-js';
+import { For, Show, createSignal } from 'solid-js';
 import Modal from '../Modal';
 import PressReleaseForm from './PressReleaseForm';
 import { usePressReleasesModifier } from './PressReleasesModifier';

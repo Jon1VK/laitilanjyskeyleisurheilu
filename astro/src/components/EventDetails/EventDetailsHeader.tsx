@@ -6,7 +6,7 @@ import {
   HiOutlineSpeakerphone,
   HiOutlineTrash,
 } from 'solid-icons/hi';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 import EventForm from '../EventForm';
 import Modal from '../Modal';
 import { useEventDetailsModifier } from './EventDetailsModifier';

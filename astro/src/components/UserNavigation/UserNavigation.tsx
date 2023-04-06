@@ -2,7 +2,7 @@ import { useAuth } from '@auth';
 import { parameterize } from 'inflected';
 import { CgProfile } from 'solid-icons/cg';
 import { HiOutlineLogout, HiOutlineMail } from 'solid-icons/hi';
-import { createSignal, Show } from 'solid-js';
+import { Show, createSignal } from 'solid-js';
 
 const UserNavigation = () => {
   const { isLoggedIn, isAthlete, isAdmin, user, signOut } = useAuth();

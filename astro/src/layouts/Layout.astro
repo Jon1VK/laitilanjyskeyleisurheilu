@@ -49,15 +49,15 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
   </head>
 
   <!-- BODY -->
-  <body class="relative bg-slate-50">
+  <body class="relative flex min-h-[100vh] flex-col bg-slate-50">
     <!-- USER STORE -->
-    <UserStore user={jwtPayload?.user} client:load />
+    {jwtPayload?.user && <UserStore user={jwtPayload.user} client:only />}
 
     <!-- USER NAVIGATION -->
     <div
       class="absolute right-16 top-4 z-10 md:right-24 md:top-8 xl:fixed xl:right-8"
     >
-      <UserNavigation client:idle />
+      <UserNavigation client:only />
     </div>
 
     <!-- HEADER -->
@@ -80,7 +80,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
     </header>
 
     <!-- MAIN CONTENT -->
-    <main id="main">
+    <main id="main" class="flex-1">
       <!-- BREADCRUMBS HEADER -->
       {
         pathSegments[0] && (
@@ -226,7 +226,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
         <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
-          <Login client:idle />
+          <Login client:only />
           {new Date().getFullYear()} Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>
       </div>

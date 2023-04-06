@@ -1,25 +1,20 @@
 import type { Event } from '@prisma/client';
 import { getDayCountBetween } from '@utils/dates';
-import { createSignal, Show } from 'solid-js';
+import { createSignal, Show, splitProps } from 'solid-js';
 
 const EventFormPressFieldset = (props: {
   event?: Event;
   updateMany?: boolean;
 }) => {
+  const [{ event }, _] = splitProps(props, ['event']);
   const initialPressStartBefore = () => {
-    return props.event
-      ? getDayCountBetween(
-          props.event.pressStartDate,
-          props.event.startDateTime
-        ).toString()
+    return event
+      ? getDayCountBetween(event.pressStartDate, event.startDateTime).toString()
       : '10';
   };
   const initialPressEndBefore = () => {
-    return props.event
-      ? getDayCountBetween(
-          props.event.pressEndDate,
-          props.event.startDateTime
-        ).toString()
+    return event
+      ? getDayCountBetween(event.pressEndDate, event.startDateTime).toString()
       : '1';
   };
   const [pressStartBefore, setPressStartBefore] = createSignal(

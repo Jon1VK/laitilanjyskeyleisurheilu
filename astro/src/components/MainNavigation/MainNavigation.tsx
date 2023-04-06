@@ -2,7 +2,7 @@ import { GENDERS, LEAGUES_BY_GENDER } from '@utils/records';
 import { parameterize } from 'inflected';
 import { FaSolidBars, FaSolidX } from 'solid-icons/fa';
 import { HiSolidChevronDown } from 'solid-icons/hi';
-import { createSignal, For } from 'solid-js';
+import { For, createSignal } from 'solid-js';
 
 const MainNavigation = () => {
   return (
