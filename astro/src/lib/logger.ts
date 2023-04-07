@@ -1,8 +1,8 @@
 const logError = async (error: Error) => {
-  await fetch('https://cloud.axiom.co/api/v1/datasets/frontend/ingest', {
-    method: 'POST',
+  await fetch("https://cloud.axiom.co/api/v1/datasets/frontend/ingest", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.PUBLIC_AXIOM_TOKEN}`,
     },
     body: JSON.stringify([

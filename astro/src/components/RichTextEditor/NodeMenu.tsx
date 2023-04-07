@@ -1,7 +1,7 @@
-import logger from '@lib/logger';
-import uploadImage from '@lib/uploadImage';
-import type { Editor } from '@tiptap/core';
-import { BsTable } from 'solid-icons/bs';
+import logger from "@lib/logger";
+import uploadImage from "@lib/uploadImage";
+import type { Editor } from "@tiptap/core";
+import { BsTable } from "solid-icons/bs";
 import {
   FaRegularImage,
   FaSolidHeading,
@@ -9,7 +9,7 @@ import {
   FaSolidListUl,
   FaSolidQuoteRight,
   FaSolidT,
-} from 'solid-icons/fa';
+} from "solid-icons/fa";
 
 type InputChangeHandler = (
   event: Event & { currentTarget: HTMLInputElement }
@@ -27,7 +27,7 @@ const NodeMenu = (props: {
       props.editor?.chain().clearNodes().focus().setImage({ src }).run();
     } catch (error) {
       await logger.error(error as Error);
-      alert('Kuvan lataus ei onnistunut. Yritä uudelleen!');
+      alert("Kuvan lataus ei onnistunut. Yritä uudelleen!");
     }
   };
   return (
@@ -36,7 +36,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="Normaali teksti"
-          class={`rounded-l-md ${props.buttonStyle('paragraph')}`}
+          class={`rounded-l-md ${props.buttonStyle("paragraph")}`}
           onClick={() =>
             props.editor?.chain().clearNodes().focus().setParagraph().run()
           }
@@ -46,7 +46,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="1. tason otsikko"
-          class={props.buttonStyle('heading', { level: 2 })}
+          class={props.buttonStyle("heading", { level: 2 })}
           onClick={() =>
             props.editor
               ?.chain()
@@ -64,7 +64,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="2. tason otsikko"
-          class={props.buttonStyle('heading', { level: 3 })}
+          class={props.buttonStyle("heading", { level: 3 })}
           onClick={() =>
             props.editor
               ?.chain()
@@ -82,7 +82,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="Lista"
-          class={props.buttonStyle('bulletList')}
+          class={props.buttonStyle("bulletList")}
           onClick={() =>
             props.editor?.chain().clearNodes().focus().toggleBulletList().run()
           }
@@ -92,7 +92,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="Numeroitu lista"
-          class={props.buttonStyle('orderedList')}
+          class={props.buttonStyle("orderedList")}
           onClick={() =>
             props.editor?.chain().clearNodes().focus().toggleOrderedList().run()
           }
@@ -102,14 +102,14 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="Lainaus"
-          class={props.buttonStyle('blockquote')}
+          class={props.buttonStyle("blockquote")}
           onClick={() =>
             props.editor?.chain().clearNodes().focus().toggleBlockquote().run()
           }
         >
           <FaSolidQuoteRight class="h-4 w-4" />
         </button>
-        <div class={`cursor-pointer ${props.buttonStyle('image')}`}>
+        <div class={`cursor-pointer ${props.buttonStyle("image")}`}>
           <label for="richTextImageButton">
             <FaRegularImage class="h-4 w-4" />
           </label>
@@ -123,7 +123,7 @@ const NodeMenu = (props: {
         <button
           type="button"
           title="Lisää taulukko"
-          class={`rounded-r-md ${props.buttonStyle('table')}`}
+          class={`rounded-r-md ${props.buttonStyle("table")}`}
           onClick={() =>
             props.editor
               ?.chain()

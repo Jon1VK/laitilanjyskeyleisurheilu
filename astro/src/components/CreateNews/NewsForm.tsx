@@ -1,8 +1,8 @@
-import { useAuth } from '@auth';
-import logger from '@lib/logger';
-import uploadImage from '@lib/uploadImage';
-import { createSignal } from 'solid-js';
-import RichTextEditor from '../RichTextEditor';
+import { useAuth } from "@auth";
+import logger from "@lib/logger";
+import uploadImage from "@lib/uploadImage";
+import { createSignal } from "solid-js";
+import RichTextEditor from "../RichTextEditor";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -12,23 +12,23 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
   const { user } = useAuth();
   const [isDraft, _setIsDraft] = createSignal(false);
   const [image, setImage] = createSignal<File>();
-  const [body, setBody] = createSignal('');
+  const [body, setBody] = createSignal("");
   const handleSubmit: SubmitHandler = async (event) => {
     try {
       event.preventDefault();
       const form = event.currentTarget;
       const formData = new FormData(form);
-      formData.set('body', body());
-      if (isDraft()) formData.set('draft', 'on');
+      formData.set("body", body());
+      if (isDraft()) formData.set("draft", "on");
       if (image()) {
         const src = await uploadImage(image() as File);
-        formData.set('cardImage', src);
+        formData.set("cardImage", src);
       }
       props.onSubmit(formData);
     } catch (error) {
       await logger.error(error as Error);
       alert(
-        'Uutisen luominen ei onnistunut. Yritä uudelleen, tai kopioi täyttämäsi kentät talteen ja lataa sivu uudelleen.'
+        "Uutisen luominen ei onnistunut. Yritä uudelleen, tai kopioi täyttämäsi kentät talteen ja lataa sivu uudelleen."
       );
     }
   };
@@ -58,7 +58,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               required
               type="date"
               name="publishedAt"
-              value={new Date().toLocaleDateString('sv')}
+              value={new Date().toLocaleDateString("sv")}
               id="publishedAt"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />

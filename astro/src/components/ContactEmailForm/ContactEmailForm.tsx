@@ -1,6 +1,6 @@
-import trpcClient from '@lib/trpcClient';
-import { createSignal, Show } from 'solid-js';
-import Modal from '../Modal';
+import trpcClient from "@lib/trpcClient";
+import { createSignal, Show } from "solid-js";
+import Modal from "../Modal";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -12,13 +12,13 @@ const ContactEmailForm = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const firstname = formData.get('firstname') as string;
-    const lastname = formData.get('lastname') as string;
-    const email = formData.get('email') as string;
-    const phone = (formData.get('phone') as string) || undefined;
-    const subject = formData.get('subject') as string;
-    const message = formData.get('message') as string;
-    await trpcClient.mutation('sendContactEmail', {
+    const firstname = formData.get("firstname") as string;
+    const lastname = formData.get("lastname") as string;
+    const email = formData.get("email") as string;
+    const phone = (formData.get("phone") as string) || undefined;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+    await trpcClient.mutation("sendContactEmail", {
       firstname,
       lastname,
       email,

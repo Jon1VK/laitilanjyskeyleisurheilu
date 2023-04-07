@@ -1,6 +1,6 @@
-import { PrismaRecord } from '@models';
-import { EVENTS, LEAGUES } from '@utils/records';
-import { z } from 'zod';
+import { PrismaRecord } from "@models";
+import { EVENTS, LEAGUES } from "@utils/records";
+import { z } from "zod";
 
 const input = z.object({
   league: z.enum(LEAGUES),

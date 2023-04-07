@@ -1,7 +1,7 @@
-import AstroAuth from '@astro-auth/core';
-import { GoogleProvider } from '@astro-auth/providers';
-import { PrismaUser } from '@models';
-import type { JwtPayload } from 'jsonwebtoken';
+import AstroAuth from "@astro-auth/core";
+import { GoogleProvider } from "@astro-auth/providers";
+import { PrismaUser } from "@models";
+import type { JwtPayload } from "jsonwebtoken";
 
 export const all = AstroAuth({
   authProviders: [
@@ -15,7 +15,7 @@ export const all = AstroAuth({
       const dbUser = await PrismaUser.findUnique({
         where: { email: user.email },
       });
-      return dbUser ? true : '/403';
+      return dbUser ? true : "/403";
     },
     jwt: async (jwtPayload: JwtPayload) => {
       const { user } = jwtPayload;

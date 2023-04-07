@@ -1,5 +1,5 @@
-import prisma from '@lib/prisma';
-import type { AthleteProfile, User } from '@prisma/client';
+import prisma from "@lib/prisma";
+import type { AthleteProfile, User } from "@prisma/client";
 
 const PrismaUser = Object.assign(prisma.user, {
   async findAllAthletes() {
@@ -8,7 +8,7 @@ const PrismaUser = Object.assign(prisma.user, {
       include: {
         athleteProfile: true,
       },
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
     });
   },
 });

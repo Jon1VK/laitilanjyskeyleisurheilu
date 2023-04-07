@@ -1,4 +1,4 @@
-import sendContactEmail from './sendContactEmail';
+import sendContactEmail from "./sendContactEmail";
 
 const emailsController = {
   sendContactEmail,

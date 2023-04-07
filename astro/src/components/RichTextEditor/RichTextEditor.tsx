@@ -1,18 +1,18 @@
-import { Editor } from '@tiptap/core';
-import BubbleMenu from '@tiptap/extension-bubble-menu';
-import FloatingMenu from '@tiptap/extension-floating-menu';
-import Link from '@tiptap/extension-link';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
-import StarterKit from '@tiptap/starter-kit';
-import { createEffect, createSignal, onCleanup } from 'solid-js';
-import HistoryMenu from './HistoryMenu';
-import Image from './Image';
-import MarkMenu from './MarkMenu';
-import NodeMenu from './NodeMenu';
-import TableMenu from './TableMenu';
+import { Editor } from "@tiptap/core";
+import BubbleMenu from "@tiptap/extension-bubble-menu";
+import FloatingMenu from "@tiptap/extension-floating-menu";
+import Link from "@tiptap/extension-link";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import StarterKit from "@tiptap/starter-kit";
+import { createEffect, createSignal, onCleanup } from "solid-js";
+import HistoryMenu from "./HistoryMenu";
+import Image from "./Image";
+import MarkMenu from "./MarkMenu";
+import NodeMenu from "./NodeMenu";
+import TableMenu from "./TableMenu";
 
 const RichTextEditor = (props: {
   initialHTML?: string;
@@ -33,13 +33,13 @@ const RichTextEditor = (props: {
           FloatingMenu.configure({ element: floatingMenuRef }),
           BubbleMenu.configure({
             element: bubbleMenuRef,
-            pluginKey: 'bubbleMenu',
+            pluginKey: "bubbleMenu",
           }),
           BubbleMenu.configure({
             element: tableMenuRef,
-            pluginKey: 'tableMenu',
+            pluginKey: "tableMenu",
             shouldShow: ({ editor, state }) => {
-              return editor.isActive('table') && state.selection.empty;
+              return editor.isActive("table") && state.selection.empty;
             },
           }),
           StarterKit.configure({
@@ -47,7 +47,7 @@ const RichTextEditor = (props: {
             codeBlock: false,
             code: false,
           }),
-          Link.configure({ protocols: ['mailto'] }),
+          Link.configure({ protocols: ["mailto"] }),
           Table,
           TableHeader,
           TableRow,
@@ -57,7 +57,7 @@ const RichTextEditor = (props: {
         editorProps: {
           attributes: {
             class:
-              'prose prose-blue prose-table:text-sm prose-table:shadow prose-table:ring-1 prose-table:ring-black/5 prose-td:p-3 prose-th:p-3 prose-th:bg-blue-600 prose-th:text-white max-w-none rounded-md border border-gray-300 py-2 px-3 shadow-sm outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600',
+              "prose prose-blue prose-table:text-sm prose-table:shadow prose-table:ring-1 prose-table:ring-black/5 prose-td:p-3 prose-th:p-3 prose-th:bg-blue-600 prose-th:text-white max-w-none rounded-md border border-gray-300 py-2 px-3 shadow-sm outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600",
           },
         },
       })
@@ -66,8 +66,8 @@ const RichTextEditor = (props: {
   const [updateSignal, setUpdateSignal] = createSignal([]);
   createEffect(() => {
     const forceUpdate = () => setUpdateSignal([]);
-    editor()?.on('transaction', forceUpdate);
-    onCleanup(() => editor()?.off('transaction', forceUpdate));
+    editor()?.on("transaction", forceUpdate);
+    onCleanup(() => editor()?.off("transaction", forceUpdate));
   });
   createEffect(() => {
     updateSignal();
@@ -78,11 +78,11 @@ const RichTextEditor = (props: {
     return editor()?.isActive(name, attributes);
   };
   const buttonStyle = (
-    name = 'default',
+    name = "default",
     attributes?: Record<string, unknown>
   ) =>
     `border border-gray-300 p-2 hover:bg-gray-200 ${
-      isActive(name, attributes) ? 'bg-gray-200' : 'bg-gray-50'
+      isActive(name, attributes) ? "bg-gray-200" : "bg-gray-50"
     }`;
   return (
     <div>

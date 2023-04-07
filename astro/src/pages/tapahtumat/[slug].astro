@@ -1,13 +1,13 @@
 ---
-import { Icon } from 'astro-icon';
-import Layout from '@layouts/Layout.astro';
-import { formattedDateTimePeriod } from '@utils/dates';
-import { PrismaEvent } from '@models';
-import { EventDetails } from '@components';
+import { Icon } from "astro-icon";
+import Layout from "@layouts/Layout.astro";
+import { formattedDateTimePeriod } from "@utils/dates";
+import { PrismaEvent } from "@models";
+import { EventDetails } from "@components";
 
 const slug = Astro.params.slug as string;
 const event = await PrismaEvent.findUniqueWithOccurrences(slug);
-if (!event) return Astro.redirect('/404');
+if (!event) return Astro.redirect("/404");
 ---
 
 <Layout title={event.title}>
@@ -18,7 +18,7 @@ if (!event) return Astro.redirect('/404');
     <meta property="og:title" content={event.title} />
     <meta
       name="description"
-      content={`${event.location} | ${formattedDateTimePeriod(event)}`}
+      content={`${event.location ?? ""} | ${formattedDateTimePeriod(event)}`}
     />
     <meta
       name="keywords"
@@ -26,11 +26,11 @@ if (!event) return Astro.redirect('/404');
     />
     <meta
       property="og:image"
-      content={new URL('/images/events.webp', Astro.url)}
+      content={new URL("/images/events.webp", Astro.url)}
     />
     <meta
       property="og:description"
-      content={`${event.location} | ${formattedDateTimePeriod(event)}`}
+      content={`${event.location ?? ""} | ${formattedDateTimePeriod(event)}`}
     />
   </Fragment>
 

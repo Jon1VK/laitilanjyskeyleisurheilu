@@ -1,30 +1,30 @@
-import { useAuth } from '@auth';
-import logger from '@lib/logger';
-import trpcClient from '@lib/trpcClient';
-import { FaSolidFilePen } from 'solid-icons/fa';
-import { createSignal, Show } from 'solid-js';
-import Modal from '../Modal';
-import NewsForm from './NewsForm';
+import { useAuth } from "@auth";
+import logger from "@lib/logger";
+import trpcClient from "@lib/trpcClient";
+import { FaSolidFilePen } from "solid-icons/fa";
+import { createSignal, Show } from "solid-js";
+import Modal from "../Modal";
+import NewsForm from "./NewsForm";
 
 const CreateNews = () => {
   const { isAdmin } = useAuth();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     try {
-      const createdNews = await trpcClient.mutation('createNews', {
-        draft: Boolean(formData.get('draft')),
-        author: formData.get('author') as string,
-        publishedAt: new Date(formData.get('publishedAt') as string),
-        cardImage: (formData.get('cardImage') as string) || null,
-        title: formData.get('title') as string,
-        leadParagraph: formData.get('leadParagraph') as string,
-        body: formData.get('body') as string,
+      const createdNews = await trpcClient.mutation("createNews", {
+        draft: Boolean(formData.get("draft")),
+        author: formData.get("author") as string,
+        publishedAt: new Date(formData.get("publishedAt") as string),
+        cardImage: (formData.get("cardImage") as string) || null,
+        title: formData.get("title") as string,
+        leadParagraph: formData.get("leadParagraph") as string,
+        body: formData.get("body") as string,
       });
       window.location.href = `/uutiset/${createdNews.slug}#main`;
     } catch (error) {
       await logger.error(error as Error);
       alert(
-        'Uutisen luominen ei onnistunut. Yritä uudelleen, tai kopioi täyttämäsi kentät talteen ja lataa sivu uudelleen.'
+        "Uutisen luominen ei onnistunut. Yritä uudelleen, tai kopioi täyttämäsi kentät talteen ja lataa sivu uudelleen."
       );
     }
   };

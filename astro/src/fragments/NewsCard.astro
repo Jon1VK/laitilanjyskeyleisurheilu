@@ -1,5 +1,5 @@
 ---
-import type { News } from '@prisma/client';
+import type { News } from "@prisma/client";
 
 interface NewsCardProps {
   news: News;
@@ -22,7 +22,7 @@ const { news } = Astro.props as NewsCardProps;
   }
   <img
     class="h-48 w-full object-cover"
-    src={news.cardImage || '/images/hero-placeholder.webp'}
+    src={news.cardImage || "/images/hero-placeholder.webp"}
     alt=""
     aria-hidden
   />
@@ -32,10 +32,10 @@ const { news } = Astro.props as NewsCardProps;
         {news.author}
       </span>
       <span aria-hidden="true"> &middot;</span>
-      <time datetime={news.publishedAt.toLocaleDateString('sv')}>
+      <time datetime={news.publishedAt.toLocaleDateString("sv")}>
         {
-          news.publishedAt.toLocaleDateString('fi', {
-            dateStyle: 'long',
+          news.publishedAt.toLocaleDateString("fi", {
+            dateStyle: "long",
           })
         }
       </time>
@@ -47,7 +47,7 @@ const { news } = Astro.props as NewsCardProps;
     <p class="mt-3 text-ellipsis text-base text-gray-500">
       {
         `${news.leadParagraph.slice(0, 150)}${
-          news.leadParagraph.length > 150 ? '...' : ''
+          news.leadParagraph.length > 150 ? "..." : ""
         }`
       }
     </p>

@@ -1,5 +1,5 @@
-import prisma from '@lib/prisma';
-import type { Prisma } from '@prisma/client';
+import prisma from "@lib/prisma";
+import type { Prisma } from "@prisma/client";
 
 const PrismaEvent = Object.assign(prisma.event, {
   async findAllBetweenStartDateAndEndDate(startDate: Date, endDate: Date) {
@@ -15,7 +15,7 @@ const PrismaEvent = Object.assign(prisma.event, {
           },
         ],
       },
-      orderBy: { startDateTime: 'asc' },
+      orderBy: { startDateTime: "asc" },
     });
   },
   async findUniqueWithOccurrences(slug: string) {
@@ -30,7 +30,7 @@ const PrismaEvent = Object.assign(prisma.event, {
                   not: slug,
                 },
               },
-              orderBy: { startDateTime: 'asc' },
+              orderBy: { startDateTime: "asc" },
             },
           },
         },
@@ -50,7 +50,7 @@ const PrismaEvent = Object.assign(prisma.event, {
                   not: id,
                 },
               },
-              orderBy: { startDateTime: 'asc' },
+              orderBy: { startDateTime: "asc" },
             },
           },
         },
@@ -66,7 +66,7 @@ const PrismaEvent = Object.assign(prisma.event, {
         pressStartDate: { lte: pressSendDate },
         pressEndDate: { gte: pressSendDate },
       },
-      orderBy: { startDateTime: 'asc' },
+      orderBy: { startDateTime: "asc" },
     });
   },
 });

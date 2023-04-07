@@ -1,5 +1,5 @@
-import EventListStateless from '../EventListStateless';
-import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
+import EventListStateless from "../EventListStateless";
+import { useEventCalendarNavigator } from "./EventCalendarNavigatorProvider";
 
 const EventCalendarMobileEventList = () => {
   const { eventsByDate, selectedDate, deleteEvent } =

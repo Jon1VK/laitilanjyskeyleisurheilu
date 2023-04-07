@@ -1,15 +1,15 @@
-import { useAuth } from '@auth';
-import logger from '@lib/logger';
-import { formattedDateTimePeriod } from '@utils/dates';
+import { useAuth } from "@auth";
+import logger from "@lib/logger";
+import { formattedDateTimePeriod } from "@utils/dates";
 import {
   HiOutlinePencilAlt,
   HiOutlineSpeakerphone,
   HiOutlineTrash,
-} from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
-import EventForm from '../EventForm';
-import Modal from '../Modal';
-import { useEventDetailsModifier } from './EventDetailsModifier';
+} from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
+import EventForm from "../EventForm";
+import Modal from "../Modal";
+import { useEventDetailsModifier } from "./EventDetailsModifier";
 
 const EventDetailsHeader = () => {
   const { isAdmin } = useAuth();
@@ -23,7 +23,7 @@ const EventDetailsHeader = () => {
     } catch (error) {
       await logger.error(error as Error);
       alert(
-        'Tietojen päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen.'
+        "Tietojen päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen."
       );
     }
   };
@@ -71,8 +71,8 @@ const EventDetailsHeader = () => {
           </span>
           <time
             class="text-base text-gray-600 sm:text-base"
-            datetime={event().startDateTime.toLocaleTimeString('sv', {
-              timeZone: 'Europe/Helsinki',
+            datetime={event().startDateTime.toLocaleTimeString("sv", {
+              timeZone: "Europe/Helsinki",
             })}
           >
             {formattedDateTimePeriod(event())}

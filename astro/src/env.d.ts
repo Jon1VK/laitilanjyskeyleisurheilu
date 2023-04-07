@@ -23,7 +23,7 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-declare module 'json-complete' {
+declare module "json-complete" {
   interface JsonComplete {
     encode: (value: any) => any;
     decode: (value: any) => any;
@@ -31,7 +31,7 @@ declare module 'json-complete' {
   export = <JsonComplete>{};
 }
 
-declare module 'jsonwebtoken' {
+declare module "jsonwebtoken" {
   interface JwtPayload {
     user: {
       readonly id: number;

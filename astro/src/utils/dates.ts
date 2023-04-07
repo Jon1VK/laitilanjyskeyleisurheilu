@@ -1,11 +1,11 @@
 export const WEEKDAYS = [
-  'maanantai',
-  'tiistai',
-  'keskiviikko',
-  'torstai',
-  'perjantai',
-  'lauantai',
-  'sunnuntai',
+  "maanantai",
+  "tiistai",
+  "keskiviikko",
+  "torstai",
+  "perjantai",
+  "lauantai",
+  "sunnuntai",
 ] as const;
 
 export const getMonthStartDate = (year: number, month: number) => {
@@ -60,30 +60,30 @@ export const formattedDateTimePeriod = (
     startDateTime: Date;
     endDateTime?: Date | null;
   },
-  dateStyle: 'short' | 'long' = 'long'
+  dateStyle: "short" | "long" = "long"
 ) => {
   const startDateTimeOnly = !endDateTime;
   const startAndEndDateTimeOnSameDate =
     startDateTime.toDateString() === endDateTime?.toDateString();
-  const startDateTimeString = startDateTime.toLocaleString('fi', {
-    timeZone: 'Europe/Helsinki',
+  const startDateTimeString = startDateTime.toLocaleString("fi", {
+    timeZone: "Europe/Helsinki",
     dateStyle: dateStyle,
     timeStyle:
-      startDateTimeOnly || startAndEndDateTimeOnSameDate ? 'short' : undefined,
+      startDateTimeOnly || startAndEndDateTimeOnSameDate ? "short" : undefined,
   });
-  const divider = startDateTimeOnly ? '' : ' - ';
-  const endDateTimeString = endDateTime?.toLocaleString('fi', {
-    timeZone: 'Europe/Helsinki',
+  const divider = startDateTimeOnly ? "" : " - ";
+  const endDateTimeString = endDateTime?.toLocaleString("fi", {
+    timeZone: "Europe/Helsinki",
     dateStyle: startAndEndDateTimeOnSameDate ? undefined : dateStyle,
-    timeStyle: startAndEndDateTimeOnSameDate ? 'short' : undefined,
+    timeStyle: startAndEndDateTimeOnSameDate ? "short" : undefined,
   });
-  return `${startDateTimeString}${divider}${endDateTimeString || ''}`;
+  return `${startDateTimeString}${divider}${endDateTimeString || ""}`;
 };
 
 export const toUTCTime = (time: string) => {
-  const currentDateString = new Date().toLocaleDateString('sv');
-  return new Date(`${currentDateString} ${time}`).toLocaleTimeString('sv', {
-    timeZone: 'utc',
+  const currentDateString = new Date().toLocaleDateString("sv");
+  return new Date(`${currentDateString} ${time}`).toLocaleTimeString("sv", {
+    timeZone: "utc",
   });
 };
 

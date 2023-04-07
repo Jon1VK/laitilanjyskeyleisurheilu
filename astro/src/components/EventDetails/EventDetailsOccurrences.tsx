@@ -1,11 +1,11 @@
-import { useAuth } from '@auth';
-import { FaSolidPlus } from 'solid-icons/fa';
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
-import EventForm from '../EventForm';
-import EventListStateless from '../EventListStateless';
-import Modal from '../Modal';
-import { useEventDetailsModifier } from './EventDetailsModifier';
+import { useAuth } from "@auth";
+import { FaSolidPlus } from "solid-icons/fa";
+import { HiOutlinePencilAlt, HiOutlineTrash } from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
+import EventForm from "../EventForm";
+import EventListStateless from "../EventListStateless";
+import Modal from "../Modal";
+import { useEventDetailsModifier } from "./EventDetailsModifier";
 
 const EventDetailsOccurrences = () => {
   const { isAdmin } = useAuth();
@@ -87,8 +87,8 @@ const EventDetailsOccurrences = () => {
             Muokkaa kaikkia tapahtumakertoja
           </h3>
           <p class="mb-3 text-gray-600">
-            Aiot muokata tapahtumasarjan kaikkia{' '}
-            {(event().recurringEvent?.occurrences.length as number) + 1}{' '}
+            Aiot muokata tapahtumasarjan kaikkia{" "}
+            {(event().recurringEvent?.occurrences.length as number) + 1}{" "}
             tapahtumakertaa. Tämä ylikirjoittaa yksittäisten kertojen tiedot.
           </p>
           <p class="text-gray-600">
@@ -129,8 +129,8 @@ const EventDetailsOccurrences = () => {
             {event().title}
           </h3>
           <p class="mb-3 text-gray-600">
-            Olet poistamassa kaikki{' '}
-            {(event().recurringEvent?.occurrences.length as number) + 1}{' '}
+            Olet poistamassa kaikki{" "}
+            {(event().recurringEvent?.occurrences.length as number) + 1}{" "}
             tapahtumakertaa.
           </p>
           <p class="text-gray-600">Haluatko suorittaa toiminnon loppuun?</p>

@@ -1,7 +1,7 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import { PrismaUser } from '@models';
-import { parameterize } from 'inflected';
+import Layout from "@layouts/Layout.astro";
+import { PrismaUser } from "@models";
+import { parameterize } from "inflected";
 
 const athletes = await PrismaUser.findAllAthletes();
 ---
@@ -22,7 +22,7 @@ const athletes = await PrismaUser.findAllAthletes();
     />
     <meta
       property="og:image"
-      content={new URL('/images/athletes.webp', Astro.url)}
+      content={new URL("/images/athletes.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -77,7 +77,7 @@ const athletes = await PrismaUser.findAllAthletes();
                   class="mx-auto h-20 w-20 rounded-full object-cover lg:h-24 lg:w-24"
                   src={
                     athlete.athleteProfile?.avatar ||
-                    '/images/avatar-placeholder.jpg'
+                    "/images/avatar-placeholder.jpg"
                   }
                   alt={`${athlete.name} profiilikuva`}
                 />

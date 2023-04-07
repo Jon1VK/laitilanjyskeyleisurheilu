@@ -1,13 +1,13 @@
 ---
-import { getUser } from '@astro-auth/core';
-import { CreateNews } from '@components';
-import Layout from '@layouts/Layout.astro';
-import { PrismaNews } from '@models';
-import PaginationNav from '@fragments/PaginationNav.astro';
-import NewsCard from '@fragments/NewsCard.astro';
+import { getUser } from "@astro-auth/core";
+import { CreateNews } from "@components";
+import Layout from "@layouts/Layout.astro";
+import { PrismaNews } from "@models";
+import PaginationNav from "@fragments/PaginationNav.astro";
+import NewsCard from "@fragments/NewsCard.astro";
 
 const includeDrafts = Boolean(getUser({ client: Astro }));
-const currentPage = Number(Astro.url.searchParams.get('sivu') || 1);
+const currentPage = Number(Astro.url.searchParams.get("sivu") || 1);
 const pageCount = await PrismaNews.countPages({ includeDrafts });
 const newsArray = await PrismaNews.findNewsForPage(currentPage, {
   includeDrafts,
@@ -27,7 +27,7 @@ const newsArray = await PrismaNews.findNewsForPage(currentPage, {
     />
     <meta
       property="og:image"
-      content={new URL('/images/news.webp', Astro.url)}
+      content={new URL("/images/news.webp", Astro.url)}
     />
     <meta
       property="og:description"

@@ -1,8 +1,8 @@
-import { emailsController } from '@controllers';
-import createRouter from '@lib/createRouter';
+import { emailsController } from "@controllers";
+import createRouter from "@lib/createRouter";
 
 const emailsRouter = createRouter().mutation(
-  'sendContactEmail',
+  "sendContactEmail",
   emailsController.sendContactEmail
 );
 

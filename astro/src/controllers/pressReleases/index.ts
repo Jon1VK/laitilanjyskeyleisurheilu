@@ -1,5 +1,5 @@
-import deletePressRelease from './delete';
-import updatePressRelease from './update';
+import deletePressRelease from "./delete";
+import updatePressRelease from "./update";
 
 const pressReleasesController = {
   update: updatePressRelease,

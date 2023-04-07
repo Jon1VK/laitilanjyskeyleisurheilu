@@ -1,6 +1,6 @@
-import { getUser } from '@astro-auth/core';
-import type { inferAsyncReturnType } from '@trpc/server';
-import type { JwtPayload } from 'jsonwebtoken';
+import { getUser } from "@astro-auth/core";
+import type { inferAsyncReturnType } from "@trpc/server";
+import type { JwtPayload } from "jsonwebtoken";
 
 const createContext = (request: Request) => {
   // eslint-disable-next-line @typescript-eslint/require-await

@@ -1,8 +1,8 @@
-import { useAuth } from '@auth';
-import type { Event } from '@prisma/client';
-import { formattedDateTimePeriod } from '@utils/dates';
-import { HiOutlineTrash, HiSolidClock } from 'solid-icons/hi';
-import { For, Show } from 'solid-js';
+import { useAuth } from "@auth";
+import type { Event } from "@prisma/client";
+import { formattedDateTimePeriod } from "@utils/dates";
+import { HiOutlineTrash, HiSolidClock } from "solid-icons/hi";
+import { For, Show } from "solid-js";
 
 const EventList = (props: {
   events: Event[];
@@ -11,12 +11,12 @@ const EventList = (props: {
   const { isAdmin } = useAuth();
   const clockColor = (event: Event) => {
     switch (event.type) {
-      case 'PRACTICE':
-        return 'text-blue-500';
-      case 'COMPETITION':
-        return 'text-red-500';
-      case 'OTHER':
-        return 'text-gray-400';
+      case "PRACTICE":
+        return "text-blue-500";
+      case "COMPETITION":
+        return "text-red-500";
+      case "OTHER":
+        return "text-gray-400";
     }
   };
   return (
@@ -33,8 +33,8 @@ const EventList = (props: {
                 <p class="font-semibold text-gray-900">{event.title}</p>
                 <p>{event.location}</p>
                 <time
-                  datetime={event.startDateTime.toLocaleString('sv', {
-                    timeZone: 'Europe/Helsinki',
+                  datetime={event.startDateTime.toLocaleString("sv", {
+                    timeZone: "Europe/Helsinki",
                   })}
                   class="mt-2 flex items-center text-gray-700"
                 >

@@ -1,21 +1,21 @@
-import type { Event } from '@prisma/client';
-import { getDayCountBetween } from '@utils/dates';
-import { createSignal, Show, splitProps } from 'solid-js';
+import type { Event } from "@prisma/client";
+import { getDayCountBetween } from "@utils/dates";
+import { createSignal, Show, splitProps } from "solid-js";
 
 const EventFormPressFieldset = (props: {
   event?: Event;
   updateMany?: boolean;
 }) => {
-  const [{ event }, _] = splitProps(props, ['event']);
+  const [{ event }, _] = splitProps(props, ["event"]);
   const initialPressStartBefore = () => {
     return event
       ? getDayCountBetween(event.pressStartDate, event.startDateTime).toString()
-      : '10';
+      : "10";
   };
   const initialPressEndBefore = () => {
     return event
       ? getDayCountBetween(event.pressEndDate, event.startDateTime).toString()
-      : '1';
+      : "1";
   };
   const [pressStartBefore, setPressStartBefore] = createSignal(
     initialPressStartBefore()
@@ -63,7 +63,7 @@ const EventFormPressFieldset = (props: {
               class="mt-1 w-full rounded-md border-gray-300 text-sm accent-red-600 shadow-sm"
             />
             <span class="col-span-3 text-sm">
-              {pressEndBefore()} päivä{pressEndBefore() === '1' ? '' : 'ä'}{' '}
+              {pressEndBefore()} päivä{pressEndBefore() === "1" ? "" : "ä"}{" "}
               ennen tapahtumaa
             </span>
           </div>
@@ -77,7 +77,7 @@ const EventFormPressFieldset = (props: {
               rows={5}
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             >
-              {props.event?.pressBody || ''}
+              {props.event?.pressBody || ""}
             </textarea>
           </div>
         </div>

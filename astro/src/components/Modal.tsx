@@ -1,5 +1,5 @@
-import { HiSolidX } from 'solid-icons/hi';
-import type { ParentComponent } from 'solid-js';
+import { HiSolidX } from "solid-icons/hi";
+import type { ParentComponent } from "solid-js";
 
 const Modal: ParentComponent<{ close: () => void }> = (props) => {
   const handleClose = (event: Event) => {

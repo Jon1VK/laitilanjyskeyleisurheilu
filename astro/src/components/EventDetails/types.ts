@@ -1,4 +1,4 @@
-import type { Event, RecurringEvent } from '@prisma/client';
+import type { Event, RecurringEvent } from "@prisma/client";
 
 export type RecurringEventWithOccurrences = RecurringEvent & {
   occurrences: Event[];

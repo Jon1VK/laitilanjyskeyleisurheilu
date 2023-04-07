@@ -1,11 +1,11 @@
-import { PrismaRecurringEvent } from '@models';
-import type { Event } from '@prisma/client';
-import { getDatesBetween } from '@utils/dates';
-import { parameterize } from 'inflected';
-import { z } from 'zod';
+import { PrismaRecurringEvent } from "@models";
+import type { Event } from "@prisma/client";
+import { getDatesBetween } from "@utils/dates";
+import { parameterize } from "inflected";
+import { z } from "zod";
 
 const input = z.object({
-  type: z.enum(['PRACTICE', 'COMPETITION', 'OTHER']),
+  type: z.enum(["PRACTICE", "COMPETITION", "OTHER"]),
   weekdays: z.array(z.number().min(0).max(6)).min(1),
   recurrenceStartDate: z.date(),
   recurrenceEndDate: z.date(),
@@ -23,12 +23,12 @@ type Input = z.infer<typeof input>;
 
 type Occurrence = Omit<
   Event,
-  | 'id'
-  | 'recurringEventId'
-  | 'resultsFileKey'
-  | 'timetableFileKey'
-  | 'externalUrl'
-  | 'promote'
+  | "id"
+  | "recurringEventId"
+  | "resultsFileKey"
+  | "timetableFileKey"
+  | "externalUrl"
+  | "promote"
 >;
 
 const resolve = async ({ input }: { input: Input }) => {
@@ -47,7 +47,7 @@ const resolve = async ({ input }: { input: Input }) => {
   const occurrences = getDatesBetween(recurrenceStartDate, recurrenceEndDate)
     .filter((date) => weekdays.includes(date.getDay()))
     .map<Occurrence>((date) => {
-      const dateString = date.toLocaleDateString('sv');
+      const dateString = date.toLocaleDateString("sv");
       return {
         ...occurrenceData,
         slug: `${dateString}-${titleSlug}`,

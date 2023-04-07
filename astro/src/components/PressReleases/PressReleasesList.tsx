@@ -1,14 +1,14 @@
-import { useAuth } from '@auth';
-import type { PressRelease } from '@prisma/client';
+import { useAuth } from "@auth";
+import type { PressRelease } from "@prisma/client";
 import {
   HiOutlineMail,
   HiOutlineTrash,
   HiSolidPencilAlt,
-} from 'solid-icons/hi';
-import { For, Show, createSignal } from 'solid-js';
-import Modal from '../Modal';
-import PressReleaseForm from './PressReleaseForm';
-import { usePressReleasesModifier } from './PressReleasesModifier';
+} from "solid-icons/hi";
+import { For, Show, createSignal } from "solid-js";
+import Modal from "../Modal";
+import PressReleaseForm from "./PressReleaseForm";
+import { usePressReleasesModifier } from "./PressReleasesModifier";
 
 const PressReleasesList = () => {
   const { isAdmin } = useAuth();
@@ -29,11 +29,11 @@ const PressReleasesList = () => {
               <div class="flex w-full items-center p-6 font-medium text-blue-700">
                 <HiOutlineMail class="h-7 w-7" />
                 <time class="ml-3 first-letter:uppercase">
-                  {new Date(pressRelease.sendDate).toLocaleDateString('fi', {
-                    timeZone: 'Europe/Helsinki',
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric',
+                  {new Date(pressRelease.sendDate).toLocaleDateString("fi", {
+                    timeZone: "Europe/Helsinki",
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
                   })}
                 </time>
               </div>
@@ -45,8 +45,8 @@ const PressReleasesList = () => {
                   >
                     <HiSolidPencilAlt class="h-5 w-5" />
                     <span class="sr-only">
-                      Muokkaa tiedotetta{' '}
-                      {pressRelease.sendDate.toLocaleDateString('sv')}
+                      Muokkaa tiedotetta{" "}
+                      {pressRelease.sendDate.toLocaleDateString("sv")}
                     </span>
                   </button>
                   <button
@@ -55,8 +55,8 @@ const PressReleasesList = () => {
                   >
                     <HiOutlineTrash class="h-5 w-5" />
                     <span class="sr-only">
-                      Poista tiedote{' '}
-                      {pressRelease.sendDate.toLocaleDateString('sv')}
+                      Poista tiedote{" "}
+                      {pressRelease.sendDate.toLocaleDateString("sv")}
                     </span>
                   </button>
                 </div>

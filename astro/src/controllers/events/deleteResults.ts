@@ -1,6 +1,6 @@
-import supabaseClient from '@lib/supabaseClient';
-import { PrismaEvent } from '@models';
-import { z } from 'zod';
+import supabaseClient from "@lib/supabaseClient";
+import { PrismaEvent } from "@models";
+import { z } from "zod";
 
 const input = z.object({
   id: z.number(),
@@ -14,7 +14,7 @@ const resolve = async ({ input }: { input: Input }) => {
   const updatedEvent = await PrismaEvent.updateAndIncludeOccurrences(id, {
     resultsFileKey: null,
   });
-  await supabaseClient.storage.from('files').remove([resultsFileKey.slice(6)]);
+  await supabaseClient.storage.from("files").remove([resultsFileKey.slice(6)]);
   return updatedEvent;
 };
 

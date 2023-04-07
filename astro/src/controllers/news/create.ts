@@ -1,6 +1,6 @@
-import { PrismaNews } from '@models';
-import { parameterize } from 'inflected';
-import { z } from 'zod';
+import { PrismaNews } from "@models";
+import { parameterize } from "inflected";
+import { z } from "zod";
 
 const input = z.object({
   draft: z.boolean().default(false),
@@ -16,7 +16,7 @@ type Input = z.infer<typeof input>;
 
 const resolve = async ({ input }: { input: Input }) => {
   const titleSlug = parameterize(input.title);
-  const dateSlug = input.publishedAt.toLocaleDateString('sv');
+  const dateSlug = input.publishedAt.toLocaleDateString("sv");
   const slug = `${dateSlug}-${titleSlug}`;
   return await PrismaNews.create({ data: { ...input, slug } });
 };

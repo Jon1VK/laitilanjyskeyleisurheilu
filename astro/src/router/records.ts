@@ -1,8 +1,8 @@
-import { recordsController } from '@controllers';
-import createRouter from '@lib/createRouter';
+import { recordsController } from "@controllers";
+import createRouter from "@lib/createRouter";
 
 const recordsRouter = createRouter().mutation(
-  'createRecord',
+  "createRecord",
   recordsController.create
 );
 

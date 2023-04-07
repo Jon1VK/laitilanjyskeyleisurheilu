@@ -1,10 +1,10 @@
 ---
-import { PressReleases } from '@components';
-import Layout from '@layouts/Layout.astro';
-import { PrismaPressRelease } from '@models';
+import { PressReleases } from "@components";
+import Layout from "@layouts/Layout.astro";
+import { PrismaPressRelease } from "@models";
 
 const pressReleases = await PrismaPressRelease.findMany({
-  orderBy: { sendDate: 'asc' },
+  orderBy: { sendDate: "asc" },
 });
 ---
 

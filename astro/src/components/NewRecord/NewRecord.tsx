@@ -1,20 +1,20 @@
-import trpcClient from '@lib/trpcClient';
-import type { League, RecordEvent } from '@utils/records';
-import { Show, createSignal } from 'solid-js';
-import Modal from '../Modal';
-import RecordForm from './RecordForm';
+import trpcClient from "@lib/trpcClient";
+import type { League, RecordEvent } from "@utils/records";
+import { Show, createSignal } from "solid-js";
+import Modal from "../Modal";
+import RecordForm from "./RecordForm";
 
 const NewRecord = () => {
   const [showForm, setShowForm] = createSignal(false);
   const [showConfirmation, setShowConfirmation] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
-    await trpcClient.mutation('createRecord', {
-      league: formData.get('league') as League,
-      athlete: formData.get('athlete') as string,
-      event: formData.get('event') as RecordEvent,
-      result: formData.get('result') as string,
-      achievedAt: new Date(formData.get('achievedAt') as string),
-      location: formData.get('location') as string,
+    await trpcClient.mutation("createRecord", {
+      league: formData.get("league") as League,
+      athlete: formData.get("athlete") as string,
+      event: formData.get("event") as RecordEvent,
+      result: formData.get("result") as string,
+      achievedAt: new Date(formData.get("achievedAt") as string),
+      location: formData.get("location") as string,
     });
     setShowForm(false);
     setShowConfirmation(true);

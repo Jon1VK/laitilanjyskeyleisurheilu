@@ -1,5 +1,5 @@
-import { WEEKDAYS } from '@utils/dates';
-import { For, Setter, Show } from 'solid-js';
+import { WEEKDAYS } from "@utils/dates";
+import { For, Setter, Show } from "solid-js";
 
 const EventFormRecurrenceFieldset = (props: {
   isRecurring: boolean;

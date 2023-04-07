@@ -1,5 +1,5 @@
-import prisma from '@lib/prisma';
-import type { Prisma } from '@prisma/client';
+import prisma from "@lib/prisma";
+import type { Prisma } from "@prisma/client";
 
 const PrismaRecurringEvent = Object.assign(prisma.recurringEvent, {
   async updateAllOccurrences(id: number, data: Prisma.EventUpdateInput) {

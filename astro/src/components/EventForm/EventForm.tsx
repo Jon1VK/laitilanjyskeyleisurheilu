@@ -1,10 +1,10 @@
-import type { EventType, Event as IEvent } from '@prisma/client';
-import { HiSolidPencilAlt } from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
-import EventFormDetailsFieldSet from './EventFormDetailsFieldSet';
-import EventFormPressFieldset from './EventFormPressFieldset';
-import EventFormRecurrenceFieldset from './EventFormRecurrenceFieldset';
-import EventFormTypeFieldset from './EventFormTypeFieldset';
+import type { EventType, Event as IEvent } from "@prisma/client";
+import { HiSolidPencilAlt } from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
+import EventFormDetailsFieldSet from "./EventFormDetailsFieldSet";
+import EventFormPressFieldset from "./EventFormPressFieldset";
+import EventFormRecurrenceFieldset from "./EventFormRecurrenceFieldset";
+import EventFormTypeFieldset from "./EventFormTypeFieldset";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -15,7 +15,7 @@ const EventForm = (props: {
   onSubmit: (formData: FormData) => void;
   updateMany?: boolean;
 }) => {
-  const [eventType, setEventType] = createSignal<EventType>('PRACTICE');
+  const [eventType, setEventType] = createSignal<EventType>("PRACTICE");
   const [isRecurring, setIsRecurring] = createSignal(false);
   const handleSubmit: SubmitHandler = (event) => {
     event.preventDefault();

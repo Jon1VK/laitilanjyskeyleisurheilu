@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon';
-import Layout from '@layouts/Layout.astro';
-import contacts from '@data/contacts';
-import { ContactEmailForm } from '@components';
+import { Icon } from "astro-icon";
+import Layout from "@layouts/Layout.astro";
+import contacts from "@data/contacts";
+import { ContactEmailForm } from "@components";
 ---
 
 <Layout>
@@ -21,7 +21,7 @@ import { ContactEmailForm } from '@components';
     />
     <meta
       property="og:image"
-      content={new URL('/images/contacts.webp', Astro.url)}
+      content={new URL("/images/contacts.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -190,7 +190,7 @@ import { ContactEmailForm } from '@components';
                   >
                     {name}
                   </th>
-                  <td class="px-3 py-4">{title ? title : '-'}</td>
+                  <td class="px-3 py-4">{title ? title : "-"}</td>
                   <td class="px-3 py-4">
                     <a
                       class="hover:text-gray-900 hover:underline"

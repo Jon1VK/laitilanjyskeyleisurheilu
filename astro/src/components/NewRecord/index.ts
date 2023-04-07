@@ -1,1 +1,1 @@
-export { default } from './NewRecord';
+export { default } from "./NewRecord";

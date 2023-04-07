@@ -1,1 +1,1 @@
-export { default } from './CreateNews';
+export { default } from "./CreateNews";

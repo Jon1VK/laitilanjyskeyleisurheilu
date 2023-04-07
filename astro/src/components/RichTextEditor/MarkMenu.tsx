@@ -1,10 +1,10 @@
-import type { Editor } from '@tiptap/core';
+import type { Editor } from "@tiptap/core";
 import {
   FaSolidBold,
   FaSolidItalic,
   FaSolidLink,
   FaSolidStrikethrough,
-} from 'solid-icons/fa';
+} from "solid-icons/fa";
 
 const MarkMenu = (props: {
   editor?: Editor;
@@ -15,7 +15,7 @@ const MarkMenu = (props: {
       <button
         type="button"
         title="Lihavoitu teksti"
-        class={`rounded-l-md ${props.buttonStyle('bold')}`}
+        class={`rounded-l-md ${props.buttonStyle("bold")}`}
         onClick={() => props.editor?.chain().focus().toggleBold().run()}
       >
         <FaSolidBold class="h-4 w-4" />
@@ -23,7 +23,7 @@ const MarkMenu = (props: {
       <button
         type="button"
         title="Kursivoitu teksti"
-        class={props.buttonStyle('italic')}
+        class={props.buttonStyle("italic")}
         onClick={() => props.editor?.chain().focus().toggleItalic().run()}
       >
         <FaSolidItalic class="h-4 w-4" />
@@ -31,7 +31,7 @@ const MarkMenu = (props: {
       <button
         type="button"
         title="Yliviivattu teksti"
-        class={props.buttonStyle('strike')}
+        class={props.buttonStyle("strike")}
         onClick={() => props.editor?.chain().focus().toggleStrike().run()}
       >
         <FaSolidStrikethrough class="h-4 w-4" />
@@ -39,12 +39,12 @@ const MarkMenu = (props: {
       <button
         type="button"
         title="Lisää linkki"
-        class={`rounded-r-md ${props.buttonStyle('link')}`}
+        class={`rounded-r-md ${props.buttonStyle("link")}`}
         onClick={() =>
           props.editor
             ?.chain()
             .focus()
-            .toggleLink({ href: prompt('Syötä linkki:') ?? '' })
+            .toggleLink({ href: prompt("Syötä linkki:") ?? "" })
             .run()
         }
       >

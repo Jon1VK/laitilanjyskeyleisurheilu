@@ -1,4 +1,4 @@
-import prisma from '@lib/prisma';
+import prisma from "@lib/prisma";
 
 const PAGE_SIZE = 6;
 
@@ -7,7 +7,7 @@ const PrismaNews = Object.assign(prisma.news, {
     return prisma.news.findMany({
       where: { draft: false },
       take,
-      orderBy: { publishedAt: 'desc' },
+      orderBy: { publishedAt: "desc" },
     });
   },
   async countPages({ includeDrafts = false }) {
@@ -21,7 +21,7 @@ const PrismaNews = Object.assign(prisma.news, {
       where: includeDrafts ? {} : { draft: false },
       skip: (page - 1) * PAGE_SIZE,
       take: PAGE_SIZE,
-      orderBy: [{ draft: 'desc' }, { publishedAt: 'desc' }],
+      orderBy: [{ draft: "desc" }, { publishedAt: "desc" }],
     });
   },
 });

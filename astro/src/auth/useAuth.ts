@@ -1,8 +1,8 @@
-import { signIn, signOut } from '@astro-auth/client';
-import { ExtendedUser } from '@models';
-import type { User } from '@prisma/client';
-import type { Accessor } from 'solid-js';
-import { user } from './UserStore';
+import { signIn, signOut } from "@astro-auth/client";
+import type { ExtendedUser } from "@models";
+import type { User } from "@prisma/client";
+import type { Accessor } from "solid-js";
+import { user } from "./UserStore";
 
 const isLoggedIn = () => !!user();
 const isAdmin = () => !!user()?.isAdmin;

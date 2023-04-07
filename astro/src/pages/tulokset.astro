@@ -1,14 +1,14 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import supabaseClient from '@lib/supabaseClient';
-import Icon from 'astro-icon';
-import PaginationNav from '@fragments/PaginationNav.astro';
+import Layout from "@layouts/Layout.astro";
+import supabaseClient from "@lib/supabaseClient";
+import Icon from "astro-icon";
+import PaginationNav from "@fragments/PaginationNav.astro";
 
 const PAGE_SIZE = 12;
-const currentPage = Number(Astro.url.searchParams.get('sivu') || 1);
+const currentPage = Number(Astro.url.searchParams.get("sivu") || 1);
 const { data: files } = await supabaseClient.storage
-  .from('files')
-  .list('results', { sortBy: { column: 'name', order: 'desc' } });
+  .from("files")
+  .list("results", { sortBy: { column: "name", order: "desc" } });
 const pageCount = Math.ceil((files?.length || 1) / PAGE_SIZE);
 const filesForPage = files?.slice(
   (currentPage - 1) * PAGE_SIZE,
@@ -32,7 +32,7 @@ const filesForPage = files?.slice(
     />
     <meta
       property="og:image"
-      content={new URL('/images/news.webp', Astro.url)}
+      content={new URL("/images/news.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -92,12 +92,12 @@ const filesForPage = files?.slice(
               />
               <div class="ml-3 flex flex-col">
                 <span class="font-medium text-blue-700">
-                  {file.name.split('__')[1]}
+                  {file.name.split("__")[1]}
                 </span>
                 <time class="text-sm first-letter:uppercase">
-                  {new Date(file.name.slice(0, 10)).toLocaleDateString('fi', {
-                    timeZone: 'Europe/Helsinki',
-                    dateStyle: 'full',
+                  {new Date(file.name.slice(0, 10)).toLocaleDateString("fi", {
+                    timeZone: "Europe/Helsinki",
+                    dateStyle: "full",
                   })}
                 </time>
               </div>

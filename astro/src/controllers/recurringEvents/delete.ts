@@ -1,5 +1,5 @@
-import { PrismaRecurringEvent } from '@models';
-import { z } from 'zod';
+import { PrismaRecurringEvent } from "@models";
+import { z } from "zod";
 
 const input = z.number();
 

@@ -1,1 +1,1 @@
-export { default } from './PressReleases';
+export { default } from "./PressReleases";

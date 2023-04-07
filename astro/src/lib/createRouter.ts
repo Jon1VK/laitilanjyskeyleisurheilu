@@ -1,5 +1,5 @@
-import { router } from '@trpc/server';
-import type { Context } from './createContext';
+import { router } from "@trpc/server";
+import type { Context } from "./createContext";
 
 const createRouter = () => router<Context>();
 

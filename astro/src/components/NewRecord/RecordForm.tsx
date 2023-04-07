@@ -3,15 +3,15 @@ import {
   GENDERS,
   League,
   LEAGUES_BY_GENDER,
-} from '@utils/records';
-import { createSignal, For } from 'solid-js';
+} from "@utils/records";
+import { createSignal, For } from "solid-js";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
 ) => void;
 
 const RecordForm = (props: { onSubmit: (formData: FormData) => void }) => {
-  const [selectedLeague, setSelectedLeague] = createSignal<League>('Miehet');
+  const [selectedLeague, setSelectedLeague] = createSignal<League>("Miehet");
   const handleSubmit: SubmitHandler = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

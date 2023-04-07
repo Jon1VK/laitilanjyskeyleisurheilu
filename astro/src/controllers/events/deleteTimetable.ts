@@ -1,6 +1,6 @@
-import supabaseClient from '@lib/supabaseClient';
-import { PrismaEvent } from '@models';
-import { z } from 'zod';
+import supabaseClient from "@lib/supabaseClient";
+import { PrismaEvent } from "@models";
+import { z } from "zod";
 
 const input = z.object({
   id: z.number(),
@@ -15,7 +15,7 @@ const resolve = async ({ input }: { input: Input }) => {
     timetableFileKey: null,
   });
   await supabaseClient.storage
-    .from('files')
+    .from("files")
     .remove([timetableFileKey.slice(6)]);
   return updatedEvent;
 };

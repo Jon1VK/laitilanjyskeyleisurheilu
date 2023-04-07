@@ -1,11 +1,11 @@
-import { useAuth } from 'src/auth';
+import { useAuth } from "src/auth";
 
 const Login = () => {
   const { isLoggedIn, signIn, signOut } = useAuth();
   return (
     <button
       onClick={() =>
-        isLoggedIn() ? signOut() : signIn({ provider: 'google' })
+        isLoggedIn() ? signOut() : signIn({ provider: "google" })
       }
     >
       &copy;

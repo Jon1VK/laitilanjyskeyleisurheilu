@@ -1,13 +1,13 @@
-import trpcClient from '@lib/trpcClient';
-import type { Event, EventType } from '@prisma/client';
+import trpcClient from "@lib/trpcClient";
+import type { Event, EventType } from "@prisma/client";
 import {
   getCalendarDates,
   getMonthDates,
   getMonthEndDate,
   getMonthStartDate,
   toUTCTime,
-} from '@utils/dates';
-import { mapEventsByDate } from '@utils/events';
+} from "@utils/dates";
+import { mapEventsByDate } from "@utils/events";
 import {
   Context,
   ParentComponent,
@@ -16,7 +16,7 @@ import {
   createResource,
   createSignal,
   useContext,
-} from 'solid-js';
+} from "solid-js";
 
 const createEventCalendarNavigator = (
   initialYear: number,
@@ -33,14 +33,14 @@ const createEventCalendarNavigator = (
   );
 
   const humanized = () => {
-    return new Date(year(), month()).toLocaleDateString('fi', {
-      year: 'numeric',
-      month: 'long',
+    return new Date(year(), month()).toLocaleDateString("fi", {
+      year: "numeric",
+      month: "long",
     });
   };
 
   const datetime = () => {
-    return new Date(year(), month()).toLocaleDateString('sv').slice(0, 7);
+    return new Date(year(), month()).toLocaleDateString("sv").slice(0, 7);
   };
 
   const isInCurrentMonth = (date: Date) => {
@@ -54,7 +54,7 @@ const createEventCalendarNavigator = (
       startDate: getMonthStartDate(year(), month()),
       endDate: getMonthEndDate(year(), month()),
     }),
-    (query) => trpcClient.query('getAllEvents', query)
+    (query) => trpcClient.query("getAllEvents", query)
   );
 
   const eventsByDate = createMemo(() => {
@@ -66,18 +66,18 @@ const createEventCalendarNavigator = (
   });
 
   const createEvent = async (formData: FormData) => {
-    const type = formData.get('type') as EventType;
-    const startDateTime = new Date(formData.get('startDateTime') as string);
-    const endDateTimeValue = formData.get('endDateTime') as string;
+    const type = formData.get("type") as EventType;
+    const startDateTime = new Date(formData.get("startDateTime") as string);
+    const endDateTimeValue = formData.get("endDateTime") as string;
     const endDateTime = endDateTimeValue ? new Date(endDateTimeValue) : null;
-    const title = formData.get('title') as string;
-    const location = (formData.get('location') as string) || null;
-    const externalUrl = (formData.get('externalUrl') as string) || null;
-    const description = (formData.get('description') as string) || null;
-    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
-    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
-    const pressBody = (formData.get('pressBody') as string) || null;
-    await trpcClient.mutation('createEvent', {
+    const title = formData.get("title") as string;
+    const location = (formData.get("location") as string) || null;
+    const externalUrl = (formData.get("externalUrl") as string) || null;
+    const description = (formData.get("description") as string) || null;
+    const pressStartBefore = Number(formData.get("pressStartBefore") as string);
+    const pressEndBefore = Number(formData.get("pressEndBefore") as string);
+    const pressBody = (formData.get("pressBody") as string) || null;
+    await trpcClient.mutation("createEvent", {
       type,
       startDateTime,
       endDateTime,
@@ -93,29 +93,29 @@ const createEventCalendarNavigator = (
   };
 
   const deleteEvent = async (event: Event) => {
-    await trpcClient.mutation('deleteEvent', event.id);
+    await trpcClient.mutation("deleteEvent", event.id);
     await refetch();
   };
 
   const createRecurringEvent = async (formData: FormData) => {
-    const type = formData.get('type') as EventType;
-    const weekdays = formData.getAll('weekdays').map(Number);
+    const type = formData.get("type") as EventType;
+    const weekdays = formData.getAll("weekdays").map(Number);
     const recurrenceStartDate = new Date(
-      formData.get('recurrenceStartDate') as string
+      formData.get("recurrenceStartDate") as string
     );
     const recurrenceEndDate = new Date(
-      formData.get('recurrenceEndDate') as string
+      formData.get("recurrenceEndDate") as string
     );
-    const startTime = toUTCTime(formData.get('startDateTime') as string);
-    const endTimeValue = formData.get('endDateTime') as string;
+    const startTime = toUTCTime(formData.get("startDateTime") as string);
+    const endTimeValue = formData.get("endDateTime") as string;
     const endTime = endTimeValue ? toUTCTime(endTimeValue) : null;
-    const title = formData.get('title') as string;
-    const location = (formData.get('location') as string) || null;
-    const description = (formData.get('description') as string) || null;
-    const pressStartBefore = Number(formData.get('pressStartBefore') as string);
-    const pressEndBefore = Number(formData.get('pressEndBefore') as string);
-    const pressBody = (formData.get('pressBody') as string) || null;
-    await trpcClient.mutation('createRecurringEvent', {
+    const title = formData.get("title") as string;
+    const location = (formData.get("location") as string) || null;
+    const description = (formData.get("description") as string) || null;
+    const pressStartBefore = Number(formData.get("pressStartBefore") as string);
+    const pressEndBefore = Number(formData.get("pressEndBefore") as string);
+    const pressBody = (formData.get("pressBody") as string) || null;
+    await trpcClient.mutation("createRecurringEvent", {
       type,
       weekdays,
       recurrenceStartDate,
@@ -138,7 +138,7 @@ const createEventCalendarNavigator = (
     const toMonth = date.getMonth();
     window.history.replaceState(
       {},
-      '',
+      "",
       `?vuosi=${toYear}&kuukausi=${toMonth + 1}`
     );
     setYear(toYear);

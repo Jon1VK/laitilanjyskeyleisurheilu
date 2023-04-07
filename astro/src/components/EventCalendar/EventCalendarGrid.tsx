@@ -1,7 +1,7 @@
-import type { Event } from '@prisma/client';
-import { WEEKDAYS } from '@utils/dates';
-import { For } from 'solid-js';
-import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
+import type { Event } from "@prisma/client";
+import { WEEKDAYS } from "@utils/dates";
+import { For } from "solid-js";
+import { useEventCalendarNavigator } from "./EventCalendarNavigatorProvider";
 
 const EventCalendarGrid = () => (
   <div class="bg-gray-200 text-xs leading-6 text-gray-700">
@@ -31,7 +31,7 @@ const EventCalendarLaptopGrid = () => {
         {(date) => (
           <div
             class={`min-h-[5rem] px-3 py-2 ${
-              isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
+              isInCurrentMonth(date) ? "bg-white" : "bg-gray-50 text-gray-500"
             }`}
           >
             <EventCalendarGridDateNumber date={date} />
@@ -57,7 +57,7 @@ const EventCalendarMobileGrid = () => {
             type="button"
             onClick={() => selectDate(date)}
             class={`flex min-h-[3.5rem] flex-col px-3 py-2 hover:bg-gray-100 ${
-              isInCurrentMonth(date) ? 'bg-white' : 'bg-gray-50 text-gray-500'
+              isInCurrentMonth(date) ? "bg-white" : "bg-gray-50 text-gray-500"
             }`}
           >
             <EventCalendarGridDateNumber date={date} mobile />
@@ -78,23 +78,23 @@ const EventCalendarGridDateNumber = (props: {
 }) => {
   const { selectedDate } = useEventCalendarNavigator();
   const timeStyle = (date: Date) => {
-    const localeDate = date.toLocaleDateString('sv', {
-      timeZone: 'Europe/Helsinki',
+    const localeDate = date.toLocaleDateString("sv", {
+      timeZone: "Europe/Helsinki",
     });
-    const currentLocaleDate = new Date().toLocaleDateString('sv', {
-      timeZone: 'Europe/Helsinki',
+    const currentLocaleDate = new Date().toLocaleDateString("sv", {
+      timeZone: "Europe/Helsinki",
     });
     if (props.mobile && selectedDate().toDateString() === date.toDateString()) {
-      return 'flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 font-semibold text-white';
+      return "flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 font-semibold text-white";
     }
     if (localeDate === currentLocaleDate) {
-      return 'font-semibold text-blue-600 lg:-ml-1.5 lg:flex lg:h-6 lg:w-6 lg:items-center lg:justify-center lg:rounded-full lg:bg-blue-600 lg:text-white';
+      return "font-semibold text-blue-600 lg:-ml-1.5 lg:flex lg:h-6 lg:w-6 lg:items-center lg:justify-center lg:rounded-full lg:bg-blue-600 lg:text-white";
     }
   };
   return (
     <time
       class={timeStyle(props.date)}
-      datetime={props.date.toLocaleDateString('sv')}
+      datetime={props.date.toLocaleDateString("sv")}
     >
       {props.date.getDate()}
     </time>
@@ -104,18 +104,18 @@ const EventCalendarGridDateNumber = (props: {
 const EventCalendarGridEventList = (props: { date: Date; events: Event[] }) => {
   const dotColor = (event: Event) => {
     switch (event.type) {
-      case 'PRACTICE':
-        return 'bg-blue-500 group-hover:bg-blue-600';
-      case 'COMPETITION':
-        return 'bg-red-500 group-hover:bg-red-600';
-      case 'OTHER':
-        return 'bg-gray-400 group-hover:bg-blue-600';
+      case "PRACTICE":
+        return "bg-blue-500 group-hover:bg-blue-600";
+      case "COMPETITION":
+        return "bg-red-500 group-hover:bg-red-600";
+      case "OTHER":
+        return "bg-gray-400 group-hover:bg-blue-600";
     }
   };
   const hoverColor = (event: Event) => {
-    return event.type === 'COMPETITION'
-      ? 'group-hover:text-red-600'
-      : 'group-hover:text-blue-700';
+    return event.type === "COMPETITION"
+      ? "group-hover:text-red-600"
+      : "group-hover:text-blue-700";
   };
   return (
     <>
@@ -141,16 +141,16 @@ const EventCalendarGridEventList = (props: { date: Date; events: Event[] }) => {
                   {event.title}
                 </p>
                 <time
-                  datetime={event.startDateTime.toLocaleString('sv', {
-                    timeZone: 'Europe/Helsinki',
+                  datetime={event.startDateTime.toLocaleString("sv", {
+                    timeZone: "Europe/Helsinki",
                   })}
                   class={`ml-3 hidden flex-none xl:block ${hoverColor(event)}`}
                 >
                   {props.date.toDateString() ===
                     event.startDateTime.toDateString() &&
-                    event.startDateTime.toLocaleTimeString('fi', {
-                      timeZone: 'Europe/Helsinki',
-                      timeStyle: 'short',
+                    event.startDateTime.toLocaleTimeString("fi", {
+                      timeZone: "Europe/Helsinki",
+                      timeStyle: "short",
                     })}
                 </time>
               </a>

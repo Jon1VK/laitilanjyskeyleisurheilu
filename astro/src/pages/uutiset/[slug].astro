@@ -1,11 +1,11 @@
 ---
-import { Icon } from 'astro-icon';
-import Layout from '@layouts/Layout.astro';
-import { PrismaNews } from '@models';
+import { Icon } from "astro-icon";
+import Layout from "@layouts/Layout.astro";
+import { PrismaNews } from "@models";
 
 const slug = Astro.params.slug as string;
 const news = await PrismaNews.findUnique({ where: { slug } });
-if (!news) return Astro.redirect('/404');
+if (!news) return Astro.redirect("/404");
 ---
 
 <Layout title={news.title}>
@@ -74,9 +74,9 @@ if (!news) return Astro.redirect('/404');
           <div class="mt-3 text-lg text-gray-500 sm:mt-4 sm:text-xl">
             <span class="font-medium text-blue-600">{news.author}</span>
             <span aria-hidden="true"> &middot;</span>
-            <time datetime={news.publishedAt.toLocaleDateString('sv')}
+            <time datetime={news.publishedAt.toLocaleDateString("sv")}
               >{
-                news.publishedAt.toLocaleDateString('fi', { dateStyle: 'full' })
+                news.publishedAt.toLocaleDateString("fi", { dateStyle: "full" })
               }
             </time>
           </div>

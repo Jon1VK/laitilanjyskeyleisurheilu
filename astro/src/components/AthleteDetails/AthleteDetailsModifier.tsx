@@ -1,14 +1,14 @@
-import logger from '@lib/logger';
-import trpcClient from '@lib/trpcClient';
-import uploadImage from '@lib/uploadImage';
+import logger from "@lib/logger";
+import trpcClient from "@lib/trpcClient";
+import uploadImage from "@lib/uploadImage";
 import {
   Context,
   createContext,
   createSignal,
   ParentComponent,
   useContext,
-} from 'solid-js';
-import type { AthleteProfileWithAthlete } from './types';
+} from "solid-js";
+import type { AthleteProfileWithAthlete } from "./types";
 
 const createAthleteDetailsModifier = (
   initialAthleteProfile: AthleteProfileWithAthlete
@@ -20,11 +20,11 @@ const createAthleteDetailsModifier = (
   const updateHeroImage = async (image: File) => {
     try {
       const src = await uploadImage(image);
-      await trpcClient.mutation('updateAthleteProfile', { heroImage: src });
+      await trpcClient.mutation("updateAthleteProfile", { heroImage: src });
       location.reload();
     } catch (error) {
       await logger.error(error as Error);
-      alert('Kansikuvan lataus ei onnistunut. Yritä uudelleen!');
+      alert("Kansikuvan lataus ei onnistunut. Yritä uudelleen!");
     }
   };
 
@@ -32,19 +32,19 @@ const createAthleteDetailsModifier = (
     try {
       const src = await uploadImage(image);
       const updatedAthleteProfile = await trpcClient.mutation(
-        'updateAthleteProfile',
+        "updateAthleteProfile",
         { avatar: src }
       );
       setAthleteProfile(updatedAthleteProfile);
     } catch (error) {
       await logger.error(error as Error);
-      alert('Henkilökuvan lataus ei onnistunut. Yritä uudelleen!');
+      alert("Henkilökuvan lataus ei onnistunut. Yritä uudelleen!");
     }
   };
 
   const updateProfile = async (formData: FormData) => {
     const updatedAthleteProfile = await trpcClient.mutation(
-      'updateAthleteProfile',
+      "updateAthleteProfile",
       Object.fromEntries(formData)
     );
     setAthleteProfile(updatedAthleteProfile);

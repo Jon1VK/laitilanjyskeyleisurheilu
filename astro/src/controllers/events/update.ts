@@ -1,5 +1,5 @@
-import { PrismaEvent } from '@models';
-import { z } from 'zod';
+import { PrismaEvent } from "@models";
+import { z } from "zod";
 
 const input = z.object({
   id: z.number().int(),

@@ -1,8 +1,8 @@
-import { useAuth } from '@auth';
-import { FaSolidFileLines, FaSolidLink } from 'solid-icons/fa';
-import { HiOutlineTrash } from 'solid-icons/hi';
-import { Show } from 'solid-js';
-import { useEventDetailsModifier } from './EventDetailsModifier';
+import { useAuth } from "@auth";
+import { FaSolidFileLines, FaSolidLink } from "solid-icons/fa";
+import { HiOutlineTrash } from "solid-icons/hi";
+import { Show } from "solid-js";
+import { useEventDetailsModifier } from "./EventDetailsModifier";
 
 const EventDetailsFiles = () => {
   const { isAdmin } = useAuth();
@@ -14,7 +14,7 @@ const EventDetailsFiles = () => {
     deleteResults,
   } = useEventDetailsModifier();
   return (
-    <Show when={event().type === 'COMPETITION'}>
+    <Show when={event().type === "COMPETITION"}>
       <div class="prose prose-blue mt-3 flex flex-col gap-2">
         <Show when={event().externalUrl}>
           <a

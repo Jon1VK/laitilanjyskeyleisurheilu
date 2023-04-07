@@ -1,6 +1,6 @@
-import { mergeAttributes, Node, SingleCommands } from '@tiptap/core';
+import { mergeAttributes, Node, SingleCommands } from "@tiptap/core";
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     image: {
       setImage: (options: { src: string }) => ReturnType;
@@ -9,9 +9,9 @@ declare module '@tiptap/core' {
 }
 
 const Image = Node.create({
-  name: 'image',
-  group: 'block',
-  content: 'inline*',
+  name: "image",
+  group: "block",
+  content: "inline*",
   draggable: true,
   isolating: true,
 
@@ -20,27 +20,27 @@ const Image = Node.create({
       src: {
         default: null,
         parseHTML: (element) =>
-          element.querySelector('img')?.getAttribute('src'),
+          element.querySelector("img")?.getAttribute("src"),
       },
     };
   },
 
   parseHTML() {
-    return [{ tag: 'figure', contentElement: 'figcaption' }];
+    return [{ tag: "figure", contentElement: "figcaption" }];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
-      'figure',
+      "figure",
       [
-        'img',
+        "img",
         mergeAttributes(HTMLAttributes, {
-          class: 'w-full rounded-lg',
+          class: "w-full rounded-lg",
           draggable: false,
           contentEditable: false,
         }),
       ],
-      ['figcaption', 0],
+      ["figcaption", 0],
     ];
   },
 

@@ -1,13 +1,13 @@
-import { useAuth } from '@auth';
+import { useAuth } from "@auth";
 import {
   HiOutlineChevronLeft,
   HiOutlineChevronRight,
   HiOutlinePlus,
-} from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
-import EventForm from '../EventForm';
-import Modal from '../Modal';
-import { useEventCalendarNavigator } from './EventCalendarNavigatorProvider';
+} from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
+import EventForm from "../EventForm";
+import Modal from "../Modal";
+import { useEventCalendarNavigator } from "./EventCalendarNavigatorProvider";
 
 const EventCalendarHeader = () => {
   const {
@@ -21,7 +21,7 @@ const EventCalendarHeader = () => {
   const { isAdmin } = useAuth();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
-    const isRecurring = formData.has('isRecurring');
+    const isRecurring = formData.has("isRecurring");
     await (isRecurring
       ? createRecurringEvent(formData)
       : createEvent(formData));

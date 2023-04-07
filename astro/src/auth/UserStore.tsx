@@ -1,5 +1,5 @@
-import type { ExtendedUser } from '@models';
-import { createEffect, createSignal } from 'solid-js';
+import type { ExtendedUser } from "@models";
+import { createEffect, createSignal } from "solid-js";
 
 const [user, setUser] = createSignal<ExtendedUser>();
 

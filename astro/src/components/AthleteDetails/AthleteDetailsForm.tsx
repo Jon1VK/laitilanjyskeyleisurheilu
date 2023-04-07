@@ -1,7 +1,7 @@
-import type { AthleteProfile } from '@prisma/client';
-import { FaBrandsInstagram, FaBrandsLinkedinIn } from 'solid-icons/fa';
-import { createSignal } from 'solid-js';
-import RichTextEditor from '../RichTextEditor';
+import type { AthleteProfile } from "@prisma/client";
+import { FaBrandsInstagram, FaBrandsLinkedinIn } from "solid-icons/fa";
+import { createSignal } from "solid-js";
+import RichTextEditor from "../RichTextEditor";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -11,11 +11,11 @@ const AthleteDetailsForm = (props: {
   athleteProfile: AthleteProfile;
   onSubmit: (formData: FormData) => void;
 }) => {
-  const [richTextDescription, setRichTextDescription] = createSignal('');
+  const [richTextDescription, setRichTextDescription] = createSignal("");
   const handleSubmit: SubmitHandler = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    formData.set('description', richTextDescription());
+    formData.set("description", richTextDescription());
     props.onSubmit(formData);
   };
   return (
@@ -33,7 +33,7 @@ const AthleteDetailsForm = (props: {
               type="text"
               placeholder="Pikajuoksu"
               name="mainEvents"
-              value={props.athleteProfile.mainEvents || ''}
+              value={props.athleteProfile.mainEvents || ""}
               id="mainEvents"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
@@ -48,7 +48,7 @@ const AthleteDetailsForm = (props: {
                 type="text"
                 placeholder="Käyttäjätunnus"
                 name="instagram"
-                value={props.athleteProfile.instagram || ''}
+                value={props.athleteProfile.instagram || ""}
                 id="instagram"
                 class="w-full rounded-md border-gray-300 text-sm shadow-sm"
               />
@@ -61,7 +61,7 @@ const AthleteDetailsForm = (props: {
                 type="text"
                 placeholder="https://www.linkedin.com/in/tunnus"
                 name="linkedin"
-                value={props.athleteProfile.linkedin || ''}
+                value={props.athleteProfile.linkedin || ""}
                 id="linkedin"
                 class="w-full rounded-md border-gray-300 text-sm shadow-sm"
               />
@@ -71,7 +71,7 @@ const AthleteDetailsForm = (props: {
             <label>Kuvaus</label>
             <div class="mt-1 w-full">
               <RichTextEditor
-                initialHTML={props.athleteProfile.description || ''}
+                initialHTML={props.athleteProfile.description || ""}
                 onChange={setRichTextDescription}
               />
             </div>

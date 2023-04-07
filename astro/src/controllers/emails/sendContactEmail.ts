@@ -1,6 +1,6 @@
-import sendgridClient from '@lib/sendgridClient';
-import type { MailDataRequired } from '@sendgrid/mail';
-import { z } from 'zod';
+import sendgridClient from "@lib/sendgridClient";
+import type { MailDataRequired } from "@sendgrid/mail";
+import { z } from "zod";
 
 const input = z.object({
   firstname: z.string().min(1),
@@ -15,9 +15,9 @@ type Input = z.infer<typeof input>;
 
 const resolve = async ({ input }: { input: Input }) => {
   const contactEmail: MailDataRequired = {
-    to: import.meta.env.CONTACT_EMAIL_RECIPIENTS.split(' '),
-    from: 'no-reply@laitilanjyskeyleisurheilu.fi',
-    subject: 'Uusi viesti osoitteesta laitilanjyskeyleisurheilu.fi',
+    to: import.meta.env.CONTACT_EMAIL_RECIPIENTS.split(" "),
+    from: "no-reply@laitilanjyskeyleisurheilu.fi",
+    subject: "Uusi viesti osoitteesta laitilanjyskeyleisurheilu.fi",
     text: contactText(input),
     mailSettings: {
       sandboxMode: {
@@ -27,8 +27,8 @@ const resolve = async ({ input }: { input: Input }) => {
   };
   const responseEmail: MailDataRequired = {
     to: input.email,
-    from: 'no-reply@laitilanjyskeyleisurheilu.fi',
-    subject: 'Viestisi on vastaanotettu',
+    from: "no-reply@laitilanjyskeyleisurheilu.fi",
+    subject: "Viestisi on vastaanotettu",
     text: responseText(input),
     mailSettings: {
       sandboxMode: {
@@ -49,7 +49,7 @@ Viestin lähettäjä:
 
 ${firstname} ${lastname}
 ${email}
-${phone || ''}`;
+${phone || ""}`;
 };
 
 const responseText = (input: Input) => {

@@ -1,8 +1,8 @@
-import { GENDERS, LEAGUES_BY_GENDER } from '@utils/records';
-import { parameterize } from 'inflected';
-import { FaSolidBars, FaSolidX } from 'solid-icons/fa';
-import { HiSolidChevronDown } from 'solid-icons/hi';
-import { For, createSignal } from 'solid-js';
+import { GENDERS, LEAGUES_BY_GENDER } from "@utils/records";
+import { parameterize } from "inflected";
+import { FaSolidBars, FaSolidX } from "solid-icons/fa";
+import { HiSolidChevronDown } from "solid-icons/hi";
+import { For, createSignal } from "solid-js";
 
 const MainNavigation = () => {
   return (
@@ -21,8 +21,8 @@ const LaptopMainNavigation = () => {
   const [showRecordsNav, setShowRecordsNav] = createSignal(false);
   const recordsNavVisibilityStyle = () => {
     return showRecordsNav()
-      ? 'duration-200 ease-out opacity-100 translate-y-0'
-      : 'ease-in duration-150 opacity-0 translate-y-1 pointer-events-none';
+      ? "duration-200 ease-out opacity-100 translate-y-0"
+      : "ease-in duration-150 opacity-0 translate-y-1 pointer-events-none";
   };
   return (
     <nav
@@ -118,8 +118,8 @@ const MobileMainNavigation = () => {
   const [showMenu, setShowMenu] = createSignal(false);
   const menuVisibilityStyle = () => {
     return showMenu()
-      ? 'duration-200 ease-out opacity-100 translate-x-0'
-      : 'ease-in duration-150 opacity-0 translate-x-10 pointer-events-none';
+      ? "duration-200 ease-out opacity-100 translate-x-0"
+      : "ease-in duration-150 opacity-0 translate-x-10 pointer-events-none";
   };
   return (
     <nav

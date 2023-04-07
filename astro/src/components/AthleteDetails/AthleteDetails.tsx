@@ -1,7 +1,7 @@
-import AthleteDetailsDescription from './AthleteDetailsDescription';
-import AthleteDetailsHeader from './AthleteDetailsHeader';
-import AthleteDetailsModifierProvider from './AthleteDetailsModifier';
-import type { AthleteProfileWithAthlete } from './types';
+import AthleteDetailsDescription from "./AthleteDetailsDescription";
+import AthleteDetailsHeader from "./AthleteDetailsHeader";
+import AthleteDetailsModifierProvider from "./AthleteDetailsModifier";
+import type { AthleteProfileWithAthlete } from "./types";
 
 const AthleteDetails = (props: {
   athleteProfile: AthleteProfileWithAthlete;

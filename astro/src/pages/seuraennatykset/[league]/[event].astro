@@ -1,14 +1,14 @@
 ---
-import { parameterize } from 'inflected';
-import { titleize } from '@utils/strings';
-import Layout from '@layouts/Layout.astro';
-import { PrismaRecord } from '@models';
+import { parameterize } from "inflected";
+import { titleize } from "@utils/strings";
+import Layout from "@layouts/Layout.astro";
+import { PrismaRecord } from "@models";
 import {
   EVENTS_BY_LEAGUE,
   formattedRecordAchievedDate,
   League,
-} from '@utils/records';
-import { NewRecord } from '@components';
+} from "@utils/records";
+import { NewRecord } from "@components";
 
 const currentLeague = titleize(Astro.params.league as string) as League;
 const currentEvent = titleize(Astro.params.event as string);
@@ -39,7 +39,7 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
     />
     <meta
       property="og:image"
-      content={new URL('/images/records.webp', Astro.url)}
+      content={new URL("/images/records.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -84,14 +84,14 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
             EVENTS_BY_LEAGUE[currentLeague].map((event) => (
               <li>
                 <a
-                  href={`/seuraennatykset/${Astro.params.league}/${parameterize(
-                    event
-                  )}#main`}
+                  href={`/seuraennatykset/${
+                    Astro.params.league as string
+                  }/${parameterize(event)}#main`}
                   rel="prefetch"
                   class={`block rounded-md px-3 py-2 ${
                     currentEvent === event
-                      ? 'bg-gray-200 text-gray-900'
-                      : 'hover:bg-white hover:text-gray-900'
+                      ? "bg-gray-200 text-gray-900"
+                      : "hover:bg-white hover:text-gray-900"
                   }`}
                 >
                   {event}
@@ -120,8 +120,8 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
             <thead
               class={`font-semibold ${
                 /^[MP]/.test(currentLeague)
-                  ? 'bg-blue-200 text-blue-800'
-                  : 'bg-red-100 text-red-800'
+                  ? "bg-blue-200 text-blue-800"
+                  : "bg-red-100 text-red-800"
               }`}
             >
               <tr>
@@ -148,12 +148,12 @@ const topTenRecords = await PrismaRecord.findTopTenByLeagueAndEvent(
                     </th>
                     <td class="px-3 py-4">{record.athlete}</td>
                     <td class="px-3 py-4">
-                      {`${record.result}${record.handtime ? 'h' : ''}`}
+                      {`${record.result}${record.handtime ? "h" : ""}`}
                     </td>
-                    <td class="px-3 py-4">{record.location || '-'}</td>
+                    <td class="px-3 py-4">{record.location || "-"}</td>
                     <td class="px-3 py-4">
-                      {record.athlete === '-'
-                        ? '-'
+                      {record.athlete === "-"
+                        ? "-"
                         : formattedRecordAchievedDate(record)}
                     </td>
                   </tr>

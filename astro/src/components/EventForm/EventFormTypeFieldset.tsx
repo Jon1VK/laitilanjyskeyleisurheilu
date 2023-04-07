@@ -1,18 +1,18 @@
-import type { EventType } from '@prisma/client';
-import { For, Setter } from 'solid-js';
+import type { EventType } from "@prisma/client";
+import { For, Setter } from "solid-js";
 
 const eventTypes = {
   PRACTICE: {
-    title: 'Harjoitus',
-    value: 'PRACTICE',
+    title: "Harjoitus",
+    value: "PRACTICE",
   },
   COMPETITION: {
-    title: 'Kilpailu',
-    value: 'COMPETITION',
+    title: "Kilpailu",
+    value: "COMPETITION",
   },
   OTHER: {
-    title: 'Muu tapahtuma',
-    value: 'OTHER',
+    title: "Muu tapahtuma",
+    value: "OTHER",
   },
 };
 

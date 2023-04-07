@@ -1,8 +1,8 @@
-import type { Event } from '@prisma/client';
-import EventCalendarGrid from './EventCalendarGrid';
-import EventCalendarHeader from './EventCalendarHeader';
-import EventCalendarMobileEventList from './EventCalendarMobileEventList';
-import EventCalendarNavigatorProvider from './EventCalendarNavigatorProvider';
+import type { Event } from "@prisma/client";
+import EventCalendarGrid from "./EventCalendarGrid";
+import EventCalendarHeader from "./EventCalendarHeader";
+import EventCalendarMobileEventList from "./EventCalendarMobileEventList";
+import EventCalendarNavigatorProvider from "./EventCalendarNavigatorProvider";
 
 const EventCalendar = (props: {
   year: number;

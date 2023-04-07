@@ -1,9 +1,9 @@
 ---
-import { Icon } from 'astro-icon';
-import Layout from '@layouts/Layout.astro';
-import { PrismaEvent, PrismaNews } from '@models';
-import { formattedDateTimePeriod } from '@utils/dates';
-import NewsCard from '@fragments/NewsCard.astro';
+import { Icon } from "astro-icon";
+import Layout from "@layouts/Layout.astro";
+import { PrismaEvent, PrismaNews } from "@models";
+import { formattedDateTimePeriod } from "@utils/dates";
+import NewsCard from "@fragments/NewsCard.astro";
 
 const promotedEvent = await PrismaEvent.findPromoted();
 const recentNews = await PrismaNews.findRecent(3);
@@ -25,7 +25,7 @@ const recentNews = await PrismaNews.findRecent(3);
     />
     <meta
       property="og:image"
-      content={new URL('/images/frontpage.webp', Astro.url)}
+      content={new URL("/images/frontpage.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -66,7 +66,7 @@ const recentNews = await PrismaNews.findRecent(3);
                 <Icon name="speaker" class="h-6 w-6" />
               </span>
               <p class="mb-5 ml-3 mt-3 flex-1 text-center md:my-0 md:truncate md:text-left">
-                {formattedDateTimePeriod(promotedEvent, 'short')}{' '}
+                {formattedDateTimePeriod(promotedEvent, "short")}{" "}
                 {promotedEvent.title} {promotedEvent.location}
               </p>
             </div>

@@ -1,9 +1,9 @@
-import EventDetailsDescription from './EventDetailsDescription';
-import EventDetailsFiles from './EventDetailsFiles';
-import EventDetailsHeader from './EventDetailsHeader';
-import EventDetailsModifierProvider from './EventDetailsModifier';
-import EventDetailsOccurrences from './EventDetailsOccurrences';
-import type { EventWithOccurrences } from './types';
+import EventDetailsDescription from "./EventDetailsDescription";
+import EventDetailsFiles from "./EventDetailsFiles";
+import EventDetailsHeader from "./EventDetailsHeader";
+import EventDetailsModifierProvider from "./EventDetailsModifier";
+import EventDetailsOccurrences from "./EventDetailsOccurrences";
+import type { EventWithOccurrences } from "./types";
 
 const EventDetails = (props: { event: EventWithOccurrences }) => (
   <EventDetailsModifierProvider initialEvent={props.event}>

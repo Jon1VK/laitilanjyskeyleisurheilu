@@ -1,5 +1,5 @@
-import type { PressRelease } from '@prisma/client';
-import { HiSolidPencilAlt } from 'solid-icons/hi';
+import type { PressRelease } from "@prisma/client";
+import { HiSolidPencilAlt } from "solid-icons/hi";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -24,7 +24,7 @@ const PressReleaseForm = (props: {
           <label for="sendDate">Lähetyspäivä</label>
           <input
             type="date"
-            value={props.pressRelease.sendDate.toLocaleDateString('sv') || ''}
+            value={props.pressRelease.sendDate.toLocaleDateString("sv") || ""}
             name="sendDate"
             id="sendDate"
             class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"

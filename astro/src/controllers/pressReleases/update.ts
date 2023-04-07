@@ -1,5 +1,5 @@
-import { PrismaPressRelease } from '@models';
-import { z } from 'zod';
+import { PrismaPressRelease } from "@models";
+import { z } from "zod";
 
 const input = z.object({
   id: z.number().int(),

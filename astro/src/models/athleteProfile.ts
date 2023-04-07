@@ -1,5 +1,5 @@
-import prisma from '@lib/prisma';
-import type { Prisma } from '@prisma/client';
+import prisma from "@lib/prisma";
+import type { Prisma } from "@prisma/client";
 
 const PrismaAthleteProfile = Object.assign(prisma.athleteProfile, {
   async findUniqueWithAthlete(slug: string) {

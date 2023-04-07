@@ -1,22 +1,22 @@
-import trpcClient from '@lib/trpcClient';
-import type { PressRelease } from '@prisma/client';
+import trpcClient from "@lib/trpcClient";
+import type { PressRelease } from "@prisma/client";
 import {
   Context,
   createContext,
   createSignal,
   ParentComponent,
   useContext,
-} from 'solid-js';
+} from "solid-js";
 
 const createPressReleasesModifier = (initialPressReleases: PressRelease[]) => {
   const [pressReleases, setPressReleases] = createSignal(initialPressReleases);
 
   const updatePressRelease = async (id: number, formData: FormData) => {
-    const sendDate = new Date(formData.get('sendDate') as string);
-    const newsBody = formData.get('newsBody') as string;
-    const whatsappBody = formData.get('whatsappBody') as string;
+    const sendDate = new Date(formData.get("sendDate") as string);
+    const newsBody = formData.get("newsBody") as string;
+    const whatsappBody = formData.get("whatsappBody") as string;
     const updatedPressRelease = await trpcClient.mutation(
-      'updatePressRelease',
+      "updatePressRelease",
       {
         id,
         sendDate,
@@ -32,7 +32,7 @@ const createPressReleasesModifier = (initialPressReleases: PressRelease[]) => {
   };
 
   const deletePressRelease = async (pressReleaseToDelete: PressRelease) => {
-    await trpcClient.mutation('deletePressRelease', pressReleaseToDelete.id);
+    await trpcClient.mutation("deletePressRelease", pressReleaseToDelete.id);
     setPressReleases(
       pressReleases().filter(
         (pressRelease) => pressRelease.id !== pressReleaseToDelete.id

@@ -1,5 +1,6 @@
 {
   "eslint.validate": ["astro", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": ["astro"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "prettier.documentSelectors": ["**/*.astro"],

@@ -1,21 +1,23 @@
 ---
-import { parameterize } from 'inflected';
-import { titleize } from '@utils/strings';
-import Layout from '@layouts/Layout.astro';
-import { PrismaRecord } from '@models';
+import { parameterize } from "inflected";
+import { titleize } from "@utils/strings";
+import Layout from "@layouts/Layout.astro";
+import { PrismaRecord } from "@models";
 import {
   formattedRecordAchievedDate,
   GENDERS,
   League,
   LEAGUES_BY_GENDER,
-} from '@utils/records';
-import { NewRecord } from '@components';
+} from "@utils/records";
+import { NewRecord } from "@components";
 
 const currentLeague = titleize(Astro.params.league as string) as League;
 const clubRecordsByEvent =
   await PrismaRecord.findClubRecordsByLeagueAndMappedByEvent(currentLeague);
 const eventClickHandler = (event: string) =>
-  `location.assign("${Astro.params.league}/${parameterize(event)}#main")`;
+  `location.assign("${Astro.params.league as string}/${parameterize(
+    event
+  )}#main")`;
 ---
 
 <Layout>
@@ -36,7 +38,7 @@ const eventClickHandler = (event: string) =>
     />
     <meta
       property="og:image"
-      content={new URL('/images/records.webp', Astro.url)}
+      content={new URL("/images/records.webp", Astro.url)}
     />
     <meta
       property="og:description"
@@ -87,10 +89,10 @@ const eventClickHandler = (event: string) =>
                         currentLeague === league
                           ? `text-gray-900 ${
                               /^[MP]/.test(league)
-                                ? 'bg-blue-100 text-blue-800'
-                                : 'bg-red-100 text-red-800'
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-red-100 text-red-800"
                             }`
-                          : 'hover:bg-white hover:text-gray-900'
+                          : "hover:bg-white hover:text-gray-900"
                       }`}
                     >
                       {league}
@@ -125,8 +127,8 @@ const eventClickHandler = (event: string) =>
             <thead
               class={`font-semibold ${
                 /^[MP]/.test(currentLeague)
-                  ? 'bg-blue-200 text-blue-800'
-                  : 'bg-red-100 text-red-800'
+                  ? "bg-blue-200 text-blue-800"
+                  : "bg-red-100 text-red-800"
               }`}
             >
               <tr>
@@ -160,12 +162,12 @@ const eventClickHandler = (event: string) =>
                         <td class="px-3 py-4">{record.athlete}</td>
                         <td class="px-3 py-4">
                           {record.result}
-                          {record.handtime ? 'h' : ''}
+                          {record.handtime ? "h" : ""}
                         </td>
-                        <td class="px-3 py-4">{record.location || '-'}</td>
+                        <td class="px-3 py-4">{record.location || "-"}</td>
                         <td class="px-3 py-4">
-                          {record.athlete === '-'
-                            ? '-'
+                          {record.athlete === "-"
+                            ? "-"
                             : formattedRecordAchievedDate(record)}
                         </td>
                       </tr>

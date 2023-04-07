@@ -1,16 +1,16 @@
-import { useAuth } from '@auth';
-import logger from '@lib/logger';
-import { BsImage } from 'solid-icons/bs';
+import { useAuth } from "@auth";
+import logger from "@lib/logger";
+import { BsImage } from "solid-icons/bs";
 import {
   FaBrandsInstagram,
   FaBrandsLinkedin,
   FaSolidCameraRetro,
-} from 'solid-icons/fa';
-import { HiOutlinePencilAlt } from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
-import Modal from '../Modal';
-import AthleteDetailsForm from './AthleteDetailsForm';
-import { useAthleteDetailsModifier } from './AthleteDetailsModifier';
+} from "solid-icons/fa";
+import { HiOutlinePencilAlt } from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
+import Modal from "../Modal";
+import AthleteDetailsForm from "./AthleteDetailsForm";
+import { useAthleteDetailsModifier } from "./AthleteDetailsModifier";
 
 type InputChangeHandler = (
   event: Event & { currentTarget: HTMLInputElement }
@@ -39,7 +39,7 @@ const EventDetailsHeader = () => {
     } catch (error) {
       await logger.error(error as Error);
       alert(
-        'Profiilin päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen.'
+        "Profiilin päivittäminen ei onnistunut. Yritä uudelleen, tai kopioi muutoksesi talteen ja lataa sivu uudelleen."
       );
     }
   };
@@ -49,7 +49,7 @@ const EventDetailsHeader = () => {
         <div class="relative mx-auto h-40 w-40 xl:h-56 xl:w-56">
           <img
             class="h-40 w-40 rounded-full object-cover xl:h-56 xl:w-56"
-            src={athleteProfile().avatar || '/images/avatar-placeholder.jpg'}
+            src={athleteProfile().avatar || "/images/avatar-placeholder.jpg"}
             alt="Profiilikuva"
           />
           <Show when={isLoggedInUser(athleteProfile().athlete)}>

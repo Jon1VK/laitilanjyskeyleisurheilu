@@ -1,4 +1,4 @@
-import createRecord from './create';
+import createRecord from "./create";
 
 const recordsController = {
   create: createRecord,

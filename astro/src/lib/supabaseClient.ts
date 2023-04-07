@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
 const PRIVATE_SUPABASE_KEY = import.meta.env.PRIVATE_SUPABASE_KEY;

@@ -1,4 +1,4 @@
-import updateAthleteProfile from './update';
+import updateAthleteProfile from "./update";
 
 const athleteProfilesController = {
   update: updateAthleteProfile,

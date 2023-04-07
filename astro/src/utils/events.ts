@@ -1,4 +1,4 @@
-import type { Event } from '@prisma/client';
+import type { Event } from "@prisma/client";
 
 export const mapEventsByDate = (events: Event[], dates: Date[]) => {
   const eventsByDate = new Map<string, Event[]>();

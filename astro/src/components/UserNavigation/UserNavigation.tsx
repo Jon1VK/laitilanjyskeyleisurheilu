@@ -1,16 +1,16 @@
-import { useAuth } from '@auth';
-import { parameterize } from 'inflected';
-import { CgProfile } from 'solid-icons/cg';
-import { HiOutlineLogout, HiOutlineMail } from 'solid-icons/hi';
-import { Show, createSignal } from 'solid-js';
+import { useAuth } from "@auth";
+import { parameterize } from "inflected";
+import { CgProfile } from "solid-icons/cg";
+import { HiOutlineLogout, HiOutlineMail } from "solid-icons/hi";
+import { Show, createSignal } from "solid-js";
 
 const UserNavigation = () => {
   const { isLoggedIn, isAthlete, isAdmin, user, signOut } = useAuth();
   const [show, setShow] = createSignal(false);
   const menuVisibilityStyle = () => {
     return show()
-      ? 'duration-200 ease-out opacity-100 translate-y-0'
-      : 'ease-in duration-150 opacity-0 translate-y-1 pointer-events-none';
+      ? "duration-200 ease-out opacity-100 translate-y-0"
+      : "ease-in duration-150 opacity-0 translate-y-1 pointer-events-none";
   };
   return (
     <Show when={isLoggedIn()}>
