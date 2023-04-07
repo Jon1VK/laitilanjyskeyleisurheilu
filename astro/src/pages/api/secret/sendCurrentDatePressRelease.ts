@@ -1,8 +1,8 @@
-import callMeBotClient from "@lib/callMeBotClient";
-import sendgridClient from "@lib/sendgridClient";
-import { PrismaPressRelease } from "@models";
 import type { MailDataRequired } from "@sendgrid/mail";
+import { callMeBotClient } from "@server/services/callMeBotClient";
+import { sendgridClient } from "@server/services/sendgridClient";
 import type { APIRoute } from "astro";
+import { prisma } from "~/server/db/prisma";
 
 export const post: APIRoute = async ({ request }) => {
   if (request.headers.get("Authorization") !== import.meta.env.API_SECRET) {
@@ -10,7 +10,7 @@ export const post: APIRoute = async ({ request }) => {
   }
   const currentDateString = new Date().toLocaleDateString("sv");
   const sendDate = new Date(currentDateString);
-  const pressRelease = await PrismaPressRelease.findUnique({
+  const pressRelease = await prisma.pressRelease.findUnique({
     where: { sendDate },
   });
   if (!pressRelease) {
@@ -39,7 +39,7 @@ export const post: APIRoute = async ({ request }) => {
     },
   };
   await sendgridClient.send([pressEmail]);
-  await PrismaPressRelease.delete({ where: { sendDate } });
+  await prisma.pressRelease.delete({ where: { sendDate } });
   return new Response(
     JSON.stringify({
       message: `Press release was sent successfully for date ${currentDateString}`,

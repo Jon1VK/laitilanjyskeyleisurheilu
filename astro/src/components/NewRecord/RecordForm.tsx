@@ -1,10 +1,10 @@
+import { createSignal, For } from "solid-js";
 import {
   EVENTS_BY_LEAGUE,
   GENDERS,
   League,
   LEAGUES_BY_GENDER,
-} from "@utils/records";
-import { createSignal, For } from "solid-js";
+} from "~/utils/records";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }

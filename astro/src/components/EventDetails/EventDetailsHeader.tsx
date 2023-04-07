@@ -1,12 +1,12 @@
-import { useAuth } from "@auth";
-import logger from "@lib/logger";
-import { formattedDateTimePeriod } from "@utils/dates";
 import {
   HiOutlinePencilAlt,
   HiOutlineSpeakerphone,
   HiOutlineTrash,
 } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
+import { useAuth } from "~/auth";
+import { formattedDateTimePeriod } from "~/utils/dates";
+import logger from "~/utils/logger";
 import EventForm from "../EventForm";
 import Modal from "../Modal";
 import { useEventDetailsModifier } from "./EventDetailsModifier";

@@ -1,7 +1,7 @@
-import { useAuth } from "@auth";
 import { FaSolidFileLines, FaSolidLink } from "solid-icons/fa";
 import { HiOutlineTrash } from "solid-icons/hi";
 import { Show } from "solid-js";
+import { useAuth } from "~/auth";
 import { useEventDetailsModifier } from "./EventDetailsModifier";
 
 const EventDetailsFiles = () => {

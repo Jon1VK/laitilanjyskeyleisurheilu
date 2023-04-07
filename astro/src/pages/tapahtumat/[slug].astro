@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon";
-import Layout from "@layouts/Layout.astro";
-import { formattedDateTimePeriod } from "@utils/dates";
-import { PrismaEvent } from "@models";
-import { EventDetails } from "@components";
+import Layout from "~/layouts/Layout.astro";
+import { formattedDateTimePeriod } from "~/utils/dates";
+import { PrismaEvent } from "@server/models";
+import { EventDetails } from "~/components";
 
 const slug = Astro.params.slug as string;
 const event = await PrismaEvent.findUniqueWithOccurrences(slug);

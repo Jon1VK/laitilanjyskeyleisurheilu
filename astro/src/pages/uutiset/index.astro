@@ -1,10 +1,10 @@
 ---
 import { getUser } from "@astro-auth/core";
-import { CreateNews } from "@components";
-import Layout from "@layouts/Layout.astro";
-import { PrismaNews } from "@models";
-import PaginationNav from "@fragments/PaginationNav.astro";
-import NewsCard from "@fragments/NewsCard.astro";
+import { CreateNews } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaNews } from "@server/models";
+import PaginationNav from "~/fragments/PaginationNav.astro";
+import NewsCard from "~/fragments/NewsCard.astro";
 
 const includeDrafts = Boolean(getUser({ client: Astro }));
 const currentPage = Number(Astro.url.searchParams.get("sivu") || 1);

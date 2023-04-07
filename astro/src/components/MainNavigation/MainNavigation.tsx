@@ -1,8 +1,8 @@
-import { GENDERS, LEAGUES_BY_GENDER } from "@utils/records";
 import { parameterize } from "inflected";
 import { FaSolidBars, FaSolidX } from "solid-icons/fa";
 import { HiSolidChevronDown } from "solid-icons/hi";
 import { For, createSignal } from "solid-js";
+import { GENDERS, LEAGUES_BY_GENDER } from "~/utils/records";
 
 const MainNavigation = () => {
   return (

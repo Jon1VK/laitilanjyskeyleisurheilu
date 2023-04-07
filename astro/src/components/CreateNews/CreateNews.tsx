@@ -1,8 +1,8 @@
-import { useAuth } from "@auth";
-import logger from "@lib/logger";
-import trpcClient from "@lib/trpcClient";
 import { FaSolidFilePen } from "solid-icons/fa";
 import { createSignal, Show } from "solid-js";
+import { useAuth } from "~/auth";
+import { api } from "~/services/api";
+import logger from "~/utils/logger";
 import Modal from "../Modal";
 import NewsForm from "./NewsForm";
 
@@ -11,7 +11,7 @@ const CreateNews = () => {
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     try {
-      const createdNews = await trpcClient.mutation("createNews", {
+      const createdNews = await api.news.create.mutate({
         draft: Boolean(formData.get("draft")),
         author: formData.get("author") as string,
         publishedAt: new Date(formData.get("publishedAt") as string),

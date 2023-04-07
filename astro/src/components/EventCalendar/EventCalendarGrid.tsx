@@ -1,6 +1,6 @@
 import type { Event } from "@prisma/client";
-import { WEEKDAYS } from "@utils/dates";
 import { For } from "solid-js";
+import { WEEKDAYS } from "~/utils/dates";
 import { useEventCalendarNavigator } from "./EventCalendarNavigatorProvider";
 
 const EventCalendarGrid = () => (

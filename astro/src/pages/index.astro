@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon";
-import Layout from "@layouts/Layout.astro";
-import { PrismaEvent, PrismaNews } from "@models";
-import { formattedDateTimePeriod } from "@utils/dates";
-import NewsCard from "@fragments/NewsCard.astro";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaEvent, PrismaNews } from "@server/models";
+import { formattedDateTimePeriod } from "~/utils/dates";
+import NewsCard from "~/fragments/NewsCard.astro";
 
 const promotedEvent = await PrismaEvent.findPromoted();
 const recentNews = await PrismaNews.findRecent(3);

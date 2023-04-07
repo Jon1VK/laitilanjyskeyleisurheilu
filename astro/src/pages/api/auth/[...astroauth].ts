@@ -1,6 +1,6 @@
 import AstroAuth from "@astro-auth/core";
 import { GoogleProvider } from "@astro-auth/providers";
-import { PrismaUser } from "@models";
+import { PrismaUser } from "@server/models";
 import type { JwtPayload } from "jsonwebtoken";
 
 export const all = AstroAuth({

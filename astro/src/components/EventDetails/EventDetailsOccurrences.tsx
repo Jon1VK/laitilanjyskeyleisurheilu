@@ -1,7 +1,7 @@
-import { useAuth } from "@auth";
 import { FaSolidPlus } from "solid-icons/fa";
 import { HiOutlinePencilAlt, HiOutlineTrash } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
+import { useAuth } from "~/auth";
 import EventForm from "../EventForm";
 import EventListStateless from "../EventListStateless";
 import Modal from "../Modal";

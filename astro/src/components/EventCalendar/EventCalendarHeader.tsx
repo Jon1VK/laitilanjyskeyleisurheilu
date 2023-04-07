@@ -1,10 +1,10 @@
-import { useAuth } from "@auth";
 import {
   HiOutlineChevronLeft,
   HiOutlineChevronRight,
   HiOutlinePlus,
 } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
+import { useAuth } from "~/auth";
 import EventForm from "../EventForm";
 import Modal from "../Modal";
 import { useEventCalendarNavigator } from "./EventCalendarNavigatorProvider";

@@ -1,8 +1,8 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import supabaseClient from "@lib/supabaseClient";
+import Layout from "~/layouts/Layout.astro";
+import { supabaseClient } from "~/services/supabaseClient";
 import Icon from "astro-icon";
-import PaginationNav from "@fragments/PaginationNav.astro";
+import PaginationNav from "~/fragments/PaginationNav.astro";
 
 const PAGE_SIZE = 12;
 const currentPage = Number(Astro.url.searchParams.get("sivu") || 1);

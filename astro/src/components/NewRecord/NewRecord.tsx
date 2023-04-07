@@ -1,6 +1,6 @@
-import trpcClient from "@lib/trpcClient";
-import type { League, RecordEvent } from "@utils/records";
 import { Show, createSignal } from "solid-js";
+import { api } from "~/services/api";
+import type { League, RecordEvent } from "~/utils/records";
 import Modal from "../Modal";
 import RecordForm from "./RecordForm";
 
@@ -8,7 +8,7 @@ const NewRecord = () => {
   const [showForm, setShowForm] = createSignal(false);
   const [showConfirmation, setShowConfirmation] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
-    await trpcClient.mutation("createRecord", {
+    await api.record.create.mutate({
       league: formData.get("league") as League,
       athlete: formData.get("athlete") as string,
       event: formData.get("event") as RecordEvent,

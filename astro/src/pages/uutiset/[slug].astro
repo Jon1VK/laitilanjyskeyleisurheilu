@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon";
-import Layout from "@layouts/Layout.astro";
-import { PrismaNews } from "@models";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaNews } from "@server/models";
 
 const slug = Astro.params.slug as string;
 const news = await PrismaNews.findUnique({ where: { slug } });

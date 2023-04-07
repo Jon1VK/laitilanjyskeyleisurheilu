@@ -1,6 +1,6 @@
 import type { Event } from "@prisma/client";
-import { getDayCountBetween } from "@utils/dates";
 import { createSignal, Show, splitProps } from "solid-js";
+import { getDayCountBetween } from "~/utils/dates";
 
 const EventFormPressFieldset = (props: {
   event?: Event;

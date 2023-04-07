@@ -1,6 +1,6 @@
 import { signIn, signOut } from "@astro-auth/client";
-import type { ExtendedUser } from "@models";
 import type { User } from "@prisma/client";
+import type { ExtendedUser } from "@server/models";
 import type { Accessor } from "solid-js";
 import { user } from "./UserStore";
 

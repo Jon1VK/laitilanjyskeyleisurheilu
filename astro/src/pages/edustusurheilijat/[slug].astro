@@ -1,8 +1,8 @@
 ---
 import { Icon } from "astro-icon";
-import Layout from "@layouts/Layout.astro";
-import { PrismaAthleteProfile } from "@models";
-import { AthleteDetails } from "@components";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaAthleteProfile } from "@server/models";
+import { AthleteDetails } from "~/components";
 
 const slug = Astro.params.slug as string;
 const athleteProfile = await PrismaAthleteProfile.findUniqueWithAthlete(slug);

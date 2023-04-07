@@ -1,8 +1,8 @@
-import { useAuth } from "@auth";
 import type { Event } from "@prisma/client";
-import { formattedDateTimePeriod } from "@utils/dates";
 import { HiOutlineTrash, HiSolidClock } from "solid-icons/hi";
 import { For, Show } from "solid-js";
+import { useAuth } from "~/auth";
+import { formattedDateTimePeriod } from "~/utils/dates";
 
 const EventList = (props: {
   events: Event[];

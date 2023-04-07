@@ -1,4 +1,4 @@
-import type { ExtendedUser } from "@models";
+import type { ExtendedUser } from "@server/models";
 import { createEffect, createSignal } from "solid-js";
 
 const [user, setUser] = createSignal<ExtendedUser>();

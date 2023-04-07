@@ -1,5 +1,3 @@
-import logger from "@lib/logger";
-import uploadImage from "@lib/uploadImage";
 import type { Editor } from "@tiptap/core";
 import { BsTable } from "solid-icons/bs";
 import {
@@ -10,6 +8,8 @@ import {
   FaSolidQuoteRight,
   FaSolidT,
 } from "solid-icons/fa";
+import logger from "~/utils/logger";
+import uploadImage from "~/utils/uploadImage";
 
 type InputChangeHandler = (
   event: Event & { currentTarget: HTMLInputElement }

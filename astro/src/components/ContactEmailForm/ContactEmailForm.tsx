@@ -1,5 +1,5 @@
-import trpcClient from "@lib/trpcClient";
 import { createSignal, Show } from "solid-js";
+import { api } from "~/services/api";
 import Modal from "../Modal";
 
 type SubmitHandler = (
@@ -18,7 +18,7 @@ const ContactEmailForm = () => {
     const phone = (formData.get("phone") as string) || undefined;
     const subject = formData.get("subject") as string;
     const message = formData.get("message") as string;
-    await trpcClient.mutation("sendContactEmail", {
+    await api.email.sendContactRequest.mutate({
       firstname,
       lastname,
       email,

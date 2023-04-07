@@ -1,6 +1,6 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import { PrismaUser } from "@models";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaUser } from "@server/models";
 import { parameterize } from "inflected";
 
 const athletes = await PrismaUser.findAllAthletes();

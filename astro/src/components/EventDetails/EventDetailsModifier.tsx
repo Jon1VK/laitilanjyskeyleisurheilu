@@ -1,5 +1,3 @@
-import supabaseClient from "@lib/supabaseClient";
-import trpcClient from "@lib/trpcClient";
 import type { Event } from "@prisma/client";
 import { parameterize } from "inflected";
 import {
@@ -9,6 +7,8 @@ import {
   ParentComponent,
   useContext,
 } from "solid-js";
+import { api } from "~/services/api";
+import { supabaseClient } from "~/services/supabaseClient";
 import type {
   EventWithOccurrences,
   RecurringEventWithOccurrences,
@@ -18,12 +18,12 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
   const [event, setEvent] = createSignal(initialEvent);
 
   const deleteEvent = async () => {
-    await trpcClient.mutation("deleteEvent", event().id);
+    await api.event.delete.mutate({ id: event().id });
     window.location.href = "/tapahtumat#main";
   };
 
   const deleteOccurrence = async (occurrenceToDelete: Event) => {
-    await trpcClient.mutation("deleteEvent", occurrenceToDelete.id);
+    await api.event.delete.mutate({ id: occurrenceToDelete.id });
     const recurringEvent = event().recurringEvent;
     if (!recurringEvent) return;
     const occurrences = recurringEvent.occurrences.filter(
@@ -47,17 +47,21 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const pressBody = (formData.get("pressBody") as string) || null;
     const recurringEvent = event()
       .recurringEvent as RecurringEventWithOccurrences;
-    const occurrence = await trpcClient.mutation("createEvent", {
-      type: "PRACTICE",
-      startDateTime,
-      endDateTime,
-      title,
-      location,
-      description,
-      pressStartBefore,
-      pressEndBefore,
-      pressBody,
-      recurringEventId: recurringEvent.id,
+    const occurrence = await api.event.create.mutate({
+      event: {
+        type: "PRACTICE",
+        startDateTime,
+        endDateTime,
+        title,
+        location,
+        description,
+        pressBody,
+        recurringEventId: recurringEvent.id,
+      },
+      pressRelease: {
+        startBefore: pressStartBefore,
+        endBefore: pressEndBefore,
+      },
     });
     const occurrences = [...recurringEvent.occurrences, occurrence].sort(
       (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
@@ -73,32 +77,29 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const location = (formData.get("location") as string) || null;
     const description = (formData.get("description") as string) || null;
     const pressBody = (formData.get("pressBody") as string) || null;
-    console.log(pressBody);
-    const recurringEvent = await trpcClient.mutation(
-      "updateRecurringEventOccurrences",
-      {
-        id: event().recurringEventId as number,
+    const recurringEvent = await api.recurringEvent.update.mutate({
+      id: event().recurringEventId as number,
+      occurrencesUpdate: {
         title,
         location,
         description,
         pressBody,
-      }
-    );
+      },
+    });
     setEvent({
       ...event(),
       title,
       location,
       description,
-      recurringEvent,
       pressBody,
+      recurringEvent,
     });
   };
 
   const deleteRecurringEvent = async () => {
-    await trpcClient.mutation(
-      "deleteRecurringEvent",
-      event().recurringEventId as number
-    );
+    await api.recurringEvent.delete.mutate({
+      id: event().recurringEventId as number,
+    });
     window.location.href = "/tapahtumat#main";
   };
 
@@ -113,24 +114,35 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
     const pressStartBefore = Number(formData.get("pressStartBefore") as string);
     const pressEndBefore = Number(formData.get("pressEndBefore") as string);
     const pressBody = (formData.get("pressBody") as string) || null;
-    const updatedEvent = await trpcClient.mutation("updateEvent", {
-      ...event(),
-      title,
-      startDateTime,
-      endDateTime,
-      location,
-      externalUrl,
-      description,
-      pressStartBefore,
-      pressEndBefore,
-      pressBody,
+    const updatedEvent = await api.event.update.mutate({
+      id: event().id,
+      eventUpdate: {
+        ...event(),
+        title,
+        startDateTime,
+        endDateTime,
+        location,
+        externalUrl,
+        description,
+        pressBody,
+      },
+      pressReleaseUpdate: {
+        startBefore: pressStartBefore,
+        endBefore: pressEndBefore,
+      },
     });
-    setEvent(updatedEvent);
+    setEvent({
+      ...updatedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   const promoteEvent = async () => {
-    const promotedEvent = await trpcClient.mutation("promoteEvent", event().id);
-    setEvent(promotedEvent);
+    const promotedEvent = await api.event.promote.mutate({ id: event().id });
+    setEvent({
+      ...promotedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   const uploadTimetable = async (file: File) => {
@@ -143,19 +155,27 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
       } as { separator: string })}__Aikataulu`,
       file
     );
-    const updatedEvent = await trpcClient.mutation("updateEvent", {
-      ...event(),
-      timetableFileKey: data?.Key,
+    const updatedEvent = await api.event.update.mutate({
+      id: event().id,
+      eventUpdate: {
+        ...event(),
+        timetableFileKey: data?.Key,
+      },
     });
-    setEvent(updatedEvent);
+    setEvent({
+      ...updatedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   const deleteTimetable = async () => {
-    const updatedEvent = await trpcClient.mutation("deleteEventTimetable", {
+    const updatedEvent = await api.event.deleteTimetable.mutate({
       id: event().id,
-      timetableFileKey: event().timetableFileKey as string,
     });
-    setEvent(updatedEvent);
+    setEvent({
+      ...updatedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   const uploadResults = async (file: File) => {
@@ -168,19 +188,27 @@ const createEventDetailsModifier = (initialEvent: EventWithOccurrences) => {
       } as { separator: string })}__Tulokset`,
       file
     );
-    const updatedEvent = await trpcClient.mutation("updateEvent", {
-      ...event(),
-      resultsFileKey: data?.Key,
+    const updatedEvent = await api.event.update.mutate({
+      id: event().id,
+      eventUpdate: {
+        ...event(),
+        resultsFileKey: data?.Key,
+      },
     });
-    setEvent(updatedEvent);
+    setEvent({
+      ...updatedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   const deleteResults = async () => {
-    const updatedEvent = await trpcClient.mutation("deleteEventResults", {
+    const updatedEvent = await api.event.deleteResults.mutate({
       id: event().id,
-      resultsFileKey: event().resultsFileKey as string,
     });
-    setEvent(updatedEvent);
+    setEvent({
+      ...updatedEvent,
+      recurringEvent: event().recurringEvent,
+    });
   };
 
   return {

@@ -1,13 +1,4 @@
-import trpcClient from "@lib/trpcClient";
 import type { Event, EventType } from "@prisma/client";
-import {
-  getCalendarDates,
-  getMonthDates,
-  getMonthEndDate,
-  getMonthStartDate,
-  toUTCTime,
-} from "@utils/dates";
-import { mapEventsByDate } from "@utils/events";
 import {
   Context,
   ParentComponent,
@@ -17,6 +8,15 @@ import {
   createSignal,
   useContext,
 } from "solid-js";
+import { api } from "~/services/api";
+import {
+  getCalendarDates,
+  getMonthDates,
+  getMonthEndDate,
+  getMonthStartDate,
+  toUTCTime,
+} from "~/utils/dates";
+import { mapEventsByDate } from "~/utils/events";
 
 const createEventCalendarNavigator = (
   initialYear: number,
@@ -54,7 +54,7 @@ const createEventCalendarNavigator = (
       startDate: getMonthStartDate(year(), month()),
       endDate: getMonthEndDate(year(), month()),
     }),
-    (query) => trpcClient.query("getAllEvents", query)
+    (query) => api.event.getAll.query(query)
   );
 
   const eventsByDate = createMemo(() => {
@@ -77,23 +77,27 @@ const createEventCalendarNavigator = (
     const pressStartBefore = Number(formData.get("pressStartBefore") as string);
     const pressEndBefore = Number(formData.get("pressEndBefore") as string);
     const pressBody = (formData.get("pressBody") as string) || null;
-    await trpcClient.mutation("createEvent", {
-      type,
-      startDateTime,
-      endDateTime,
-      title,
-      location,
-      externalUrl,
-      description,
-      pressStartBefore,
-      pressEndBefore,
-      pressBody,
+    await api.event.create.mutate({
+      event: {
+        type,
+        startDateTime,
+        endDateTime,
+        title,
+        location,
+        externalUrl,
+        description,
+        pressBody,
+      },
+      pressRelease: {
+        startBefore: pressStartBefore,
+        endBefore: pressEndBefore,
+      },
     });
     await refetch();
   };
 
   const deleteEvent = async (event: Event) => {
-    await trpcClient.mutation("deleteEvent", event.id);
+    await api.event.delete.mutate({ id: event.id });
     await refetch();
   };
 
@@ -115,19 +119,25 @@ const createEventCalendarNavigator = (
     const pressStartBefore = Number(formData.get("pressStartBefore") as string);
     const pressEndBefore = Number(formData.get("pressEndBefore") as string);
     const pressBody = (formData.get("pressBody") as string) || null;
-    await trpcClient.mutation("createRecurringEvent", {
-      type,
-      weekdays,
-      recurrenceStartDate,
-      recurrenceEndDate,
-      startTime,
-      endTime,
-      title,
-      location,
-      description,
-      pressStartBefore,
-      pressEndBefore,
-      pressBody,
+    await api.recurringEvent.create.mutate({
+      event: {
+        type,
+        title,
+        location,
+        description,
+        pressBody,
+      },
+      recurrence: {
+        weekdays,
+        startDate: recurrenceStartDate,
+        endDate: recurrenceEndDate,
+        startTime,
+        endTime,
+      },
+      pressRelease: {
+        startBefore: pressStartBefore,
+        endBefore: pressEndBefore,
+      },
     });
     await refetch();
   };

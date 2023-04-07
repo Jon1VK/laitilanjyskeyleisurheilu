@@ -1,7 +1,8 @@
-import { PrismaEvent, PrismaPressRelease } from "@models";
 import type { Event } from "@prisma/client";
-import { formattedDateTimePeriod } from "@utils/dates";
+import { PrismaEvent } from "@server/models";
 import type { APIRoute } from "astro";
+import { prisma } from "~/server/db/prisma";
+import { formattedDateTimePeriod } from "~/utils/dates";
 
 export const post: APIRoute = async ({ request }) => {
   if (request.headers.get("Authorization") !== import.meta.env.API_SECRET) {
@@ -10,7 +11,7 @@ export const post: APIRoute = async ({ request }) => {
   const body = (await request.json()) as Record<string, string>;
   const sendDate = new Date(body.sendDate);
   const events = await PrismaEvent.findByPressSendDate(sendDate);
-  await PrismaPressRelease.create({
+  await prisma.pressRelease.create({
     data: {
       sendDate,
       newsBody: createNewsBody(events),

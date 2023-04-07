@@ -1,9 +1,9 @@
 ---
 import { getUser } from "@astro-auth/core";
-import { UserStore } from "@auth";
-import { Login, MainNavigation, UserNavigation } from "@components";
+import { UserStore } from "~/auth";
+import { Login, MainNavigation, UserNavigation } from "~/components";
 import { Icon } from "astro-icon";
-import { titleize } from "@utils/strings";
+import { titleize } from "~/utils/strings";
 import type { JwtPayload } from "jsonwebtoken";
 
 export interface Props {

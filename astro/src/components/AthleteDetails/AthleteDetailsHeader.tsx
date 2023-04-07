@@ -1,5 +1,3 @@
-import { useAuth } from "@auth";
-import logger from "@lib/logger";
 import { BsImage } from "solid-icons/bs";
 import {
   FaBrandsInstagram,
@@ -8,6 +6,8 @@ import {
 } from "solid-icons/fa";
 import { HiOutlinePencilAlt } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
+import { useAuth } from "~/auth";
+import logger from "~/utils/logger";
 import Modal from "../Modal";
 import AthleteDetailsForm from "./AthleteDetailsForm";
 import { useAthleteDetailsModifier } from "./AthleteDetailsModifier";

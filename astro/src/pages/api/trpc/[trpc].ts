@@ -1,29 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import createContext from "@lib/createContext";
-import { appRouter } from "@router";
-import type { HTTPHeaders } from "@trpc/client";
-import { resolveHTTPResponse } from "@trpc/server";
-import type { APIContext } from "astro";
+import { appRouter } from "@server/router";
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import type { APIRoute } from "astro";
+import { createContext } from "~/server/router/trpc";
 
-async function httpHandler({ request, params }: APIContext): Promise<Response> {
-  const query = new URL(request.url).searchParams;
-  const requestBody = request.method === "GET" ? {} : await request.json();
-  const { status, headers, body } = await resolveHTTPResponse({
-    createContext: createContext(request),
+export const all: APIRoute = ({ request }) => {
+  return fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req: request,
     router: appRouter,
-    path: params.trpc as string,
-    req: {
-      query,
-      method: request.method,
-      headers: request.headers as unknown as HTTPHeaders,
-      body: requestBody,
-    },
+    createContext,
   });
-  return new Response(body, {
-    headers: headers as HeadersInit,
-    status,
-  });
-}
-
-export const post = httpHandler;
-export const get = httpHandler;
+};

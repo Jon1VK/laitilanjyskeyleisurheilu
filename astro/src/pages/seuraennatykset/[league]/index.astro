@@ -1,15 +1,15 @@
 ---
 import { parameterize } from "inflected";
-import { titleize } from "@utils/strings";
-import Layout from "@layouts/Layout.astro";
-import { PrismaRecord } from "@models";
+import { titleize } from "~/utils/strings";
+import Layout from "~/layouts/Layout.astro";
+import { PrismaRecord } from "@server/models";
 import {
   formattedRecordAchievedDate,
   GENDERS,
   League,
   LEAGUES_BY_GENDER,
-} from "@utils/records";
-import { NewRecord } from "@components";
+} from "~/utils/records";
+import { NewRecord } from "~/components";
 
 const currentLeague = titleize(Astro.params.league as string) as League;
 const clubRecordsByEvent =

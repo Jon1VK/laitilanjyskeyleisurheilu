@@ -1,6 +1,3 @@
-import logger from "@lib/logger";
-import trpcClient from "@lib/trpcClient";
-import uploadImage from "@lib/uploadImage";
 import {
   Context,
   createContext,
@@ -8,6 +5,9 @@ import {
   ParentComponent,
   useContext,
 } from "solid-js";
+import { api } from "~/services/api";
+import logger from "~/utils/logger";
+import uploadImage from "~/utils/uploadImage";
 import type { AthleteProfileWithAthlete } from "./types";
 
 const createAthleteDetailsModifier = (
@@ -20,7 +20,7 @@ const createAthleteDetailsModifier = (
   const updateHeroImage = async (image: File) => {
     try {
       const src = await uploadImage(image);
-      await trpcClient.mutation("updateAthleteProfile", { heroImage: src });
+      await api.athleteProfile.update.mutate({ heroImage: src });
       location.reload();
     } catch (error) {
       await logger.error(error as Error);
@@ -31,10 +31,9 @@ const createAthleteDetailsModifier = (
   const updateAvatar = async (image: File) => {
     try {
       const src = await uploadImage(image);
-      const updatedAthleteProfile = await trpcClient.mutation(
-        "updateAthleteProfile",
-        { avatar: src }
-      );
+      const updatedAthleteProfile = await api.athleteProfile.update.mutate({
+        avatar: src,
+      });
       setAthleteProfile(updatedAthleteProfile);
     } catch (error) {
       await logger.error(error as Error);
@@ -43,8 +42,7 @@ const createAthleteDetailsModifier = (
   };
 
   const updateProfile = async (formData: FormData) => {
-    const updatedAthleteProfile = await trpcClient.mutation(
-      "updateAthleteProfile",
+    const updatedAthleteProfile = await api.athleteProfile.update.mutate(
       Object.fromEntries(formData)
     );
     setAthleteProfile(updatedAthleteProfile);

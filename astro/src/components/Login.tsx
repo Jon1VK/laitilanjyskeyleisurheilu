@@ -1,4 +1,4 @@
-import { useAuth } from "src/auth";
+import { useAuth } from "~/auth";
 
 const Login = () => {
   const { isLoggedIn, signIn, signOut } = useAuth();

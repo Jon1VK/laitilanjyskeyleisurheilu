@@ -1,8 +1,8 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import { EventCalendar } from "@components";
-import { getMonthEndDate, getMonthStartDate } from "@utils/dates";
-import { PrismaEvent } from "@models";
+import Layout from "~/layouts/Layout.astro";
+import { EventCalendar } from "~/components";
+import { getMonthEndDate, getMonthStartDate } from "~/utils/dates";
+import { PrismaEvent } from "@server/models";
 
 const searchParams = Astro.url.searchParams;
 const queryYear = searchParams.get("vuosi");

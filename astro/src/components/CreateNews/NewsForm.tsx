@@ -1,7 +1,7 @@
-import { useAuth } from "@auth";
-import logger from "@lib/logger";
-import uploadImage from "@lib/uploadImage";
 import { createSignal } from "solid-js";
+import { useAuth } from "~/auth";
+import logger from "~/utils/logger";
+import uploadImage from "~/utils/uploadImage";
 import RichTextEditor from "../RichTextEditor";
 
 type SubmitHandler = (

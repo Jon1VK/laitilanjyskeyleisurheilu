@@ -1,4 +1,3 @@
-import { useAuth } from "@auth";
 import type { PressRelease } from "@prisma/client";
 import {
   HiOutlineMail,
@@ -6,6 +5,7 @@ import {
   HiSolidPencilAlt,
 } from "solid-icons/hi";
 import { For, Show, createSignal } from "solid-js";
+import { useAuth } from "~/auth";
 import Modal from "../Modal";
 import PressReleaseForm from "./PressReleaseForm";
 import { usePressReleasesModifier } from "./PressReleasesModifier";
