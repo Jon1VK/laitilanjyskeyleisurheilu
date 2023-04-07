@@ -38,7 +38,9 @@ const EventList = (props: {
                   })}
                   class="mt-2 flex items-center text-gray-700"
                 >
-                  <HiSolidClock class={`mr-2 h-5 w-5 ${clockColor(event)}`} />
+                  <span class={clockColor(event)}>
+                    <HiSolidClock class="mr-2 h-5 w-5" />
+                  </span>
                   {formattedDateTimePeriod(event)}
                 </time>
               </div>

@@ -130,8 +130,8 @@ const MobileMainNavigation = () => {
         <span class="sr-only">Etusivu</span>
         <img src="/images/logo.svg" alt="Logo" class="h-12 w-auto md:h-14" />
       </a>
-      <button onClick={() => setShowMenu(!showMenu())}>
-        <FaSolidBars class="h-8 w-8 text-white md:h-10 md:w-10" />
+      <button onClick={() => setShowMenu(!showMenu())} class="text-white">
+        <FaSolidBars class="h-8 w-8 md:h-10 md:w-10" />
       </button>
       <div
         class={`fixed right-0 top-0 z-10 flex h-screen w-screen flex-col overflow-y-auto bg-white p-4 pt-16 font-sans font-medium text-gray-500 shadow-lg ring-1 ring-black/5 sm:max-w-sm ${menuVisibilityStyle()}`}
