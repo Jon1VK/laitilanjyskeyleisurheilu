@@ -12,7 +12,7 @@ export const getAllEvents = publicProcedure
     return await ctx.prisma.event.findMany({
       where: {
         startDateTime: { lte: input.endDate },
-        endDateTime: { gte: input.startDate },
+        OR: [{ endDateTime: { gte: input.startDate } }, { endDateTime: null }],
       },
       orderBy: { startDateTime: "asc" },
     });
