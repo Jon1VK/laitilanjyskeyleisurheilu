@@ -3,6 +3,7 @@ import { createEvent } from "./create";
 import { deleteEvent } from "./delete";
 import { deleteEventResults } from "./deleteResults";
 import { deleteEventTimetable } from "./deleteTimetable";
+import { fetchCompetitionData } from "./fetchCompetitionData";
 import { getAllEvents } from "./getAll";
 import { promoteEvent } from "./promote";
 import { updateEvent } from "./update";
@@ -15,4 +16,5 @@ export const eventsRouter = createRouter({
   delete: deleteEvent,
   deleteResults: deleteEventResults,
   deleteTimetable: deleteEventTimetable,
+  fetchCompetitionData,
 });

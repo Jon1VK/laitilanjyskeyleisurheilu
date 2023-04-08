@@ -81,7 +81,7 @@ const EventDetailsHeader = () => {
       </header>
       <Show when={showForm()}>
         <Modal close={() => setShowForm(false)}>
-          <EventForm event={event()} onSubmit={handleFormSubmit} />
+          <EventForm event={event()} onSubmit={handleFormSubmit} update />
         </Modal>
       </Show>
     </>

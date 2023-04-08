@@ -1,9 +1,11 @@
 import type { Event } from "@prisma/client";
 import { createSignal, Show, splitProps } from "solid-js";
+import type { RouterOutput } from "~/server/router";
 import { getDayCountBetween } from "~/utils/dates";
 
 const EventFormPressFieldset = (props: {
   event?: Event;
+  competition?: RouterOutput["event"]["fetchCompetitionData"];
   updateMany?: boolean;
 }) => {
   const [{ event }, _] = splitProps(props, ["event"]);
@@ -69,7 +71,7 @@ const EventFormPressFieldset = (props: {
           </div>
         </Show>
         <div class="sm:col-span-2">
-          <label for="pressBody">Kuvaus tekstinä</label>
+          <label for="pressBody">Kuvaus tiedotteisiin</label>
           <div class="mt-1 w-full">
             <textarea
               name="pressBody"
@@ -77,7 +79,9 @@ const EventFormPressFieldset = (props: {
               rows={5}
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             >
-              {props.event?.pressBody || ""}
+              {props.event?.pressBody ||
+                props.competition?.pressDescription ||
+                ""}
             </textarea>
           </div>
         </div>

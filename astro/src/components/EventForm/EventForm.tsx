@@ -1,6 +1,7 @@
 import type { EventType, Event as IEvent } from "@prisma/client";
 import { HiSolidPencilAlt } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
+import type { RouterOutput } from "~/server/router";
 import EventFormDetailsFieldSet from "./EventFormDetailsFieldSet";
 import EventFormPressFieldset from "./EventFormPressFieldset";
 import EventFormRecurrenceFieldset from "./EventFormRecurrenceFieldset";
@@ -13,10 +14,13 @@ type SubmitHandler = (
 const EventForm = (props: {
   event?: IEvent;
   onSubmit: (formData: FormData) => void;
+  update?: boolean;
   updateMany?: boolean;
 }) => {
   const [eventType, setEventType] = createSignal<EventType>("PRACTICE");
   const [isRecurring, setIsRecurring] = createSignal(false);
+  const [competition, setCompetition] =
+    createSignal<RouterOutput["event"]["fetchCompetitionData"]>();
   const handleSubmit: SubmitHandler = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -25,11 +29,13 @@ const EventForm = (props: {
   return (
     <>
       <h3 class="mb-3 flex items-center gap-2 text-lg font-medium leading-6 text-gray-900">
-        <Show when={!props.event}>Luo uusi tapahtuma</Show>
-        <Show when={props.event}>
+        <Show when={!props.update && !props.updateMany}>
+          Luo uusi tapahtuma{props.event && "kerta"}
+        </Show>
+        <Show when={props.update || props.updateMany}>
           <HiSolidPencilAlt class="h-5 w-5" />
         </Show>
-        <Show when={props.event && !props.updateMany}>Muokkaa tapahtumaa</Show>
+        <Show when={props.update}>Muokkaa tapahtumaa</Show>
         <Show when={props.updateMany}>Muokkaa kaikkia tapahtumakertoja</Show>
       </h3>
       <form onSubmit={handleSubmit} class="space-y-6 text-sm">
@@ -45,12 +51,15 @@ const EventForm = (props: {
         </Show>
         <EventFormDetailsFieldSet
           event={props.event}
+          competition={competition()}
+          setCompetition={setCompetition}
           eventType={eventType()}
           isRecurring={isRecurring()}
           updateMany={props.updateMany}
         />
         <EventFormPressFieldset
           event={props.event}
+          competition={competition()}
           updateMany={props.updateMany}
         />
         <fieldset>

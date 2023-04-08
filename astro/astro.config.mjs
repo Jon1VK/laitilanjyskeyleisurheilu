@@ -20,6 +20,9 @@ export default defineConfig({
         },
       },
     },
+    optimizeDeps: {
+      exclude: ["node-libcurl"],
+    },
   },
   server: {
     host: true,

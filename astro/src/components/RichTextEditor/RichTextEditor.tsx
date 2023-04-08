@@ -24,6 +24,10 @@ const RichTextEditor = (props: {
   let tableMenuRef!: HTMLDivElement;
   const [editor, setEditor] = createSignal<Editor>();
   createEffect(() => {
+    if (editor()) {
+      editor()?.commands.setContent(props.initialHTML || "");
+      return;
+    }
     setEditor(
       new Editor({
         element: editorRef,

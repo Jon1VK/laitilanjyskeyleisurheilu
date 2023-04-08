@@ -1,20 +1,71 @@
 import type { Event, EventType } from "@prisma/client";
-import { Show, createSignal } from "solid-js";
+import { HiSolidDownload } from "solid-icons/hi";
+import { Setter, Show, createSignal } from "solid-js";
+import type { RouterOutput } from "~/server/router";
+import { api } from "~/services/api";
 import RichTextEditor from "../RichTextEditor";
 
 const EventFormDetailsFieldSet = (props: {
   event?: Event;
+  competition?: RouterOutput["event"]["fetchCompetitionData"];
+  setCompetition: Setter<RouterOutput["event"]["fetchCompetitionData"]>;
   updateMany?: boolean;
   eventType: EventType;
   isRecurring: boolean;
 }) => {
   const [description, setDescription] = createSignal("");
+  let competionUrlInput: HTMLInputElement | undefined;
+  const handleCompetitionFetch = async () => {
+    const url = competionUrlInput?.value || "";
+    const competion = await api.event.fetchCompetitionData.query({ url });
+    props.setCompetition(competion || "Not found");
+  };
+  const competitionStartDate = () => {
+    const startDay = props.competition?.startDay;
+    const startMonth = props.competition?.startMonth;
+    const startTime = props.competition?.startTime;
+    if (!startDay || !startMonth || !startTime) return "";
+    const currYear = new Date().getFullYear();
+    const startDate = new Date(
+      `${startMonth}-${startDay}-${currYear} ${startTime}`
+    );
+    return startDate.toLocaleString("sv");
+  };
   return (
     <fieldset>
       <legend class="mb-3 text-base font-medium text-gray-700">
         Tapahtuman tiedot
       </legend>
       <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+        <Show
+          when={
+            props.eventType === "COMPETITION" &&
+            !props.updateMany &&
+            !props.isRecurring
+          }
+        >
+          <div class="sm:col-span-2">
+            <label for="externalUrl">Kilpailukalenteri</label>
+            <div class="relative mt-1">
+              <input
+                type="text"
+                ref={competionUrlInput}
+                value={props.event?.externalUrl || ""}
+                name="externalUrl"
+                placeholder="https://www.kilpailukalenteri.fi/?cs=16&nid=30297"
+                id="externalUrl"
+                class="w-full rounded-md border-gray-300 text-sm shadow-sm"
+              />
+              <button
+                type="button"
+                onClick={handleCompetitionFetch}
+                class="absolute inset-y-0 right-0 rounded-r-md bg-blue-700 px-2 text-white hover:bg-blue-800"
+              >
+                <HiSolidDownload class="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </Show>
         <div class="sm:col-span-2">
           <div class="flex justify-between">
             <label for="title">Otsikko</label>
@@ -23,7 +74,7 @@ const EventFormDetailsFieldSet = (props: {
           <input
             required
             type="text"
-            value={props.event?.title || ""}
+            value={props.event?.title || props.competition?.title || ""}
             name="title"
             id="title"
             class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -38,7 +89,11 @@ const EventFormDetailsFieldSet = (props: {
             <input
               required
               type={props.isRecurring ? "time" : "datetime-local"}
-              value={props.event?.startDateTime.toLocaleString("sv") || ""}
+              value={
+                props.event?.startDateTime.toLocaleString("sv") ||
+                competitionStartDate() ||
+                ""
+              }
               name="startDateTime"
               id="startDateTime"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -59,37 +114,20 @@ const EventFormDetailsFieldSet = (props: {
           <label for="location">Paikka</label>
           <input
             type="text"
-            value={props.event?.location || ""}
+            value={props.event?.location || props.competition?.location || ""}
             name="location"
             id="location"
             class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
           />
         </div>
-        <Show
-          when={
-            props.eventType === "COMPETITION" &&
-            !props.updateMany &&
-            !props.isRecurring
-          }
-        >
-          <div class="sm:col-span-2">
-            <label for="externalUrl">Kilpailukalenteri</label>
-            <input
-              type="text"
-              value={props.event?.externalUrl || ""}
-              name="externalUrl"
-              placeholder="https://www.kilpailukalenteri.fi/?cs=16&nid=30297"
-              id="externalUrl"
-              class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-            />
-          </div>
-        </Show>
         <div class="sm:col-span-2">
           <label>Kuvaus</label>
           <input type="hidden" name="description" value={description()} />
           <div class="mt-1 w-full">
             <RichTextEditor
-              initialHTML={props.event?.description || ""}
+              initialHTML={
+                props.event?.description || props.competition?.description || ""
+              }
               onChange={setDescription}
             />
           </div>
