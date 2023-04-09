@@ -76,13 +76,14 @@ const EventFormPressFieldset = (props: {
             <textarea
               name="pressBody"
               id="pressBody"
+              value={
+                props.competition?.pressDescription ||
+                props.event?.pressBody ||
+                ""
+              }
               rows={5}
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
-            >
-              {props.event?.pressBody ||
-                props.competition?.pressDescription ||
-                ""}
-            </textarea>
+            />
           </div>
         </div>
       </div>

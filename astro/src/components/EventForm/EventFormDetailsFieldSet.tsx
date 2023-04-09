@@ -70,7 +70,7 @@ const EventFormDetailsFieldSet = (props: {
           <input
             required
             type="text"
-            value={props.event?.title || props.competition?.title || ""}
+            value={props.competition?.title || props.event?.title || ""}
             name="title"
             id="title"
             class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -86,8 +86,8 @@ const EventFormDetailsFieldSet = (props: {
               required
               type={props.isRecurring ? "time" : "datetime-local"}
               value={
-                props.event?.startDateTime.toLocaleString("sv") ||
                 competitionStartDate() ||
+                props.event?.startDateTime.toLocaleString("sv") ||
                 ""
               }
               name="startDateTime"
@@ -110,7 +110,7 @@ const EventFormDetailsFieldSet = (props: {
           <label for="location">Paikka</label>
           <input
             type="text"
-            value={props.event?.location || props.competition?.location || ""}
+            value={props.competition?.location || props.event?.location || ""}
             name="location"
             id="location"
             class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -122,7 +122,7 @@ const EventFormDetailsFieldSet = (props: {
           <div class="mt-1 w-full">
             <RichTextEditor
               initialHTML={
-                props.event?.description || props.competition?.description || ""
+                props.competition?.description || props.event?.description || ""
               }
               onChange={setDescription}
             />
