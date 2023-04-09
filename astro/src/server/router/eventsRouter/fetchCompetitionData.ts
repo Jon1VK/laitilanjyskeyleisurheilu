@@ -47,7 +47,9 @@ export const fetchCompetitionData = publicProcedure
           : "") +
         (events.length
           ? "<h2><strong>Sarjat ja lajit</strong></h2>" +
-            $.html(events).replaceAll("ul>", "li>")
+            $.html(events)
+              .replaceAll("ul>", "li>")
+              .replaceAll(/<\/?a.*?>/g, "")
           : ""),
       pressDescription:
         (enrollmentDate ? `Ilmoittautuminen ${enrollmentDate}. ` : "") +
