@@ -1,4 +1,4 @@
-import type { Event, EventType } from "@prisma/client";
+import type { Event } from "@prisma/client";
 import { HiSolidDownload } from "solid-icons/hi";
 import { Setter, Show, createSignal } from "solid-js";
 import type { RouterOutput } from "~/server/router";
@@ -10,7 +10,7 @@ const EventFormDetailsFieldSet = (props: {
   competition?: RouterOutput["event"]["fetchCompetitionData"];
   setCompetition: Setter<RouterOutput["event"]["fetchCompetitionData"]>;
   updateMany?: boolean;
-  eventType: EventType;
+  isCompetition?: boolean;
   isRecurring: boolean;
 }) => {
   const [description, setDescription] = createSignal("");
@@ -38,11 +38,7 @@ const EventFormDetailsFieldSet = (props: {
       </legend>
       <div class="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
         <Show
-          when={
-            props.eventType === "COMPETITION" &&
-            !props.updateMany &&
-            !props.isRecurring
-          }
+          when={props.isCompetition && !props.updateMany && !props.isRecurring}
         >
           <div class="sm:col-span-2">
             <label for="externalUrl">Kilpailukalenteri</label>

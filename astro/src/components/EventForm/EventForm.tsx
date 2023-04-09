@@ -53,7 +53,9 @@ const EventForm = (props: {
           event={props.event}
           competition={competition()}
           setCompetition={setCompetition}
-          eventType={eventType()}
+          isCompetition={[props.event?.type, eventType()].includes(
+            "COMPETITION"
+          )}
           isRecurring={isRecurring()}
           updateMany={props.updateMany}
         />
