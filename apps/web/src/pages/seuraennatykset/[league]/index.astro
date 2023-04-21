@@ -1,0 +1,206 @@
+---
+import { EVENTS_BY_LEAGUE, GENDERS, LEAGUES_BY_GENDER } from "@laitjy/data";
+import type { League } from "@laitjy/data";
+import type { Record } from "@laitjy/db";
+import { prisma } from "@laitjy/db";
+import { stringUtils, recordUtils } from "@laitjy/utils";
+import { NewRecord } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+
+const currentLeague = stringUtils.titleize(
+  Astro.params["league"] as string
+) as League;
+const records = await prisma.$queryRaw<Record[]>`
+      SELECT *
+      FROM "Record" as R1
+        JOIN (
+          SELECT event,
+            CASE
+              WHEN event SIMILAR TO '[0-9]%|Puoli%|Maraton%' THEN MIN(LPAD(result, 10, '0'))
+              ELSE MAX(LPAD(result, 10, '0'))
+            END AS "bestResult"
+          FROM "Record"
+          WHERE league = ${currentLeague}
+            AND reviewed
+          GROUP BY event
+        ) AS R2 ON R1.event = R2.event
+      WHERE league = ${currentLeague}
+        AND reviewed
+        AND LPAD(R1.result, 10, '0') = R2."bestResult"
+      ORDER BY "achievedAt"
+    `;
+const recordsByEvent = new Map<string, Record[]>();
+EVENTS_BY_LEAGUE[currentLeague].forEach((event) => {
+  const eventRecords = records.filter((record) => record.event === event);
+  recordsByEvent.set(event, eventRecords);
+});
+const eventClickHandler = (event: string) =>
+  `location.assign("${
+    Astro.params["league"] as string
+  }/${stringUtils.parameterize(event)}#main")`;
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/records.webp" />
+    <title>
+      Laitilan Jyske - Yleisurheilu | Seuraennätykset | {currentLeague}
+    </title>
+    <meta property="og:title" content={`Seuraennätykset | ${currentLeague}`} />
+    <meta
+      name="description"
+      content={`Selaa ${currentLeague} seuraennätyksiä.`}
+    />
+    <meta
+      name="keywords"
+      content={`laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, seuraennätykset, ennätykset, TOP10, ${currentLeague}`}
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/records.webp", Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content={`Selaa ${currentLeague} seuraennätyksiä.`}
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/records.webp"
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Seuraennätykset | {currentLeague}
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:grid lg:grid-cols-5 lg:px-12"
+    >
+      <!-- LEAGUE SIDEBAR NAVIGATION -->
+      <nav class="hidden lg:block">
+        {
+          GENDERS.map((gender) => (
+            <>
+              <div class="mb-1 mt-2 font-semibold text-gray-700">{gender}</div>
+              <ul
+                class="space-y-1 text-sm font-medium text-gray-500"
+                aria-label="Sidebar"
+              >
+                {LEAGUES_BY_GENDER[gender].map((league) => (
+                  <li>
+                    <a
+                      href={`/seuraennatykset/${stringUtils.parameterize(
+                        league
+                      )}#main`}
+                      rel="prefetch"
+                      class={`block rounded-md px-3 py-2 ${
+                        currentLeague === league
+                          ? `text-gray-900 ${
+                              /^[MP]/.test(league)
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-red-100 text-red-800"
+                            }`
+                          : "hover:bg-white hover:text-gray-900"
+                      }`}
+                    >
+                      {league}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))
+        }
+      </nav>
+
+      <!-- LEAGUE RECORDS SECTION -->
+      <section class="col-span-4 px-4 sm:px-8 lg:px-12">
+        <!-- LEAGUE RECORDS DESCRIPTION -->
+        <h2 class="text-xl font-medium leading-6 text-gray-900">
+          Seuraennätykset | {currentLeague}
+        </h2>
+        <p class="my-2 text-gray-600">
+          Klikkaamalla taulukon riviä pääset tarkastelemaan kyseisen lajin
+          TOP10-listaa.
+        </p>
+        <NewRecord client:load />
+        <div class="mt-3 border-b border-gray-200"></div>
+
+        <!-- LEAGUE RECORDS TABLE -->
+        <div
+          class="my-8 overflow-x-auto rounded-lg text-left text-sm shadow ring-1 ring-black/5"
+        >
+          <table class="min-w-full divide-y divide-gray-300 bg-white">
+            <!-- LEAGUE RECORDS TABLE HEAD -->
+            <thead
+              class={`font-semibold ${
+                /^[MP]/.test(currentLeague)
+                  ? "bg-blue-200 text-blue-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3">Laji</th>
+                <th scope="col" class="px-3 py-3.5">Urheilija</th>
+                <th scope="col" class="px-3 py-3.5">Tulos</th>
+                <th scope="col" class="px-3 py-3.5">Paikkakunta</th>
+                <th scope="col" class="px-3 py-3.5">Päivämäärä</th>
+              </tr>
+            </thead>
+
+            <!-- LEAGUE RECORDS TABLE BODY -->
+            <tbody
+              class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
+              >{
+                [...recordsByEvent.values()].map((records) => (
+                  <>
+                    {records.map((record, index) => (
+                      <tr
+                        onclick={eventClickHandler(record.event)}
+                        class="cursor-pointer hover:bg-gray-100"
+                      >
+                        {index === 0 && (
+                          <th
+                            rowspan={records.length}
+                            class="py-4 pl-4 pr-3 align-top font-medium"
+                          >
+                            {record.event}
+                          </th>
+                        )}
+                        <td class="px-3 py-4">{record.athlete}</td>
+                        <td class="px-3 py-4">
+                          {record.result}
+                          {record.handtime ? "h" : ""}
+                        </td>
+                        <td class="px-3 py-4">{record.location || "-"}</td>
+                        <td class="px-3 py-4">
+                          {record.athlete === "-"
+                            ? "-"
+                            : recordUtils.formattedRecordAchievedDate(record)}
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </Fragment>
+</Layout>

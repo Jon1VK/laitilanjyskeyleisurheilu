@@ -1,0 +1,24 @@
+{
+  "name": "@laitjy/db",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules *.tsbuildinfo",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate",
+    "db:migrate:dev": "prisma migrate dev",
+    "lint": "eslint .",
+    "type-check": "tsc"
+  },
+  "devDependencies": {
+    "@laitjy/eslint-config-custom": "workspace:^",
+    "@laitjy/tsconfig": "workspace:^",
+    "@prisma/client": "^4.13.0",
+    "eslint": "^8.38.0",
+    "prisma": "^4.13.0",
+    "typescript": "^5.0.4"
+  },
+  "prisma": {
+    "seed": "./seeds/seed.sh"
+  }
+}

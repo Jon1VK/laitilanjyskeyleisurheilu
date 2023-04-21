@@ -1,0 +1,12 @@
+{
+  "extends": "@laitjy/tsconfig/base.json",
+  "include": ["src/**/*", "astro.config.mjs", "env.d.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
+}

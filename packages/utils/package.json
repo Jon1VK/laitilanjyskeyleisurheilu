@@ -1,0 +1,19 @@
+{
+  "name": "@laitjy/utils",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules *.tsbuildinfo",
+    "lint": "eslint .",
+    "type-check": "tsc"
+  },
+  "devDependencies": {
+    "@laitjy/db": "workspace:^",
+    "@laitjy/eslint-config-custom": "workspace:^",
+    "@laitjy/tsconfig": "workspace:^",
+    "@types/inflected": "^1.1.29",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "inflected": "^2.1.0"
+  }
+}

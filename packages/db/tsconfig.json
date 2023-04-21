@@ -1,0 +1,4 @@
+{
+  "extends": "@laitjy/tsconfig/base.json",
+  "files": ["index.ts", "env.d.ts"]
+}

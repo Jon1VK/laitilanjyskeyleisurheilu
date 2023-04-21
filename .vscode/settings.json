@@ -1,16 +1,17 @@
 {
-  "eslint.validate": ["astro", "typescript", "typescriptreact"],
-  "eslint.workingDirectories": ["astro"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "eslint.packageManager": "pnpm",
+  "eslint.validate": ["astro", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": [
+    { "pattern": "./apps/*" },
+    { "pattern": "./packages/*" }
+  ],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
   "files.associations": {
     "*.svg": "html"
-  },
-  "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow.json": "file:///home/jon1vk/github/laitilanjyskeyleisurheilu/.github/workflows/deploy.yml"
   }
 }

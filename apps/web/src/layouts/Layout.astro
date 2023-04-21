@@ -1,0 +1,236 @@
+---
+import { getSession } from "@laitjy/auth";
+import { stringUtils } from "@laitjy/utils";
+import { Icon } from "astro-icon";
+import { UserStore } from "~/auth";
+import { Login, MainNavigation, UserNavigation } from "~/components";
+
+export interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const pathSegments = Astro.url.pathname.slice(1).split("/");
+const session = getSession({ astroGlobal: Astro });
+---
+
+<!DOCTYPE html>
+<html lang="fi">
+  <!-- HEAD META DATA -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Graduate&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL("", Astro.url)} />
+    <meta property="og:site_name" content="Laitilan Jyske | Yleisurheilu" />
+    <style is:global>
+      .prose li > p,
+      .prose table p {
+        margin: 0;
+      }
+      .prose li {
+        margin: 0;
+      }
+      .prose .selectedCell {
+        background: rgba(29, 78, 216, 0.2);
+      }
+    </style>
+    <slot name="head" />
+  </head>
+
+  <!-- BODY -->
+  <body class="relative flex min-h-[100vh] flex-col bg-slate-50">
+    <!-- USER STORE -->
+    {session?.user && <UserStore user={session.user} client:only />}
+
+    <!-- USER NAVIGATION -->
+    <div
+      class="absolute right-16 top-4 z-10 md:right-24 md:top-8 xl:fixed xl:right-8"
+    >
+      <UserNavigation client:only />
+    </div>
+
+    <!-- HEADER -->
+    <header class="font-display relative bg-red-500">
+      <!-- HEADER HERO IMAGE -->
+      <div class="absolute inset-0">
+        <slot name="hero-image" />
+        <div
+          class="absolute inset-0 bg-black/25 bg-gradient-to-br from-yellow-900/60 to-blue-900/60 mix-blend-multiply"
+          aria-hidden="true"
+        >
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION -->
+      <MainNavigation client:load />
+
+      <!-- HEADER HERO HEADING -->
+      <slot name="hero-heading" />
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main" class="flex-1">
+      <!-- BREADCRUMBS HEADER -->
+      {
+        pathSegments[0] && (
+          <header class="bg-blue-700">
+            <div class="mx-auto max-w-7xl p-4 sm:px-8 lg:px-12">
+              <nav class="sm:hidden" aria-label="Back">
+                <button
+                  onclick="history.back()"
+                  class="flex items-center text-sm font-medium text-blue-200 hover:text-white"
+                >
+                  <Icon
+                    pack="custom"
+                    name="chevron-right"
+                    class="-ml-1 mr-1 h-5 w-5 shrink-0 text-blue-200"
+                  />
+                  Takaisin
+                </button>
+              </nav>
+              <nav
+                class="hidden text-sm font-medium text-blue-200 sm:block"
+                aria-label="Breadcrumb"
+              >
+                <ol class="flex gap-4">
+                  <li class="flex items-center">
+                    <a href="/" rel="prefetch" class="hover:text-white">
+                      Etusivu
+                    </a>
+                  </li>
+                  {pathSegments.map((segment, index) => (
+                    <li class="flex items-center">
+                      <Icon
+                        pack="custom"
+                        name="chevron-right"
+                        class="mr-4 h-5 w-5 shrink-0 text-blue-200"
+                      />
+                      <a
+                        href={`/${pathSegments
+                          .slice(0, 1 + index)
+                          .join("/")}#main`}
+                        rel="prefetch"
+                        class={
+                          index + 1 === pathSegments.length
+                            ? "text-white"
+                            : "hover:text-white"
+                        }
+                      >
+                        {(index === pathSegments.length - 1 && title) ||
+                          stringUtils.titleize(segment)}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </div>
+          </header>
+        )
+      }
+
+      <!-- MAIN PAGE CONTENT -->
+      <slot name="main" />
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-800">
+      <div class="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
+        <!-- FOOTER SITE NAVIGATION -->
+        <nav
+          class="-mx-5 -my-2 flex flex-wrap justify-center"
+          aria-label="Footer"
+        >
+          <div class="px-5 py-2">
+            <a href="/uutiset" class="text-base text-gray-300 hover:text-white">
+              Uutiset
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/tapahtumat"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Tapahtumat
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/tulokset"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Tulokset
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/seuraennatykset"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Seuraennätykset
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/edustusurheilijat"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Edustusurheilijat
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a
+              href="/yhteystiedot"
+              class="text-base text-gray-300 hover:text-white"
+            >
+              Yhteystiedot
+            </a>
+          </div>
+        </nav>
+
+        <!-- FOOTER SOCIAL NAVIGATION -->
+        <div class="mt-8 flex justify-center space-x-6">
+          <a
+            href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">WhatsApp</span>
+            <Icon pack="custom" name="whatsapp" class="h-6 w-auto" />
+          </a>
+          <a
+            href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">Instagram</span>
+            <Icon pack="custom" name="instagram" class="h-6 w-auto" />
+          </a>
+          <a
+            href="https://www.facebook.com/laitilanjyskeyu/"
+            target="_blank"
+            class="text-gray-400 hover:text-gray-300"
+          >
+            <span class="sr-only">Facebook</span>
+            <Icon pack="custom" name="facebook" class="h-6 w-auto" />
+          </a>
+        </div>
+
+        <!-- FOOTER COPYRIGHT -->
+        <p class="mt-8 text-center text-base text-gray-400">
+          <Login client:only />
+          {new Date().getFullYear()} Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

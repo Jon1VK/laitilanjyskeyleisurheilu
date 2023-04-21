@@ -1,0 +1,98 @@
+---
+import { prisma } from "@laitjy/db";
+import { Icon } from "astro-icon";
+import Layout from "~/layouts/Layout.astro";
+
+const slug = Astro.params["slug"] as string;
+const news = await prisma.news.findUnique({ where: { slug } });
+// eslint-disable-next-line
+if (!news) return Astro.redirect("/404");
+---
+
+<Layout title={news.title}>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/news.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Uutiset | {news.title}</title>
+    <meta property="og:title" content={news.title} />
+    <meta name="description" content={news.leadParagraph} />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, uutiset"
+    />
+    {news.cardImage && <meta property="og:image" content={news.cardImage} />}
+    <meta property="og:description" content={news.leadParagraph} />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover object-[100%_35%] lg:object-[100%_30%] xl:object-[100%_25%]"
+      src="/images/news.webp"
+      alt="Seuran vakiotoimitsijat ajanotossa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Uutiset
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div class="relative overflow-hidden py-16">
+      <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
+        <div class="relative mx-auto h-full max-w-prose" aria-hidden="true">
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute left-full top-12 translate-x-32 text-blue-200"
+          />
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute right-full top-1/2 -translate-x-32 -translate-y-1/2 text-blue-200"
+          />
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute bottom-12 left-full translate-x-32"
+          />
+        </div>
+      </div>
+      <div class="relative px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-prose text-center text-lg">
+          <h1
+            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
+          >
+            {news.title}
+          </h1>
+          <div class="mt-3 text-lg text-gray-500 sm:mt-4 sm:text-xl">
+            <span class="font-medium text-blue-600">{news.author}</span>
+            <span aria-hidden="true"> &middot;</span>
+            <time datetime={news.publishedAt.toLocaleDateString("sv")}
+              >{
+                news.publishedAt.toLocaleDateString("fi", { dateStyle: "full" })
+              }
+            </time>
+          </div>
+          <p class="mt-8 text-lg leading-8 text-gray-600 sm:text-xl">
+            {news.leadParagraph}
+          </p>
+        </div>
+        <div
+          set:html={news.body}
+          class="prose prose-blue mx-auto mt-6 text-lg text-gray-600"
+        />
+      </div>
+    </div>
+  </Fragment>
+</Layout>

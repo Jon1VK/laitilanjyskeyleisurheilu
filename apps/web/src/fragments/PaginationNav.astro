@@ -1,0 +1,73 @@
+---
+import { paginationUtils } from "@laitjy/utils";
+import Icon from "astro-icon";
+
+interface PaginationNavProps {
+  url: string;
+  pageCount: number;
+  currentPage: number;
+}
+
+const { url, pageCount, currentPage } = Astro.props as PaginationNavProps;
+const pageNumbers = paginationUtils.getPageNumbers(pageCount, currentPage);
+---
+
+{
+  pageCount > 1 && (
+    <nav class="mt-6 flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 md:mt-8">
+      <div class="-mt-px flex w-0 flex-1">
+        {currentPage > 1 && (
+          <a
+            href={`${url}?sivu=${currentPage - 1}#main`}
+            rel="prefetch"
+            class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+          >
+            <Icon
+              class="mr-3 h-5 w-5 text-gray-400"
+              pack="heroicons-solid"
+              name="arrow-narrow-left"
+            />
+            Edellinen sivu
+          </a>
+        )}
+      </div>
+      <div class="hidden justify-self-center md:-mt-px md:flex">
+        {pageNumbers.map((page, i) => (
+          <>
+            {0 < i && pageNumbers[i - 1] !== page - 1 && (
+              <span class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">
+                ...
+              </span>
+            )}
+            <a
+              href={`${url}?sivu=${page}#main`}
+              class={`inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium ${
+                currentPage === page
+                  ? "border-indigo-500 text-indigo-600"
+                  : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+              }`}
+            >
+              {page}
+            </a>
+          </>
+        ))}
+      </div>
+      <div class="-mt-px flex w-0 flex-1 justify-end">
+        {currentPage < pageCount && (
+          <a
+            href={`${url}?sivu=${currentPage + 1}#main`}
+            rel="prefetch"
+            class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+          >
+            Seuraava sivu
+            <Icon
+              class="ml-3 h-5 w-5 text-gray-400"
+              pack="heroicons-solid"
+              name="arrow-narrow-right"
+            />
+          </a>
+        )}
+      </div>
+    </nav>
+  )
+}

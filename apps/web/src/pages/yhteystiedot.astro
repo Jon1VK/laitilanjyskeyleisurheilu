@@ -1,0 +1,222 @@
+---
+import { contacts } from "@laitjy/data";
+import { Icon } from "astro-icon";
+import { ContactEmailForm } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/contacts.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Yhteystiedot</title>
+    <meta property="og:title" content="Yhteystiedot" />
+    <meta
+      name="description"
+      content="Ota yhteyttä yhteystietojen tai lomakkeen avulla."
+    />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, yhteystiedot"
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/contacts.webp", Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content="Ota yhteyttä yhteystietojen tai lomakkeen avulla."
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+      src="/images/contacts.webp"
+      alt="Seuran puheenjohtaja Pekka Kuusisto toimitsijana"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Yhteystiedot
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <!-- CONTACT CARD -->
+    <section
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <div
+        class="grid grid-cols-1 bg-white shadow-xl ring-1 ring-gray-400/5 lg:grid-cols-3"
+      >
+        <!-- CONTACT INFO -->
+        <div
+          class="relative overflow-hidden bg-gradient-to-b from-blue-600 to-blue-700 px-6 py-10 sm:px-10 xl:p-12"
+        >
+          <!-- DECORATION FOR MOBILES -->
+          <Icon
+            pack="custom"
+            name="angle-sm"
+            class="pointer-events-none absolute inset-0 h-full w-full sm:hidden"
+          />
+          <!-- DECORATION FOR TABLETS -->
+          <Icon
+            pack="custom"
+            name="angle-md"
+            class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-1/2 sm:block lg:hidden"
+          />
+          <!-- DECORATION FOR LAPTOPS -->
+          <Icon
+            pack="custom"
+            name="angle-lg"
+            class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
+          />
+
+          <!-- CONTACT INFO DESCRIPTION -->
+          <h2 class="text-lg font-medium text-white">Seuran yhteystiedot</h2>
+          <h3 class="mt-9 font-medium text-white">
+            Laitilan Jyske - Yleisurheilujaosto
+          </h3>
+          <dl class="mt-3 space-y-3 text-blue-50">
+            <dt><span class="sr-only">Postiosoite</span></dt>
+            <dd class="flex">
+              <Icon
+                pack="custom"
+                name="home"
+                class="h-6 w-6 shrink-0 text-blue-200"
+              />
+              <span class="ml-3">Haaparinne 4, 23800 Laitila</span>
+            </dd>
+            <dt><span class="sr-only">Email</span></dt>
+            <dd class="flex">
+              <Icon
+                pack="custom"
+                name="mail"
+                class="h-6 w-6 shrink-0 text-blue-200"
+              />
+              <span class="ml-3 hover:text-white hover:underline"
+                ><a href="mailto:laitilan.jyske@lailanet.fi"
+                  >laitilan.jyske@lailanet.fi
+                </a>
+              </span>
+            </dd>
+          </dl>
+
+          <div class="mt-9 font-medium text-white">
+            <a
+              class="hover:underline"
+              href="/files/kustannus_ja_matkalaskupohja_yleisurheilu.pdf"
+              download>Kustannus- ja matkalaskupohja</a
+            >
+          </div>
+
+          <!-- CONTACT INFO SOCIAL MEDIA -->
+          <ul class="mt-9 flex items-end gap-6">
+            <li>
+              <a
+                href="https://chat.whatsapp.com/C4T97CG5hZd69TG1b6gNt6"
+                target="_blank"
+                class="text-blue-200 hover:text-blue-50"
+              >
+                <span class="sr-only">WhatsApp</span>
+                <Icon pack="custom" name="whatsapp" class="h-7 w-auto" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/laitilanjyskeyleisurheilu/"
+                target="_blank"
+                class="text-blue-200 hover:text-blue-50"
+              >
+                <span class="sr-only">Instagram</span>
+                <Icon pack="custom" name="instagram" class="h-7 w-auto" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/laitilanjyskeyu/"
+                target="_blank"
+                class="text-blue-200 hover:text-blue-50"
+              >
+                <span class="sr-only">Facebook</span>
+                <Icon pack="custom" name="facebook" class="h-7 w-auto" />
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="px-6 py-10 sm:px-10 lg:col-span-2 xl:p-12">
+          <h3 class="text-lg font-medium text-gray-900">Lähetä viesti</h3>
+          <ContactEmailForm client:load />
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMBERS INFO SECTION -->
+    <section
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <!-- MEMBERS INFO DESCRIPTION -->
+      <h2 class="text-xl font-medium leading-6 text-gray-900">
+        Yleisurheilujaoston jäsenet
+      </h2>
+      <p class="mt-2 max-w-4xl border-b border-gray-200 pb-5 text-gray-600">
+        Oheisesta taulukosta löydät yleisurheilujaoston jäsenten yhteystiedot.
+      </p>
+
+      <!-- MEMBERS CONTACTS TABLE -->
+      <div
+        class="my-8 overflow-x-auto text-left text-sm shadow ring-1 ring-black/5 md:rounded-lg"
+      >
+        <table class="min-w-full divide-y divide-gray-300 bg-slate-50">
+          <!-- MEMBERS TABLE HEAD -->
+          <thead class="bg-blue-600 font-semibold text-white">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3">Nimi</th>
+              <th scope="col" class="px-3 py-3.5">Tehtävä</th>
+              <th scope="col" class="px-3 py-3.5">Sähköposti</th>
+              <th scope="col" class="px-3 py-3.5">Puhelinnumero</th>
+            </tr>
+          </thead>
+
+          <!-- MEMBERS TABLE BODY -->
+          <tbody
+            class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
+          >
+            {
+              contacts.map(({ name, title, email, phone }) => (
+                <tr class="hover:bg-white">
+                  <th
+                    scope="row"
+                    class="py-4 pl-4 pr-3 font-medium text-gray-900"
+                  >
+                    {name}
+                  </th>
+                  <td class="px-3 py-4">{title ? title : "-"}</td>
+                  <td class="px-3 py-4">
+                    <a
+                      class="hover:text-gray-900 hover:underline"
+                      href={`mailto:${email}`}
+                    >
+                      {email}
+                    </a>
+                  </td>
+                  <td class="px-3 py-4">{phone}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </Fragment>
+</Layout>

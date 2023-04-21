@@ -1,0 +1,50 @@
+{
+  "name": "@laitjy/web",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules *.tsbuildinfo",
+    "dev": "astro dev",
+    "lint": "eslint .",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@astrojs/prefetch": "^0.2.1",
+    "@astrojs/solid-js": "^2.1.0",
+    "@astrojs/tailwind": "^3.1.1",
+    "@astrojs/vercel": "^3.2.4",
+    "@laitjy/api": "workspace:^",
+    "@laitjy/auth": "workspace:^",
+    "@laitjy/axiom": "workspace:^",
+    "@laitjy/callmebot": "workspace:^",
+    "@laitjy/data": "workspace:^",
+    "@laitjy/db": "workspace:^",
+    "@laitjy/icons": "workspace:^",
+    "@laitjy/sendgrid": "workspace:^",
+    "@laitjy/supabase": "workspace:^",
+    "@laitjy/utils": "workspace:^",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/extension-bubble-menu": "^2.0.3",
+    "@tiptap/extension-floating-menu": "^2.0.3",
+    "@tiptap/extension-link": "^2.0.3",
+    "@tiptap/extension-table": "^2.0.3",
+    "@tiptap/extension-table-cell": "^2.0.3",
+    "@tiptap/extension-table-header": "^2.0.3",
+    "@tiptap/extension-table-row": "^2.0.3",
+    "@tiptap/starter-kit": "^2.0.3",
+    "astro": "^2.3.0",
+    "astro-icon": "^0.8.0",
+    "solid-icons": "^1.0.4",
+    "solid-js": "^1.7.3",
+    "tailwindcss": "^3.3.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@laitjy/eslint-config-custom": "workspace:^",
+    "@laitjy/tsconfig": "workspace:^",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.4"
+  }
+}

@@ -1,0 +1,84 @@
+---
+import { prisma } from "@laitjy/db";
+import { Icon } from "astro-icon";
+import { AthleteDetails } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+
+const slug = Astro.params["slug"] as string;
+const athleteProfile = await prisma.athleteProfile.findUnique({
+  where: { slug },
+  include: { athlete: true },
+}); 
+// eslint-disable-next-line
+if (!athleteProfile) return Astro.redirect("/404");
+const athlete = athleteProfile.athlete;
+const heroImage = athleteProfile.heroImage || "/images/hero-placeholder.webp";
+---
+
+<Layout title={athlete.name}>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href={heroImage} />
+    <title>
+      Laitilan Jyske - Yleisurheilu | Edustusurheilijat | {athlete.name}
+    </title>
+    <meta property="og:title" content={athlete.name} />
+    <meta
+      name="description"
+      content="Edustusurheilijan henkilökohtaiset sivut"
+    />
+    <meta
+      name="keywords"
+      content={`laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, edustusurheilijat, ${athlete.name}`}
+    />
+    <meta property="og:image" content={new URL(heroImage, Astro.url)} />
+    <meta
+      property="og:description"
+      content={`Edustusurheilijan henkilökohtaiset sivut`}
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src={heroImage}
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      {athlete.name}
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div class="relative overflow-hidden py-8 sm:py-16">
+      <div
+        class="pointer-events-none hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full"
+      >
+        <div class="relative mx-auto h-full max-w-prose" aria-hidden="true">
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute left-full top-1/2 -translate-y-1/2 translate-x-32 text-blue-200"
+          />
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute right-full top-1/2 -translate-x-32 -translate-y-1/2 text-blue-200"
+          />
+        </div>
+      </div>
+      <AthleteDetails client:load athleteProfile={athleteProfile} />
+    </div>
+  </Fragment>
+</Layout>

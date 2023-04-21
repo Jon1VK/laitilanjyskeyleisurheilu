@@ -1,0 +1,6 @@
+# Generated client
+client
+
+# User and athlete seed data
+users.sql
+athleteProfiles.sql

@@ -1,0 +1,97 @@
+---
+import { prisma } from "@laitjy/db";
+import { dateUtils } from "@laitjy/utils";
+import { Icon } from "astro-icon";
+import { EventDetails } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+
+const slug = Astro.params["slug"] as string;
+const event = await prisma.event.findUnique({
+  where: { slug },
+  include: {
+    recurringEvent: {
+      include: {
+        occurrences: {
+          where: {
+            slug: {
+              not: slug,
+            },
+          },
+          orderBy: { startDateTime: "asc" },
+        },
+      },
+    },
+  },
+});
+// eslint-disable-next-line
+if (!event) return Astro.redirect("/404");
+---
+
+<Layout title={event.title}>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/events.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Tapahtumat | {event.title}</title>
+    <meta property="og:title" content={event.title} />
+    <meta
+      name="description"
+      content={`${event.location ?? ""} | ${dateUtils.formattedDateTimePeriod(event)}`}
+    />
+    <meta
+      name="keywords"
+      content={`laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, tapahtumat, ${event.title}`}
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/events.webp", Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content={`${event.location ?? ""} | ${dateUtils.formattedDateTimePeriod(event)}`}
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/events.webp"
+      alt="Juoksumatka Seuracup-kilpailussa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Tapahtumat
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div class="relative overflow-hidden py-8 sm:py-16">
+      <div
+        class="pointer-events-none hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full"
+      >
+        <div class="relative mx-auto h-full max-w-prose" aria-hidden="true">
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute left-full top-1/2 -translate-y-1/2 translate-x-32 text-blue-200"
+          />
+          <Icon
+            pack="custom"
+            name="dot-grid"
+            width={404}
+            class="absolute right-full top-1/2 -translate-x-32 -translate-y-1/2 text-blue-200"
+          />
+        </div>
+      </div>
+      <EventDetails client:load event={event} />
+    </div>
+  </Fragment>
+</Layout>

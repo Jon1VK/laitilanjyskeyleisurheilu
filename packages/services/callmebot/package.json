@@ -1,0 +1,17 @@
+{
+  "name": "@laitjy/callmebot",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules *.tsbuildinfo",
+    "lint": "eslint .",
+    "type-check": "tsc"
+  },
+  "devDependencies": {
+    "@laitjy/eslint-config-custom": "workspace:^",
+    "@laitjy/tsconfig": "workspace:^",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {}
+}

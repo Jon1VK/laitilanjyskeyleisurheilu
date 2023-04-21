@@ -1,0 +1,87 @@
+---
+import { prisma } from "@laitjy/db";
+import { dateUtils } from "@laitjy/utils";
+import { EventCalendar } from "~/components";
+import Layout from "~/layouts/Layout.astro";
+
+const searchParams = Astro.url.searchParams;
+const queryYear = searchParams.get("vuosi");
+const queryMonth = searchParams.get("kuukausi");
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth();
+const year = Number(queryYear || currentYear);
+const month = Number(queryMonth || currentMonth + 1) - 1;
+const startDate = dateUtils.getMonthStartDate(year, month);
+const endDate = dateUtils.getMonthEndDate(year, month);
+const events = await prisma.event.findMany({
+  where: {
+    startDateTime: { lte: endDate },
+    OR: [{ endDateTime: { gte: startDate } }, { endDateTime: null }],
+  },
+  orderBy: { startDateTime: "asc" },
+});
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/events.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Tapahtumat</title>
+    <meta property="og:title" content="Tapahtumat" />
+    <meta
+      name="description"
+      content="Osallistu Laitilan Jyskeen yleisurheilujaoston järjestämiin harjoituksiin ja kilpailuihin."
+    />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, etusivu"
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/events.webp", Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content="Osallistu Laitilan Jyskeen yleisurheilujaoston järjestämiin harjoituksiin ja kilpailuihin."
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/events.webp"
+      alt="Juoksumatka Seuracup-kilpailussa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Tapahtumat
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <!-- CALENDAR -->
+    <section
+      class="mx-auto my-6 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:flex lg:flex-col lg:px-12"
+    >
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Tapahtumakalenteri
+        </h2>
+        <p class="mx-auto mt-3 max-w-3xl text-xl text-gray-500 sm:mt-4">
+          Löydä seuraava tapahtuma, johon voit osallistua. Punaisella värillä
+          merkatut tapahtumat ovat kilpailuja ja sinisellä merkatut
+          harjoituksia.
+        </p>
+      </div>
+      <EventCalendar client:load year={year} month={month} events={events} />
+    </section>
+  </Fragment>
+</Layout>

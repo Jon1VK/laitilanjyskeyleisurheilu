@@ -1,56 +1,78 @@
 version: "3.8"
 services:
-  astro:
+  web:
     build:
-      context: ./astro
+      context: ./
       dockerfile: Dockerfile
-      target: development
+      target: web-dev
     ports:
       - 3000:3000
     volumes:
-      - ./astro:/app
-      - astro_node_modules:/app/node_modules
+      - ./:/laitjy
+      - root_node_modules:/laitjy/node_modules/
+      - web_node_modules:/laitjy/apps/web/node_modules/
+      - api_node_modules:/laitjy/packages/api/node_modules/
+      - auth_node_modules:/laitjy/packages/auth/node_modules/
+      - eslint_node_modules:/laitjy/packages/config/eslint-config-custom/node_modules/
+      - data_node_modules:/laitjy/packages/data/node_modules/
+      - db_node_modules:/laitjy/packages/db/node_modules/
+      - axiom_node_modules:/laitjy/packages/services/axiom/node_modules/
+      - callmebot_node_modules:/laitjy/packages/services/callmebot/node_modules/
+      - sendgrid_node_modules:/laitjy/packages/services/sendgrid/node_modules/
+      - supabase_node_modules:/laitjy/packages/services/supabase/node_modules/
+      - utils_node_modules:/laitjy/packages/utils/node_modules/
     env_file:
-      - config/astro/.env
+      - .env
     depends_on:
-      - prisma-migrate
-  prisma-studio:
+      - db-migrate
+  db-studio:
     build:
-      context: ./astro
+      context: ./
       dockerfile: Dockerfile
-      target: prisma-studio
+      target: db-studio
     ports:
       - 5555:5555
     volumes:
-      - ./astro:/app
-      - astro_node_modules:/app/node_modules
+      - ./:/laitjy
+      - root_node_modules:/laitjy/node_modules/
+      - db_node_modules:/laitjy/packages/db/node_modules/
     env_file:
-      - config/astro/.env
+      - .env
     depends_on:
-      - prisma-migrate
-  prisma-migrate:
+      - db-migrate
+  db-migrate:
     build:
-      context: ./astro
+      context: ./
       dockerfile: Dockerfile
-      target: prisma-migrate
+      target: db-migrate
     volumes:
-      - ./astro:/app
-      - astro_node_modules:/app/node_modules
+      - ./:/laitjy
+      - root_node_modules:/laitjy/node_modules/
+      - db_node_modules:/laitjy/packages/db/node_modules/
     env_file:
-      - config/astro/.env
+      - .env
     depends_on:
       - postgres
   postgres:
     image: postgres:14.5-alpine
-    restart: always
     environment:
       POSTGRES_PASSWORD: postgres
   adminer:
     image: adminer
-    restart: always
     ports:
       - 8080:8080
     depends_on:
       - postgres
 volumes:
-  astro_node_modules:
+  root_node_modules:
+  web_node_modules:
+  api_node_modules:
+  auth_node_modules:
+  eslint_node_modules:
+  data_node_modules:
+  db_node_modules:
+  axiom_node_modules:
+  callmebot_node_modules:
+  sendgrid_node_modules:
+  supabase_node_modules:
+  utils_node_modules:
