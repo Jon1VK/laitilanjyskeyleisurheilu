@@ -48,7 +48,7 @@
     "json-complete": "^2.0.1",
     "node-libcurl": "^3.0.0",
     "prisma": "^4.3.1",
-    "solid-icons": "^1.0.1",
+    "solid-icons": "^1.1.0",
     "solid-js": "^1.4.8",
     "zod": "^3.18.0"
   },

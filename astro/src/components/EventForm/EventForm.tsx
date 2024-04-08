@@ -1,5 +1,5 @@
 import type { EventType, Event as IEvent } from "@prisma/client";
-import { HiSolidPencilAlt } from "solid-icons/hi";
+import { HiSolidPencilSquare } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
 import type { RouterOutput } from "~/server/router";
 import EventFormDetailsFieldSet from "./EventFormDetailsFieldSet";
@@ -33,7 +33,7 @@ const EventForm = (props: {
           Luo uusi tapahtuma{props.event && "kerta"}
         </Show>
         <Show when={props.update || props.updateMany}>
-          <HiSolidPencilAlt class="h-5 w-5" />
+          <HiSolidPencilSquare class="h-5 w-5" />
         </Show>
         <Show when={props.update}>Muokkaa tapahtumaa</Show>
         <Show when={props.updateMany}>Muokkaa kaikkia tapahtumakertoja</Show>

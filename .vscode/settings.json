@@ -2,7 +2,7 @@
   "eslint.validate": ["astro", "typescript", "typescriptreact"],
   "eslint.workingDirectories": ["astro"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"

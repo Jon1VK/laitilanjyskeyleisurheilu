@@ -1,8 +1,5 @@
-import {
-  HiOutlinePencilAlt,
-  HiOutlineSpeakerphone,
-  HiOutlineTrash,
-} from "solid-icons/hi";
+import { HiOutlinePencilSquare, HiOutlineTrash } from "solid-icons/hi";
+import { TbSpeakerphone } from "solid-icons/tb";
 import { Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 import { formattedDateTimePeriod } from "~/utils/dates";
@@ -40,20 +37,20 @@ const EventDetailsHeader = () => {
                 onClick={promoteEvent}
                 class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
               >
-                <HiOutlineSpeakerphone class="h-5 w-5" />
+                <TbSpeakerphone class="h-5 w-5" />
                 <span class="sr-only">Mainosta tapahtumaa {event().title}</span>
               </button>
             </Show>
             <Show when={event().promote}>
               <div class="rounded-md border border-gray-300 bg-green-600 p-2 font-semibold text-white shadow-sm">
-                <HiOutlineSpeakerphone class="h-5 w-5" />
+                <TbSpeakerphone class="h-5 w-5" />
               </div>
             </Show>
             <button
               onClick={() => setShowForm(true)}
               class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
             >
-              <HiOutlinePencilAlt class="h-5 w-5" />
+              <HiOutlinePencilSquare class="h-5 w-5" />
               <span class="sr-only">Muokkaa tapahtumaa {event().title}</span>
             </button>
             <button

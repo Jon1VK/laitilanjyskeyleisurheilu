@@ -1,9 +1,6 @@
 import type { PressRelease } from "@prisma/client";
-import {
-  HiOutlineMail,
-  HiOutlineTrash,
-  HiSolidPencilAlt,
-} from "solid-icons/hi";
+import { HiOutlineTrash, HiSolidPencilSquare } from "solid-icons/hi";
+import { TbMail } from "solid-icons/tb";
 import { For, Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 import Modal from "../Modal";
@@ -27,7 +24,7 @@ const PressReleasesList = () => {
           {(pressRelease) => (
             <div class="relative focus-within:bg-gray-50 hover:bg-gray-100">
               <div class="flex w-full items-center p-6 font-medium text-blue-700">
-                <HiOutlineMail class="h-7 w-7" />
+                <TbMail class="h-7 w-7" />
                 <time class="ml-3 first-letter:uppercase">
                   {new Date(pressRelease.sendDate).toLocaleDateString("fi", {
                     timeZone: "Europe/Helsinki",
@@ -43,7 +40,7 @@ const PressReleasesList = () => {
                     onClick={() => setSelectedPressRelease(pressRelease)}
                     class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-700 hover:text-white focus:bg-blue-700 focus:text-white"
                   >
-                    <HiSolidPencilAlt class="h-5 w-5" />
+                    <HiSolidPencilSquare class="h-5 w-5" />
                     <span class="sr-only">
                       Muokkaa tiedotetta{" "}
                       {pressRelease.sendDate.toLocaleDateString("sv")}

@@ -1,4 +1,4 @@
-import { HiSolidX } from "solid-icons/hi";
+import { HiSolidXMark } from "solid-icons/hi";
 import type { ParentComponent } from "solid-js";
 
 const Modal: ParentComponent<{ close: () => void }> = (props) => {
@@ -18,7 +18,7 @@ const Modal: ParentComponent<{ close: () => void }> = (props) => {
             class="absolute right-0 top-0 m-2 rounded-md bg-white p-2 text-gray-400 hover:text-gray-500"
           >
             <span class="sr-only">Close</span>
-            <HiSolidX class="h-6 w-6" />
+            <HiSolidXMark class="h-6 w-6" />
           </button>
           <div>{props.children}</div>
         </div>

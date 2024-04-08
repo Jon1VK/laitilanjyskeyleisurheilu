@@ -1,5 +1,5 @@
 import { FaSolidPlus } from "solid-icons/fa";
-import { HiOutlinePencilAlt, HiOutlineTrash } from "solid-icons/hi";
+import { HiOutlinePencilSquare, HiOutlineTrash } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 import EventForm from "../EventForm";
@@ -54,7 +54,7 @@ const EventDetailsOccurrences = () => {
                   onClick={() => setShowEditOccurrencesConfirmation(true)}
                   class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
                 >
-                  <HiOutlinePencilAlt class="h-4 w-4" />
+                  <HiOutlinePencilSquare class="h-4 w-4" />
                   <span class="sr-only">
                     Muokkaa koko sarjan tapahtumakertoja
                   </span>
@@ -83,7 +83,7 @@ const EventDetailsOccurrences = () => {
       <Show when={showEditOccurrencesConfirmation()}>
         <Modal close={() => setShowEditOccurrencesConfirmation(false)}>
           <h3 class="mb-6 flex items-center gap-3 text-lg font-medium leading-6 text-gray-900">
-            <HiOutlinePencilAlt class="h-5 w-5" />
+            <HiOutlinePencilSquare class="h-5 w-5" />
             Muokkaa kaikkia tapahtumakertoja
           </h3>
           <p class="mb-3 text-gray-600">

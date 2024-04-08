@@ -1,5 +1,5 @@
 import type { PressRelease } from "@prisma/client";
-import { HiSolidPencilAlt } from "solid-icons/hi";
+import { HiSolidPencilSquare } from "solid-icons/hi";
 
 type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
@@ -17,7 +17,7 @@ const PressReleaseForm = (props: {
   return (
     <>
       <h3 class="mb-3 flex items-center gap-2 text-lg font-medium leading-6 text-gray-900">
-        <HiSolidPencilAlt class="h-5 w-5" /> Muokkaa tiedotetta
+        <HiSolidPencilSquare class="h-5 w-5" /> Muokkaa tiedotetta
       </h3>
       <form onSubmit={handleSubmit} class="space-y-3 text-sm">
         <div>

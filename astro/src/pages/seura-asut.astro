@@ -1,0 +1,75 @@
+---
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/contacts.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Seura-asut</title>
+    <meta property="og:title" content="Seura-asut" />
+    <meta name="description" content="Tilaa seura-asuja verkkokaupasta." />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, seura-asut"
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/frontpage.webp", Astro.url)}
+    />
+    <meta
+      property="og:description"
+      content="Tilaa seura-asuja verkkokaupasta."
+    />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover lg:object-[100%_35%] xl:object-[100%_30%] 2xl:object-[100%_25%]"
+      src="/images/frontpage.webp"
+      alt="Yhteenkuuluvuuden tunnetta"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Seura-asut
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <!-- CONTACT CARD -->
+    <section
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:px-12"
+    >
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Seura-asut
+        </h2>
+        <p class="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">
+          Tilaa seura-asut kätevästi verkkokaupasta. Tieto
+          tilauksesta menee Rami Hyytiälle. Maksu suoritetaan tuotteita
+          haettaessa.
+        </p>
+        <p class="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">
+          Custom-asusteista tilaus lähtee eteenpäin sitten, kun niitä on tilattu
+          yhteensä tarpeeksi suuri erä (10 kpl / malli). Muita asusteita on
+          saatavilla ympäri vuoden. Voit tarkistaa tilaustilanteen Rami
+          Hyytiältä.
+        </p>
+      </div>
+      <div class="mt-12">
+        <iframe
+          title="Verkkokauppa"
+          class="h-[calc(100vh-6rem)] w-full block"
+          src="https://jyskeyu.ourwear.shop"></iframe>
+      </div>
+    </section>
+  </Fragment>
+</Layout>

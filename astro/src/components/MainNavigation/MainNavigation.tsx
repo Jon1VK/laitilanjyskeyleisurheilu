@@ -109,6 +109,13 @@ const LaptopMainNavigation = () => {
         >
           Yhteystiedot
         </a>
+        <a
+          href="/seura-asut"
+          rel="prefetch"
+          class="text-white hover:text-gray-300"
+        >
+          Seura-asut
+        </a>
       </div>
     </nav>
   );
@@ -200,6 +207,13 @@ const MobileMainNavigation = () => {
           class="block rounded-md p-3 hover:bg-gray-50 hover:text-gray-900"
         >
           Yhteystiedot
+        </a>
+        <a
+          href="/seura-asut"
+          rel="prefetch"
+          class="block rounded-md p-3 hover:bg-gray-50 hover:text-gray-900"
+        >
+          Seura-asut
         </a>
       </div>
     </nav>

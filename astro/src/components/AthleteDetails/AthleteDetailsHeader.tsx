@@ -4,7 +4,7 @@ import {
   FaBrandsLinkedin,
   FaSolidCameraRetro,
 } from "solid-icons/fa";
-import { HiOutlinePencilAlt } from "solid-icons/hi";
+import { HiOutlinePencilSquare } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 import logger from "~/utils/logger";
@@ -89,7 +89,8 @@ const EventDetailsHeader = () => {
                 class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
               >
                 <div class="flex items-center px-1 text-sm">
-                  <HiOutlinePencilAlt class="mr-2 h-5 w-5" /> Muokkaa profiilia
+                  <HiOutlinePencilSquare class="mr-2 h-5 w-5" /> Muokkaa
+                  profiilia
                 </div>
               </button>
             </div>

@@ -1,6 +1,6 @@
 import { parameterize } from "inflected";
 import { CgProfile } from "solid-icons/cg";
-import { HiOutlineLogout, HiOutlineMail } from "solid-icons/hi";
+import { TbLogout, TbMail } from "solid-icons/tb";
 import { Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 
@@ -47,7 +47,7 @@ const UserNavigation = () => {
               class="flex items-center justify-between rounded-md p-3 text-sm text-gray-600 transition duration-150 ease-in-out hover:bg-gray-100"
             >
               <span>Tiedotteet</span>
-              <HiOutlineMail class="h-5 w-5" />
+              <TbMail class="h-5 w-5" />
             </a>
           </Show>
           <button
@@ -55,7 +55,7 @@ const UserNavigation = () => {
             onClick={() => signOut()}
           >
             <span>Kirjaudu ulos</span>
-            <HiOutlineLogout class="h-5 w-5" />
+            <TbLogout class="h-5 w-5" />
           </button>
         </div>
       </nav>

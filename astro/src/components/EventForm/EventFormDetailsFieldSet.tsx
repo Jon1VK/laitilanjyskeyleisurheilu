@@ -1,5 +1,5 @@
 import type { Event } from "@prisma/client";
-import { HiSolidDownload } from "solid-icons/hi";
+import { TbDownload } from "solid-icons/tb";
 import { Setter, Show, createSignal } from "solid-js";
 import type { RouterOutput } from "~/server/router";
 import { api } from "~/services/api";
@@ -8,7 +8,9 @@ import RichTextEditor from "../RichTextEditor";
 const EventFormDetailsFieldSet = (props: {
   event?: Event;
   competition?: RouterOutput["event"]["fetchCompetitionData"];
-  setCompetition: Setter<RouterOutput["event"]["fetchCompetitionData"]>;
+  setCompetition: Setter<
+    RouterOutput["event"]["fetchCompetitionData"] | undefined
+  >;
   updateMany?: boolean;
   isCompetition?: boolean;
   isRecurring: boolean;
@@ -57,7 +59,7 @@ const EventFormDetailsFieldSet = (props: {
                 onClick={handleCompetitionFetch}
                 class="absolute inset-y-0 right-0 rounded-r-md bg-blue-700 px-2 text-white hover:bg-blue-800"
               >
-                <HiSolidDownload class="h-5 w-5" />
+                <TbDownload class="h-5 w-5" />
               </button>
             </div>
           </div>
