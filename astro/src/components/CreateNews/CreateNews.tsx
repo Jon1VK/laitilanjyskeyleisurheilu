@@ -4,7 +4,7 @@ import { useAuth } from "~/auth";
 import { api } from "~/services/api";
 import logger from "~/utils/logger";
 import Modal from "../Modal";
-import NewsForm from "./NewsForm";
+import NewsForm from "../NewsForm";
 
 const CreateNews = () => {
   const { isAdmin } = useAuth();

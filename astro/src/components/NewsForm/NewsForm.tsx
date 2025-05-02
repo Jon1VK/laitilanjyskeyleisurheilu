@@ -1,4 +1,6 @@
-import { createSignal } from "solid-js";
+import { News } from "@prisma/client";
+import { HiSolidPencilSquare } from "solid-icons/hi";
+import { createSignal, Show } from "solid-js";
 import { useAuth } from "~/auth";
 import logger from "~/utils/logger";
 import uploadImage from "~/utils/uploadImage";
@@ -8,9 +10,13 @@ type SubmitHandler = (
   event: Event & { currentTarget: HTMLFormElement }
 ) => Promise<void>;
 
-const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
+const NewsForm = (props: {
+  newsArticle?: News;
+  onSubmit: (formData: FormData) => void;
+  update?: boolean;
+}) => {
   const { user } = useAuth();
-  const [isDraft, _setIsDraft] = createSignal(false);
+  const [isDraft, setIsDraft] = createSignal(false);
   const [image, setImage] = createSignal<File>();
   const [body, setBody] = createSignal("");
   const handleSubmit: SubmitHandler = async (event) => {
@@ -35,8 +41,11 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
   return (
     <div class="text-left">
       <header class="text-gray-600">
-        <h3 class="mb-4 text-lg font-medium leading-6 text-gray-900">
-          Luo uusi uutinen
+        <h3 class="mb-3 flex items-center gap-2 text-lg font-medium leading-6 text-gray-900">
+          <Show when={!props.update}>Luo uusi uutinen</Show>
+          <Show when={props.update}>
+            <HiSolidPencilSquare class="h-5 w-5" /> Muokkaa uutista
+          </Show>
         </h3>
       </header>
       <form onSubmit={handleSubmit} class="space-y-6 text-sm">
@@ -47,7 +56,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               required
               type="text"
               name="author"
-              value={user().name}
+              value={props.newsArticle?.author ?? user().name}
               id="author"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
@@ -58,14 +67,19 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               required
               type="date"
               name="publishedAt"
-              value={new Date().toLocaleDateString("sv")}
+              value={(
+                props.newsArticle?.publishedAt ?? new Date()
+              ).toLocaleDateString("sv")}
               id="publishedAt"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
           </div>
           <div class="sm:col-span-2">
             <div class="flex justify-between">
-              <label for="cardImage">Pääkuva</label>
+              <label for="cardImage">
+                <Show when={!props.update}>Pääkuva</Show>
+                <Show when={props.update}>Vaihda pääkuva</Show>
+              </label>
               <span class="ml-auto text-gray-500">Valinnainen</span>
             </div>
             <input
@@ -84,6 +98,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               required
               type="text"
               name="title"
+              value={props.newsArticle?.title ?? ""}
               id="title"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
@@ -93,6 +108,7 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
             <textarea
               required
               name="leadParagraph"
+              value={props.newsArticle?.leadParagraph ?? ""}
               id="leadParagraph"
               rows={4}
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
@@ -101,8 +117,20 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
           <div class="sm:col-span-2">
             <label>Teksti</label>
             <div class="mt-1 w-full">
-              <RichTextEditor onChange={setBody} />
+              <RichTextEditor
+                onChange={setBody}
+                initialHTML={props.newsArticle?.body}
+              />
             </div>
+          </div>
+          <div class="sm:col-span-2">
+            <button
+              type="submit"
+              onClick={() => setIsDraft(true)}
+              class="mt-4 w-full rounded-md bg-gray-100 px-4 py-2 font-medium ring-1 ring-black/10 hover:bg-gray-200"
+            >
+              Tallenna luonnoksena
+            </button>
           </div>
           <div class="sm:col-span-2">
             <button
@@ -112,15 +140,6 @@ const NewsForm = (props: { onSubmit: (formData: FormData) => void }) => {
               Julkaise
             </button>
           </div>
-          {/* <div>
-            <button
-              type="submit"
-              onClick={() => setIsDraft(true)}
-              class="mt-4 w-full rounded-md bg-gray-100 px-4 py-2 font-medium ring-1 ring-black/10 hover:bg-gray-200"
-            >
-              Tallenna luonnoksena
-            </button>
-          </div> */}
         </div>
       </form>
     </div>
