@@ -1,7 +1,7 @@
 name: Backup DB
 on:
   schedule:
-    - cron: 0 0 * * 1
+    - cron: 0 0 * * *
 jobs:
   Backup-DB:
     runs-on: ubuntu-latest
@@ -10,7 +10,7 @@ jobs:
         with:
           database_url: ${{ secrets.DATABASE_URL }}
           path: db.sql
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: DB Backup
           path: db.sql
