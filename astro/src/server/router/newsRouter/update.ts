@@ -2,7 +2,6 @@ import { TRPCError } from "@trpc/server";
 import { parameterize } from "inflected";
 import { z } from "zod";
 import { prisma } from "~/server/db/prisma";
-import { supabaseClient } from "~/services/supabaseClient";
 import { adminProtectedProcedure } from "../trpc";
 
 export const updateNewsArticle = adminProtectedProcedure
@@ -13,7 +12,7 @@ export const updateNewsArticle = adminProtectedProcedure
         draft: z.boolean().default(false),
         publishedAt: z.date(),
         author: z.string().min(1),
-        cardImage: z.string().min(1).optional().nullable(),
+        cardImage: z.string().min(1).optional(),
         title: z.string().min(1),
         leadParagraph: z.string().min(1),
         body: z.string().min(1),
@@ -23,10 +22,6 @@ export const updateNewsArticle = adminProtectedProcedure
   .mutation(async ({ ctx, input: { id, update } }) => {
     const newsArticle = await prisma.news.findUnique({ where: { id } });
     if (!newsArticle) throw new TRPCError({ code: "CONFLICT" });
-    if (update.cardImage !== undefined && newsArticle.cardImage) {
-      const path = newsArticle.cardImage.split("public/files/")[1];
-      await supabaseClient.storage.from("files").remove([path]);
-    }
     const titleSlug = parameterize(update.title);
     const dateSlug = update.publishedAt.toLocaleDateString("sv");
     const slug = `${dateSlug}-${titleSlug}`;

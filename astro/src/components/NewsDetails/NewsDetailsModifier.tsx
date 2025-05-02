@@ -20,7 +20,7 @@ const createNewsDetailsModifier = (initialNewsArticle: News) => {
     const draft = Boolean(formData.get("draft"));
     const author = formData.get("author") as string;
     const publishedAt = new Date(formData.get("publishedAt") as string);
-    const cardImage = (formData.get("cardImage") as string) || null;
+    const cardImage = (formData.get("cardImage") as string) || undefined;
     const title = formData.get("title") as string;
     const leadParagraph = formData.get("leadParagraph") as string;
     const body = formData.get("body") as string;
