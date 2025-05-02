@@ -1,4 +1,4 @@
-import { HiOutlinePencilSquare } from "solid-icons/hi";
+import { HiOutlinePencilSquare, HiOutlineTrash } from "solid-icons/hi";
 import { Show, createSignal } from "solid-js";
 import { useAuth } from "~/auth";
 import logger from "~/utils/logger";
@@ -8,11 +8,8 @@ import { useNewsDetailsModifier } from "./NewsDetailsModifier";
 
 const NewsDetailsInner = () => {
   const { isAdmin } = useAuth();
-  const {
-    newsArticle,
-    updateNewsArticle,
-    deleteNewsArticle: _deleteNewsArticle,
-  } = useNewsDetailsModifier();
+  const { newsArticle, updateNewsArticle, deleteNewsArticle } =
+    useNewsDetailsModifier();
   const [showForm, setShowForm] = createSignal(false);
   const handleFormSubmit = async (formData: FormData) => {
     try {
@@ -29,7 +26,10 @@ const NewsDetailsInner = () => {
     <>
       <header class="mx-auto max-w-prose text-center text-lg">
         <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          {newsArticle().title}
+          <span>{newsArticle().title}</span>
+          <Show when={newsArticle().draft}>
+            <span class="font-normal"> (Luonnos)</span>
+          </Show>
         </h1>
         <Show when={isAdmin()}>
           <div class="my-3 flex justify-center gap-1">
@@ -40,13 +40,17 @@ const NewsDetailsInner = () => {
               <HiOutlinePencilSquare class="h-5 w-5" />
               <span class="sr-only">Muokkaa uutista {newsArticle().title}</span>
             </button>
-            {/* <button
-              onClick={() => deleteNewsArticle()}
-              class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white"
-            >
-              <HiOutlineTrash class="h-5 w-5" />
-              <span class="sr-only">Poista uutinen {newsArticle().title}</span>
-            </button> */}
+            <Show when={newsArticle().draft}>
+              <button
+                onClick={() => deleteNewsArticle()}
+                class="rounded-md border border-gray-300 bg-white p-2 font-semibold text-gray-700 shadow-sm hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white"
+              >
+                <HiOutlineTrash class="h-5 w-5" />
+                <span class="sr-only">
+                  Poista uutinen {newsArticle().title}
+                </span>
+              </button>
+            </Show>
           </div>
         </Show>
         <div class="mt-3 text-lg text-gray-500 sm:mt-4 sm:text-xl">
