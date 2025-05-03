@@ -21,7 +21,7 @@ const { news } = Astro.props as NewsCardProps;
     )
   }
   <img
-    class="h-48 w-full object-cover"
+    class={`h-48 w-full object-cover object-[${news.cardImagePosition}]`}
     src={news.cardImage || "/images/hero-placeholder.webp"}
     alt=""
     aria-hidden

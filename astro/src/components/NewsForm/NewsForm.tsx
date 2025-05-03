@@ -74,7 +74,7 @@ const NewsForm = (props: {
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             />
           </div>
-          <div class="sm:col-span-2">
+          <div>
             <div class="flex justify-between">
               <label for="cardImage">
                 <Show when={!props.update}>Pääkuva</Show>
@@ -91,6 +91,19 @@ const NewsForm = (props: {
               }}
               class="mt-1 w-full cursor-pointer rounded-md border border-gray-300 text-sm shadow-sm file:mr-3 file:cursor-pointer file:border-0 file:bg-gray-200 file:px-4 file:py-2 file:font-medium file:hover:bg-gray-300 focus:outline-blue-600"
             />
+          </div>
+          <div>
+            <label for="cardImagePosition">Pääkuvan asennointi</label>
+            <select
+              value={props.newsArticle?.cardImagePosition ?? "50%_50%"}
+              name="cardImagePosition"
+              id="cardImagePosition"
+              class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
+            >
+              <option value="50%_0%">Yläreunaan</option>
+              <option value="50%_50%">Keskelle</option>
+              <option value="50%_100%">Alareunaan</option>
+            </select>
           </div>
           <div class="sm:col-span-2">
             <label for="title">Otsikko</label>

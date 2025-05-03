@@ -16,6 +16,7 @@ const CreateNews = () => {
         author: formData.get("author") as string,
         publishedAt: new Date(formData.get("publishedAt") as string),
         cardImage: (formData.get("cardImage") as string) || null,
+        cardImagePosition: formData.get("cardImagePosition") as string,
         title: formData.get("title") as string,
         leadParagraph: formData.get("leadParagraph") as string,
         body: formData.get("body") as string,

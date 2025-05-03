@@ -9,5 +9,12 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    "object-[50%_0%]",
+    "object-[50%_25%]",
+    "object-[50%_50%]",
+    "object-[50%_75%]",
+    "object-[50%_100%]",
+  ],
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };

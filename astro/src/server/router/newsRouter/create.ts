@@ -9,6 +9,7 @@ export const createNewsArticle = adminProtectedProcedure
       publishedAt: z.date(),
       author: z.string().min(1),
       cardImage: z.string().min(1).optional().nullable(),
+      cardImagePosition: z.string(),
       title: z.string().min(1),
       leadParagraph: z.string().min(1),
       body: z.string().min(1),

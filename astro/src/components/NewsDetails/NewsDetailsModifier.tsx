@@ -21,6 +21,7 @@ const createNewsDetailsModifier = (initialNewsArticle: News) => {
     const author = formData.get("author") as string;
     const publishedAt = new Date(formData.get("publishedAt") as string);
     const cardImage = (formData.get("cardImage") as string) || undefined;
+    const cardImagePosition = formData.get("cardImagePosition") as string;
     const title = formData.get("title") as string;
     const leadParagraph = formData.get("leadParagraph") as string;
     const body = formData.get("body") as string;
@@ -32,6 +33,7 @@ const createNewsDetailsModifier = (initialNewsArticle: News) => {
         author,
         publishedAt,
         cardImage,
+        cardImagePosition,
         title,
         leadParagraph,
         body,
