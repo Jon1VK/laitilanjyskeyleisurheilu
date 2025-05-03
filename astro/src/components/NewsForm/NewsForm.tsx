@@ -93,16 +93,26 @@ const NewsForm = (props: {
             />
           </div>
           <div>
-            <label for="cardImagePosition">Pääkuvan asennointi</label>
+            <label for="cardImagePosition">
+              Pääkuvan asennointi (yläreunasta)
+            </label>
             <select
               value={props.newsArticle?.cardImagePosition ?? "50%_50%"}
               name="cardImagePosition"
               id="cardImagePosition"
               class="mt-1 w-full rounded-md border-gray-300 text-sm shadow-sm"
             >
-              <option value="50%_0%">Yläreunaan</option>
-              <option value="50%_50%">Keskelle</option>
-              <option value="50%_100%">Alareunaan</option>
+              <option value="50%_0%">0%</option>
+              <option value="50%_10%">10%</option>
+              <option value="50%_20%">20%</option>
+              <option value="50%_30%">30%</option>
+              <option value="50%_40%">40%</option>
+              <option value="50%_50%">50%</option>
+              <option value="50%_60%">60%</option>
+              <option value="50%_70%">70%</option>
+              <option value="50%_80%">80%</option>
+              <option value="50%_90%">90%</option>
+              <option value="50%_100%">100%</option>
             </select>
           </div>
           <div class="sm:col-span-2">
