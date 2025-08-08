@@ -60,14 +60,17 @@ const LaptopMainNavigation = () => {
             onClick={() => setShowRecordsNav(!showRecordsNav())}
             class="flex items-center text-white hover:text-gray-300"
           >
-            Seuraennätykset <HiSolidChevronDown class="ml-2 h-6 w-6" />
+            Ennätykset <HiSolidChevronDown class="ml-2 h-6 w-6" />
           </button>
           <div
-            class={`absolute left-1/2 z-10 mt-4 grid w-screen max-w-lg -translate-x-1/2 grid-cols-3 overflow-hidden rounded-lg bg-white p-5 font-sans shadow-lg ring-black/5 transition focus-within:translate-y-0 focus-within:opacity-100 ${recordsNavVisibilityStyle()}`}
+            class={`absolute left-1/2 z-10 mt-4 grid w-screen max-w-2xl -translate-x-1/2 grid-flow-col-dense grid-cols-4 overflow-hidden rounded-lg bg-white p-5 font-sans shadow-lg ring-black/5 transition focus-within:translate-y-0 focus-within:opacity-100 ${recordsNavVisibilityStyle()}`}
           >
+            <div class="col-span-3 mb-3 ml-3 font-semibold text-blue-700">
+              Seuraennätykset
+            </div>
             <For each={GENDERS}>
               {(gender) => (
-                <div>
+                <div class="row-start-2">
                   <div class="mb-3 ml-3 font-semibold text-blue-700">
                     {gender}
                   </div>
@@ -93,6 +96,35 @@ const LaptopMainNavigation = () => {
                 </div>
               )}
             </For>
+            <div class="mb-3 ml-3 font-semibold text-blue-700">
+              Kenttäennätykset
+            </div>
+            <div>
+              <div class="mb-3 ml-3 font-semibold text-blue-700">Aikuiset</div>
+              <div class="row-start-2">
+                <ul
+                  class="space-y-1 text-base font-medium text-gray-500"
+                  aria-label="Sidebar"
+                >
+                  <li>
+                    <a
+                      href="/kenttaennatykset/miehet#main"
+                      class="block rounded-md px-3 py-2 hover:bg-gray-50 hover:text-gray-900"
+                    >
+                      Miehet
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/kenttaennatykset/naiset#main"
+                      class="block rounded-md px-3 py-2 hover:bg-gray-50 hover:text-gray-900"
+                    >
+                      Naiset
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <a
@@ -193,6 +225,23 @@ const MobileMainNavigation = () => {
               </details>
             )}
           </For>
+        </details>
+        <details>
+          <summary class="rounded-md p-3 hover:bg-gray-50 hover:text-gray-900">
+            <span class="ml-1">Kenttäennätykset</span>
+          </summary>
+          <a
+            href="/kenttaennatykset/miehet#main"
+            class="ml-4 block rounded-md p-3 hover:bg-gray-50 hover:text-gray-900"
+          >
+            Miehet
+          </a>
+          <a
+            href="/kenttaennatykset/naiset#main"
+            class="ml-4 block rounded-md p-3 hover:bg-gray-50 hover:text-gray-900"
+          >
+            Naiset
+          </a>
         </details>
         <a
           href="/edustusurheilijat"

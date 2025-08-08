@@ -1,0 +1,305 @@
+---
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout>
+  <!-- HEAD META DATA FOR SEO -->
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/records.webp" />
+    <title>Laitilan Jyske - Yleisurheilu | Kenttaennätykset | Miehet</title>
+    <meta property="og:title" content="Kenttaennätykset | Miehet" />
+    <meta name="description" content="Selaa miesten kenttäennätyksiä." />
+    <meta
+      name="keywords"
+      content="laitila, jyske, laitilan jyske, yleisurheilu, yleisurheilujaosto, kenttäennätykset, ennätykset, miehet"
+    />
+    <meta
+      property="og:image"
+      content={new URL("/images/records.webp", Astro.url)}
+    />
+    <meta property="og:description" content="Selaa miesten seuraennätyksiä." />
+  </Fragment>
+
+  <!-- HERO IMAGE -->
+  <Fragment slot="hero-image">
+    <img
+      class="h-full w-full object-cover"
+      src="/images/records.webp"
+      alt="Seuracup mitali kaulassa"
+      aria-hidden="true"
+    />
+  </Fragment>
+
+  <!-- HERO HEADING -->
+  <Fragment slot="hero-heading">
+    <h1
+      class="relative pb-32 pt-16 text-center text-2xl text-white sm:pb-40 sm:pt-24 sm:text-3xl md:pb-48 md:text-4xl lg:pt-36 xl:pb-52 xl:pt-44"
+    >
+      Kenttäennätykset | Miehet
+    </h1>
+  </Fragment>
+
+  <!-- MAIN -->
+  <Fragment slot="main">
+    <div
+      class="mx-auto my-8 max-w-7xl px-4 sm:my-12 sm:px-8 lg:my-16 lg:grid lg:grid-cols-5 lg:px-12"
+    >
+      <!-- LEAGUE SIDEBAR NAVIGATION -->
+      <nav class="hidden lg:block">
+        <ul
+          class="space-y-1 text-sm font-medium text-gray-500"
+          aria-label="Sidebar"
+        >
+          <li>
+            <a
+              href="/kenttaennatykset/miehet#main"
+              rel="prefetch"
+              class="block rounded-md bg-blue-100 px-3 py-2 text-blue-800"
+            >
+              Miehet
+            </a>
+          </li>
+          <li>
+            <a
+              href="/kenttaennatykset/naiset#main"
+              rel="prefetch"
+              class="block rounded-md px-3 py-2 hover:bg-white hover:text-gray-900"
+            >
+              Naiset
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- LEAGUE RECORDS SECTION -->
+      <section class="col-span-4 px-4 sm:px-8 lg:px-12">
+        <!-- LEAGUE RECORDS DESCRIPTION -->
+        <h2 class="text-xl font-medium leading-6 text-gray-900">
+          Kenttäennätykset | Miehet
+        </h2>
+        <div class="mt-3 border-b border-gray-200"></div>
+
+        <!-- LEAGUE RECORDS TABLE -->
+        <div
+          class="my-8 overflow-x-auto rounded-lg text-left text-sm shadow ring-1 ring-black/5"
+        >
+          <table class="min-w-full divide-y divide-gray-300 bg-white">
+            <!-- LEAGUE RECORDS TABLE HEAD -->
+            <thead class="bg-blue-200 font-semibold text-blue-800">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3">Laji</th>
+                <th scope="col" class="px-3 py-3.5">Tulos</th>
+                <th scope="col" class="px-3 py-3.5">Urheilija</th>
+                <th scope="col" class="px-3 py-3.5">Seura</th>
+                <th scope="col" class="px-3 py-3.5">Vuosi</th>
+              </tr>
+            </thead>
+
+            <!-- LEAGUE RECORDS TABLE BODY -->
+            <tbody
+              class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
+            >
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >100m</th
+                >
+                <td class="px-3 py-4">10,80</td>
+                <td class="px-3 py-4">Aleksi Lehto</td>
+                <td class="px-3 py-4">SeinäjSU</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >200m</th
+                >
+                <td class="px-3 py-4">21,0h</td>
+                <td class="px-3 py-4">Antti Rajamäki</td>
+                <td class="px-3 py-4">KarijTa</td>
+                <td class="px-3 py-4">1978</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >400m</th
+                >
+                <td class="px-3 py-4">46,8h</td>
+                <td class="px-3 py-4">Jim Bolding</td>
+                <td class="px-3 py-4">USA</td>
+                <td class="px-3 py-4">1974</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >800m</th
+                >
+                <td class="px-3 py-4">1.50,37</td>
+                <td class="px-3 py-4">Markus Teijula</td>
+                <td class="px-3 py-4">NaantLöy</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >1500m</th
+                >
+                <td class="px-3 py-4">3.45,8h</td>
+                <td class="px-3 py-4">Danie Malan</td>
+                <td class="px-3 py-4">RSA</td>
+                <td class="px-3 py-4">1975</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >3000m</th
+                >
+                <td class="px-3 py-4">7.57,9h</td>
+                <td class="px-3 py-4">Ari Paunonen</td>
+                <td class="px-3 py-4">MaarMa</td>
+                <td class="px-3 py-4">1980</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >5000m</th
+                >
+                <td class="px-3 py-4">13.46,0h</td>
+                <td class="px-3 py-4">Franco Fava</td>
+                <td class="px-3 py-4">ITA</td>
+                <td class="px-3 py-4">1976</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >10000m</th
+                >
+                <td class="px-3 py-4">30.00,4h</td>
+                <td class="px-3 py-4">Jukka Toivola</td>
+                <td class="px-3 py-4">TuUL</td>
+                <td class="px-3 py-4">1975</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >3000m ej.</th
+                >
+                <td class="px-3 py-4">8.55,0h</td>
+                <td class="px-3 py-4">Martti Vainio</td>
+                <td class="px-3 py-4">TuUL</td>
+                <td class="px-3 py-4">1975</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >110m aj.</th
+                >
+                <td class="px-3 py-4">14,18</td>
+                <td class="px-3 py-4">Ilari Manninen</td>
+                <td class="px-3 py-4">JyväskKU</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >400m aj.</th
+                >
+                <td class="px-3 py-4">52,64</td>
+                <td class="px-3 py-4">Kalle Kompuinen</td>
+                <td class="px-3 py-4">LiedPa</td>
+                <td class="px-3 py-4">2025</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Korkeus</th
+                >
+                <td class="px-3 py-4">210</td>
+                <td class="px-3 py-4">Matias Mustonen</td>
+                <td class="px-3 py-4">LempKiYU</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th
+                  class="py-4 pl-4 pr-3 align-top font-medium"
+                  scope="row"
+                  rowspan="2">Seiväs</th
+                >
+                <td class="px-3 py-4">550</td>
+                <td class="px-3 py-4">Tapani Haapakoski</td>
+                <td class="px-3 py-4">YlivKu</td>
+                <td class="px-3 py-4">1980</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <td class="px-3 py-4">550</td>
+                <td class="px-3 py-4">Kimmo Pallonen</td>
+                <td class="px-3 py-4">RaahVe</td>
+                <td class="px-3 py-4">1982</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Pituus</th
+                >
+                <td class="px-3 py-4">7,26</td>
+                <td class="px-3 py-4">Johannes Lahti</td>
+                <td class="px-3 py-4">TuUL</td>
+                <td class="px-3 py-4">1975</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >3-loikka</th
+                >
+                <td class="px-3 py-4">15,90</td>
+                <td class="px-3 py-4">Arttu Tyystjärvi</td>
+                <td class="px-3 py-4">LappUM</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Kuula</th
+                >
+                <td class="px-3 py-4">20,33</td>
+                <td class="px-3 py-4">Reijo Ståhlberg</td>
+                <td class="px-3 py-4">EsboIF</td>
+                <td class="px-3 py-4">1974</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Kiekko</th
+                >
+                <td class="px-3 py-4">66,98</td>
+                <td class="px-3 py-4">Mac Wilkins</td>
+                <td class="px-3 py-4">USA</td>
+                <td class="px-3 py-4">1977</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Moukari</th
+                >
+                <td class="px-3 py-4">68,81</td>
+                <td class="px-3 py-4">Aaron Kangas</td>
+                <td class="px-3 py-4">KanksLei</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >Keihäs</th
+                >
+                <td class="px-3 py-4">73,89</td>
+                <td class="px-3 py-4">Toni Keränen</td>
+                <td class="px-3 py-4">LimNM</td>
+                <td class="px-3 py-4">2018</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >10000m käv.</th
+                >
+                <td class="px-3 py-4">44.10,3</td>
+                <td class="px-3 py-4">Karsten Godtfredsen</td>
+                <td class="px-3 py-4">DEN</td>
+                <td class="px-3 py-4">1998</td>
+              </tr>
+              <tr class="hover:bg-gray-100">
+                <th class="py-4 pl-4 pr-3 align-top font-medium" scope="row"
+                  >10-ottelu</th
+                >
+                <td class="px-3 py-4">7180</td>
+                <td class="px-3 py-4">Juuso Hassi</td>
+                <td class="px-3 py-4">OrivPo</td>
+                <td class="px-3 py-4">2014</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </Fragment>
+</Layout>

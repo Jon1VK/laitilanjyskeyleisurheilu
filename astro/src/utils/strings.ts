@@ -2,6 +2,7 @@ import { titleize as t } from "inflected";
 
 const TITLEIZED_SLUGS = new Map([
   ["seuraennatykset", "Seuraennätykset"],
+  ["kenttaennatykset", "Kenttäennätykset"],
   ["uusi-ennatys", "Uusi Ennätys"],
   ["tytot-9", "Tytöt 9"],
   ["tytot-10", "Tytöt 10"],
