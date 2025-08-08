@@ -26,7 +26,6 @@
     "@astrojs/tailwind": "^3.1.1",
     "@astrojs/vercel": "^3.2.2",
     "@prisma/client": "^4.3.1",
-    "@sendgrid/mail": "^7.7.0",
     "@supabase/supabase-js": "^1.35.6",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.7",
@@ -48,6 +47,7 @@
     "json-complete": "^2.0.1",
     "node-libcurl": "^3.0.0",
     "prisma": "^4.3.1",
+    "resend": "^6.0.0",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.4.8",
     "zod": "^3.18.0"

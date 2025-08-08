@@ -1,8 +1,8 @@
-import type { MailDataRequired } from "@sendgrid/mail";
 import { callMeBotClient } from "@server/services/callMeBotClient";
-import { sendgridClient } from "@server/services/sendgridClient";
 import type { APIRoute } from "astro";
+import { CreateEmailOptions } from "resend";
 import { prisma } from "~/server/db/prisma";
+import { resendClient } from "~/server/services/resendClient";
 
 export const post: APIRoute = async ({ request }) => {
   if (request.headers.get("Authorization") !== import.meta.env.API_SECRET) {
@@ -27,18 +27,13 @@ export const post: APIRoute = async ({ request }) => {
   for (const message of messages) {
     await callMeBotClient.sendWhatsAppMessage(message);
   }
-  const pressEmail: MailDataRequired = {
+  const pressEmail: CreateEmailOptions = {
     to: import.meta.env.PRESS_EMAIL_RECIPIENTS.split(" "),
     from: "no-reply@laitilanjyskeyleisurheilu.fi",
     subject: "Yleisurheilutiedotteet",
     text: pressRelease.newsBody,
-    mailSettings: {
-      sandboxMode: {
-        enable: import.meta.env.DEV,
-      },
-    },
   };
-  await sendgridClient.send([pressEmail]);
+  await resendClient.emails.send(pressEmail);
   await prisma.pressRelease.delete({ where: { sendDate } });
   return new Response(
     JSON.stringify({

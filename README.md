@@ -64,7 +64,7 @@ Below are listed all of the environment variables that the application needs. If
 | ASTROAUTH_SECRET         | Astro Auth secret                                |
 | GOOGLE_CLIENT_ID         | Google OAuth Web Client ID                       |
 | GOOGLE_CLIENT_SECRET     | Google OAuth Web Client secret                   |
-| SENDGRID_API_KEY         | SendGrid API key                                 |
+| RESEND_API_KEY           | Resend API key                                   |
 | CONTACT_EMAIL_RECIPIENTS | Space separated list for contact form emails     |
 | PRESS_EMAIL_RECIPIENTS   | Space separated list of press email recipients   |
 | CALLMEBOT_PHONE          | CallMeBot phone number to send WhatsApp messages |

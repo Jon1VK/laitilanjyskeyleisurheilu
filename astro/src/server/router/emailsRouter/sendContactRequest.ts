@@ -1,6 +1,6 @@
-import type { MailDataRequired } from "@sendgrid/mail";
-import { sendgridClient } from "@server/services/sendgridClient";
+import { CreateEmailOptions } from "resend";
 import { z } from "zod";
+import { resendClient } from "~/server/services/resendClient";
 import type { RouterInput } from "..";
 import { publicProcedure } from "../trpc";
 
@@ -16,29 +16,19 @@ export const sendContactRequestEmail = publicProcedure
     })
   )
   .mutation(async ({ input }) => {
-    const contactEmail: MailDataRequired = {
+    const contactEmail: CreateEmailOptions = {
       to: import.meta.env.CONTACT_EMAIL_RECIPIENTS.split(" "),
       from: "no-reply@laitilanjyskeyleisurheilu.fi",
       subject: "Uusi viesti osoitteesta laitilanjyskeyleisurheilu.fi",
       text: contactText(input),
-      mailSettings: {
-        sandboxMode: {
-          enable: import.meta.env.DEV,
-        },
-      },
     };
-    const responseEmail: MailDataRequired = {
+    const responseEmail: CreateEmailOptions = {
       to: input.email,
       from: "no-reply@laitilanjyskeyleisurheilu.fi",
       subject: "Viestisi on vastaanotettu",
       text: responseText(input),
-      mailSettings: {
-        sandboxMode: {
-          enable: import.meta.env.DEV,
-        },
-      },
     };
-    await sendgridClient.send([contactEmail, responseEmail]);
+    await resendClient.batch.send([contactEmail, responseEmail]);
   });
 
 type Input = RouterInput["email"]["sendContactRequest"];

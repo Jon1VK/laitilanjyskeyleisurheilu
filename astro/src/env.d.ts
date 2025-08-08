@@ -12,7 +12,7 @@ interface ImportMetaEnv {
   readonly API_SECRET: string;
   readonly GOOGLE_CLIENT_ID: string;
   readonly GOOGLE_CLIENT_SECRET: string;
-  readonly SENDGRID_API_KEY: string;
+  readonly RESEND_API_KEY: string;
   readonly CONTACT_EMAIL_RECIPIENTS: string;
   readonly PRESS_EMAIL_RECIPIENTS: string;
   readonly CALLMEBOT_PHONE: string;
