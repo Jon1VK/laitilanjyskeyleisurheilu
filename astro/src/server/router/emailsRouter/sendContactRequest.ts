@@ -1,4 +1,4 @@
-import { CreateEmailOptions } from "resend";
+import type { CreateEmailOptions } from "resend";
 import { z } from "zod";
 import { resendClient } from "~/server/services/resendClient";
 import type { RouterInput } from "..";

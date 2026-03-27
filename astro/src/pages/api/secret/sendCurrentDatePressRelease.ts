@@ -1,10 +1,10 @@
 import { callMeBotClient } from "@server/services/callMeBotClient";
 import type { APIRoute } from "astro";
-import { CreateEmailOptions } from "resend";
+import type { CreateEmailOptions } from "resend";
 import { prisma } from "~/server/db/prisma";
 import { resendClient } from "~/server/services/resendClient";
 
-export const post: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request }) => {
   if (request.headers.get("Authorization") !== import.meta.env.API_SECRET) {
     return new Response(null, { status: 401 });
   }

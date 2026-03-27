@@ -1,6 +1,6 @@
 import type { Event } from "@prisma/client";
 import { TbDownload } from "solid-icons/tb";
-import { Setter, Show, createSignal } from "solid-js";
+import { Show, createSignal, type Setter } from "solid-js";
 import type { RouterOutput } from "~/server/router";
 import { api } from "~/services/api";
 import RichTextEditor from "../RichTextEditor";
@@ -19,8 +19,10 @@ const EventFormDetailsFieldSet = (props: {
   let competionUrlInput: HTMLInputElement | undefined;
   const handleCompetitionFetch = async () => {
     const url = competionUrlInput?.value || "";
-    const competion = await api.event.fetchCompetitionData.query({ url });
-    props.setCompetition(competion || "Not found");
+    console.log("Fetching competition data for URL:", url);
+    const competition = await api.event.fetchCompetitionData.query({ url });
+    console.log("Fetched competition data:", competition);
+    props.setCompetition(competition || "Not found");
   };
   const competitionStartDate = () => {
     const startDay = props.competition?.startDay;

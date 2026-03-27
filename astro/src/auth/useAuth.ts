@@ -1,8 +1,10 @@
-import { signIn, signOut } from "@astro-auth/client";
 import type { User } from "@prisma/client";
 import type { ExtendedUser } from "@server/models";
+import { createAuthClient } from "better-auth/solid";
 import type { Accessor } from "solid-js";
 import { user } from "./UserStore";
+
+const authClient = createAuthClient();
 
 const isLoggedIn = () => !!user();
 const isAdmin = () => !!user()?.isAdmin;
@@ -17,8 +19,8 @@ const useAuth = () => ({
   isLoggedInUser,
   isAdmin,
   isAthlete,
-  signIn,
-  signOut,
+  signIn: authClient.signIn.social,
+  signOut: authClient.signOut,
 });
 
 export default useAuth;

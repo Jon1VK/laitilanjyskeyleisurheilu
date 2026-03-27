@@ -1,10 +1,10 @@
 import type { News } from "@prisma/client";
 import {
-  Context,
-  ParentComponent,
   createContext,
   createSignal,
   useContext,
+  type Context,
+  type ParentComponent,
 } from "solid-js";
 import { api } from "~/services/api";
 

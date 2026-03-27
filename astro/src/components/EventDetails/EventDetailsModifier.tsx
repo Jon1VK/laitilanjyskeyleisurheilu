@@ -1,11 +1,11 @@
 import type { Event } from "@prisma/client";
 import { parameterize } from "inflected";
 import {
-  Context,
   createContext,
   createSignal,
-  ParentComponent,
   useContext,
+  type Context,
+  type ParentComponent,
 } from "solid-js";
 import { api } from "~/services/api";
 import { supabaseClient } from "~/services/supabaseClient";

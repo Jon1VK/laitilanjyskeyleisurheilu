@@ -1,7 +1,8 @@
-FROM node:18.20-alpine AS base
+FROM node:20.20.2-alpine AS base
 RUN apk add openssl
 WORKDIR /app
 COPY ./package*.json ./
+COPY ./prisma/schema.prisma ./prisma/
 RUN npm install
 RUN chown -R node /root
 RUN chown -R node node_modules

@@ -1,4 +1,4 @@
-import { News } from "@prisma/client";
+import type { News } from "@prisma/client";
 import NewsDetailsInner from "./NewsDetailsInner";
 import NewsDetailsModifierProvider from "./NewsDetailsModifier";
 

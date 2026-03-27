@@ -1,10 +1,10 @@
 import type { PressRelease } from "@prisma/client";
 import {
-  Context,
   createContext,
   createSignal,
-  ParentComponent,
   useContext,
+  type Context,
+  type ParentComponent,
 } from "solid-js";
 import { api } from "~/services/api";
 

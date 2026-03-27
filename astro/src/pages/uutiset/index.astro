@@ -1,12 +1,11 @@
 ---
-import { getUser } from "@astro-auth/core";
-import { CreateNews } from "~/components";
-import Layout from "~/layouts/Layout.astro";
 import { PrismaNews } from "@server/models";
-import PaginationNav from "~/fragments/PaginationNav.astro";
+import { CreateNews } from "~/components";
 import NewsCard from "~/fragments/NewsCard.astro";
+import PaginationNav from "~/fragments/PaginationNav.astro";
+import Layout from "~/layouts/Layout.astro";
 
-const includeDrafts = Boolean(getUser({ client: Astro }));
+const includeDrafts = Boolean(Astro.locals.user?.isAdmin);
 const currentPage = Number(Astro.url.searchParams.get("sivu") || 1);
 const pageCount = await PrismaNews.countPages({ includeDrafts });
 const newsArray = await PrismaNews.findNewsForPage(currentPage, {
@@ -67,7 +66,7 @@ const newsArray = await PrismaNews.findNewsForPage(currentPage, {
           Lue tuoreimmat yleisurheilu-uutiset journalistimme Ilkka Simolan
           sanoittamina
         </p>
-        <CreateNews client:only />
+        <CreateNews client:only="solid-js" />
       </div>
       <div
         class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3"

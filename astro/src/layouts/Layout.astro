@@ -1,10 +1,8 @@
 ---
-import { getUser } from "@astro-auth/core";
 import { UserStore } from "~/auth";
 import { Login, MainNavigation, UserNavigation } from "~/components";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import { titleize } from "~/utils/strings";
-import type { JwtPayload } from "jsonwebtoken";
 
 export interface Props {
   title?: string;
@@ -12,7 +10,7 @@ export interface Props {
 
 const { title } = Astro.props;
 const pathSegments = Astro.url.pathname.slice(1).split("/");
-const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
+const user = Astro.locals.user;
 ---
 
 <!DOCTYPE html>
@@ -51,13 +49,13 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
   <!-- BODY -->
   <body class="relative flex min-h-[100vh] flex-col bg-slate-50">
     <!-- USER STORE -->
-    {jwtPayload?.user && <UserStore user={jwtPayload.user} client:only />}
+    <UserStore user={user} client:only="solid-js" />
 
     <!-- USER NAVIGATION -->
     <div
       class="absolute right-16 top-4 z-10 md:right-24 md:top-8 xl:fixed xl:right-8"
     >
-      <UserNavigation client:only />
+      <UserNavigation client:only="solid-js" />
     </div>
 
     <!-- HEADER -->
@@ -234,7 +232,7 @@ const jwtPayload = getUser({ client: Astro }) as JwtPayload | null | undefined;
 
         <!-- FOOTER COPYRIGHT -->
         <p class="mt-8 text-center text-base text-gray-400">
-          <Login client:only />
+          <Login client:only="solid-js" />
           {new Date().getFullYear()} Joni Vainio-Kaila. Kaikki oikeudet pidätetään.
         </p>
       </div>

@@ -31,7 +31,6 @@ const EventDetailsFiles = () => {
             <a
               class="flex items-center gap-1"
               target="_blank"
-              download
               href={`${
                 import.meta.env.PUBLIC_SUPABASE_URL
               }/storage/v1/object/public/${event().timetableFileKey as string}`}
@@ -69,7 +68,6 @@ const EventDetailsFiles = () => {
             <a
               class="flex items-center gap-1"
               target="_blank"
-              download
               href={`${
                 import.meta.env.PUBLIC_SUPABASE_URL
               }/storage/v1/object/public/${event().resultsFileKey as string}`}

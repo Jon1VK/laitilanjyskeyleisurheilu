@@ -1,6 +1,6 @@
 import type { Record } from "@prisma/client";
 import { prisma } from "~/server/db/prisma";
-import { EVENTS_BY_LEAGUE, League } from "~/utils/records";
+import { EVENTS_BY_LEAGUE, type League } from "~/utils/records";
 
 const PrismaRecord = Object.assign(prisma.record, {
   async findClubRecordsByLeagueAndMappedByEvent(league: League) {

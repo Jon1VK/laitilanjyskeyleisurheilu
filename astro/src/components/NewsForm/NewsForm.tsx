@@ -1,4 +1,4 @@
-import { News } from "@prisma/client";
+import type { News } from "@prisma/client";
 import { HiSolidPencilSquare } from "solid-icons/hi";
 import { createSignal, Show } from "solid-js";
 import { useAuth } from "~/auth";

@@ -1,3 +1,4 @@
+/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
@@ -31,15 +32,17 @@ declare module "json-complete" {
   export = <JsonComplete>{};
 }
 
-declare module "jsonwebtoken" {
-  interface JwtPayload {
-    user: {
-      readonly id: number;
-      readonly name: string;
-      readonly email: string;
-      readonly image?: string;
-      readonly isAdmin: boolean;
-      readonly isAthlete: boolean;
-    };
+declare namespace App {
+  interface Locals {
+    user:
+      | (import("better-auth").User & {
+          email: string;
+          id: number;
+          isAdmin: boolean;
+          isAthlete: boolean;
+          image?: string;
+        })
+      | null;
+    session: import("better-auth").Session | null;
   }
 }

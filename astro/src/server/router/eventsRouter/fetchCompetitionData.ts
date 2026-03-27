@@ -5,10 +5,7 @@ import { publicProcedure } from "../trpc";
 export const fetchCompetitionData = publicProcedure
   .input(z.object({ url: z.string() }))
   .query(async ({ input }) => {
-    const corsProxyUrl = `https://corsproxy.io/?${encodeURIComponent(
-      input.url
-    )}`;
-    const response = await fetch(corsProxyUrl);
+    const response = await fetch(input.url);
     const responseText = await response.text();
     const $ = cheerio.load(responseText);
     const competitionListing = $(".listaus");

@@ -1,12 +1,12 @@
 import type { Event, EventType } from "@prisma/client";
 import {
-  Context,
-  ParentComponent,
   createContext,
   createMemo,
   createResource,
   createSignal,
   useContext,
+  type Context,
+  type ParentComponent,
 } from "solid-js";
 import { api } from "~/services/api";
 import {

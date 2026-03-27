@@ -1,14 +1,15 @@
-import prefetch from "@astrojs/prefetch";
 import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
+import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  integrations: [solidJs(), tailwind(), prefetch()],
+  integrations: [solidJs(), tailwind(), icon()],
+  prefetch: true,
   vite: {
     ssr: {
       external: ["svgo"],
@@ -19,9 +20,6 @@ export default defineConfig({
           entryFileNames: "entry.[hash].js",
         },
       },
-    },
-    optimizeDeps: {
-      exclude: ["node-libcurl"],
     },
   },
   server: {

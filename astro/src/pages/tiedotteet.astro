@@ -48,7 +48,7 @@ const pressReleases = await prisma.pressRelease.findMany({
           Muokkaa lähetettäviä tiedotteita
         </p>
       </div>
-      <PressReleases client:only pressReleases={pressReleases} />
+      <PressReleases client:only="solid-js" pressReleases={pressReleases} />
     </section>
   </Fragment>
 </Layout>

@@ -1,5 +1,5 @@
 import type { EventType } from "@prisma/client";
-import { For, Setter } from "solid-js";
+import { For, type Setter } from "solid-js";
 
 const eventTypes = {
   PRACTICE: {

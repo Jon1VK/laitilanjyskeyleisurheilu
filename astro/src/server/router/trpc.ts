@@ -1,13 +1,12 @@
-import { getUser } from "@astro-auth/core";
-import { TRPCError, inferAsyncReturnType, initTRPC } from "@trpc/server";
+import { TRPCError, initTRPC, type inferAsyncReturnType } from "@trpc/server";
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
-import type { JwtPayload } from "jsonwebtoken";
+import { auth } from "~/auth/auth";
 import { transformer } from "~/utils/trpcTransformer";
 import { prisma } from "../db/prisma";
 
-export const createContext = ({ req }: FetchCreateContextFnOptions) => {
-  const JwtPayload = getUser({ server: req }) as JwtPayload | null | undefined;
-  return { user: JwtPayload?.user, prisma };
+export const createContext = async ({ req }: FetchCreateContextFnOptions) => {
+  const session = await auth.api.getSession(req);
+  return { user: session?.user, prisma };
 };
 
 export type Context = inferAsyncReturnType<typeof createContext>;

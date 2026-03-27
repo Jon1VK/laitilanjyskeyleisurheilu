@@ -1,9 +1,9 @@
 import {
-  Context,
   createContext,
   createSignal,
-  ParentComponent,
   useContext,
+  type Context,
+  type ParentComponent,
 } from "solid-js";
 import { api } from "~/services/api";
 import logger from "~/utils/logger";

@@ -1,4 +1,4 @@
-import { mergeAttributes, Node, SingleCommands } from "@tiptap/core";
+import { mergeAttributes, Node, type SingleCommands } from "@tiptap/core";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {

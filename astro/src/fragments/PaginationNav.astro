@@ -1,6 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
 import { getPageNumbers } from "~/utils/pages";
-import Icon from "astro-icon";
 
 interface PaginationNavProps {
   url: string;
@@ -24,8 +24,7 @@ const pageNumbers = getPageNumbers(pageCount, currentPage);
           >
             <Icon
               class="mr-3 h-5 w-5 text-gray-400"
-              pack="heroicons-solid"
-              name="arrow-narrow-left"
+              name="heroicons-solid:arrow-narrow-left"
             />
             Edellinen sivu
           </a>
@@ -62,8 +61,7 @@ const pageNumbers = getPageNumbers(pageCount, currentPage);
             Seuraava sivu
             <Icon
               class="ml-3 h-5 w-5 text-gray-400"
-              pack="heroicons-solid"
-              name="arrow-narrow-right"
+              name="heroicons-solid:arrow-narrow-right"
             />
           </a>
         )}
