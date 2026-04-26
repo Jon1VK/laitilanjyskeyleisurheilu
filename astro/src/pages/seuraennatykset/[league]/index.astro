@@ -1,15 +1,15 @@
 ---
-import { parameterize } from "inflected";
-import { titleize } from "~/utils/strings";
-import Layout from "~/layouts/Layout.astro";
 import { PrismaRecord } from "@server/models";
+import { parameterize } from "inflected";
+import { NewRecord } from "~/components";
+import Layout from "~/layouts/Layout.astro";
 import {
   formattedRecordAchievedDate,
   GENDERS,
-  League,
+  type League,
   LEAGUES_BY_GENDER,
 } from "~/utils/records";
-import { NewRecord } from "~/components";
+import { titleize } from "~/utils/strings";
 
 const currentLeague = titleize(Astro.params.league as string) as League;
 const clubRecordsByEvent =
@@ -144,11 +144,23 @@ const eventClickHandler = (event: string) =>
             <tbody
               class="divide-y divide-gray-200 whitespace-nowrap text-gray-700"
               >{
-                [...clubRecordsByEvent.values()].map((records) => (
+                [...clubRecordsByEvent.entries()].map(([event, records]) => (
                   <>
+                    {records.length === 0 && (
+                      <tr
+                        onclick={eventClickHandler(event)}
+                        class="cursor-pointer hover:bg-gray-100"
+                      >
+                        <th class="py-4 pl-4 pr-3 font-medium">{event}</th>
+                        <td class="px-3 py-4">-</td>
+                        <td class="px-3 py-4">-</td>
+                        <td class="px-3 py-4">-</td>
+                        <td class="px-3 py-4">-</td>
+                      </tr>
+                    )}
                     {records.map((record, index) => (
                       <tr
-                        onclick={eventClickHandler(record.event)}
+                        onclick={eventClickHandler(event)}
                         class="cursor-pointer hover:bg-gray-100"
                       >
                         {index === 0 && (
@@ -156,7 +168,7 @@ const eventClickHandler = (event: string) =>
                             rowspan={records.length}
                             class="py-4 pl-4 pr-3 align-top font-medium"
                           >
-                            {record.event}
+                            {event}
                           </th>
                         )}
                         <td class="px-3 py-4">{record.athlete}</td>
