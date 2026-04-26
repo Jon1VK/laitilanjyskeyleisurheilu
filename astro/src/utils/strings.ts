@@ -22,6 +22,7 @@ const TITLEIZED_SLUGS = new Map([
   ["400m-aitajuoksu", "400m aitajuoksu"],
   ["seivas", "Seiväs"],
   ["keihas", "Keihäs"],
+  ["neliottelu-2025-asti", "Neliottelu (2025 asti)"],
   ["600m-kavely", "600m kävely"],
   ["1000m-kavely", "1000m kävely"],
   ["2000m-kavely", "2000m kävely"],
